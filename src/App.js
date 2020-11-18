@@ -17,7 +17,9 @@ function App() {
   }, []);
 
   const handleClick = () => {
-    db.collection("users").doc("McdZHiZqbuwa6hFZ3Pi2").update({ name: "Nano" });
+    db.collection("users")
+      .doc("McdZHiZqbuwa6hFZ3Pi2")
+      .update({ name: "Chino" });
   };
 
   return (
