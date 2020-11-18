@@ -1,0 +1,32 @@
+{
+  "name": "talentos-itesa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "scripts": {
+    "clean": "rm dist/bundle.js",
+    "build-dev": "webpack --mode development",
+    "build-prod": "webpack --mode production",
+    "start": "webpack serve --hot --mode development"
+  },
+  "dependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-hot-loader": "^4.13.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.5.0",
+    "webpack-cli": "^4.2.0",
+    "@babel/preset-react": "^7.12.5",
+    "babel-loader": "^8.2.1",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "@hot-loader/react-dom": "^17.0.0+4.13.0",
+    "webpack-dev-server": "^3.11.0",
+    "css-loader": "^5.0.1",
+    "style-loader": "^2.0.0"
+  }
+}
