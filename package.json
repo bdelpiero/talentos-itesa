@@ -17,6 +17,8 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-hot-loader": "^4.13.0",
+    "react-router-dom": "^5.2.0",
+    "react-signature-canvas": "^1.0.3",
     "recoil": "^0.1.2"
   },
   "devDependencies": {
