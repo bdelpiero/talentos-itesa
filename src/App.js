@@ -1,18 +1,31 @@
+import React, { useEffect, useState } from "react";
+import { hot } from "react-hot-loader/root";
+import { useRecoilState } from "recoil";
+import { userName } from "./atoms";
+import { db } from "../firebase";
 
-import React from "react";
-import { hot } from 'react-hot-loader/root';
+function App() {
+  const [name, setName] = useRecoilState(userName);
 
-class App extends React.Component {
-  render() {
-    const { name } = this.props;
-    return (
-      <>
-        <h1>
-          Hello {name}
-        </h1>
-      </>
-    );
-  }
+  useEffect(() => {
+    db.collection("users")
+      .doc("McdZHiZqbuwa6hFZ3Pi2")
+      .onSnapshot((doc) => {
+        console.log(doc.data());
+        setName(doc.data().name);
+      });
+  }, []);
+
+  const handleClick = () => {
+    db.collection("users").doc("McdZHiZqbuwa6hFZ3Pi2").update({ name: "Nano" });
+  };
+
+  return (
+    <>
+      <h1>Hello {name}</h1>
+      <button onClick={handleClick}></button>
+    </>
+  );
 }
 
-export default hot(App);
+export default App;
