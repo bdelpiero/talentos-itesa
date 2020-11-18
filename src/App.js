@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { hot } from "react-hot-loader/root";
 import { useRecoilState } from "recoil";
 import { userName } from "./atoms";
-import { db } from "../firebase";
+import { db } from "../firebase"
+import {AuthProvider} from '../auth/auth'
 
 function App() {
   const [name, setName] = useRecoilState(userName);
@@ -22,8 +23,11 @@ function App() {
 
   return (
     <>
-      <h1>Hello {name}</h1>
-      <button onClick={handleClick}></button>
+      <AuthProvider>
+        <h1>Hello {name}</h1>
+        <button onClick={handleClick}></button>
+      </AuthProvider>
+      
     </>
   );
 }
