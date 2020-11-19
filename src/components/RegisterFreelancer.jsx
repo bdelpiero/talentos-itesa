@@ -1,10 +1,14 @@
 import React from "react";
+import SignatureCanvas from 'react-signature-canvas'
 
-function RegisterFreelancer({ handleChange, handleSubmit, data, bankData, step }) {
+
+
+function RegisterFreelancer({ handleChange, handleSubmit, handleClick, data, bankData, step, error }) {
     return (
         <div style={{ maxWidth: '10rem' }}>
 
             <form onSubmit={handleSubmit} >
+                {error.errorType == 'empty' && error.errorMessage}
                 {step == 1 &&
                     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
                         <label> Name:
@@ -18,13 +22,15 @@ function RegisterFreelancer({ handleChange, handleSubmit, data, bankData, step }
                         </label>
                         <label> Password:
                             <input type="password" name='password' value={data.password} onChange={handleChange} />
+                            {error.errorType == 'password' && error.errorMessage}
                         </label>
                         <label> Type of freelancer:
                             <select name='freelancerType' value={data.freelancerType} onChange={handleChange}>
-                                <option value="">Choose your type</option>
+                                <option >Choose your type</option>
                                 <option value="developer">Developer</option>
                                 <option value="designer">Designer</option>
                             </select>
+                            {error.errorType == 'freelancerType' && error.errorMessage}
                         </label>
                     </div>
                 }
@@ -40,18 +46,38 @@ function RegisterFreelancer({ handleChange, handleSubmit, data, bankData, step }
                             <input type="text" name='alias' value={bankData.alias} onChange={handleChange} />
                         </label>
                         <label> CBU:
-                            <input type="text" name='cbu' value={bankData.cbu} onChange={handleChange} />
+                            <input type="number" name='cbu' value={bankData.cbu} onChange={handleChange} />
+                            {error.errorType == 'cbu' && error.errorMessage}
                         </label>
                         <label> DNI:
-                            <input type="text" name='dni' value={bankData.dni} onChange={handleChange} />
+                            <input type="number" name='dni' value={bankData.dni} onChange={handleChange} />
                         </label>
                     </div>
                 }
+                {step == 3 &&
+                    <div>
+                        <div id='pdf_register' style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-around' }}>
+                            <div>PDF TEST HOLAAAAAAAAAAAAAAAAAA</div>
+                            {/* SIGNATURE */}
+                            <div style={{ width: 500, border: '1px solid black' }}>
+                                <SignatureCanvas penColor='green'
+                                    canvasProps={{ width: 500, height: 200, className: 'sigCanvas' }} />
+                            </div>
+                        </div>
+                        <button onClick={(e) => {
+                            let element = document.getElementById('pdf_register')
+                            handleClick(e, element)
+                        }}> CREATE PDF</button>
+                    </div>
+                }
                 <br />
+
                 <button type='submit'> Next Step</button>
             </form>
         </div>
     );
 }
+
+
 
 export default RegisterFreelancer;
