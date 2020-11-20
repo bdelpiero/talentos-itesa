@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 /*
 
@@ -11,7 +12,7 @@ admin {
 
  */
 
-function AdminComponent({ handleChange, handleSubmit, hClick }) {
+function RegisterAdminComponent({ handleChange, handleSubmit, hClick }) {
   return (
     <div>
       <form onSubmit={handleSubmit} action="">
@@ -33,4 +34,4 @@ function AdminComponent({ handleChange, handleSubmit, hClick }) {
   );
 }
 
-export default AdminComponent;
+export default RegisterAdminComponent;
