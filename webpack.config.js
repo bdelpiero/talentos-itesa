@@ -44,6 +44,9 @@ const config = {
   devServer: {
     contentBase: "./dist",
     port: 3000,
+    historyApiFallback: {
+      index: 'index.html'
+    }
   },
 };
 
