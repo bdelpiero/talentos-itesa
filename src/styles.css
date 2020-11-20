@@ -1,4 +1,41 @@
+@import '~antd/dist/antd.css';
+.bodyCard{
+  font-family:"arial";
+  color: #0B2257;
+  font-size: 20px;
+  width: 500px;
+  border-radius:42px;
+
+}
+
 h1 {
   color: white;
   background-color: black;
+}
+
+#subtittle{
+
+  font-family:"Open Sans Semibold",arial;
+  color: #9E39FF;
+  font-size: 15px;
+
+}
+
+#tittleCard{
+  font-family:"Open Sans Semibold";
+  color: #8990AD;
+  font-size: 19px;
+  font-stretch: expanded;
+  
+}
+
+.buttonCard{
+  background-color:#9E39FF;
+  color:white;
+  float: right;
+  right: 0px;
+  width: 200px;
+  height: 40px;
+  text-align: center;   
+
 }

@@ -9,6 +9,7 @@ import { db } from "../firebase/firebase"
 import LoginContainer from './containers/loginContainer'
 import { AuthProvider } from '../auth/auth'
 import { Layout, Menu, Typography } from 'antd';
+import ProximoPago from './components/ProximoPago';
 
 const { Header, Content, Footer } = Layout;
 const {Title} =Typography
@@ -34,6 +35,7 @@ function App() {
             <Switch>
                 <Route exact path='/register' component={RegisterFreelancerContainer} />
                 <Route exact path='/login' component={LoginContainer} />
+                <Route exact path='/pruebacard' component={ProximoPago}/>
             </Switch>
           </div>
         </Content>
