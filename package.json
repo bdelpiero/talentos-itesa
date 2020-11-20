@@ -13,6 +13,7 @@
     "start": "webpack serve --hot --mode development"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.3.0",
     "antd": "^4.8.4",
     "firebase": "^8.0.2",
     "react": "^17.0.1",
