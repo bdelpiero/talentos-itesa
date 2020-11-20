@@ -3,11 +3,7 @@ import React from "react";
 function InviteComponent() {
   return (
     <div>
-      <form action="">
-        Nombre
-        <input name="name" type="text" />
-        <br />
-      </form>
+      <p>HOLA MUNDO</p>
     </div>
   );
 }
