@@ -40,6 +40,7 @@ function RegisterFreelancerContainer() {
     lastName: "",
     email: "",
     password: "",
+    confirm: "",
     freelancerType: "",
   });
 
@@ -53,13 +54,16 @@ function RegisterFreelancerContainer() {
     bankName: "",
     accountName: "",
     alias: "",
-    cbu: "",
-    dni: "",
+    // cbu: "",
+    cuit: "",
+    type: "",
   });
 
   const [step, setStep] = useState(1);
 
   const handleChange = (e) => {
+    console.log("name", e.target.name);
+    console.log("value", e.target.value);
     if (step == 1)
       setData({
         ...data,
@@ -72,44 +76,41 @@ function RegisterFreelancerContainer() {
       });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("ESTO ES DATA", data);
-    if (step == 1) {
-      validate(data, setError, setStep, step);
-    } else if (step == 2) {
-      validate(bankData, setError, setStep, step);
-    } else
-      signup(data.email, data.password)
-        .then((res) => res.user.uid)
-        .then((uid) => {
-          db.collection("users").doc(uid).set({
-            name: data.name,
-            lastName: data.lastName,
-            freelancerType: data.freelancerType,
-            bankDetails: bankData,
-          });
-        }),
-        setData({
-          name: "",
-          lastName: "",
-          email: "",
-          password: "",
-          freelancerType: "",
-        }),
-        setBankData({
-          bankName: "",
-          accountName: "",
-          alias: "",
-          cbu: "",
-          dni: "",
-        });
+  const handleConfirm = () => {
+    console.log("data", data);
+    console.log("bankData", bankData);
+    validate(data, setError, setStep, step);
   };
 
-  const handleClick = (e, div) => {
-    console.log("este es el id", div);
-    e.preventDefault();
+  const handleSubmit = (e, div) => {
+    // e.preventDefault();
+    console.log("ESTO ES DATA", data);
 
+    signup(data.email, data.password)
+      .then((res) => res.user.uid)
+      .then((uid) => {
+        db.collection("users").doc(uid).set({
+          name: data.name,
+          lastName: data.lastName,
+          freelancerType: data.freelancerType,
+          bankDetails: bankData,
+        });
+      }),
+      setData({
+        name: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirm: "",
+        freelancerType: "",
+      }),
+      setBankData({
+        bankName: "",
+        accountName: "",
+        alias: "",
+        cbu: "",
+        dni: "",
+      });
     const worker = html2pdf().from(div).toPdf().output("blob", "signature.pdf");
     worker.then((file) => {
       const storageRef = storage.ref();
@@ -120,6 +121,20 @@ function RegisterFreelancerContainer() {
     });
   };
 
+  // const handleClick = (e, div) => {
+  //   console.log("este es el id", div);
+  //   e.preventDefault();
+
+  //   const worker = html2pdf().from(div).toPdf().output("blob", "signature.pdf");
+  //   worker.then((file) => {
+  //     const storageRef = storage.ref();
+  //     const pdfsRef = storageRef.child("pdfs/contract.pdf");
+  //     pdfsRef.put(file).then(function (snapshot) {
+  //       console.log("Uploaded a blob or file!");
+  //     });
+  //   });
+  // };
+
   return (
     <div>
       <RegisterFreelancer
@@ -129,7 +144,7 @@ function RegisterFreelancerContainer() {
         bankData={bankData}
         step={step}
         error={error}
-        handleClick={handleClick}
+        handleConfirm={handleConfirm}
       />
     </div>
   );
