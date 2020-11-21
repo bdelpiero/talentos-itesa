@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Route, Switch, Link, Redirect } from "react-router-dom";
 import RegisterFreelancerContainer from "./containers/RegisterFreelancerContainer";
 import React, { useEffect, useState } from "react";
@@ -14,6 +15,14 @@ import AdminContainer from "./containers/adminContainer";
 const { Header, Content, Footer } = Layout;
 const { Title } = Typography;
 
+=======
+
+import React from "react";
+import { Route, Switch } from 'react-router-dom'
+import { AuthProvider } from '../auth/auth'
+import RegisterFreelancerContainer from './containers/RegisterFreelancerContainer'
+
+>>>>>>> 90bb50819e6b789791b3480d6ee3c074356ec05e
 function App() {
   return (
     <AuthProvider>
@@ -26,7 +35,11 @@ function App() {
         <Redirect from='/' to='/' />
       </Switch>
     </AuthProvider>
+<<<<<<< HEAD
   );
+=======
+  )
+>>>>>>> 90bb50819e6b789791b3480d6ee3c074356ec05e
 }
 
 export default App;
