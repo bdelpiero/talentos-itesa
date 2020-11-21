@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import RegisterFreelancer from '../components/RegisterFreelancer'
-import { db } from '../../firebase/firebase'
-import { authUser } from '../../auth/auth'
+import RegisterFreelancer from "../components/RegisterFreelancer";
+import { db } from "../../firebase/firebase";
+import { authUser } from "../../auth/auth";
+
 import html2pdf from "html2pdf.js";
 import { storage } from "../../firebase/firebase";
 
 const validate = (data, setError, setStep, step) => {
-    /* if (Object.values(data).some(value => value === '')) {
+  /* if (Object.values(data).some(value => value === '')) {
         setError({ errorType: 'empty', errorMessage: 'All fields must be completed' })
         return setStep(step)
     }
@@ -28,100 +29,88 @@ const validate = (data, setError, setStep, step) => {
         setError({ errorType: '', errorMessage: '' })
         return setStep(step + 1)
     } */
-    return setStep(step + 1)
-}
-
+  return setStep(step + 1);
+};
 
 function RegisterFreelancerContainer() {
+  const { signup } = authUser();
 
-    const { signup } = authUser()
+  const [data, setData] = useState({
+    name: "",
+    lastName: "",
+    email: "",
+    password: "",
+    freelancerType: "",
+  });
 
-    const [data, setData] = useState({
-        name: '',
-        lastName: '',
-        email: '',
-        password: '',
-        freelancerType: '',
-    })
+  const [error, setError] = useState({
+    // showError: false,
+    errorType: "",
+    errorMessage: "",
+  });
 
-    const [error, setError] = useState({
-        // showError: false,
-        errorType: '',
-        errorMessage: ''
-    })
+  const [bankData, setBankData] = useState({
+    bankName: "",
+    accountName: "",
+    alias: "",
+    cbu: "",
+    dni: "",
+  });
 
-    const [bankData, setBankData] = useState({
-        bankName: '',
-        accountName: '',
-        alias: '',
-        cbu: '',
-        dni: ''
-    })
+  const [step, setStep] = useState(1);
 
-    const [step, setStep] = useState(1)
+  const handleChange = (e) => {
+    if (step == 1)
+      setData({
+        ...data,
+        [e.target.name]: e.target.value,
+      });
+    if (step == 2)
+      setBankData({
+        ...bankData,
+        [e.target.name]: e.target.value,
+      });
+  };
 
-    const handleChange = (e) => {
-        if (step == 1) setData({
-            ...data, [e.target.name]: e.target.value
-        })
-        if (step == 2) setBankData({
-            ...bankData, [e.target.name]: e.target.value
-        })
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("ESTO ES DATA", data);
+    if (step == 1) {
+      validate(data, setError, setStep, step);
+    } else if (step == 2) {
+      validate(bankData, setError, setStep, step);
+    } else
+      signup(data.email, data.password)
+        .then((res) => res.user.uid)
+        .then((uid) => {
+          db.collection("users").doc(uid).set({
+            name: data.name,
+            lastName: data.lastName,
+            freelancerType: data.freelancerType,
+            bankDetails: bankData,
+          });
+        }),
+        setData({
+          name: "",
+          lastName: "",
+          email: "",
+          password: "",
+          freelancerType: "",
+        }),
+        setBankData({
+          bankName: "",
+          accountName: "",
+          alias: "",
+          cbu: "",
+          dni: "",
+        });
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        console.log('ESTO ES DATA', data)
-        if (step == 1) {
-            validate(data, setError, setStep, step)
-        }
-        else if (step == 2) {
-            validate(bankData, setError, setStep, step)
-        }
-        else (
-            signup(data.email, data.password)
-                .then(res => res.user.uid)
-                .then(uid => {
-                    db.collection('users').doc(uid).set({
-                        name: data.name,
-                        lastName: data.lastName,
-                        freelancerType: data.freelancerType,
-                        bankDetails: bankData
-                    })
-                }),
-            setData({
-                name: '',
-                lastName: '',
-                email: '',
-                password: '',
-                freelancerType: ''
-            }),
-            setBankData({
-                bankName: '',
-                accountName: '',
-                alias: '',
-                cbu: '',
-                dni: ''
-            })
-        )
-    }
+  const handleClick = (e, div) => {
+    console.log("este es el id", div);
+    e.preventDefault();
 
-    const handleClick = (e, div) => {
-        console.log('este es el id', div)
-        e.preventDefault()
-        html2PDF(div, {
-            jsPDF: {
-                format: 'a4',
-            },
-            imageType: 'image/jpeg',
-            output: '../../pdfs/register_userid.pdf',
-        })
-
-        const element = document.getElementById("to-print");
-        const worker = html2pdf()
-      .from(element)
-      .toPdf()
-      .output("blob", "signature.pdf");
+    const worker = html2pdf().from(div).toPdf().output("blob", "signature.pdf");
     worker.then((file) => {
       const storageRef = storage.ref();
       const pdfsRef = storageRef.child("pdfs/contract.pdf");
@@ -129,23 +118,21 @@ function RegisterFreelancerContainer() {
         console.log("Uploaded a blob or file!");
       });
     });
-    }
+  };
 
-    return (
-        <div>
-            <RegisterFreelancer
-                handleChange={handleChange}
-                handleSubmit={handleSubmit}
-                data={data}
-                bankData={bankData}
-                step={step}
-                error={error}
-                handleClick={handleClick}
-            />
-
-        </div>
-
-    );
+  return (
+    <div>
+      <RegisterFreelancer
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        data={data}
+        bankData={bankData}
+        step={step}
+        error={error}
+        handleClick={handleClick}
+      />
+    </div>
+  );
 }
 
 // 1234567891234567891234
