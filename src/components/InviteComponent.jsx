@@ -1,9 +1,12 @@
 import React from "react";
 
-function InviteComponent() {
+function InviteComponent({ handleClick }) {
   return (
     <div>
-      <p>HOLA MUNDO</p>
+      <form action="">
+        <input type="text" />
+        <button onClick={handleClick}>Enviar</button>
+      </form>
     </div>
   );
 }

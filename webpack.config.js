@@ -33,6 +33,26 @@ const config = {
         ],
         include: /\.module\.css$/,
       },
+      {
+        test: /\.(png|jp(e*)g|svg|gif)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "images/[hash]-[name].[ext]",
+            },
+          },
+        ],
+      },
+      {
+        test: /\.svg$/,
+        issuer: /\.js$/,
+        use: [
+          {
+            loader: "svg-react-loader",
+          },
+        ],
+      },
     ],
   },
   resolve: {
