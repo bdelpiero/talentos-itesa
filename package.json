@@ -16,6 +16,7 @@
     "@ant-design/icons": "^4.3.0",
     "antd": "^4.8.4",
     "firebase": "^8.0.2",
+    "html2pdf.js": "^0.9.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-hot-loader": "^4.13.0",
