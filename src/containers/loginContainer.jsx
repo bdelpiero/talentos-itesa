@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import db from '../../firebase/firebase'
 import Login from '../components/login'
 import {authUser} from '../../auth/auth'
 import {Form} from 'antd'
@@ -27,10 +26,7 @@ export default ()=>{
         login(email,password)
         console.log("AQUI",valores)
         form.resetFields()
-        history.push("/")
-       
-       console.log(currentUser)
-
+        history.push("/frelance")
     }
 
         return(
