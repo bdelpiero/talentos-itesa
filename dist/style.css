@@ -6,24 +6,37 @@ trabajando con sider user
   height: 100vh;
   color: grey;
   background-color: whitesmoke !important;
+  box-shadow: 6px 0px 5px -4px rgba(0, 0, 0, 0.75);
 }
 .card-sider {
   margin: 10px auto !important;
   width: 90%;
   height: 150px;
   background-color: whitesmoke !important;
-  /* border: none !important; */
+  border: none !important;
+  border-radius: 20% !important;
+  text-align: center !important;
 }
+.card-sider:hover {
+  box-shadow: -1px 3px 26px -6px rgba(0, 0, 0, 0.75);
+}
+.card-sider:active {
+  box-shadow: inset -1px 3px 26px -6px rgba(0, 0, 0, 0.75);
+}
+
 .logaut {
   margin-top: 180px !important;
 }
 
 .icono-sider svg {
-  margin: 0 auto !important;
   display: block;
   color: grey;
   height: 4em;
   width: 4em;
+}
+
+.card-sider svg:hover {
+  color: rgb(228, 9, 217);
 }
 
 /* ----------------------
@@ -32,8 +45,25 @@ trabajando con header user
 
 .ant-layout-header {
   color: black;
-  background-color: bisque !important;
+  background-color: whitesmoke !important;
   height: 125px !important;
+}
+
+.mini-logo {
+  height: 35px;
+}
+
+.ant-avatar {
+  margin-right: 10px !important;
+  box-shadow: -1px 0px 16px -6px rgba(0, 0, 0, 0.75);
+}
+
+.dashboard {
+  margin-bottom: 0 !important;
+}
+.subtitulo {
+  display: flex !important;
+  color: red;
 }
 
 /* ----------------------
@@ -43,7 +73,7 @@ trabajando con content user
 .content-user {
   height: 75vh;
   color: black;
-  background-color: grey !important;
+  background-color: whitesmoke !important;
 }
 .content-row {
   height: 48%;
