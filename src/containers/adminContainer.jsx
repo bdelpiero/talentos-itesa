@@ -35,7 +35,6 @@ console.log("userContainer",currentUser)
                         pagos
                    </Row>
                 </Content>
-                {/* <Footer style={{ textAlign: 'center' }}>Talentos ITESA ©2020 Created by Plataforma 5</Footer> */}
             </Layout>
         </Layout>
     )

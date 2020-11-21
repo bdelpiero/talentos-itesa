@@ -9,6 +9,8 @@ import LoginContainer from './containers/loginContainer'
 import { AuthProvider } from '../auth/auth'
 import { Layout, Menu, Typography } from 'antd';
 import UserContainer from './containers/userContainer';
+import AdminContainer from './containers/adminContainer';
+
 
 const { Header, Content, Footer } = Layout;
 const {Title} =Typography
@@ -24,6 +26,7 @@ function App() {
         <Route exact path='/register' component={RegisterFreelancerContainer} />
         <Route exact path='/login' component={LoginContainer} />
         <Route exact path='/frelance' component={UserContainer} />
+        <Route exact path='/admin' component={AdminContainer} />
         <Route path="/" component={RegisterFreelancerContainer}/>
         <Redirect from="/" to="/" />
     </Switch>
