@@ -136,7 +136,8 @@ function RegisterFreelancerContainer() {
   // };
 
   return (
-    <div>
+    <div className='register-container'>
+      <div className='register-left'></div>
       <RegisterFreelancer
         handleChange={handleChange}
         handleSubmit={handleSubmit}

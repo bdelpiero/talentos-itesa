@@ -23,9 +23,12 @@ function RegisterFreelancer({
   error,
 }) {
   return (
-    <div style={{ maxWidth: "20rem" }}>
+    <div className='register-formContainer'>
       {step == 1 && (
-        <Form onFinish={handleConfirm} validateMessages={validateMessages}>
+        <Form
+          onFinish={handleConfirm}
+          validateMessages={validateMessages}
+          className='refister-form'>
           <Form.Item
             name='name'
             value={data.name}
@@ -69,7 +72,16 @@ function RegisterFreelancer({
                 message: "Please input your password!",
               },
             ]}>
-            <Input.Password placeholder='Contraseña' name='password' />
+            <Input.Password
+              placeholder='Contraseña'
+              name='password'
+              style={{
+                border: 0,
+                borderBottomWidth: 0.3,
+                borderBottomStyle: "solid",
+                borderBottomColor: "lightgray",
+              }}
+            />
           </Form.Item>
 
           <Form.Item
@@ -94,10 +106,23 @@ function RegisterFreelancer({
                 },
               }),
             ]}>
-            <Input.Password placeholder='Repetir Contraseña' name='confirm' />
+            <Input.Password
+              placeholder='Repetir Contraseña'
+              name='confirm'
+              style={{
+                border: 0,
+                borderBottomWidth: 0.3,
+                borderBottomStyle: "solid",
+                borderBottomColor: "lightgray",
+              }}
+            />
           </Form.Item>
           <Form.Item>
-            <Button type='primary' htmlType='submit' block>
+            <Button
+              block
+              type='primary'
+              htmlType='submit'
+              className='register-button'>
               Confirmar
             </Button>
           </Form.Item>
@@ -109,7 +134,10 @@ function RegisterFreelancer({
         </Form>
       )}
       {step == 2 && (
-        <Form onFinish={handleConfirm} validateMessages={validateMessages}>
+        <Form
+          onFinish={handleConfirm}
+          validateMessages={validateMessages}
+          className='refister-form'>
           <Form.Item
             name='cuit'
             value={bankData.cuit}
@@ -167,7 +195,11 @@ function RegisterFreelancer({
             <Input placeholder='Tipo de factura a emitir' name='type' />
           </Form.Item>
           <Form.Item>
-            <Button type='primary' htmlType='submit' block>
+            <Button
+              block
+              type='primary'
+              htmlType='submit'
+              className='register-button'>
               Confirmar
             </Button>
           </Form.Item>
