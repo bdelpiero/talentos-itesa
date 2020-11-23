@@ -1,4 +1,4 @@
-@import '~antd/dist/antd.css';
+/* @import '~antd/dist/antd.css';
 .bodyCard{
   font-family:"arial";
   color: #0B2257;
@@ -7,12 +7,12 @@
   border-radius:42px;
 
 }
-
+ */
 h1 {
   color: white;
   background-color: black;
 }
-
+/* 
 #subtittle{
 
   font-family:"Open Sans Semibold",arial;
@@ -38,4 +38,4 @@ h1 {
   height: 40px;
   text-align: center;   
 
-}
+} */
