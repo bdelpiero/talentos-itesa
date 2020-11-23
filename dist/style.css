@@ -104,18 +104,18 @@ register freelancer
 
 .register-container {
   display: flex;
-  height: 100vh;
+  height: 90vh;
   width: 100vw;
-  margin-top: 80px;
+  margin-top: 10vh;
 }
 
 .register-left {
-  flex-basis: 55vw;
+  flex-basis: 50vw;
 }
 
 .register-formContainer {
-  flex-basis: 45vw;
-  padding: 50px;
+  flex-basis: 50vw;
+  padding: 0 8%;
 }
 
 .refister-form input {
@@ -125,4 +125,39 @@ register freelancer
 
 .register-button span {
   border: 0;
+}
+
+.register-steps {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 30%;
+  margin-top: 50px;
+}
+.register-steps button {
+  width: 30%;
+  height: 3px;
+}
+
+.register-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.register-link a {
+  text-decoration: none;
+  color: "gray";
+}
+@media (max-width: 850px) {
+  .register-left {
+    flex-basis: 0;
+    width: 0;
+  }
+
+  .register-formContainer {
+    flex-basis: 100vw;
+    padding: 0 20%;
+    /* width: 100vw; */
+  }
 }

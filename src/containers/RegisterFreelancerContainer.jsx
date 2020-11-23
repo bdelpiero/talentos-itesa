@@ -6,31 +6,31 @@ import { authUser } from "../../auth/auth";
 import html2pdf from "html2pdf.js";
 import { storage } from "../../firebase/firebase";
 
-const validate = (data, setError, setStep, step) => {
-  /* if (Object.values(data).some(value => value === '')) {
-        setError({ errorType: 'empty', errorMessage: 'All fields must be completed' })
-        return setStep(step)
-    }
+// const validate = (data, setError, setStep, step) => {
+//   /* if (Object.values(data).some(value => value === '')) {
+//         setError({ errorType: 'empty', errorMessage: 'All fields must be completed' })
+//         return setStep(step)
+//     }
 
-    if (data.password && (data.password.length < 6)) {
-        setError({ errorType: 'password', errorMessage: 'Password must have at least 6 characters' })
-        return setStep(1)
-    }
-    if (data.freelancerType && (data.freelancerType == '')) {
-        console.log('data freelancer type')
-        setError({ errorType: 'freelancerType', errorMessage: 'You need to choose 1 Freelancer Type' })
-        return setStep(1)
-    }
-    if (data.cbu && (data.cbu.toString().length != 22)) {
-        setError({ errorType: 'cbu', errorMessage: 'CBU must have at least 22 numbers' })
-        return setStep(2)
-    }
-    else {
-        setError({ errorType: '', errorMessage: '' })
-        return setStep(step + 1)
-    } */
-  return setStep(step + 1);
-};
+//     if (data.password && (data.password.length < 6)) {
+//         setError({ errorType: 'password', errorMessage: 'Password must have at least 6 characters' })
+//         return setStep(1)
+//     }
+//     if (data.freelancerType && (data.freelancerType == '')) {
+//         console.log('data freelancer type')
+//         setError({ errorType: 'freelancerType', errorMessage: 'You need to choose 1 Freelancer Type' })
+//         return setStep(1)
+//     }
+//     if (data.cbu && (data.cbu.toString().length != 22)) {
+//         setError({ errorType: 'cbu', errorMessage: 'CBU must have at least 22 numbers' })
+//         return setStep(2)
+//     }
+//     else {
+//         setError({ errorType: '', errorMessage: '' })
+//         return setStep(step + 1)
+//     } */
+//   return setStep(step + 1);
+// };
 
 function RegisterFreelancerContainer() {
   const { signup } = authUser();
@@ -77,9 +77,11 @@ function RegisterFreelancerContainer() {
   };
 
   const handleConfirm = () => {
-    console.log("data", data);
-    console.log("bankData", bankData);
-    validate(data, setError, setStep, step);
+    // habría que checkear con firebase (pero sin guardar todavía ningún dato):
+    //    - si el mail está entre los invitados
+    //    - si el mail no está ya registrado (en usuarios, no en auth)
+
+    setStep(step + 1);
   };
 
   const handleSubmit = (e, div) => {

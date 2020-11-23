@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import SignatureCanvas from "react-signature-canvas";
-import { Form, Input, InputNumber, Button, Steps } from "antd";
+import { Form, Input, Select, Button, Steps } from "antd";
 
 const { Step } = Steps;
 
@@ -29,6 +30,18 @@ function RegisterFreelancer({
           onFinish={handleConfirm}
           validateMessages={validateMessages}
           className='refister-form'>
+          <h1 style={{ color: "gray", textAlign: "center" }}>Creá tu cuenta</h1>
+          <Form.Item
+            hasFeedback
+            name='freelancerType'
+            value={data.freelancerType}
+            onChange={handleChange}
+            rules={[{ required: true, message: "Please select an option" }]}>
+            <Select allowClear placeholder='Tipo de freelancer'>
+              <Select.Option value='developer'>Developer</Select.Option>
+              <Select.Option value='designer'>Designer</Select.Option>
+            </Select>
+          </Form.Item>
           <Form.Item
             name='name'
             value={data.name}
@@ -69,7 +82,10 @@ function RegisterFreelancer({
             rules={[
               {
                 required: true,
-                message: "Please input your password!",
+              },
+              {
+                min: 6,
+                message: "Password must be minimum 6 characters.",
               },
             ]}>
             <Input.Password
@@ -117,8 +133,10 @@ function RegisterFreelancer({
               }}
             />
           </Form.Item>
+
           <Form.Item>
             <Button
+              shape='round'
               block
               type='primary'
               htmlType='submit'
@@ -126,11 +144,18 @@ function RegisterFreelancer({
               Confirmar
             </Button>
           </Form.Item>
-          <Steps size='small' current={step - 1}>
-            <Step />
-            <Step />
-            <Step />
-          </Steps>
+          <div className='register-steps'>
+            <Button shape='round' style={{ backgroundColor: "pink" }}>
+              {" "}
+            </Button>
+            <Button shape='round'> </Button>
+            <Button shape='round'> </Button>
+          </div>
+          <div className='register-link'>
+            <Link to='/login' style={{ color: "gray" }}>
+              Already have an account? Login
+            </Link>
+          </div>
         </Form>
       )}
       {step == 2 && (
@@ -138,6 +163,9 @@ function RegisterFreelancer({
           onFinish={handleConfirm}
           validateMessages={validateMessages}
           className='refister-form'>
+          <h1 style={{ color: "gray", textAlign: "center" }}>
+            Registrá tus datos fiscales
+          </h1>
           <Form.Item
             name='cuit'
             value={bankData.cuit}
@@ -196,6 +224,7 @@ function RegisterFreelancer({
           </Form.Item>
           <Form.Item>
             <Button
+              shape='round'
               block
               type='primary'
               htmlType='submit'
@@ -203,11 +232,19 @@ function RegisterFreelancer({
               Confirmar
             </Button>
           </Form.Item>
-          <Steps size='small' current={step - 1}>
-            <Step />
-            <Step />
-            <Step />
-          </Steps>
+
+          <div className='register-steps'>
+            <Button shape='round'> </Button>
+            <Button shape='round' style={{ backgroundColor: "orange" }}>
+              {" "}
+            </Button>
+            <Button shape='round'> </Button>
+          </div>
+          <div className='register-link'>
+            <Link to='/login' style={{ color: "gray" }}>
+              Already have an account? Login
+            </Link>
+          </div>
         </Form>
       )}
       {step == 3 && (
