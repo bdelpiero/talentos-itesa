@@ -6,7 +6,7 @@ trabajando con sider user
   height: 100vh;
   color: grey;
   background-color: whitesmoke !important;
-  box-shadow: 6px 0px 5px -4px rgba(0, 0, 0, 0.75);
+  box-shadow: 3px 0px 5px -3px rgba(0, 0, 0, 0.75);
 }
 .card-sider {
   margin: 10px auto !important;
@@ -14,7 +14,7 @@ trabajando con sider user
   height: 150px;
   background-color: whitesmoke !important;
   border: none !important;
-  border-radius: 20% !important;
+  border-radius: 5% !important;
   text-align: center !important;
 }
 .card-sider:hover {
@@ -25,7 +25,7 @@ trabajando con sider user
 }
 
 .logaut {
-  margin-top: 180px !important;
+  margin-top: 350px !important;
 }
 
 .icono-sider svg {

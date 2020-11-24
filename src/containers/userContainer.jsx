@@ -2,8 +2,8 @@ import React from 'react'
 import {Link,useHistory} from 'react-router-dom'
 import {authUser} from '../../auth/auth'
 import { Layout,Row } from 'antd';
-import Sidebar from '../components/sidebar'
-import HeaderComponent from '../components/header'
+import Sidebar from '../components/Sidebar'
+import HeaderComponent from '../components/Header'
 
 const { Header, Footer, Sider, Content } = Layout;
 

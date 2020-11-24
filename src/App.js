@@ -1,20 +1,17 @@
-import { Route, Switch, Link, Redirect } from "react-router-dom";
-import RegisterFreelancerContainer from "./containers/RegisterFreelancerContainer";
-import React, { useEffect, useState } from "react";
-import { hot } from "react-hot-loader/root";
-import { useRecoilState } from "recoil";
-import { userName } from "./atoms";
-
-import { db } from "../firebase/firebase";
-import LoginContainer from "./containers/loginContainer";
+import React from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { AuthProvider } from "../auth/auth";
-import { Layout, Menu, Typography } from "antd";
+
+// CONTAINERS
+import RegisterFreelancerContainer from "./containers/RegisterFreelancerContainer";
+import LoginContainer from "./containers/LoginContainer";
 import AdminContainer from "./containers/AdminContainer";
-import UserContainer from "./containers/userContainer";
+import UserContainer from "./containers/UserContainer";
+
+//OTHERS
+import { Layout, Menu, Typography } from "antd";
 import InviteComponent from "./components/InviteComponent";
 
-const { Header, Content, Footer } = Layout;
-const { Title } = Typography;
 
 function App() {
   return (
@@ -25,7 +22,7 @@ function App() {
         <Route exact path='/freelancer' component={UserContainer} />
         <Route exact path='/admin' component={AdminContainer} />
         <Route path='/' component={RegisterFreelancerContainer} />
-        <Redirect  to='/' />
+        <Redirect from="/" to='/' />
       </Switch>
     </AuthProvider>
   );
