@@ -15,7 +15,7 @@ function App() {
         <Route exact path='/freelancer' component={UserContainer} />
         <Route exact path='/admin' component={AdminContainer} />
         <Route path='/' component={RegisterFreelancerContainer} />
-        <Redirect from='/' to='/' />
+        <Redirect  to='/' />
       </Switch>
     </AuthProvider>
   );

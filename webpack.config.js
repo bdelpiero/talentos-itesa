@@ -34,9 +34,17 @@ const config = {
         include: /\.module\.css$/,
       },
       {
-        test: /\.svg$/,
-        use: ["@svgr/webpack"],
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
       },
+      {
+        test: /\.svg$/,
+        use: ["@svgr/webpack"]
+      }
     ],
   },
   resolve: {
