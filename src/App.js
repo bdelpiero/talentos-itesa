@@ -11,7 +11,6 @@ import { AuthProvider } from "../auth/auth";
 import { Layout, Menu, Typography } from "antd";
 import AdminContainer from "./containers/AdminContainer";
 import UserContainer from "./containers/userContainer";
-import InviteComponent from "./components/InviteComponent";
 
 const { Header, Content, Footer } = Layout;
 const { Title } = Typography;

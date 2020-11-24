@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-
+import InviteCard from "../components/InviteCard";
 import { db } from "../../firebase/firebase";
 import { authUser } from "../../auth/auth";
 
@@ -11,7 +11,7 @@ import {
 } from "@ant-design/icons";
 import { Modal, Button } from "antd";
 
-function InviteComponent() {
+function InviteContainer() {
   const { signup } = authUser();
   const [modal, setModal] = useState(false);
   const [email, setEmail] = useState("");
@@ -22,15 +22,9 @@ function InviteComponent() {
   const closeModal = () => {
     setModal(false);
   };
-
-  const invite = () => {
-    closeModal();
-    openModalOk();
-  };
   const handleChange = (e) => {
     setEmail(e.target.value);
   };
-
   function success() {
     closeModal();
     db.collection("invites")
@@ -60,32 +54,14 @@ function InviteComponent() {
       });
   }
   return (
-    <div className="Modal">
-      <Button type="primary" onClick={openModal}>
-        <UserOutlined twoToneColor="#9e39ff" />
-      </Button>
-      <Modal
-        title="Modal invite"
-        visible={modal}
-        okText="Invitar"
-        centered="true"
-        cancelButtonProps={{ hidden: true }}
-        okButtonProps={{
-          style: { backgroundColor: "#9e39ff", border: "none" },
-          shape: "round",
-        }}
-        onCancel={closeModal}
-        onOk={success}
-        closeIcon={<CloseCircleOutlined style={{ color: "#9e39ff" }} />}
-        bodyStyle={{ color: "#9e39ff" }}
-      >
-        <h2>Invitar Usuario</h2>
-        <form action="">
-          <input onChange={handleChange} type="text" />
-        </form>
-      </Modal>
-    </div>
+    <InviteCard
+      handleChange={handleChange}
+      closeModal={closeModal}
+      success={success}
+      openModal={openModal}
+      modal={modal}
+    />
   );
 }
 
-export default InviteComponent;
+export default InviteContainer;
