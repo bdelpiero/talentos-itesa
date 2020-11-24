@@ -104,9 +104,21 @@ register freelancer
 
 .register-container {
   display: flex;
-  height: 90vh;
+  height: 80vh;
   width: 100vw;
-  margin-top: 10vh;
+  margin: 10vh 0;
+}
+
+.register-logo {
+  margin-top: 50px;
+  margin-right: 8%;
+}
+
+.register-header {
+  display: flex;
+  height: 10vh;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .register-left {
@@ -121,6 +133,9 @@ register freelancer
 .refister-form input {
   border: 0;
   border-bottom: 0.3px solid lightgray;
+}
+.register-button {
+  background-color: #a77ffa;
 }
 
 .register-button span {

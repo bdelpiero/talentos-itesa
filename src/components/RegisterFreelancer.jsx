@@ -136,6 +136,7 @@ function RegisterFreelancer({
 
           <Form.Item>
             <Button
+              style={{ backgroundColor: "#a77ffa", border: 0 }}
               shape='round'
               block
               type='primary'
@@ -224,6 +225,7 @@ function RegisterFreelancer({
           </Form.Item>
           <Form.Item>
             <Button
+              style={{ backgroundColor: "#a77ffa", border: 0 }}
               shape='round'
               block
               type='primary'

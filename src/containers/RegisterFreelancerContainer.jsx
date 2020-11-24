@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import RegisterFreelancer from "../components/RegisterFreelancer";
 import { db } from "../../firebase/firebase";
 import { authUser } from "../../auth/auth";
+import Logo from "../../views/Logo_Itesa.svg";
 
 import html2pdf from "html2pdf.js";
 import { storage } from "../../firebase/firebase";
@@ -138,17 +139,23 @@ function RegisterFreelancerContainer() {
   // };
 
   return (
-    <div className='register-container'>
-      <div className='register-left'></div>
-      <RegisterFreelancer
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-        data={data}
-        bankData={bankData}
-        step={step}
-        error={error}
-        handleConfirm={handleConfirm}
-      />
+    <div>
+      <div className='register-header'>
+        <Logo className='register-logo' />
+      </div>
+
+      <div className='register-container'>
+        <div className='register-left'></div>
+        <RegisterFreelancer
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          data={data}
+          bankData={bankData}
+          step={step}
+          error={error}
+          handleConfirm={handleConfirm}
+        />
+      </div>
     </div>
   );
 }
