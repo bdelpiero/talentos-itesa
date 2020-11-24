@@ -24,9 +24,19 @@ export default ()=>{
         setEmail("")
         setPassword('')
         login(email,password)
-        console.log("AQUI USER",currentUser)
+        // .then((res)=>{
+        //     console.log("AQUI USER",currentUser,"res",res)
+        //     // if(currentUser.isAdmin){
+        //     //     history.push("/admin")
+        //     // }else{
+        //     //     history.push("/freelance")
+        //     // }
+        //     // history.push("/admin")
+        // })
+        console.log("currentuser",currentUser)
         form.resetFields()
-        history.push("/frelance")
+        
+        
     }
 
         return(

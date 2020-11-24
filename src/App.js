@@ -22,7 +22,7 @@ function App() {
       <Switch>
         <Route exact path='/register' component={RegisterFreelancerContainer} />
         <Route exact path='/login' component={LoginContainer} />
-        <Route exact path='/freelancer' component={UserContainer} />
+        <Route exact path='/freelance' component={UserContainer} />
         <Route exact path='/admin' component={AdminContainer} />
         <Route path='/' component={RegisterFreelancerContainer} />
         <Redirect  to='/' />
