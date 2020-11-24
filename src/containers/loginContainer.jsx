@@ -24,7 +24,7 @@ export default ()=>{
         setEmail("")
         setPassword('')
         login(email,password)
-        console.log("AQUI",valores)
+        console.log("AQUI USER",currentUser)
         form.resetFields()
         history.push("/frelance")
     }

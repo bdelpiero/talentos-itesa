@@ -33,6 +33,14 @@ const config = {
         ],
         include: /\.module\.css$/,
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
     ],
   },
   resolve: {
