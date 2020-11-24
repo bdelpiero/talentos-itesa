@@ -17,20 +17,20 @@ export class PagosFreelace extends Component {
             <div className="space-align-block">
             <h3 className="textPagos">$ 80.000</h3>
               <img id="imgPagos" src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar"></img>
-            <Row gutter={[16, 16]}>                                          
-                <Col span={6}>
+            <Row justify="end">                                          
+                <Col span={5}>
                   <p className="subtittle2">Proyecto:</p>
                   <p className="text2">ITS202|Satapp</p>
                 </Col>
-                <Col span={6}>
+                <Col span={5}>
                   <p className="subtittle2">Factura:</p>
                   <p className="text2">1 de 4</p>
                 </Col>
-                <Col span={6}>
+                <Col span={5}>
                   <p className="subtittle2">Fecha de pago</p>
                   <p className="text2">02/05/2020</p>
                 </Col>
-                <Col span={6}>
+                <Col span={5}>
                 <Button className="buttonPagos" shape="round" >Ver comprobante de pago <DownloadOutlined /> </Button>
                 </Col>
               </Row>

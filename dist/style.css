@@ -65,6 +65,10 @@ trabajando con header user
   display: flex !important;
   color: red;
 }
+.mini-logo {
+  height: 20px;
+  width: 30px f8h7dsgf;
+}
 
 /* ----------------------
 trabajando con content user
@@ -227,4 +231,82 @@ trabajando con Pagos Freelance
 #imgPagos {
   border-radius: 50%;
   height: 60px ;
+}
+/* ----------------------
+register freelancer
+---------------------- */
+
+.register-container {
+  display: flex;
+  height: 80vh;
+  width: 100vw;
+  margin: 10vh 0;
+}
+
+.register-logo {
+  margin-top: 50px;
+  margin-right: 8%;
+}
+
+.register-header {
+  display: flex;
+  height: 10vh;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.register-left {
+  flex-basis: 50vw;
+}
+
+.register-formContainer {
+  flex-basis: 50vw;
+  padding: 0 8%;
+}
+
+.refister-form input {
+  border: 0;
+  border-bottom: 0.3px solid lightgray;
+}
+.register-button {
+  background-color: #a77ffa;
+}
+
+.register-button span {
+  border: 0;
+}
+
+.register-steps {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 30%;
+  margin-top: 50px;
+}
+.register-steps button {
+  width: 30%;
+  height: 3px;
+}
+
+.register-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.register-link a {
+  text-decoration: none;
+  color: "gray";
+}
+@media (max-width: 850px) {
+  .register-left {
+    flex-basis: 0;
+    width: 0;
+  }
+
+  .register-formContainer {
+    flex-basis: 100vw;
+    padding: 0 20%;
+    /* width: 100vw; */
+  }
 }

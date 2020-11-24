@@ -1,15 +1,16 @@
 import React from 'react'
 import {Row,Col,Typography,Avatar} from 'antd'
 import {UserOutlined} from '@ant-design/icons';
+import logo from '../../views/Logo_Itesa.svg'
 
 const { Title ,Text} = Typography;
+
     
 
-export default  ({handleLogout})=>{
-    return (
-    <>
+export default ()=>{
+    return (<>
        <Row align='top' justify='end' className='mini-logo'>
-        Logo Itesa
+       <img src={logo} alt="" className='mini-logo'/>
        </Row>
        <Row justify='space-between'  align='top'>
         <Col>

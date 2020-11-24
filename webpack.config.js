@@ -33,6 +33,18 @@ const config = {
         ],
         include: /\.module\.css$/,
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
+      },
+      {
+        test: /\.svg$/,
+        use: ["@svgr/webpack"]
+      }
     ],
   },
   resolve: {
@@ -44,9 +56,10 @@ const config = {
   devServer: {
     contentBase: "./dist",
     port: 3000,
+
     historyApiFallback: {
-      index: 'index.html'
-    }
+      index: "index.html",
+    },
   },
 };
 

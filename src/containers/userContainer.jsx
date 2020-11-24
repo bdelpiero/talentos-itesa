@@ -4,6 +4,8 @@ import {authUser} from '../../auth/auth'
 import { Layout,Row } from 'antd';
 import Sidebar from '../components/sidebar'
 import HeaderComponent from '../components/header'
+import PagosFreelace from '../components/PagosFreelace';
+import CardsFreelace from '../components/CardsFreelace';
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -29,10 +31,10 @@ console.log("userContainer",currentUser)
                 </Header>
                 <Content className='content-user'>
                    <Row className='content-row'>
-                       ofertas / proximo pago / mi banco
+                      <CardsFreelace/>
                    </Row>
                    <Row className='content-row'>  
-                        pagos
+                        <PagosFreelace/>
                    </Row>
                 </Content>
                 {/* <Footer style={{ textAlign: 'center' }}>Talentos ITESA ©2020 Created by Plataforma 5</Footer> */}
