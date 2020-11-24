@@ -11,7 +11,6 @@ import { AuthProvider } from "../auth/auth";
 import { Layout, Menu, Typography } from "antd";
 import AdminContainer from "./containers/AdminContainer";
 import UserContainer from "./containers/userContainer";
-import InviteComponent from "./components/InviteComponent";
 
 const { Header, Content, Footer } = Layout;
 const { Title } = Typography;
@@ -20,12 +19,12 @@ function App() {
   return (
     <AuthProvider>
       <Switch>
-        <Route exact path='/register' component={RegisterFreelancerContainer} />
-        <Route exact path='/login' component={LoginContainer} />
-        <Route exact path='/freelancer' component={UserContainer} />
-        <Route exact path='/admin' component={AdminContainer} />
-        <Route path='/' component={RegisterFreelancerContainer} />
-        <Redirect  to='/' />
+        <Route exact path="/register" component={RegisterFreelancerContainer} />
+        <Route exact path="/login" component={LoginContainer} />
+        <Route exact path="/freelancer" component={UserContainer} />
+        <Route exact path="/admin" component={AdminContainer} />
+        <Route path="/" component={RegisterFreelancerContainer} />
+        <Redirect to="/" />
       </Switch>
     </AuthProvider>
   );
