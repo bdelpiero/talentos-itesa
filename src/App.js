@@ -8,8 +8,11 @@ import { db } from "../firebase/firebase"
 import LoginContainer from './containers/loginContainer'
 import { AuthProvider } from '../auth/auth'
 import { Layout, Menu, Typography } from 'antd';
-import ProximoPago from './components/ProximoPago';
+import CardsFreelace from './components/CardsFreelace';
 import UserContainer from './containers/userContainer';
+import AdminContainer from './containers/adminContainer';
+import PagosFreelace from './components/PagosFreelace';
+
 
 const { Header, Content, Footer } = Layout;
 const {Title} =Typography
@@ -25,8 +28,10 @@ function App() {
         <Route exact path='/register' component={RegisterFreelancerContainer} />
         <Route exact path='/login' component={LoginContainer} />
         <Route exact path='/frelance' component={UserContainer} />
-        <Route exact path='/pruebacard' component={ProximoPago}/>
-        <Route path="/" component={RegisterFreelancerContainer}/>
+        <Route exact path='/pruebacard' component={CardsFreelace}/>
+        <Route exact path='/pruebacard2' component={PagosFreelace}/>
+        <Route exact path='/admin' component={AdminContainer} />
+        <Route exact path="/"  component={LoginContainer} />
 
         <Redirect from="/" to="/" />
     </Switch>

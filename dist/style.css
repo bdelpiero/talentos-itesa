@@ -6,24 +6,37 @@ trabajando con sider user
   height: 100vh;
   color: grey;
   background-color: whitesmoke !important;
+  box-shadow: 6px 0px 5px -4px rgba(0, 0, 0, 0.75);
 }
 .card-sider {
   margin: 10px auto !important;
   width: 90%;
   height: 150px;
   background-color: whitesmoke !important;
-  /* border: none !important; */
+  border: none !important;
+  border-radius: 20% !important;
+  text-align: center !important;
 }
+.card-sider:hover {
+  box-shadow: -1px 3px 26px -6px rgba(0, 0, 0, 0.75);
+}
+.card-sider:active {
+  box-shadow: inset -1px 3px 26px -6px rgba(0, 0, 0, 0.75);
+}
+
 .logaut {
   margin-top: 180px !important;
 }
 
 .icono-sider svg {
-  margin: 0 auto !important;
   display: block;
   color: grey;
   height: 4em;
   width: 4em;
+}
+
+.card-sider svg:hover {
+  color: rgb(228, 9, 217);
 }
 
 /* ----------------------
@@ -32,8 +45,25 @@ trabajando con header user
 
 .ant-layout-header {
   color: black;
-  background-color: bisque !important;
+  background-color: whitesmoke !important;
   height: 125px !important;
+}
+
+.mini-logo {
+  height: 35px;
+}
+
+.ant-avatar {
+  margin-right: 10px !important;
+  box-shadow: -1px 0px 16px -6px rgba(0, 0, 0, 0.75);
+}
+
+.dashboard {
+  margin-bottom: 0 !important;
+}
+.subtitulo {
+  display: flex !important;
+  color: red;
 }
 
 /* ----------------------
@@ -43,7 +73,7 @@ trabajando con content user
 .content-user {
   height: 75vh;
   color: black;
-  background-color: grey !important;
+  background-color: whitesmoke !important;
 }
 .content-row {
   height: 48%;
@@ -86,7 +116,7 @@ trabajando con content user
 
 
 /* ----------------------
-trabajando con content user Cards
+trabajando con  user Cards
 ---------------------- */
 
 @import '~antd/dist/antd.css';
@@ -95,7 +125,7 @@ trabajando con content user Cards
   font-family:"arial";
   color: #0B2257;
   font-size: 20px;
-  width: 500px;
+  width: 400px;
   border-radius:42px;
 
 }
@@ -106,12 +136,12 @@ h1 {
 }
 
 #subtittle{
-
   font-family:"Open Sans Semibold",arial;
   color: #9E39FF;
   font-size: 15px;
 
 }
+
 
 #tittleCard{
   font-family:"Open Sans Semibold";
@@ -126,8 +156,75 @@ h1 {
   color:white;
   float: right;
   right: 0px;
-  width: 200px;
-  height: 40px;
+  width: 220px;
+  height: 50px;
+  text-align: center;  
+
+}
+
+/* ----------------------
+trabajando con Pagos Freelance
+---------------------- */
+
+.bodyCard2{
+  font-family:"arial";
+  color: #0B2257;
+  font-size: 15px;
+  width: 90%; 
+   
+
+}
+
+.space-align-container {  
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 90%;
+  height: 20%;
+  
+  
+}
+.space-align-block {
+  margin: 8px 4px;  
+  padding: 4px;
+  flex: none;
+}
+.space-align-block .mock-block {
+  display: inline-block;
+  padding: 32px 8px 16px;
+  background: rgba(150, 150, 150, 0.2);
+}
+
+.text2{
+  font-family:"Open Sans Semibold";
+  color:black;
+  font-size: 12px;
+  font-stretch: expanded;  
+}
+.textPagos{
+  font-family:"Open Sans Semibold";
+  color:#8990AD;
+}
+
+.subtittle2{
+  font-family:"Open Sans Semibold",arial;
+  color: #9E39FF;
+  font-size: 12px;
+}
+
+
+.buttonPagos{
+
+  background-color:#9E39FF;
+  color:white;
+  float: right;
+  right: 0px;
+  width: 220px;
+  height: 50px;
   text-align: center;   
 
+}
+
+#imgPagos {
+  border-radius: 50%;
+  height: 60px ;
 }
