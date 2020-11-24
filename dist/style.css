@@ -39,6 +39,7 @@ trabajando con sider user
   color: rgb(228, 9, 217);
 }
 
+
 /* ----------------------
 trabajando con header user
 ---------------------- */
@@ -51,6 +52,8 @@ trabajando con header user
 
 .mini-logo {
   height: 35px;
+  margin-top: 4px;
+  margin-bottom: 2px ;
 }
 
 .ant-avatar {
@@ -65,10 +68,7 @@ trabajando con header user
   display: flex !important;
   color: red;
 }
-.mini-logo {
-  height: 20px;
-  width: 30px f8h7dsgf;
-}
+
 
 /* ----------------------
 trabajando con content user
@@ -179,4 +179,25 @@ register freelancer
     padding: 0 20%;
     /* width: 100vw; */
   }
+}
+/* ----------------------
+Trabajando con Admin Cards/DashBoard
+---------------------- */
+.admin-cards {
+  margin: 10px !important;
+  height: 150px;
+  background-color: whitesmoke !important;
+  border: none !important;
+  border-radius: 20% !important;
+  text-align: center !important;
+  box-shadow: -1px 3px 26px -6px rgba(0, 0, 0, 0.75);
+}
+.admin-cards svg:hover {
+  color: rgb(228, 9, 217);
+}
+/* .admin-cards:hover {
+  box-shadow: -1px 3px 26px -6px rgba(0, 0, 0, 0.75);
+} */
+.admin-cards:active {
+  box-shadow: inset -1px 3px 26px -6px rgba(0, 0, 0, 0.75);
 }

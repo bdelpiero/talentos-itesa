@@ -1,6 +1,6 @@
 import React from 'react'
 import {Card,Row,Col} from 'antd'
-import {LogoutOutlined,BarChartOutlined,HomeOutlined} from '@ant-design/icons';
+import {RightCircleOutlined } from '@ant-design/icons';
 
 export default ({handleLogout})=>{
     return (
@@ -21,33 +21,9 @@ export default ({handleLogout})=>{
             </Row>
             <hr/>
             <h6> RECORDATORIO </h6>
+            <RightCircleOutlined />
         </Card>
         </div>
     )
 }
 
-
-// import { Card, Col, Row } from 'antd';
-
-// ReactDOM.render(
-//   <div className="site-card-wrapper">
-//     <Row gutter={16}>
-//       <Col span={8}>
-//         <Card title="Card title" bordered={false}>
-//           Card content
-//         </Card>
-//       </Col>
-//       <Col span={8}>
-//         <Card title="Card title" bordered={false}>
-//           Card content
-//         </Card>
-//       </Col>
-//       <Col span={8}>
-//         <Card title="Card title" bordered={false}>
-//           Card content
-//         </Card>
-//       </Col>
-//     </Row>
-//   </div>,
-//   mountNode,
-// );
