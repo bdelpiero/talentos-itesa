@@ -1,5 +1,5 @@
 import React from 'react'
-import {Card,Row,Col} from 'antd'
+import {Card} from 'antd'
 import {LogoutOutlined,BarChartOutlined,HomeOutlined} from '@ant-design/icons';
 
 export default ({handleLogout})=>{

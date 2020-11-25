@@ -7,7 +7,9 @@ function AddPayment() {
     <div className="Modal">
       <Card className="admin-cards">
         <Briefing className="icono-sider" />
-        <h3 style={{ color: "#9e39ff" }}>Invitar perfiles</h3>
+
+        {/* <Button style={{ color: "#9e39ff" }}>Ingresar un Pago</Button> */}
+        <p style={{ color: "#9e39ff" }}>Ingresar un Pago</p>
       </Card>
     </div>
   );
