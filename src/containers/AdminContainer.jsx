@@ -26,7 +26,7 @@ function AdminContainer() {
   console.log("userContainer", currentUser);
   return (
     <Layout>
-      <Sider className="sider-user" justify="center">
+      <Sider className="sider-user"  >
         <Sidebar handleLogout={handleLogout} />
       </Sider>
 

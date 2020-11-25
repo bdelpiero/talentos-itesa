@@ -3,16 +3,19 @@ import Login from "../components/Login";
 import { authUser } from "../../auth/auth";
 import { Link, useHistory } from "react-router-dom";
 import Logo from "../../views/logo-itesa.svg";
+import { useRecoilState } from "recoil";
+import { isLoading } from "../atoms";
+import {Form} from 'antd'
+
 
 export default () => {
   const [data, setData] = useState({
     email: "",
     password: "",
   });
-
-  //   const [form] = Form.useForm();
+  const [form] =Form.useForm()
   const history = useHistory();
-
+  const [loading, setLoading] = useRecoilState(isLoading);
   const { login, currentUser } = authUser();
 
   const handleInputChange = (e) => {
@@ -24,22 +27,12 @@ export default () => {
     });
   };
 
-  //   const handleChangeEmail = (e) => {
-  //     setEmail(e.target.value);
-  //   };
-
-  //   const handleChangePassword = (e) => {
-  //     setPassword(e.target.value);
-  //   };
 
   const handleSubmit = (valores) => {
-    console.log("user", data.email);
-    console.log("pass", data.password);
+    setLoading(true)
     login(data.email, data.password);
-    console.log("AQUI", valores);
     setData({ email: "", password: "" });
-    // form.resetFields();
-    // history.push("/freelancer");
+    form.resetFields()
   };
 
   return (
@@ -54,15 +47,10 @@ export default () => {
           handleInputChange={handleInputChange}
           handleSubmit={handleSubmit}
           data={data}
+          form={form}
+          loading={loading}
         />
-        {/* <Login
-            hanledChangeEmail={hanledChangeEmail}
-            hanledChangePassword={hanledChangePassword}
-            hanledSubmit={hanledSubmit}
-            email={email}
-            password={password}
-            form={form}
-            /> */}
+       
       </div>
     </div>
   );

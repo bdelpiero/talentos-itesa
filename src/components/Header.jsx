@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col, Typography, Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import Logo from "../../views/logo-itesa.svg";
+import logo from "../../views/logo-itesa.svg";
 
 const { Title, Text } = Typography;
 
@@ -9,7 +9,7 @@ export default () => {
   return (
     <>
       <Row align='top' justify='end' className='mini-logo'>
-        <Logo className='mini-logo' />
+      <img src={logo}  className='logo'/>
       </Row>
 
       <Row justify='space-between' align='top'>

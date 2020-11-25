@@ -8,6 +8,16 @@ trabajando con sider user
   background-color: whitesmoke !important;
   box-shadow: 3px 0px 5px -3px rgba(0, 0, 0, 0.75);
 }
+
+.sider-user-row {
+  height: 100vh;
+  width: 100%;
+}
+
+.logout {
+  width: 100%;
+}
+
 .card-sider {
   margin: 10px auto !important;
   width: 90%;
@@ -17,15 +27,13 @@ trabajando con sider user
   border-radius: 5% !important;
   text-align: center !important;
 }
+
 .card-sider:hover {
   box-shadow: -1px 3px 26px -6px rgba(0, 0, 0, 0.75);
 }
+
 .card-sider:active {
   box-shadow: inset -1px 3px 26px -6px rgba(0, 0, 0, 0.75);
-}
-
-.logaut {
-  margin-top: 180px !important;
 }
 
 .icono-sider svg {
@@ -47,11 +55,11 @@ trabajando con header user
   color: black;
   background-color: whitesmoke !important;
   height: 22vh !important;
-  line-height: 20px !important;
 }
 
 .mini-logo {
-  height: 35px;
+  height: 25%;
+  line-height: 20px !important;
   margin-top: 4px;
   margin-bottom: 2px;
 }
@@ -67,6 +75,9 @@ trabajando con header user
 .subtitulo {
   display: flex !important;
   color: red;
+}
+.logo {
+  height: 100%;
 }
 
 /* ----------------------
@@ -359,6 +370,16 @@ Trabajando con Admin Cards/DashBoard
 .admin-cards:active {
   box-shadow: inset -1px 3px 26px -6px rgba(0, 0, 0, 0.75);
 }
+/* ----------------
+spiner de loadin
+------------------- */
+.spinLoading {
+  margin-left: 10px !important;
+}
+.ant-spin-dot-item {
+  background-color: rgb(228, 9, 217) !important;
+}
+
 .invite_msg {
   margin: 10px !important;
   height: 150px;
