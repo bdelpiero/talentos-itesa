@@ -2,10 +2,20 @@ const webpack = require("webpack");
 const path = require("path");
 
 const config = {
-  entry: ["react-hot-loader/patch", "./src/index.js"],
+  entry: ["./src/index.js"],
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js",
+  },
+  node: {
+    module: "empty",
+    dgram: "empty",
+    dns: "mock",
+    fs: "empty",
+    http2: "empty",
+    net: "empty",
+    tls: "empty",
+    child_process: "empty",
   },
   module: {
     rules: [
@@ -36,6 +46,17 @@ const config = {
       {
         test: /\.svg$/,
         use: ["@svgr/webpack"],
+      },
+      {
+        test: /\.(png|svg|jpg|gif|pdf)$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[name].[ext]",
+            },
+          },
+        ],
       },
     ],
   },

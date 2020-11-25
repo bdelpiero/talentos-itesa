@@ -4,7 +4,7 @@ trabajando con sider user
 
 .sider-user {
   height: 100vh;
-  color: grey;
+  color: rgb(161, 148, 148);
   background-color: whitesmoke !important;
   box-shadow: 6px 0px 5px -4px rgba(0, 0, 0, 0.75);
 }
@@ -102,6 +102,24 @@ trabajando con content user
 register freelancer
 ---------------------- */
 
+.login-container {
+  display: flex;
+  height: 80vh;
+  width: 100vw;
+  margin: 0;
+}
+.login-formContainer {
+  display: flex;
+  flex-basis: 50vw;
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-formContainer form {
+  flex-basis: 450px;
+}
+
 .register-container {
   display: flex;
   height: 80vh;
@@ -134,6 +152,7 @@ register freelancer
   border: 0;
   border-bottom: 0.3px solid lightgray;
 }
+
 .register-button {
   background-color: #a77ffa;
 }
@@ -174,5 +193,9 @@ register freelancer
     flex-basis: 100vw;
     padding: 0 20%;
     /* width: 100vw; */
+  }
+  .login-formContainer {
+    flex-basis: 100vw;
+    padding: 0 10%;
   }
 }
