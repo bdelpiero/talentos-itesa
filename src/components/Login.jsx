@@ -42,6 +42,7 @@ export default ({ handleInputChange, handleSubmit, data, form }) => {
             },
           ]}>
           <Input
+            name='email'
             placeholder='Email'
             value={data.email}
             onChange={handleInputChange}
@@ -65,6 +66,7 @@ export default ({ handleInputChange, handleSubmit, data, form }) => {
             },
           ]}>
           <Input.Password
+            name='password'
             placeholder='Password'
             value={data.password}
             onChange={handleInputChange}
@@ -144,6 +146,8 @@ export default ({ handleInputChange, handleSubmit, data, form }) => {
                         Submit
                         </Button>
                 </Form.Item>
+                
+                
             </Form>
             </Col>
         </Row>

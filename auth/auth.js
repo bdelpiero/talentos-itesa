@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import { auth } from "../firebase/firebase";
+import { auth, db } from "../firebase/firebase";
+import { useHistory } from "react-router-dom";
 
 const AuthContext = React.createContext();
 
@@ -10,6 +11,7 @@ export function authUser() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
+  const history = useHistory();
 
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password);
@@ -17,6 +19,31 @@ export function AuthProvider({ children }) {
 
   function login(email, password) {
     return auth.signInWithEmailAndPassword(email, password);
+    // .then((user)=>{
+    //   console.log("entrando")
+    //   if(user.user){
+    //     return db.collection('users').doc(user.user.uid).get()
+    //         .then(UserInfo=>{
+    //           console.log("UserInfo",UserInfo.data())
+    //           UserInfo.data()
+    //           // .then((res)=>console.log("AQUI",res))
+    //           // setLoading(false);
+    //           // setCurrentUser(User)
+    //           // console.log("User",User)
+    //           //   if(User){
+    //           //     if(User.isAdmin){
+    //           //       history.push("/admin")
+    //           //     }else{
+    //           //       history.push("/freelance")
+    //           //   }
+    //           //   }
+
+    //         }).then(()=>console.log("current", currentUser))
+    //   }else{
+    //     setLoading(false);
+    //     setCurrentUser(user)
+    //   }
+    // })
   }
 
   function logout() {
@@ -37,10 +64,32 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
-      setLoading(false);
+      console.log("entrando");
+      if (user) {
+        return db
+          .collection("users")
+          .doc(user.uid)
+          .get()
+          .then((UserInfo) => {
+            console.log("UserInfo", UserInfo);
+            const User = UserInfo.data();
+            setLoading(false);
+            setCurrentUser(User);
+            console.log("User", User);
+            if (User) {
+              if (User.isAdmin) {
+                history.push("/admin");
+              } else {
+                history.push("/freelancer");
+              }
+            }
+          })
+          .then(() => console.log("current", currentUser));
+      } else {
+        setLoading(false);
+        setCurrentUser(user);
+      }
     });
-
     return unsubscribe;
   }, []);
 

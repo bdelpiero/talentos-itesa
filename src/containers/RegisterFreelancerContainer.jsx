@@ -71,7 +71,7 @@ function RegisterFreelancerContainer() {
   const { signup } = authUser();
 
   const [data, setData] = useState({
-    name: "",
+    displayName: "",
     lastName: "",
     email: "",
     password: "",
@@ -138,18 +138,18 @@ function RegisterFreelancerContainer() {
     // e.preventDefault();
     // console.log("ESTO ES DATA", data);
 
-    signup(data.email, data.password)
+    signup(data.email, data.password,data.displayName)
       .then((res) => res.user.uid)
       .then((uid) => {
         db.collection("users").doc(uid).set({
-          name: data.name,
+          displayName: data.name,
           lastName: data.lastName,
           freelancerType: data.freelancerType,
           bankDetails: bankData,
         });
       }),
       setData({
-        name: "",
+        displayName: "",
         lastName: "",
         email: "",
         password: "",

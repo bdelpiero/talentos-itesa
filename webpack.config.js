@@ -44,8 +44,12 @@ const config = {
         include: /\.module\.css$/,
       },
       {
-        test: /\.svg$/,
-        use: ["@svgr/webpack"],
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+          },
+        ],
       },
       {
         test: /\.(png|svg|jpg|gif|pdf)$/,
@@ -58,6 +62,10 @@ const config = {
           },
         ],
       },
+      {
+        test: /\.svg$/,
+        use: ["@svgr/webpack"],
+      }
     ],
   },
   resolve: {
@@ -69,6 +77,7 @@ const config = {
   devServer: {
     contentBase: "./dist",
     port: 3000,
+
     historyApiFallback: {
       index: "index.html",
     },
