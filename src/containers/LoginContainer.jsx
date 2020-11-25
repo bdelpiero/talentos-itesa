@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import Login from '../components/login'
+import Login from '../components/Login'
 import {authUser} from '../../auth/auth'
 import {Form} from 'antd'
 import { Link, useHistory } from "react-router-dom"
 
-export default ()=>{
+
+export default ( )=>{
     const [email, setEmail]=useState('')
     const [password, setPassword]=useState('')
     const [form] =Form.useForm()
@@ -24,12 +25,26 @@ export default ()=>{
         setEmail("")
         setPassword('')
         login(email,password)
-        console.log("AQUI USER",currentUser)
+        // .then((res)=>{
+        //     console.log("AQUI USER",currentUser,"res",res)
+        //     // if(currentUser.isAdmin){
+        //     //     history.push("/admin")
+        //     // }else{
+        //     //     history.push("/freelance")
+        //     // }
+        //     // history.push("/admin")
+        // })
+        console.log("currentuser",currentUser)
         form.resetFields()
-        history.push("/frelance")
+        
+        
     }
 
+    console.log("aqui login",currentUser)
+    
+
         return(
+            <>
             <Login
             hanledChangeEmail={hanledChangeEmail}
             hanledChangePassword={hanledChangePassword}
@@ -38,5 +53,8 @@ export default ()=>{
             password={password}
             form={form}
             />
+           
+            </>
+            
         )
 }

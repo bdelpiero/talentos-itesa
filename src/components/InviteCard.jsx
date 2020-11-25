@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  CheckCircleOutlined,
-  CloseCircleOutlined,
-  UserOutlined,
-  BarChartOutlined,
-} from "@ant-design/icons";
+import { CloseCircleOutlined } from "@ant-design/icons";
 import UserLogo from "../../views/man.svg";
 import { Modal, Button, Card } from "antd";
 function InviteCard({ handleChange, closeModal, success, openModal, modal }) {
