@@ -4,7 +4,8 @@ import {authUser} from '../../auth/auth'
 import {Form} from 'antd'
 import { Link, useHistory } from "react-router-dom"
 
-export default ()=>{
+
+export default ( )=>{
     const [email, setEmail]=useState('')
     const [password, setPassword]=useState('')
     const [form] =Form.useForm()
@@ -39,7 +40,11 @@ export default ()=>{
         
     }
 
+    console.log("aqui login",currentUser)
+    
+
         return(
+            <>
             <Login
             hanledChangeEmail={hanledChangeEmail}
             hanledChangePassword={hanledChangePassword}
@@ -48,5 +53,8 @@ export default ()=>{
             password={password}
             form={form}
             />
+           
+            </>
+            
         )
 }

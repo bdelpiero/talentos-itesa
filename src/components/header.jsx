@@ -1,7 +1,7 @@
 import React from 'react'
 import {Row,Col,Typography,Avatar} from 'antd'
 import {UserOutlined} from '@ant-design/icons';
-import logo from '../../views/logo-Itesa.png'
+import logo from '../../views/Logo_Itesa.svg'
 
 const { Title ,Text} = Typography;
 
@@ -24,6 +24,6 @@ export default ()=>{
         </Col>
        </Row>
         
-        </>
+    </>
     )
 }

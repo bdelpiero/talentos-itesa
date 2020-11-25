@@ -1,7 +1,8 @@
-import React from 'react'
-import { Form, Input, Button, Checkbox,Row,Col,Typography } from 'antd'
+import React from 'react';
+import { Form, Input, Button, Checkbox,Row,Col,Typography } from 'antd';
 
-export default ({hanledChangeEmail,hanledChangePassword,hanledSubmit,email,password,form}) =>{
+
+export default ({hanledChangeEmail,hanledChangePassword,hanledSubmit,email,password,form, }) =>{
     const layout = {
         labelCol: {
           span: 8,
@@ -24,7 +25,8 @@ export default ({hanledChangeEmail,hanledChangePassword,hanledSubmit,email,passw
 
         console.log('Failed:', errorInfo);
     };
-    console.log("REREMDERIZA", email)
+  
+   
 
     return(
         <>
@@ -76,6 +78,8 @@ export default ({hanledChangeEmail,hanledChangePassword,hanledSubmit,email,passw
                         Submit
                         </Button>
                 </Form.Item>
+                
+                
             </Form>
             </Col>
         </Row>
