@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Route, Link, useHistory } from "react-router-dom";
-import InviteComponent from "../components/InviteComponent";
-import { Layout, Row } from "antd";
+import InviteContainer from "./InviteContainer";
+import AddPaymentContainer from "./AddPaymentContainer";
+import NewProjectContainer from "./NewProjectContainer";
+import { Layout, Row, Col } from "antd";
 import Sidebar from "../components/sidebar";
 import { authUser } from "../../auth/auth";
 import HeaderComponent from "../components/header";
@@ -26,8 +28,17 @@ function AdminContainer() {
           <HeaderComponent />
         </Header>
         <Content className="content-user">
-          <Row className="content-row">
-            ofertas / proximo pago / mi banco <InviteComponent />
+          <Row gutter={[60, 16]}>
+            <Col span={4}>
+              <InviteContainer />
+            </Col>
+            <Col span={4}>
+              <NewProjectContainer />
+            </Col>
+            <Col span={4}>
+              <AddPaymentContainer />
+            </Col>
+            <Col span={8}>CARD TU RESUMEN</Col>
           </Row>
 
           <Row className="content-row">pagos</Row>

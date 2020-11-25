@@ -3,13 +3,9 @@ import Login from '../components/login'
 import {authUser} from '../../auth/auth'
 import {Form} from 'antd'
 import { Link, useHistory } from "react-router-dom"
-import {
-    FirebaseAuthProvider,
-    IfFirebaseAuthed
-  } from "@react-firebase/auth";
-import firebase from "firebase/app";
 
-export default ({user,signInWithGoogle} )=>{
+
+export default ( )=>{
     const [email, setEmail]=useState('')
     const [password, setPassword]=useState('')
     const [form] =Form.useForm()
@@ -35,7 +31,7 @@ export default ({user,signInWithGoogle} )=>{
     }
 
     console.log("aqui login",currentUser)
-    console.log("aqui login", user)
+    
 
         return(
             <>
@@ -47,9 +43,7 @@ export default ({user,signInWithGoogle} )=>{
             password={password}
             form={form}
             />
-            <a  onClick={signInWithGoogle}>
-                        Sign In with Google
-                        </a>
+           
             </>
             
         )

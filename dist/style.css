@@ -25,6 +25,7 @@ trabajando con sider user
 }
 
 .logaut {
+
   margin-top: 180px !important;
 }
 
@@ -77,12 +78,13 @@ trabajando con content user
 .content-user {
   height: 75vh;
   color: black;
+  width: 100%;
   background-color: whitesmoke !important;
 }
 .content-row {
   height: 48%;
   margin: 7px;
-  background-color: khaki;
+  
 }
 
 .site-layout-content {
@@ -129,14 +131,21 @@ trabajando con  user Cards
   font-family:"arial";
   color: #0B2257;
   font-size: 20px;
-  width: 400px;
+  width: 450px;
   border-radius:42px;
+  height: auto;
+  margin: auto;
+}
 
+.bodyCard div{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 h1 {
   color: white;
-  background-color: black;
+  
 }
 
 #subtittle{
@@ -174,11 +183,17 @@ trabajando con Pagos Freelance
   font-family:"arial";
   color: #0B2257;
   font-size: 15px;
-  width: 90%; 
-   
-
+  width: 100%;  
+  border-radius:42px;
+  height: auto;
+  margin: auto;
 }
 
+.bodyCard div{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 .space-align-container {  
   align-items: flex-start;
   flex-wrap: wrap;
@@ -216,13 +231,14 @@ trabajando con Pagos Freelance
 }
 
 
-.buttonPagos{
+.buttonPagos2{
 
   background-color:#9E39FF;
   color:white;
   float: right;
+  align-content: center;
   right: 0px;
-  width: 220px;
+  width: 350px;
   height: 50px;
   text-align: center;   
 
@@ -230,7 +246,12 @@ trabajando con Pagos Freelance
 
 #imgPagos {
   border-radius: 50%;
-  height: 60px ;
+  height: 80px ;
+  width: 90px;
+}
+
+.titlePagos{
+  font-size: 30px;
 }
 /* ----------------------
 register freelancer
@@ -309,4 +330,25 @@ register freelancer
     padding: 0 20%;
     /* width: 100vw; */
   }
+}
+/* ----------------------
+Trabajando con Admin Cards/DashBoard
+---------------------- */
+.admin-cards {
+  margin: 10px !important;
+  height: 150px;
+  background-color: whitesmoke !important;
+  border: none !important;
+  border-radius: 20% !important;
+  text-align: center !important;
+  box-shadow: -1px 3px 26px -6px rgba(0, 0, 0, 0.75);
+}
+.admin-cards svg:hover {
+  color: rgb(228, 9, 217);
+}
+/* .admin-cards:hover {
+  box-shadow: -1px 3px 26px -6px rgba(0, 0, 0, 0.75);
+} */
+.admin-cards:active {
+  box-shadow: inset -1px 3px 26px -6px rgba(0, 0, 0, 0.75);
 }
