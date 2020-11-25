@@ -11,13 +11,16 @@ const data = [
   },
   {
     valor: "$80.000"
-  }
+  },
+ 
 ]
 
 class PagosFreelace extends Component {
   
   render() {
     return ( 
+      <>
+      <h1 id="h1">Pagos</h1>
       <Card className="bodyCard2" >
         <List
            itemLayout="horizontal"
@@ -51,6 +54,7 @@ class PagosFreelace extends Component {
     )}
     />
     </Card> 
+    </>
   )
 }
 }

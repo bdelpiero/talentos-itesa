@@ -6,7 +6,7 @@ import { AuthProvider } from "../auth/auth";
 import RegisterFreelancerContainer from "./containers/RegisterFreelancerContainer";
 import LoginContainer from "./containers/LoginContainer";
 import AdminContainer from "./containers/AdminContainer";
-import PagosFreelace from './components/PagosFreelace';
+import PagosFreelace from './components/PagosFreelance';
 import UserContainer from "./containers/UserContainer";
 
 function App() {
