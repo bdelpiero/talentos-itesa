@@ -1,7 +1,66 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SignatureCanvas from "react-signature-canvas";
-import { Form, Input, Select, Button, Steps } from "antd";
+import { Form, Input, Select, Button, Steps, Alert } from "antd";
+import {
+  PDFViewer,
+  pdf,
+  Page,
+  Text,
+  View,
+  Document,
+  StyleSheet,
+  Image,
+} from "@react-pdf/renderer";
+import Contract from "../components/pdfs/Contract";
+
+const styles = StyleSheet.create({
+  viewer: {
+    width: "75%",
+    margin: "1rem",
+    height: "45rem",
+  },
+  page: {
+    flexDirection: "row",
+  },
+  section: {
+    margin: 30,
+    padding: 10,
+    flexGrow: 1,
+  },
+  title: {
+    fontSize: 15,
+    textAlign: "center",
+    marginBottom: "10pt",
+  },
+  subtitles: {
+    fontSize: 10,
+    textAlign: "justify",
+    marginBottom: "10pt",
+    fontWeight: "bold",
+  },
+  textContent: {
+    fontSize: 10,
+    textAlign: "justify",
+    marginBottom: "10pt",
+  },
+  signature: {
+    width: "30%",
+    height: "auto",
+    alignSelf: "center",
+  },
+  signatureTexts: {
+    justifyContent: "center",
+    textAlign: "center",
+    fontSize: 10,
+    marginBottom: "10pt",
+  },
+  martinSignature: {
+    width: "30%",
+    height: "auto",
+    alignSelf: "center",
+  },
+});
 
 const { Step } = Steps;
 
@@ -21,7 +80,10 @@ function RegisterFreelancer({
   data,
   bankData,
   step,
-  error,
+  signatureRef,
+  handleClick,
+  saveSignature,
+  invited,
 }) {
   return (
     <div className='register-formContainer'>
@@ -31,6 +93,14 @@ function RegisterFreelancer({
           validateMessages={validateMessages}
           className='refister-form'>
           <h1 style={{ color: "gray", textAlign: "center" }}>Creá tu cuenta</h1>
+          {!invited && (
+            <Alert
+              message='You must be invited in order to sign in'
+              type='error'
+              showIcon
+              style={{ margin: 5 }}
+            />
+          )}
           <Form.Item
             hasFeedback
             name='freelancerType'
@@ -179,6 +249,17 @@ function RegisterFreelancer({
             <Input placeholder='Cuit' name='cuit' />
           </Form.Item>
           <Form.Item
+            name='address'
+            value={bankData.address}
+            onChange={handleChange}
+            rules={[
+              {
+                required: true,
+              },
+            ]}>
+            <Input placeholder='Address' name='address' />
+          </Form.Item>
+          <Form.Item
             name='alias'
             value={bankData.alias}
             onChange={handleChange}
@@ -251,200 +332,37 @@ function RegisterFreelancer({
       )}
       {step == 3 && (
         <div>
-          <div
-            id='to-print'
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-around",
-            }}>
-            <div>PDF TEST HOLAAAAAAAAAAAAAAAAAA</div>
-            {/* SIGNATURE */}
-            <div style={{ width: 500, border: "1px solid black" }}>
-              <SignatureCanvas
-                penColor='green'
-                canvasProps={{
-                  width: 500,
-                  height: 200,
-                  className: "sigCanvas",
-                }}
-              />
-            </div>
-          </div>
-          <button
-            onClick={(e) => {
-              let element = document.getElementById("to-print");
-              handleSubmit(e, element);
-            }}>
-            {" "}
-            CREATE PDF
-          </button>
+          <Contract
+            show={true}
+            name={data.name}
+            lastName={data.lastName}
+            cuit={bankData.cuit}
+            address={bankData.address}
+            freelancerType={data.freelancerType}
+          />
+          <br />
+          <SignatureCanvas
+            ref={signatureRef}
+            velocityFilterWeight={0.3}
+            penColor='black'
+            canvasProps={{
+              width: 400,
+              height: 150,
+              className: "sigCanvas",
+              style: { border: "1px solid #000000" },
+            }}
+            onEnd={
+              () =>
+                saveSignature(
+                  signatureRef.current.getTrimmedCanvas().toDataURL("image/jpg")
+                ) //base64
+            }
+          />
+          <br />
+          <button onClick={handleClick}> BLOB </button>
         </div>
       )}
     </div>
-    // <div style={{ maxWidth: "10rem" }}>
-    //   <form onSubmit={handleSubmit}>
-    //     {error.errorType == "empty" && error.errorMessage}
-    //     {step == 1 && (
-    //       <div
-    //         style={{
-    //           display: "flex",
-    //           flexDirection: "column",
-    //           justifyContent: "space-around",
-    //         }}>
-    //         <label>
-    //           {" "}
-    //           Name:
-    //           <input
-    //             type='text'
-    //             name='name'
-    //             value={data.name}
-    //             onChange={handleChange}
-    //           />
-    //         </label>
-    //         <label>
-    //           {" "}
-    //           Last Name:
-    //           <input
-    //             type='text'
-    //             name='lastName'
-    //             value={data.lastName}
-    //             onChange={handleChange}
-    //           />
-    //         </label>
-    //         <label>
-    //           {" "}
-    //           Email:
-    //           <input
-    //             type='email'
-    //             name='email'
-    //             value={data.email}
-    //             onChange={handleChange}
-    //           />
-    //         </label>
-    //         <label>
-    //           {" "}
-    //           Password:
-    //           <input
-    //             type='password'
-    //             name='password'
-    //             value={data.password}
-    //             onChange={handleChange}
-    //           />
-    //           {error.errorType == "password" && error.errorMessage}
-    //         </label>
-    //         <label>
-    //           {" "}
-    //           Type of freelancer:
-    //           <select
-    //             name='freelancerType'
-    //             value={data.freelancerType}
-    //             onChange={handleChange}>
-    //             <option>Choose your type</option>
-    //             <option value='developer'>Developer</option>
-    //             <option value='designer'>Designer</option>
-    //           </select>
-    //           {error.errorType == "freelancerType" && error.errorMessage}
-    //         </label>
-    //       </div>
-    //     )}
-    //     {step == 2 && (
-    //       <div
-    //         style={{
-    //           display: "flex",
-    //           flexDirection: "column",
-    //           justifyContent: "space-around",
-    //         }}>
-    //         <label>
-    //           {" "}
-    //           Bank Name:
-    //           <input
-    //             type='text'
-    //             name='bankName'
-    //             value={bankData.name}
-    //             onChange={handleChange}
-    //           />
-    //         </label>
-    //         <label>
-    //           {" "}
-    //           Account Name:
-    //           <input
-    //             type='text'
-    //             name='accountName'
-    //             value={bankData.accountName}
-    //             onChange={handleChange}
-    //           />
-    //         </label>
-    //         <label>
-    //           {" "}
-    //           Alias:
-    //           <input
-    //             type='text'
-    //             name='alias'
-    //             value={bankData.alias}
-    //             onChange={handleChange}
-    //           />
-    //         </label>
-    //         <label>
-    //           {" "}
-    //           CBU:
-    //           <input
-    //             type='number'
-    //             name='cbu'
-    //             value={bankData.cbu}
-    //             onChange={handleChange}
-    //           />
-    //           {error.errorType == "cbu" && error.errorMessage}
-    //         </label>
-    //         <label>
-    //           {" "}
-    //           DNI:
-    //           <input
-    //             type='number'
-    //             name='dni'
-    //             value={bankData.dni}
-    //             onChange={handleChange}
-    //           />
-    //         </label>
-    //       </div>
-    //     )}
-    //     {step == 3 && (
-    //       <div>
-    //         <div
-    //           id='to-print'
-    //           style={{
-    //             display: "flex",
-    //             flexDirection: "column",
-    //             justifyContent: "space-around",
-    //           }}>
-    //           <div>PDF TEST HOLAAAAAAAAAAAAAAAAAA</div>
-    //           {/* SIGNATURE */}
-    //           <div style={{ width: 500, border: "1px solid black" }}>
-    //             <SignatureCanvas
-    //               penColor='green'
-    //               canvasProps={{
-    //                 width: 500,
-    //                 height: 200,
-    //                 className: "sigCanvas",
-    //               }}
-    //             />
-    //           </div>
-    //         </div>
-    //         <button
-    //           onClick={(e) => {
-    //             let element = document.getElementById("to-print");
-    //             handleClick(e, element);
-    //           }}>
-    //           {" "}
-    //           CREATE PDF
-    //         </button>
-    //       </div>
-    //     )}
-    //     <br />
-
-    //     <button type='submit'> Next Step</button>
-    //   </form>
-    // </div>
   );
 }
 

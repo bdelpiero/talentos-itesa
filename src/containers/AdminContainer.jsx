@@ -10,6 +10,8 @@ import NewProjectContainer from "./NewProjectContainer";
 import Sidebar from "../components/Sidebar";
 import HeaderComponent from "../components/Header";
 import ResumeContainer from "../containers/ResumeContainer";
+import PendingPayments from "../components/PendingPayments";
+import Title from "antd/lib/skeleton/Title";
 
 function AdminContainer() {
   const { Header, Footer, Sider, Content } = Layout;
@@ -24,7 +26,7 @@ function AdminContainer() {
   console.log("userContainer", currentUser);
   return (
     <Layout>
-      <Sider className="sider-user" justify="center">
+      <Sider className="sider-user"  >
         <Sidebar handleLogout={handleLogout} />
       </Sider>
 
@@ -34,22 +36,33 @@ function AdminContainer() {
         </Header>
 
         <Content className="content-user">
-          <Row gutter={[60, 16]} align="middle">
-            <Col span={4} style={{margin:"auto"}} >
+          <Row
+            gutter={[30, 16]}
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-around",
+            }}
+            className="content-row"
+          >
+            <Col span={2}>
               <InviteContainer />
             </Col>
-            <Col span={4} style={{margin:"auto"}} >
+            <Col span={2}>
               <NewProjectContainer />
             </Col>
-            <Col span={4} style={{margin:"auto"}}>
+            <Col span={2}>
               <AddPaymentContainer />
             </Col>
-            <Col span={8} style={{margin:"auto"}}>
+            <Col span={8}>
               <ResumeContainer />
-              </Col>
+            </Col>
           </Row>
 
-          <Row className="content-row">pagos</Row>
+          <Row className="content-row">
+            <Title>Pagos a realizar este mes</Title>
+            <PendingPayments></PendingPayments>
+          </Row>
         </Content>
       </Layout>
     </Layout>

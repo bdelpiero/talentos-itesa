@@ -1,9 +1,7 @@
 import React from "react";
 import Briefing from "../../views/briefing.svg";
-import { Modal, Button, Card,Form, Input, Select } from "antd";
-import {
-  CloseCircleOutlined,
-} from "@ant-design/icons";
+import { Modal, Button, Card, Form, Input, Select } from "antd";
+import { CloseCircleOutlined } from "@ant-design/icons";
 
 function NewProject({
   handleChangeName,
@@ -18,7 +16,6 @@ function NewProject({
   openModal,
   modal,
 }) {
-
   const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 8 },
@@ -33,9 +30,11 @@ function NewProject({
 
   return (
     <div className="Modal">
-      <Card className="admin-cards" onClick={openModal} >
+      <Card className="admin-cards" onClick={openModal}>
         <Briefing className="icono-sider" />
-        <p style={{ color: "#9e39ff" }}>Crear proyecto nuevo</p>
+        <div className="admin-button">
+          <h4 style={{ color: "#9e39ff" }}>Crear proyecto nuevo</h4>
+        </div>
       </Card>
 
       <Modal
@@ -55,82 +54,82 @@ function NewProject({
       >
         <h2>Crear Proyecto </h2>
         <Form
-        {...layout}
-        initialValues={{ remember: true }}
-        onFinish={handleSubmit}
-        // onFinishFailed={onFinishFailed}
-      >
-        <Form.Item
-          label="Nombre del Proyecto"
-          name="name"
-          onChange={handleChangeName}
-          rules={[
-            {
-              required: true,
-              message: "Por favor ingrese Nombre del Proyecto",
-            },
-          ]}
+          {...layout}
+          initialValues={{ remember: true }}
+          onFinish={handleSubmit}
+          // onFinishFailed={onFinishFailed}
         >
-          <Input />
-        </Form.Item>
+          <Form.Item
+            label="Nombre del Proyecto"
+            name="name"
+            onChange={handleChangeName}
+            rules={[
+              {
+                required: true,
+                message: "Por favor ingrese Nombre del Proyecto",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
 
-        <Form.Item
-          label="Duración"
-          name="term"
-          onChange={handleChangeTerm}
-          rules={[
-            {
-              required: true,
-              message: "Por favor ingrese duración del Proyecto",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
+          <Form.Item
+            label="Duración"
+            name="term"
+            onChange={handleChangeTerm}
+            rules={[
+              {
+                required: true,
+                message: "Por favor ingrese duración del Proyecto",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
 
-        <Form.Item
-          label="Inicio"
-          name="startDate"
-          onChange={handleChangeStartDate}
-          rules={[
-            { required: true, message: "Por favor ingrese fecha de inicio" },
-          ]}
-        >
-          <Input />
-        </Form.Item>
+          <Form.Item
+            label="Inicio"
+            name="startDate"
+            onChange={handleChangeStartDate}
+            rules={[
+              { required: true, message: "Por favor ingrese fecha de inicio" },
+            ]}
+          >
+            <Input />
+          </Form.Item>
 
-        <Form.Item
-          label="Finalización"
-          name="endDate"
-          onChange={handleChangeEndDate}
-          rules={[
-            {
-              required: true,
-              message: "Por favor ingrese fecha de finalizacion",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
+          <Form.Item
+            label="Finalización"
+            name="endDate"
+            onChange={handleChangeEndDate}
+            rules={[
+              {
+                required: true,
+                message: "Por favor ingrese fecha de finalizacion",
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
 
-        <Form.Item
-          label="Estado"
-          name="status"
-          onChange={handleChangeStatus}
-          rules={[{ required: true }]}
-        >
-          <Select onChange={handleChangeStatus} allowClear>
-            <Option value="ondevolpment">On Devolpment </Option>
-            <Option value="finished"> Finished </Option>
-          </Select>
-        </Form.Item>
-{/* 
+          <Form.Item
+            label="Estado"
+            name="status"
+            onChange={handleChangeStatus}
+            rules={[{ required: true }]}
+          >
+            <Select onChange={handleChangeStatus} allowClear>
+              <Option value="ondevolpment">On Devolpment </Option>
+              <Option value="finished"> Finished </Option>
+            </Select>
+          </Form.Item>
+          {/* 
         <Form.Item {...tailLayout}>
           <Button type="primary" htmlType="submit">
             Crear Proyecto
           </Button>
         </Form.Item> */}
-      </Form>
+        </Form>
       </Modal>
     </div>
   );

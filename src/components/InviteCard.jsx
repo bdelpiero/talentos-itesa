@@ -1,7 +1,5 @@
 import React from "react";
-import {
-  CloseCircleOutlined,
-} from "@ant-design/icons";
+import { CloseCircleOutlined } from "@ant-design/icons";
 import UserLogo from "../../views/man.svg";
 import { Modal, Button, Card } from "antd";
 function InviteCard({ handleChange, closeModal, success, openModal, modal }) {
@@ -9,7 +7,9 @@ function InviteCard({ handleChange, closeModal, success, openModal, modal }) {
     <div className="Modal">
       <Card className="admin-cards" onClick={openModal}>
         <UserLogo className="icono-sider" />
-        <p style={{ color: "#9e39ff" }}>Invitar perfiles</p>
+        <div className="admin-button">
+          <h4 style={{ color: "#9e39ff" }}>Invitar perfiles</h4>
+        </div>
       </Card>
 
       <Modal
@@ -27,7 +27,6 @@ function InviteCard({ handleChange, closeModal, success, openModal, modal }) {
         closeIcon={<CloseCircleOutlined style={{ color: "#9e39ff" }} />}
         bodyStyle={{ color: "#9e39ff" }}
       >
-        <h2>Invitar Usuario</h2>
         <form action="">
           <input onChange={handleChange} type="text" />
         </form>

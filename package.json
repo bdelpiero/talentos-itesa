@@ -10,10 +10,11 @@
     "clean": "rm dist/bundle.js",
     "build-dev": "webpack --mode development",
     "build-prod": "webpack --mode production",
-    "start": "webpack serve --hot --mode development"
+    "start": "webpack-dev-server --hot --mode development"
   },
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
+    "@react-pdf/renderer": "^1.6.12",
     "@react-firebase/auth": "^0.2.10",
     "antd": "^4.8.4",
     "firebase": "^8.0.2",
