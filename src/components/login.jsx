@@ -1,7 +1,7 @@
 import React from 'react'
-import { Form, Input, Button, Checkbox,Row,Col,Typography } from 'antd'
+import { Form, Input, Button, Checkbox,Row,Col,Typography,Spin } from 'antd'
 
-export default ({hanledChangeEmail,hanledChangePassword,hanledSubmit,email,password,form}) =>{
+export default ({hanledChangeEmail,hanledChangePassword,hanledSubmit,email,password,form,loading}) =>{
     const layout = {
         labelCol: {
           span: 8,
@@ -24,7 +24,7 @@ export default ({hanledChangeEmail,hanledChangePassword,hanledSubmit,email,passw
 
         console.log('Failed:', errorInfo);
     };
-    console.log("REREMDERIZA", email)
+    console.log("REREMDERIZA login", loading)
 
     return(
         <>
@@ -73,10 +73,13 @@ export default ({hanledChangeEmail,hanledChangePassword,hanledSubmit,email,passw
 
                     <Form.Item {...tailLayout}>
                         <Button type="primary" htmlType="submit">
-                        Submit
+                        Submit 
                         </Button>
+                        {loading && <Spin size="large" className='spinLoading' />}
                 </Form.Item>
             </Form>
+            
+            
             </Col>
         </Row>
         

@@ -5,6 +5,7 @@ export const user = atom({
   default: '', // default value (aka initial value)
 });
 
-export const userAdmin = atom({
-  key: "userAdmin",
+export const isLoading = atom({
+  key: "loading",
+  default: false
 });

@@ -1,14 +1,19 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Login from '../components/login'
 import {authUser} from '../../auth/auth'
 import {Form} from 'antd'
-import { Link, useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom"
+import { useRecoilState } from "recoil";
+import { isLoading } from "../atoms";
 
 export default ()=>{
     const [email, setEmail]=useState('')
     const [password, setPassword]=useState('')
     const [form] =Form.useForm()
     const history = useHistory()
+    const [loading, setLoading] = useRecoilState(isLoading);
+
+
 
     const {login,currentUser}=authUser()
     
@@ -20,24 +25,19 @@ export default ()=>{
         setPassword(e.target.value)
     }
 
-    const hanledSubmit =(valores)=>{
+    const hanledSubmit =()=>{
+        setLoading(true)
         setEmail("")
         setPassword('')
         login(email,password)
-        // .then((res)=>{
-        //     console.log("AQUI USER",currentUser,"res",res)
-        //     // if(currentUser.isAdmin){
-        //     //     history.push("/admin")
-        //     // }else{
-        //     //     history.push("/freelance")
-        //     // }
-        //     // history.push("/admin")
-        // })
-        console.log("currentuser",currentUser)
+        .then(()=>{
+            console.log("SUMMT LOADING", loading)
+        })
         form.resetFields()
         
         
     }
+    
 
         return(
             <Login
@@ -47,6 +47,7 @@ export default ()=>{
             email={email}
             password={password}
             form={form}
+            loading={loading}
             />
         )
 }

@@ -10,7 +10,7 @@ const { Title ,Text} = Typography;
 export default ()=>{
     return (<>
        <Row align='top' justify='end' className='mini-logo'>
-       <img src={logo} alt="" className='mini-logo'/>
+       <img src={logo} alt="" className='logo'/>
        </Row>
        <Row justify='space-between'  align='top'>
         <Col>
