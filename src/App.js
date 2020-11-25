@@ -14,12 +14,9 @@ function App() {
       <Switch>
         <Route exact path='/register' component={RegisterFreelancerContainer} />
         <Route exact path='/login' component={LoginContainer} />
-        <Route exact path='/freelance' component={UserContainer} />
-        
-        <Route exact path='/pruebacard2' component={PagosFreelace}/>
+        <Route exact path='/freelance' component={UserContainer} />    
         <Route exact path='/admin' component={AdminContainer} />
         <Route exact path="/"  component={LoginContainer} />
-
         <Redirect from="/" to="/" />
     </Switch>
         
