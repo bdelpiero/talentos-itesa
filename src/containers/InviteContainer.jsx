@@ -3,13 +3,15 @@ import { Link, useHistory } from "react-router-dom";
 import InviteCard from "../components/InviteCard";
 import { db } from "../../firebase/firebase";
 import { authUser } from "../../auth/auth";
+import CheckCircle from "../../views/check.svg";
+import UserLogo from "../../views/man.svg";
 
 import {
   CheckCircleOutlined,
   CloseCircleOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Modal, Button } from "antd";
+import { Modal, Button, Card } from "antd";
 
 function InviteContainer() {
   const { signup } = authUser();
@@ -39,10 +41,15 @@ function InviteContainer() {
             flexDirection: "column",
             justifyContent: "center",
           },
-          content: "Solicitud Enviada!",
+          content: (
+            <Card className="invite_msg" onClick={openModal}>
+              <h1>¡Solicitud Enviada!</h1>
+              <h4> El perfil podrá crear su cuenta desde su email</h4>
+            </Card>
+          ),
           centered: "true",
           okText: "VOLVER",
-          icon: <CheckCircleOutlined style={{ color: "#9e39ff" }} />,
+          icon: <CheckCircle style={{ color: "#9e39ff" }} />,
           okButtonProps: {
             style: {
               backgroundColor: "#9e39ff",

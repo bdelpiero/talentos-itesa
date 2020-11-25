@@ -7,7 +7,6 @@ import { isLoading } from "../src/atoms";
 
 const AuthContext = React.createContext();
 
-
 export function authUser() {
   return useContext(AuthContext);
 }
@@ -15,9 +14,7 @@ export function authUser() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
-  // const [loading, setLoading] = useRecoilState(isLoading);
-  const history = useHistory()
-
+  const history = useHistory();
 
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password);
@@ -60,7 +57,7 @@ export function AuthProvider({ children }) {
                   if(User.isAdmin){
                     history.push("/admin")
                   }else{
-                    history.push("/freelance")
+                    history.push("/freelancer")
                 }
                 }
                
@@ -69,8 +66,8 @@ export function AuthProvider({ children }) {
       }else{
         console.log("USEEFFECT LOADIN",loading)
         setLoading(false);
-        setCurrentUser(user)
-      }  
+        setCurrentUser(user);
+      }
     });
     return unsubscribe;
   }, []);

@@ -10,10 +10,12 @@
     "clean": "rm dist/bundle.js",
     "build-dev": "webpack --mode development",
     "build-prod": "webpack --mode production",
-    "start": "webpack serve --hot --mode development"
+    "start": "webpack-dev-server --hot --mode development"
   },
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
+    "@react-pdf/renderer": "^1.6.12",
+    "@react-firebase/auth": "^0.2.10",
     "antd": "^4.8.4",
     "firebase": "^8.0.2",
     "html2pdf.js": "^0.9.2",
@@ -31,13 +33,14 @@
     "@babel/preset-react": "^7.12.5",
     "@hot-loader/react-dom": "^17.0.0+4.13.0",
     "@svgr/webpack": "^5.5.0",
+    "@webpack-cli/serve": "^1.1.0",
     "babel-loader": "^8.2.1",
     "css-loader": "^5.0.1",
     "file-loader": "^6.2.0",
     "style-loader": "^2.0.0",
     "svg-url-loader": "^6.0.0",
-    "webpack": "^5.5.0",
-    "webpack-cli": "^4.2.0",
+    "webpack": "^4.29.3",
+    "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.11.0"
   }
 }

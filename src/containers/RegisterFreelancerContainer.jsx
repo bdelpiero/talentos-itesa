@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import RegisterFreelancer from "../components/RegisterFreelancer";
 import { db } from "../../firebase/firebase";
 import { authUser } from "../../auth/auth";
-import Logo from "../../views/Logo_Itesa.svg";
-
-import html2pdf from "html2pdf.js";
+import Logo from "../../views/logo-itesa.svg";
 import { storage } from "../../firebase/firebase";
+import SignedDocument from "../components/pdfs/SignedDocument";
+
+import { pdf } from "@react-pdf/renderer";
 
 // const validate = (data, setError, setStep, step) => {
 //   /* if (Object.values(data).some(value => value === '')) {
@@ -34,10 +35,43 @@ import { storage } from "../../firebase/firebase";
 // };
 
 function RegisterFreelancerContainer() {
+  const signatureRef = useRef({});
+  const [imageData, setImageData] = useState("");
+
+  const saveSignature = (signature) => {
+    setImageData(signature);
+  };
+
+  const handleClick = () => {
+    const blob = pdf(
+      <SignedDocument
+        imageData={imageData}
+        name={data.name}
+        lastName={data.lastName}
+        cuit={bankData.cuit}
+        address={bankData.address}
+        freelancerType={data.freelancerType}
+      />
+    )
+      .toBlob()
+      .then((file) => {
+        const storageRef = storage.ref();
+        const pdfsRef = storageRef.child("pdfs/contract.pdf");
+        pdfsRef.put(file).then(function (snapshot) {
+          console.log("Uploaded a blob or file!");
+        });
+      });
+  };
+
+  // const handleClickContract = () => {
+  //   if (toggle == false) setToggle(true)
+  //   if (toggle == true) setToggle(false)
+  // }
+
   const { signup } = authUser();
 
   const [data, setData] = useState({
-    name: "",
+    displayName: "",
     lastName: "",
     email: "",
     password: "",
@@ -51,6 +85,8 @@ function RegisterFreelancerContainer() {
     errorMessage: "",
   });
 
+  const [invited, setInvited] = useState(true);
+
   const [bankData, setBankData] = useState({
     bankName: "",
     accountName: "",
@@ -58,13 +94,13 @@ function RegisterFreelancerContainer() {
     // cbu: "",
     cuit: "",
     type: "",
+    // dni: "",
+    address: "",
   });
 
   const [step, setStep] = useState(1);
 
   const handleChange = (e) => {
-    console.log("name", e.target.name);
-    console.log("value", e.target.value);
     if (step == 1)
       setData({
         ...data,
@@ -78,29 +114,42 @@ function RegisterFreelancerContainer() {
   };
 
   const handleConfirm = () => {
-    // habría que checkear con firebase (pero sin guardar todavía ningún dato):
-    //    - si el mail está entre los invitados
-    //    - si el mail no está ya registrado (en usuarios, no en auth)
-
-    setStep(step + 1);
+    if (step === 1) {
+      db.collection("invites")
+        .get()
+        .then(function (querySnapshot) {
+          const matches = [];
+          querySnapshot.forEach(function (doc) {
+            const email = doc.data().email;
+            if (email == data.email) matches.push(email);
+          });
+          return matches.length !== 0;
+        })
+        .then((invited) => {
+          if (invited) setStep(step + 1);
+          else setInvited(false);
+        });
+    } else {
+      setStep(step + 1);
+    }
   };
 
   const handleSubmit = (e, div) => {
     // e.preventDefault();
-    console.log("ESTO ES DATA", data);
+    // console.log("ESTO ES DATA", data);
 
-    signup(data.email, data.password)
+    signup(data.email, data.password,data.displayName)
       .then((res) => res.user.uid)
       .then((uid) => {
         db.collection("users").doc(uid).set({
-          name: data.name,
+          displayName: data.name,
           lastName: data.lastName,
           freelancerType: data.freelancerType,
           bankDetails: bankData,
         });
       }),
       setData({
-        name: "",
+        displayName: "",
         lastName: "",
         email: "",
         password: "",
@@ -154,6 +203,10 @@ function RegisterFreelancerContainer() {
           step={step}
           error={error}
           handleConfirm={handleConfirm}
+          invited={invited}
+          signatureRef={signatureRef}
+          handleClick={handleClick}
+          saveSignature={saveSignature}
         />
       </div>
     </div>
