@@ -1,34 +1,102 @@
-import React from 'react';
-import { Form, Input, Button, Checkbox,Row,Col,Typography } from 'antd';
+import React from "react";
+import { Form, Input, Button, Checkbox, Row, Col, Typography } from "antd";
 
+export default ({ handleInputChange, handleSubmit, data, form }) => {
+  const layout = {
+    labelCol: {
+      span: 8,
+    },
+    wrapperCol: {
+      span: 16,
+    },
+  };
+  const tailLayout = {
+    wrapperCol: {
+      offset: 8,
+      span: 16,
+    },
+  };
+  const { Title } = Typography;
 
-export default ({hanledChangeEmail,hanledChangePassword,hanledSubmit,email,password,form, }) =>{
-    const layout = {
-        labelCol: {
-          span: 8,
-        },
-        wrapperCol: {
-          span: 16,
-        },
-      };
-      const tailLayout = {
-        wrapperCol: {
-          offset: 8,
-          span: 16,
-        },
-      };
-      const {Title} =Typography
+  const onFinishFailed = (errorInfo) => {
+    form.resetFields();
 
-     
-    const onFinishFailed = (errorInfo) => {
-        form.resetFields()
+    console.log("Failed:", errorInfo);
+  };
 
-        console.log('Failed:', errorInfo);
-    };
-  
-   
+  return (
+    <div className='login-formContainer'>
+      <Form
+        onFinish={handleSubmit}
+        // validateMessages={validateMessages}
+        className='refister-form'>
+        <h1 style={{ color: "gray", textAlign: "center" }}>Login</h1>
+        <Form.Item
+          name='email'
+          //   label='E-mail'
+          rules={[
+            {
+              type: "email",
+              required: true,
+              message: "Please input your username!",
+            },
+          ]}>
+          <Input
+            name='email'
+            placeholder='Email'
+            value={data.email}
+            onChange={handleInputChange}
+          />
+        </Form.Item>
 
-    return(
+        <Form.Item
+          //   label='Password'
+
+          name='password'
+          //   style={{
+          //     border: 0,
+          //     borderBottomWidth: 0.3,
+          //     borderBottomStyle: "solid",
+          //     borderBottomColor: "lightgray",
+          //   }}
+          rules={[
+            {
+              required: true,
+              message: "Please input your password!",
+            },
+          ]}>
+          <Input.Password
+            name='password'
+            placeholder='Password'
+            value={data.password}
+            onChange={handleInputChange}
+            bordered={false}
+            style={{
+              borderBottomWidth: 0.3,
+              borderBottomStyle: "solid",
+              borderBottomColor: "lightgray",
+            }}
+            className='register-input'
+          />
+        </Form.Item>
+        <Form.Item>
+          <Button
+            style={{ backgroundColor: "#a77ffa", border: 0 }}
+            shape='round'
+            block
+            type='primary'
+            htmlType='submit'
+            className='register-button'>
+            LOGIN
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
+  );
+};
+
+{
+  /* </div>
         <>
         <Row justify='center'>
         <Title level={3} >LOGIN</Title>
@@ -84,6 +152,5 @@ export default ({hanledChangeEmail,hanledChangePassword,hanledSubmit,email,passw
             </Col>
         </Row>
         
-        </>
-    )
+        </> */
 }

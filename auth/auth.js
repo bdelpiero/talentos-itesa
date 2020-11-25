@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { auth, db } from "../firebase/firebase";
-import { useHistory } from "react-router-dom"
-
+import { useHistory } from "react-router-dom";
 
 const AuthContext = React.createContext();
-
 
 export function authUser() {
   return useContext(AuthContext);
@@ -13,15 +11,14 @@ export function authUser() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
-  const history = useHistory()
-
+  const history = useHistory();
 
   function signup(email, password) {
-    return auth.createUserWithEmailAndPassword(displayName,email, password);
+    return auth.createUserWithEmailAndPassword(email, password);
   }
 
   function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password)
+    return auth.signInWithEmailAndPassword(email, password);
     // .then((user)=>{
     //   console.log("entrando")
     //   if(user.user){
@@ -40,13 +37,12 @@ export function AuthProvider({ children }) {
     //           //       history.push("/freelance")
     //           //   }
     //           //   }
-               
-              
+
     //         }).then(()=>console.log("current", currentUser))
     //   }else{
     //     setLoading(false);
     //     setCurrentUser(user)
-    //   }  
+    //   }
     // })
   }
 
@@ -68,29 +64,31 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      console.log("entrando")
-      if(user){
-        return db.collection('users').doc(user.uid).get()
-            .then(UserInfo=>{
-              console.log("UserInfo",UserInfo)
-              const User=UserInfo.data()
-              setLoading(false);
-              setCurrentUser(User)
-              console.log("User",User)
-                if(User){
-                  if(User.isAdmin){
-                    history.push("/admin")
-                  }else{
-                    history.push("/freelance")
-                }
-                }
-               
-              
-            }).then(()=>console.log("current", currentUser))
-      }else{
+      console.log("entrando");
+      if (user) {
+        return db
+          .collection("users")
+          .doc(user.uid)
+          .get()
+          .then((UserInfo) => {
+            console.log("UserInfo", UserInfo);
+            const User = UserInfo.data();
+            setLoading(false);
+            setCurrentUser(User);
+            console.log("User", User);
+            if (User) {
+              if (User.isAdmin) {
+                history.push("/admin");
+              } else {
+                history.push("/freelancer");
+              }
+            }
+          })
+          .then(() => console.log("current", currentUser));
+      } else {
         setLoading(false);
-        setCurrentUser(user)
-      }  
+        setCurrentUser(user);
+      }
     });
     return unsubscribe;
   }, []);
