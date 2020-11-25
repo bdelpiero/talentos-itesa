@@ -16,6 +16,11 @@ const config = {
 
 firebase.initializeApp(config);
 
+const providers = {
+  googleProvider: new firebase.auth.GoogleAuthProvider(),
+  facebookProvider: new firebase.auth.FacebookAuthProvider(),
+};
+
 export const storage = firebase.storage();
 export const db = firebase.firestore(); // this will let you query the database
 export const auth = firebase.auth();

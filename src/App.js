@@ -6,6 +6,7 @@ import { AuthProvider } from "../auth/auth";
 import RegisterFreelancerContainer from "./containers/RegisterFreelancerContainer";
 import LoginContainer from "./containers/LoginContainer";
 import AdminContainer from "./containers/AdminContainer";
+import PagosFreelace from './components/PagosFreelace';
 import UserContainer from "./containers/UserContainer";
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route exact path='/login' component={LoginContainer} />
         <Route exact path='/freelancer' component={UserContainer} />
         <Route exact path='/admin' component={AdminContainer} />
+        <Route exact path='/pruebacard2' component={PagosFreelace}/>
         <Route path='/' component={RegisterFreelancerContainer} />
         <Redirect from="/" to='/' />
       </Switch>

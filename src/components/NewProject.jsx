@@ -1,11 +1,8 @@
 import React from "react";
-import {} from "@ant-design/icons";
 import Briefing from "../../views/briefing.svg";
 import { Modal, Button, Card,Form, Input, Select } from "antd";
 import {
-  CheckCircleOutlined,
   CloseCircleOutlined,
-  UserOutlined,
 } from "@ant-design/icons";
 
 function NewProject({

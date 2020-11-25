@@ -34,7 +34,7 @@ function AdminContainer() {
         </Header>
 
         <Content className="content-user">
-          <Row gutter={[60, 16]} >
+          <Row gutter={[60, 16]} align="middle">
             <Col span={4} style={{margin:"auto"}} >
               <InviteContainer />
             </Col>
