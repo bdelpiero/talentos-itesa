@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../../firebase/firebase";
 import NewProject from "../components/NewProject";
-import {
-  CheckCircleOutlined,
-} from "@ant-design/icons";
+import {CheckCircleOutlined} from "@ant-design/icons";
 import { Modal, Form} from "antd";
 
 function NewProjectContainer() {
@@ -93,6 +91,7 @@ function NewProjectContainer() {
       success={success}
       openModal={openModal}
       modal={modal}
+      form={form}
     />
   );
 }
