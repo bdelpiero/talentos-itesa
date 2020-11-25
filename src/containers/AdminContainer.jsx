@@ -28,14 +28,21 @@ function AdminContainer() {
           <HeaderComponent />
         </Header>
         <Content className="content-user">
-          <Row gutter={[60, 16]}>
-            <Col span={4}>
+          <Row
+            gutter={[30, 16]}
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-around",
+            }}
+          >
+            <Col span={2}>
               <InviteContainer />
             </Col>
-            <Col span={4}>
+            <Col span={2}>
               <NewProjectContainer />
             </Col>
-            <Col span={4}>
+            <Col span={2}>
               <AddPaymentContainer />
             </Col>
             <Col span={8}>CARD TU RESUMEN</Col>
