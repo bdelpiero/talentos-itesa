@@ -6,7 +6,7 @@ trabajando con sider user
   height: 100vh;
   color: grey;
   background-color: whitesmoke !important;
-  box-shadow: 6px 0px 5px -4px rgba(0, 0, 0, 0.75);
+  box-shadow: 3px 0px 5px -3px rgba(0, 0, 0, 0.75);
 }
 .card-sider {
   margin: 10px auto !important;
@@ -14,7 +14,7 @@ trabajando con sider user
   height: 150px;
   background-color: whitesmoke !important;
   border: none !important;
-  border-radius: 20% !important;
+  border-radius: 5% !important;
   text-align: center !important;
 }
 .card-sider:hover {
@@ -40,6 +40,7 @@ trabajando con sider user
   color: rgb(228, 9, 217);
 }
 
+
 /* ----------------------
 trabajando con header user
 ---------------------- */
@@ -48,10 +49,13 @@ trabajando con header user
   color: black;
   background-color: whitesmoke !important;
   height: 125px !important;
+  line-height: 20px !important;
 }
 
 .mini-logo {
   height: 35px;
+  margin-top: 4px;
+  margin-bottom: 2px ;
 }
 
 .ant-avatar {
@@ -66,10 +70,7 @@ trabajando con header user
   display: flex !important;
   color: red;
 }
-.mini-logo {
-  height: 20px;
-  width: 30px f8h7dsgf;
-}
+
 
 /* ----------------------
 trabajando con content user
@@ -130,17 +131,17 @@ trabajando con  user Cards
 .bodyCard{
   font-family:"arial";
   color: #0B2257;
-  font-size: 20px;
-  width: 450px;
+  font-size: 100%;
+  width: 90%;
   border-radius:42px;
-  height: auto;
+  height: 50% !important;
   margin: auto;
 }
 
 .bodyCard div{
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 40% !important;
 }
 
 h1 {
@@ -159,7 +160,7 @@ h1 {
 #tittleCard{
   font-family:"Open Sans Semibold";
   color: #8990AD;
-  font-size: 19px;
+  font-size: 100%;
   font-stretch: expanded;
   
 }
@@ -168,7 +169,6 @@ h1 {
   background-color:#9E39FF;
   color:white;
   float: right;
-  right: 0px;
   width: 220px;
   height: 50px;
   text-align: center;  
@@ -183,17 +183,13 @@ trabajando con Pagos Freelance
   font-family:"arial";
   color: #0B2257;
   font-size: 15px;
-  width: 100%;  
+  width: 95%;  
   border-radius:42px;
   height: auto;
   margin: auto;
 }
 
-.bodyCard div{
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
+
 .space-align-container {  
   align-items: flex-start;
   flex-wrap: wrap;

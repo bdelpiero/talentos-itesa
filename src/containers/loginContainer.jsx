@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Login from '../components/login'
+import Login from '../components/Login'
 import {authUser} from '../../auth/auth'
 import {Form} from 'antd'
 import { Link, useHistory } from "react-router-dom"

@@ -2,13 +2,14 @@ import React from 'react'
 import {Link,useHistory} from 'react-router-dom'
 import {authUser} from '../../auth/auth'
 import { Layout,Row,Col } from 'antd';
-import Sidebar from '../components/sidebar'
-import HeaderComponent from '../components/header'
+import Sidebar from '../components/Sidebar'
+import HeaderComponent from '../components/Header'
 import PagosFreelace from '../components/PagosFreelace';
 import CardsFreelace from '../components/MiBanco';
 import OfertaProyectoContainer from './OfertaProyectoContainer';
 import ProximoPagoContainer from './ProximoPagoContainer';
 import MiBancoContainer from './MiBancoContainer';
+import CardsFreelancer from "../components/CardsFreelancer"
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -33,20 +34,11 @@ console.log("userContainer",currentUser)
                     <HeaderComponent/>
                 </Header>
                 <Content className='content-user' /* gutter={{ xs: 6, sm: 16, md: 24, lg: 32 }} */>                   
-                       <Row  gutter={[32, 16]}  justify="space-around" >
-                           <Col  span={8}>
-                      <OfertaProyectoContainer/>
-                      </Col >
-                         <Col  span={8} >
-                      <ProximoPagoContainer/>
-                      </Col>
-                         <Col  span={8}>
-                      <MiBancoContainer/>
-                      </Col>
+                       <Row  gutter={[32, 16]}  justify="space-around" align="middle" >
+                       <CardsFreelancer/>
                       </Row>
                       
                    <Row className='content-row'> 
-                   <h1>Pagos</h1> 
                         <PagosFreelace/>
                    </Row>
                 </Content>
