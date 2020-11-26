@@ -190,7 +190,7 @@ function RegisterFreelancerContainer() {
   return (
     <div>
       <div className='register-header'>
-        <Logo className='register-logo' />
+       <img src={Logo} className='register-logo'/> 
       </div>
 
       <div className='register-container'>

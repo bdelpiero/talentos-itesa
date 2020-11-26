@@ -59,8 +59,7 @@ export function AuthProvider({ children }) {
                   }else{
                     history.push("/freelancer")
                 }
-                }
-               
+                }             
               
             })
       }else{
@@ -71,6 +70,8 @@ export function AuthProvider({ children }) {
     });
     return unsubscribe;
   }, []);
+
+
 
   const value = {
     currentUser,

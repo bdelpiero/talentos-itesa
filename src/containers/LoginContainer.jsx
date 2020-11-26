@@ -38,7 +38,7 @@ export default () => {
   return (
     <div>
       <div className='register-header'>
-        <Logo className='register-logo' />
+       <img src={Logo} className='register-logo'/> 
       </div>
 
       <div className='login-container'>
