@@ -2,6 +2,7 @@ import React from "react";
 import { CloseCircleOutlined } from "@ant-design/icons";
 import Logo from "../../views/man.svg";
 import { Modal, Button, Card } from "antd";
+
 function InviteCard({ handleChange, closeModal, success, openModal, modal }) {
   return (
     <div className="Modal">

@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from 'react-router-dom'
 import { Form, Input, Button, Typography,Alert } from "antd";
 
 export default ({ handleInputChange, handleSubmit, data, form,isLogin }) => {
@@ -85,7 +86,13 @@ export default ({ handleInputChange, handleSubmit, data, form,isLogin }) => {
             LOGIN
           </Button>
         </Form.Item>
+        <div className='register-link'>
+            <Link to='/register' style={{ color: "gray" }}>
+              Don't have an account? Register
+            </Link>
+        </div>
       </Form>
+     
     </div>
   );
 };

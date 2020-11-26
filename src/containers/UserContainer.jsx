@@ -17,7 +17,7 @@ export default () => {
 
   const handleLogout = () => {
     logout();
-    history.push("/");
+    history.push("/login");
   };
   console.log("userContainer", currentUser);
 

@@ -2,77 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import SignatureCanvas from "react-signature-canvas";
 import { Form, Input, Select, Button, Steps, Alert } from "antd";
-import {
-  PDFViewer,
-  pdf,
-  Page,
-  Text,
-  View,
-  Document,
-  StyleSheet,
-  Image,
-} from "@react-pdf/renderer";
-import Contract from "../components/pdfs/Contract";
+import { Spin } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 
-const styles = StyleSheet.create({
-  viewer: {
-    width: "75%",
-    margin: "1rem",
-    height: "45rem",
-  },
-  page: {
-    flexDirection: "row",
-  },
-  section: {
-    margin: 30,
-    padding: 10,
-    flexGrow: 1,
-  },
-  title: {
-    fontSize: 15,
-    textAlign: "center",
-    marginBottom: "10pt",
-  },
-  subtitles: {
-    fontSize: 10,
-    textAlign: "justify",
-    marginBottom: "10pt",
-    fontWeight: "bold",
-  },
-  textContent: {
-    fontSize: 10,
-    textAlign: "justify",
-    marginBottom: "10pt",
-  },
-  signature: {
-    width: "30%",
-    height: "auto",
-    alignSelf: "center",
-  },
-  signatureTexts: {
-    justifyContent: "center",
-    textAlign: "center",
-    fontSize: 10,
-    marginBottom: "10pt",
-  },
-  martinSignature: {
-    width: "30%",
-    height: "auto",
-    alignSelf: "center",
-  },
-});
 
 const { Step } = Steps;
-
-const validateMessages = {
-  required: "${name} is required!",
-  types: {
-    email: "${name} is not a valid email!",
-    number: "${name} is not a valid number!",
-    password: "${name} please input your password!",
-  },
-};
-
+const antIcon = <LoadingOutlined style={{ fontSize: 40 }} spin />;
+ 
 function RegisterFreelancer({
   handleChange,
   handleSubmit,
@@ -84,18 +20,22 @@ function RegisterFreelancer({
   handleClick,
   saveSignature,
   invited,
+  setData,
+  errorSignature,
+  setErrorSignature,
+  isLoading
 }) {
   return (
     <div className='register-formContainer'>
       {step == 1 && (
         <Form
           onFinish={handleConfirm}
-          validateMessages={validateMessages}
-          className='refister-form'>
+          // validateMessages={validateMessages}
+          className='register-form'>
           <h1 style={{ color: "gray", textAlign: "center" }}>Creá tu cuenta</h1>
           {!invited && (
             <Alert
-              message='You must be invited in order to sign in'
+              message='The email address you provided is not invited to register'
               type='error'
               showIcon
               style={{ margin: 5 }}
@@ -104,10 +44,16 @@ function RegisterFreelancer({
           <Form.Item
             hasFeedback
             name='freelancerType'
-            value={data.freelancerType}
-            onChange={handleChange}
-            rules={[{ required: true, message: "Please select an option" }]}>
-            <Select allowClear placeholder='Tipo de freelancer'>
+            rules={[{ required: true, message: "Please select an option" }]}
+            >
+            <Select
+            onChange={(value) => {
+              setData({...data, 'freelancerType': value});
+            }}
+            value={data.freelancerType} 
+            allowClear 
+            placeholder='Tipo de freelancer'
+            >
               <Select.Option value='developer'>Developer</Select.Option>
               <Select.Option value='designer'>Designer</Select.Option>
             </Select>
@@ -119,7 +65,8 @@ function RegisterFreelancer({
             rules={[
               {
                 required: true,
-              },
+                message: "Name is required"
+              }
             ]}>
             <Input placeholder='Nombre' name='name' />
           </Form.Item>
@@ -130,7 +77,8 @@ function RegisterFreelancer({
             rules={[
               {
                 required: true,
-              },
+                message: "Last Name is required"
+              }
             ]}>
             <Input placeholder='Apellido' name='lastName' />
           </Form.Item>
@@ -140,8 +88,13 @@ function RegisterFreelancer({
             onChange={handleChange}
             rules={[
               {
-                type: "email",
+                required: true,
+                message: "Email is required",
               },
+              {
+                message: "Must be a valid email",
+                type: "email"
+              }
             ]}>
             <Input placeholder='Email' name='email' />
           </Form.Item>
@@ -152,6 +105,7 @@ function RegisterFreelancer({
             rules={[
               {
                 required: true,
+                message: "Password is required"
               },
               {
                 min: 6,
@@ -179,7 +133,7 @@ function RegisterFreelancer({
             rules={[
               {
                 required: true,
-                message: "Please confirm your password!",
+                message: 'Confirm your password'
               },
               ({ getFieldValue }) => ({
                 validator(rule, value) {
@@ -232,7 +186,6 @@ function RegisterFreelancer({
       {step == 2 && (
         <Form
           onFinish={handleConfirm}
-          validateMessages={validateMessages}
           className='refister-form'>
           <h1 style={{ color: "gray", textAlign: "center" }}>
             Registrá tus datos fiscales
@@ -244,9 +197,10 @@ function RegisterFreelancer({
             rules={[
               {
                 required: true,
+                message: 'CUIT is required'
               },
             ]}>
-            <Input placeholder='Cuit' name='cuit' />
+            <Input placeholder='CUIT' name='cuit' />
           </Form.Item>
           <Form.Item
             name='address'
@@ -255,6 +209,7 @@ function RegisterFreelancer({
             rules={[
               {
                 required: true,
+                message: 'Address is required'
               },
             ]}>
             <Input placeholder='Address' name='address' />
@@ -266,6 +221,7 @@ function RegisterFreelancer({
             rules={[
               {
                 required: true,
+                message: 'Alias is required'
               },
             ]}>
             <Input placeholder='Alias de cuenta' name='alias' />
@@ -277,6 +233,7 @@ function RegisterFreelancer({
             rules={[
               {
                 required: true,
+                message: 'Bank Name is required'
               },
             ]}>
             <Input placeholder='Banco' name='bankName' />
@@ -288,6 +245,7 @@ function RegisterFreelancer({
             rules={[
               {
                 required: true,
+                message: 'Account Name is required'
               },
             ]}>
             <Input placeholder='Titular de cuenta' name='accountName' />
@@ -300,6 +258,7 @@ function RegisterFreelancer({
             rules={[
               {
                 required: true,
+                message: 'Invoice type is required'
               },
             ]}>
             <Input placeholder='Tipo de factura a emitir' name='type' />
@@ -332,15 +291,19 @@ function RegisterFreelancer({
       )}
       {step == 3 && (
         <div>
-          <Contract
-            show={true}
-            name={data.name}
-            lastName={data.lastName}
-            cuit={bankData.cuit}
-            address={bankData.address}
-            freelancerType={data.freelancerType}
-          />
-          <br />
+          <h1 style={{ color: "gray", textAlign: "center" }}>
+            Firma del acuerdo de confidencialidad
+          </h1>
+         <br />
+         {errorSignature && (
+            <Alert
+              message='You need to sign the document to complete the register'
+              type='error'
+              showIcon
+              style={{ margin: 5 }}
+            />
+          )}
+          <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
           <SignatureCanvas
             ref={signatureRef}
             velocityFilterWeight={0.3}
@@ -349,18 +312,60 @@ function RegisterFreelancer({
               width: 400,
               height: 150,
               className: "sigCanvas",
-              style: { border: "1px solid #000000" },
+              style: { border: "1px solid #000000", borderRadius: '25px' },
             }}
             onEnd={
-              () =>
+              () =>{
                 saveSignature(
                   signatureRef.current.getTrimmedCanvas().toDataURL("image/jpg")
                 ) //base64
-            }
+                setErrorSignature(false)
+            }}
           />
+          <Button
+            onClick={handleClick}
+            style={{ backgroundColor: 'lightgray', border: 0, width: '30%' }}
+            shape='round'
+            block
+            type='primary'
+            htmlType='submit'
+            className='register-button'
+            onClick={() => {
+              signatureRef.current.clear();
+              saveSignature(null);
+              }}
+            >
+              Reset
+            </Button>
+          </div>
           <br />
-          <button onClick={handleClick}> BLOB </button>
+          <Button
+            onClick={handleSubmit}
+            style={{ backgroundColor: '#a77ffa', border: 0 }}
+            shape='round'
+            block
+            type='primary'
+            htmlType='submit'
+            className='register-button'
+            >
+              Register
+            </Button>
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+            { isLoading && <Spin indicator={antIcon}  />}
+            </div>
+          <div className='register-steps'>
+            <Button shape='round'> </Button>
+            <Button shape='round' > {' '}</Button>
+            <Button shape='round' style={{ backgroundColor: "green" }}> </Button>
+          </div>
+          <div className='register-link'>
+            <Link to='/login' style={{ color: "gray" }}>
+              Already have an account? Login
+            </Link>
+          </div>
+
         </div>
+
       )}
     </div>
   );
