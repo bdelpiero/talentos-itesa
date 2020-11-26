@@ -6,7 +6,7 @@ import { Modal, Form} from "antd";
 
 function NewProjectContainer() {
   const [name, setName] = useState("");
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState("On Development");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [term, setTerm] = useState("");
@@ -15,10 +15,6 @@ function NewProjectContainer() {
 
   const handleChangeName = (e) => {
     setName(e.target.value);
-  };
-
-  const handleChangeStatus = (e) => {
-    setStatus(e.target.value);
   };
 
   const handleChangeStartDate = (e) => {
@@ -42,7 +38,6 @@ function NewProjectContainer() {
   };
 
   function success(){
-    console.log("llego al submit");
     db.collection("projects")
       .add({
         name,
@@ -53,7 +48,6 @@ function NewProjectContainer() {
       })
       .then(() => {
         console.log("Se creo correctamente");
-        form.resetFields()
       })
       .then(() => {
         Modal.success({
@@ -82,7 +76,7 @@ function NewProjectContainer() {
   return (
     <NewProject
       handleChangeName={handleChangeName}
-      handleChangeStatus={handleChangeStatus}
+      // handleChangeStatus={handleChangeStatus}
       handleChangeStartDate={handleChangeStartDate}
       handleChangeEndDate={handleChangeEndDate}
       handleChangeTerm={handleChangeTerm}

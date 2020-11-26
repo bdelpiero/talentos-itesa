@@ -419,3 +419,54 @@ Trabajando con Admin Cards/DashBoard
   align-self: center;
   margin: 0;
 }
+
+/* ----------------
+      MODALES
+------------------- */
+
+.close-button {
+  font-size: 180%;
+  color: #9e39ff;
+}
+
+.modal-style {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Raleway;
+}
+
+.modal-outside {
+  border-radius: 40px;
+}
+
+.ok-button {
+  background-color: #9e39ff;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 10px;
+  width: auto;
+  font-size: 16px;
+}
+
+.ant-modal-footer{
+padding: 0;
+border-top: none;
+}
+
+.ant-modal-content {
+  border-radius: 20px;
+}
+
+.modal-input{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-formularios{
+  width: 180%;
+  margin-left: 95px
+}
