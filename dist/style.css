@@ -21,7 +21,7 @@ trabajando con sider user
 
 .card-sider {
   margin: 10px auto !important;
-  width: 90%;
+  width: 80%;
   height: 150px;
   background-color: whitesmoke !important;
   border: none !important;
@@ -40,8 +40,8 @@ trabajando con sider user
 .icono-sider svg {
   display: block;
   color: grey;
-  height: 4em;
-  width: 4em;
+  height: 3em;
+  width: 3em;
 }
 
 .card-sider svg:hover {
@@ -92,7 +92,7 @@ trabajando con content user
   background-color: whitesmoke !important;
 }
 .content-row {
-  height: 60%;
+  height: 48%;
   margin: 7px;
 }
 
@@ -137,11 +137,12 @@ trabajando con  user Cards
   font-family: "arial";
   color: #0b2257;
   font-size: 100%;  
-  width: 300px;
+  width: 400px;
   border-radius:42px;  
   margin: auto; 
   height: 300px !important; 
   min-height: 100% !important;
+  padding: 20px;
 }
 
 .bodyCard div {
@@ -193,7 +194,7 @@ trabajando con Pagos Freelance
   margin: auto;
 }
 .ant-card-body {
-  padding: 10px;
+  padding: 40px;
 }
 .space-align-container {
   align-items: flex-start;

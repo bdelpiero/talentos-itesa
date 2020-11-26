@@ -21,7 +21,7 @@ class PendingPayments extends Component {
     return (
       <Col xs={24} sm={12} md={24}>
         <div className="Pagos">
-          <Title level={2}>Pagos</Title>
+          <Title level={2}>Pagos a realizar este mes</Title>
         </div>
         <Card>
           <List
