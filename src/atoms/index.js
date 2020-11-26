@@ -9,3 +9,13 @@ export const isLoading = atom({
   key: "loading",
   default: false
 });
+
+
+export const atomLogin = atom({
+  key: "login",
+  default: {
+    loading:false,
+    errorCode:'',
+    errorMessage:''
+  }
+});

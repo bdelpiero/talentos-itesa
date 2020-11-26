@@ -5,11 +5,9 @@ import { Layout, Row, Col } from "antd";
 import Sidebar from "../components/Sidebar";
 import HeaderComponent from "../components/Header";
 import PagosFreelace from "../components/PagosFreelace";
-import { Typography } from 'antd';
-
-const { Title } = Typography;
-
 import CardsFreelancer from "../components/CardsFreelancer";
+import Error404 from '../components/404'
+
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -23,7 +21,8 @@ export default () => {
   };
   console.log("userContainer", currentUser);
 
-  return (
+  return !currentUser ? <Error404/> :
+   (
     <Layout>
       <Sider className="sider-user" justify="center">
         <Sidebar handleLogout={handleLogout} />

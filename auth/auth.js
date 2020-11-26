@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { auth, db } from "../firebase/firebase";
 import { useHistory } from "react-router-dom"
 import { useRecoilState } from "recoil";
-import { isLoading } from "../src/atoms";
+import { atomLogin } from "../src/atoms";
 
 
 const AuthContext = React.createContext();
@@ -14,6 +14,7 @@ export function authUser() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
+  const [isLogin, setIsLogin] = useRecoilState(atomLogin);
   const history = useHistory();
 
   function signup(email, password) {
@@ -22,6 +23,16 @@ export function AuthProvider({ children }) {
 
   function login(email, password) {
     return auth.signInWithEmailAndPassword(email, password)
+    .catch(function(error) {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      setIsLogin({
+        loadin:false,
+        errorCode,
+        errorMessage
+      })
+    });
+
   }
 
   function logout() {
@@ -48,6 +59,7 @@ export function AuthProvider({ children }) {
               const User=UserInfo.data()
               setLoading(false);
               setCurrentUser(User)
+              setIsLogin({loadin:false})
                 if(User){
                   if(User.isAdmin){
                     history.push("/admin")
@@ -58,7 +70,6 @@ export function AuthProvider({ children }) {
               
             })
       }else{
-        console.log("USEEFFECT LOADIN",loading)
         setLoading(false);
         setCurrentUser(user);
       }
@@ -70,7 +81,6 @@ export function AuthProvider({ children }) {
 
   const value = {
     currentUser,
-    loading,
     login,
     signup,
     logout,

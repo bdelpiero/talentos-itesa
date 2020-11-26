@@ -4,6 +4,7 @@ trabajando con sider user
 
 .sider-user {
   height: 100vh;
+  min-width: 30vh !important;
   color: rgb(161, 148, 148);
   background-color: whitesmoke !important;
   box-shadow: 3px 0px 5px -3px rgba(0, 0, 0, 0.75);
@@ -357,6 +358,15 @@ register freelancer
     padding: 0 10%;
   }
 }
+
+/* ----------------
+componente de error
+------------------- */
+
+.botonauth {
+  background-color: rgb(228, 9, 217) !important;
+  border: 0;
+}
 /* ----------------------
 Trabajando con Admin Cards/DashBoard
 ---------------------- */
@@ -381,15 +391,6 @@ Trabajando con Admin Cards/DashBoard
 } */
 .admin-cards:active {
   box-shadow: inset -1px 3px 26px -6px rgba(0, 0, 0, 0.75);
-}
-/* ----------------
-spiner de loadin
-------------------- */
-.spinLoading {
-  margin-left: 10px !important;
-}
-.ant-spin-dot-item {
-  background-color: rgb(228, 9, 217) !important;
 }
 
 .invite_msg {
