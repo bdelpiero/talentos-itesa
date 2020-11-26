@@ -25,12 +25,8 @@ function InviteContainer() {
   };
   function success() {
     closeModal();
-    
-    db.collection("invites")
-      .add({
-        email,
-      })
-      .then(() => {
+    db.collection("invites").doc(`${email}`).set({email: email})
+    .then(() => {
         Modal.success({
           bodyStyle: {
             display: "flex",

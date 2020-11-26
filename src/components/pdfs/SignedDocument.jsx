@@ -1,5 +1,4 @@
 import React from "react";
-
 import {
   PDFViewer,
   pdf,
@@ -10,6 +9,8 @@ import {
   StyleSheet,
   Image,
 } from "@react-pdf/renderer";
+import Martin from '../../../views/firma_martin.png'
+
 
 const styles = StyleSheet.create({
   viewer: {
@@ -324,7 +325,7 @@ const SignedDocument = ({
           DNI Nro.
           {cuit.substring(2, cuit.length - 1)}
         </Text>
-        <Image src='/firma_martin.png' style={styles.martinSignature}></Image>
+        <Image src={Martin} style={styles.martinSignature}></Image>
         <Text style={styles.signatureTexts}>____________________</Text>
         <Text style={styles.signatureTexts}>
           Martin Pilossof Director General

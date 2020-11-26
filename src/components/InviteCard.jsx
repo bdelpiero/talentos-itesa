@@ -6,7 +6,7 @@ function InviteCard({ handleChange, closeModal, success, openModal, modal }) {
   return (
     <div className="Modal">
       <Card className="admin-cards" onClick={openModal}>
-        <img src={UserLogo} />
+          <img src={UserLogo} className="icono-sider"/>
         <div className="admin-button">
           <h4 style={{ color: "#9e39ff" }}>Invitar perfiles</h4>
         </div>
