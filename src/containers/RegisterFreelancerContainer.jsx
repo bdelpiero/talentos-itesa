@@ -47,9 +47,7 @@ function RegisterFreelancerContainer() {
   };
 
   const handleChange = (e) => {
-    // console.log('TARGET', value)
-    // console.log('NAME', e.target.name)
-    
+  
     if (step == 1)
     setData({
       ...data,
@@ -128,7 +126,7 @@ function RegisterFreelancerContainer() {
   return (
     <div>
       <div className='register-header'>
-        <img src={Logo} className='register-logo'/>
+      <img src={Logo} className='register-logo'/>
       </div>
 
       <div className='register-container'>
@@ -150,7 +148,6 @@ function RegisterFreelancerContainer() {
           handleConfirm={handleConfirm}
           invited={invited}
           signatureRef={signatureRef}
-          handleClick={handleClick}
           saveSignature={saveSignature}
           setData={setData}
           errorSignature={errorSignature}

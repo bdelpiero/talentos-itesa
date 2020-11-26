@@ -5,8 +5,9 @@ import { Layout, Row, Col } from "antd";
 import Sidebar from "../components/Sidebar";
 import HeaderComponent from "../components/Header";
 import PagosFreelace from "../components/PagosFreelace";
-
 import CardsFreelancer from "../components/CardsFreelancer";
+import Error404 from '../components/404'
+
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -20,7 +21,8 @@ export default () => {
   };
   console.log("userContainer", currentUser);
 
-  return (
+  return !currentUser ? <Error404/> :
+   (
     <Layout>
       <Sider className="sider-user" justify="center">
         <Sidebar handleLogout={handleLogout} />
@@ -30,7 +32,7 @@ export default () => {
           <HeaderComponent />
         </Header>
         <Content
-          className="content-user" /* gutter={{ xs: 6, sm: 16, md: 24, lg: 32 }} */
+          className="content-user" 
         >
           <Row
             className="content-row"
