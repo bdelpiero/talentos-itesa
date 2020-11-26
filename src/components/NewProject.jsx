@@ -1,6 +1,6 @@
 import React from "react";
 import Briefing from "../../views/briefing.svg";
-import { Modal, Button, Card, Form, Input, Select } from "antd";
+import { Modal, Button, Card, Form, Input, Select,DatePicker } from "antd";
 import { CloseCircleOutlined } from "@ant-design/icons";
 
 function NewProject({
@@ -38,29 +38,35 @@ function NewProject({
       </Card>
 
       <Modal
-        title="Modal invite"
         visible={modal}
-        okText="Crear Proyecto"
         centered="true"
         cancelButtonProps={{ hidden: true }}
-        okButtonProps={{
-          style: { backgroundColor: "#9e39ff", border: "none" },
-          shape: "round",
-        }}
+        okButtonProps={{ hidden: true }}
         onCancel={closeModal}
         onOk={success}
-        closeIcon={<CloseCircleOutlined style={{ color: "#9e39ff" }} />}
+        closeIcon={<CloseCircleOutlined className="close-button" />}
         bodyStyle={{ color: "#9e39ff" }}
+        destroyOnClose={true}
       >
-        <h2>Crear Proyecto </h2>
+        <div className="modal-style">
+          <br />
+          <h1>Crear Proyecto</h1>
+          <p style={{ color: "grey" }}>
+            Ingrese los datos para crear el proyecto
+          </p>
+          <br />
+        </div>
         <Form
           {...layout}
           initialValues={{ remember: true }}
           onFinish={handleSubmit}
           // onFinishFailed={onFinishFailed}
         >
+          <h5 style={{ color: "grey", marginLeft: "95px" }}>
+            NOMBRE DEL PROYECTO
+          </h5>
           <Form.Item
-            label="Nombre del Proyecto"
+            className="modal-formularios"
             name="name"
             onChange={handleChangeName}
             rules={[
@@ -70,11 +76,12 @@ function NewProject({
               },
             ]}
           >
-            <Input />
+            <Input/>
           </Form.Item>
 
+          <h5 style={{ color: "grey", marginLeft: "95px" }}>DURACIÓN</h5>
           <Form.Item
-            label="Duración"
+            className="modal-formularios"
             name="term"
             onChange={handleChangeTerm}
             rules={[
@@ -84,24 +91,29 @@ function NewProject({
               },
             ]}
           >
-            <Input />
+            <Input/>
           </Form.Item>
 
+          <h5 style={{ color: "grey", marginLeft: "95px" }}>FECHA DE INICIO</h5>
           <Form.Item
-            label="Inicio"
             name="startDate"
             onChange={handleChangeStartDate}
+            className="modal-formularios"
             rules={[
               { required: true, message: "Por favor ingrese fecha de inicio" },
             ]}
           >
-            <Input />
+            <Input/>
+            {/* <DatePicker /> */}
           </Form.Item>
 
+          <h5 style={{ color: "grey", marginLeft: "95px" }}>
+            FECHA DE FINALIZACION
+          </h5>
           <Form.Item
-            label="Finalización"
             name="endDate"
             onChange={handleChangeEndDate}
+            className="modal-formularios"
             rules={[
               {
                 required: true,
@@ -110,25 +122,14 @@ function NewProject({
             ]}
           >
             <Input />
+            {/* <DatePicker /> */}
           </Form.Item>
 
-          <Form.Item
-            label="Estado"
-            name="status"
-            onChange={handleChangeStatus}
-            rules={[{ required: true }]}
-          >
-            <Select onChange={handleChangeStatus} allowClear>
-              <Option value="ondevolpment">On Devolpment </Option>
-              <Option value="finished"> Finished </Option>
-            </Select>
-          </Form.Item>
-          {/* 
-        <Form.Item {...tailLayout}>
-          <Button type="primary" htmlType="submit">
-            Crear Proyecto
-          </Button>
-        </Form.Item> */}
+          <div className="modal-input">
+            <button className="ok-button" type="submit">
+              CREAR PROYECTO
+            </button>
+          </div>
         </Form>
       </Modal>
     </div>
