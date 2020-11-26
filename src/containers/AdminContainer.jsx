@@ -12,6 +12,7 @@ import HeaderComponent from "../components/Header";
 import ResumeContainer from "../containers/ResumeContainer";
 import PendingPayments from "../components/PendingPayments";
 import Title from "antd/lib/skeleton/Title";
+import Error404 from "../components/404";
 
 function AdminContainer() {
   const { Header, Footer, Sider, Content } = Layout;
@@ -24,7 +25,9 @@ function AdminContainer() {
   };
 
   console.log("userContainer", currentUser);
-  return (
+  return !currentUser ? (
+    <Error404 />
+  ) : (
     <Layout>
       <Sider className="sider-user">
         <Sidebar handleLogout={handleLogout} />
@@ -60,7 +63,6 @@ function AdminContainer() {
           </Row>
 
           <Row className="content-row">
-            <Title>Pagos a realizar este mes</Title>
             <PendingPayments></PendingPayments>
           </Row>
         </Content>

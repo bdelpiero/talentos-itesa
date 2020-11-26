@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import { Button, Radio, Card, Row, Col, List, Avatar } from "antd";
 import { Content } from "antd/lib/layout/layout";
 import { DownloadOutlined } from "@ant-design/icons";
+import { Typography } from "antd";
+
+const { Title } = Typography;
 
 const data = [
   {
@@ -16,8 +19,11 @@ const data = [
 class PendingPayments extends Component {
   render() {
     return (
-      <>
-        <Card className="bodyCard2">
+      <Col xs={24} sm={12} md={24}>
+        <div className="Pagos">
+          <Title level={2}>Pagos</Title>
+        </div>
+        <Card>
           <List
             itemLayout="horizontal"
             dataSource={data}
@@ -36,23 +42,25 @@ class PendingPayments extends Component {
                     </a>
                   }
                   description={
-                    <Row gutter={30} justify="end">
-                      <Col xs={24} sm={12} lg={6}>
+                    <Row justify="end">
+                      <Col xs={24} sm={12} md={6}>
                         <p className="subtittle2">Proyecto:</p>
                         <p className="text2">ITS202|Satapp</p>
                       </Col>
-                      <Col xs={24} sm={12} lg={6}>
+                      <Col xs={24} sm={12} md={6}>
                         <p className="subtittle2">Factura:</p>
                         <p className="text2">1 de 4</p>
                       </Col>
-                      <Col xs={24} sm={12} lg={6}>
+                      <Col xs={24} sm={12} md={6}>
                         <p className="subtittle2">Fecha de pago</p>
                         <p className="text2">02/05/2020</p>
                       </Col>
-                      <Col xs={24} sm={12} lg={6}>
-                        <Button className="buttonPagos2" shape="round">
-                          Pagar Factura
-                        </Button>
+                      <Col xs={24} sm={12} md={6}>
+                        <>
+                          <Button className="buttonPagos2" shape="round">
+                            Ver comprobante de pago <DownloadOutlined />{" "}
+                          </Button>
+                        </>
                       </Col>
                     </Row>
                   }
@@ -61,7 +69,7 @@ class PendingPayments extends Component {
             )}
           />
         </Card>
-      </>
+      </Col>
     );
   }
 }

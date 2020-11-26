@@ -4,6 +4,7 @@ trabajando con sider user
 
 .sider-user {
   height: 100vh;
+  min-width: 30vh !important;
   color: rgb(161, 148, 148);
   background-color: whitesmoke !important;
   box-shadow: 3px 0px 5px -3px rgba(0, 0, 0, 0.75);
@@ -91,7 +92,7 @@ trabajando con content user
   background-color: whitesmoke !important;
 }
 .content-row {
-  height: 48%;
+  height: 60%;
   margin: 7px;
 }
 
@@ -132,23 +133,25 @@ trabajando con content user
 trabajando con  user Cards
 ---------------------- */
 
-@import "~antd/dist/antd.css";
-
 .bodyCard {
   font-family: "arial";
   color: #0b2257;
-  font-size: 100%;
-  width: 90%;
-  border-radius: 42px;
-  height: 50% !important;
-  margin: auto;
+  font-size: 100%;  
+  width: 300px;
+  border-radius:42px;  
+  margin: auto; 
+  height: 300px !important; 
+  min-height: 100% !important;
 }
 
 .bodyCard div {
   display: flex;
-  flex-direction: column;
-  height: 40% !important;
+  flex-direction: column; 
+  height: 90% !important; 
+  box-sizing: content-box;
+  
 }
+
 
 h1 {
   color: white;
@@ -157,7 +160,7 @@ h1 {
 #subtittle {
   font-family: "Open Sans Semibold", arial;
   color: #9e39ff;
-  font-size: 15px;
+  font-size: 75%;
 }
 
 #tittleCard {
@@ -171,8 +174,8 @@ h1 {
   background-color: #9e39ff;
   color: white;
   float: right;
-  width: 220px;
-  height: 50px;
+  width: 200px;
+  height: 30px;
   text-align: center;
 }
 
@@ -186,19 +189,21 @@ trabajando con Pagos Freelance
   font-size: 15px;
   width: 95%;
   border-radius: 42px;
-  height: auto;
+  height: 20% !important;
   margin: auto;
 }
-
+.ant-card-body {
+  padding: 10px;
+}
 .space-align-container {
   align-items: flex-start;
   flex-wrap: wrap;
   width: 90%;
-  height: 20%;
+  height: 80%;
 }
 .space-align-block {
-  margin: 8px 4px;
-  padding: 4px;
+  margin: 8% 4%;
+  padding: 4%;
   flex: none;
 }
 .space-align-block .mock-block {
@@ -207,21 +212,26 @@ trabajando con Pagos Freelance
   background: rgba(150, 150, 150, 0.2);
 }
 
+
 .text2 {
   font-family: "Open Sans Semibold";
   color: black;
-  font-size: 12px;
+  font-size: 75%;
   font-stretch: expanded;
 }
 .textPagos {
   font-family: "Open Sans Semibold";
   color: #8990ad;
 }
+.Pagos{
+  text-align: left;
+  width: 95% !important;
+}
 
 .subtittle2 {
   font-family: "Open Sans Semibold", arial;
   color: #9e39ff;
-  font-size: 12px;
+  font-size: 90%;
 }
 
 .buttonPagos2 {
@@ -230,8 +240,8 @@ trabajando con Pagos Freelance
   float: right;
   align-content: center;
   right: 0px;
-  width: 350px;
-  height: 50px;
+  width: 100%;
+  height: 50%;
   text-align: center;
 }
 
@@ -270,7 +280,7 @@ register freelancer
   display: flex;
   height: 80vh;
   width: 100vw;
-  margin: 10vh 0;
+  margin: 0;
 }
 
 .register-logo {
@@ -292,15 +302,18 @@ register freelancer
 .register-formContainer {
   flex-basis: 50vw;
   padding: 0 8%;
+  margin: 10vh 0;
 }
 
-.refister-form input {
+.register-form input {
   border: 0;
   border-bottom: 0.3px solid lightgray;
 }
 
 .register-button {
   background-color: #a77ffa;
+  border: 0;
+  margin: 1vh 0
 }
 
 .register-button span {
@@ -345,6 +358,15 @@ register freelancer
     padding: 0 10%;
   }
 }
+
+/* ----------------
+componente de error
+------------------- */
+
+.botonauth {
+  background-color: rgb(228, 9, 217) !important;
+  border: 0;
+}
 /* ----------------------
 Trabajando con Admin Cards/DashBoard
 ---------------------- */
@@ -369,15 +391,6 @@ Trabajando con Admin Cards/DashBoard
 } */
 .admin-cards:active {
   box-shadow: inset -1px 3px 26px -6px rgba(0, 0, 0, 0.75);
-}
-/* ----------------
-spiner de loadin
-------------------- */
-.spinLoading {
-  margin-left: 10px !important;
-}
-.ant-spin-dot-item {
-  background-color: rgb(228, 9, 217) !important;
 }
 
 .invite_msg {
@@ -405,4 +418,55 @@ spiner de loadin
 .admin-button h4 {
   align-self: center;
   margin: 0;
+}
+
+/* ----------------
+      MODALES
+------------------- */
+
+.close-button {
+  font-size: 180%;
+  color: #9e39ff;
+}
+
+.modal-style {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Raleway;
+}
+
+.modal-outside {
+  border-radius: 40px;
+}
+
+.ok-button {
+  background-color: #9e39ff;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 10px;
+  width: auto;
+  font-size: 16px;
+}
+
+.ant-modal-footer{
+padding: 0;
+border-top: none;
+}
+
+.ant-modal-content {
+  border-radius: 20px;
+}
+
+.modal-input{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-formularios{
+  width: 180%;
+  margin-left: 95px
 }
