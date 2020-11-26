@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
-import InviteCard from "../components/InviteCard";
+import React, { useState } from "react";
+import InviteCard from "../components/InviteCard"
 import { db } from "../../firebase/firebase";
 import { authUser } from "../../auth/auth";
 import CheckCircle from "../../views/check.svg";
 import UserLogo from "../../views/man.svg";
 
 import {
-  CheckCircleOutlined,
-  CloseCircleOutlined,
-  UserOutlined,
 } from "@ant-design/icons";
 import { Modal, Button, Card } from "antd";
 
@@ -59,6 +55,7 @@ function InviteContainer() {
   }
   return (
     <InviteCard
+    className="modal-outside"
       handleChange={handleChange}
       closeModal={closeModal}
       success={success}
