@@ -20,7 +20,7 @@ class PagosFreelace extends Component {
         <div className="Pagos">
           <Title level={2}>Pagos</Title>
         </div>
-        <Card className="bodyCard2">
+        <Card className="card2">
           <List
             itemLayout="horizontal"
             dataSource={data}

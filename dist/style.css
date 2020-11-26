@@ -4,7 +4,7 @@ trabajando con sider user
 
 .sider-user {
   height: 100vh;
-  min-width: 30vh !important;
+  min-width: 20vh !important;
   color: rgb(161, 148, 148);
   background-color: whitesmoke !important;
   box-shadow: 3px 0px 5px -3px rgba(0, 0, 0, 0.75);
@@ -12,7 +12,7 @@ trabajando con sider user
 
 .sider-user-row {
   height: 100vh;
-  width: 100%;
+  width: 90%;
 }
 
 .logout {
@@ -22,7 +22,7 @@ trabajando con sider user
 .card-sider {
   margin: 10px auto !important;
   width: 90%;
-  height: 150px;
+  height: 100px;
   background-color: whitesmoke !important;
   border: none !important;
   border-radius: 5% !important;
@@ -40,8 +40,8 @@ trabajando con sider user
 .icono-sider svg {
   display: block;
   color: grey;
-  height: 4em;
-  width: 4em;
+  height: 1.5em;
+  width: 1.5em;
 }
 
 .card-sider svg:hover {
@@ -92,7 +92,7 @@ trabajando con content user
   background-color: whitesmoke !important;
 }
 .content-row {
-  height: 60%;
+  height: 48%;
   margin: 7px;
 }
 
@@ -133,25 +133,18 @@ trabajando con content user
 trabajando con  user Cards
 ---------------------- */
 
-.bodyCard {
+.ant-card-body {
   font-family: "arial";
   color: #0b2257;
-  font-size: 100%;  
-  width: 300px;
-  border-radius:42px;  
-  margin: auto; 
-  height: 300px !important; 
-  min-height: 100% !important;
-}
-
-.bodyCard div {
-  display: flex;
-  flex-direction: column; 
-  height: 90% !important; 
-  box-sizing: content-box;
+  font-size: 100%;   
   
 }
 
+.card{
+  border-radius:42px !important;  
+  margin: auto; 
+  width: 95%;
+}
 
 h1 {
   color: white;
@@ -183,14 +176,10 @@ h1 {
 trabajando con Pagos Freelance
 ---------------------- */
 
-.bodyCard2 {
-  font-family: "arial";
-  color: #0b2257;
-  font-size: 15px;
+.card2{
+  border-radius:42px !important;  
+  margin: auto; 
   width: 95%;
-  border-radius: 42px;
-  height: 20% !important;
-  margin: auto;
 }
 .ant-card-body {
   padding: 10px;

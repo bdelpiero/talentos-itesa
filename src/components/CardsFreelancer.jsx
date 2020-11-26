@@ -5,7 +5,7 @@ export default () => {
   return (
     <>
       <Col xs={24} sm={12} md={8} >
-        <Card className="bodyCard">
+        <Card className="card">
           <h3 id="tittleCard">OFERTA DE PROYECTO</h3>
           <p id="subtittle">PROYECTO</p>
           <p>"ITS202|SATAPP"</p>
@@ -23,7 +23,7 @@ export default () => {
         </Card>
       </Col>
       <Col xs={24} sm={12} md={8}>
-        <Card className="bodyCard">
+        <Card className="card" >
           <h3 id="tittleCard">PROXIMO PAGO</h3>
           <p id="subtittle">PROYECTO</p>
           <p>"ITS202|SATAPP"</p>
@@ -42,7 +42,7 @@ export default () => {
         </Card>
       </Col>
       <Col xs={24} sm={12} md={8}>
-        <Card className="bodyCard">
+        <Card className="card" >
            <h3 id="tittleCard">MI BANCO</h3>
           <p id="subtittle">CBU/Alias</p>
           <p>Banco EL pepino</p>
