@@ -5,15 +5,14 @@ import { Link, useHistory } from "react-router-dom";
 import Logo from "../../views/logo-itesa.svg";
 import { useRecoilState } from "recoil";
 import { isLoading } from "../atoms";
-import {Form} from 'antd'
-
+import { Form } from "antd";
 
 export default () => {
   const [data, setData] = useState({
     email: "",
     password: "",
   });
-  const [form] =Form.useForm()
+  const [form] = Form.useForm();
   const history = useHistory();
   const [loading, setLoading] = useRecoilState(isLoading);
   const { login, currentUser } = authUser();
@@ -27,22 +26,21 @@ export default () => {
     });
   };
 
-
   const handleSubmit = (valores) => {
-    setLoading(true)
+    setLoading(true);
     login(data.email, data.password);
     setData({ email: "", password: "" });
-    form.resetFields()
+    form.resetFields();
   };
 
   return (
     <div>
-      <div className='register-header'>
-        <Logo className='register-logo' />
+      <div className="register-header">
+        <img src={Logo} className="register-logo" />
       </div>
 
-      <div className='login-container'>
-        <div className='register-left'></div>
+      <div className="login-container">
+        <div className="register-left"></div>
         <Login
           handleInputChange={handleInputChange}
           handleSubmit={handleSubmit}
@@ -50,7 +48,6 @@ export default () => {
           form={form}
           loading={loading}
         />
-       
       </div>
     </div>
   );

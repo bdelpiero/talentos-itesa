@@ -36,20 +36,20 @@ class PendingPayments extends Component {
                     </a>
                   }
                   description={
-                    <Row justify="end">
-                      <Col span={6}>
+                    <Row gutter={30} justify="end">
+                      <Col xs={24} sm={12} lg={6}>
                         <p className="subtittle2">Proyecto:</p>
                         <p className="text2">ITS202|Satapp</p>
                       </Col>
-                      <Col span={6}>
+                      <Col xs={24} sm={12} lg={6}>
                         <p className="subtittle2">Factura:</p>
                         <p className="text2">1 de 4</p>
                       </Col>
-                      <Col span={6}>
+                      <Col xs={24} sm={12} lg={6}>
                         <p className="subtittle2">Fecha de pago</p>
                         <p className="text2">02/05/2020</p>
                       </Col>
-                      <Col span={6}>
+                      <Col xs={24} sm={12} lg={6}>
                         <Button className="buttonPagos2" shape="round">
                           Pagar Factura
                         </Button>

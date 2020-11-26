@@ -26,7 +26,7 @@ function AdminContainer() {
   console.log("userContainer", currentUser);
   return (
     <Layout>
-      <Sider className="sider-user"  >
+      <Sider className="sider-user">
         <Sidebar handleLogout={handleLogout} />
       </Sider>
 
@@ -37,7 +37,7 @@ function AdminContainer() {
 
         <Content className="content-user">
           <Row
-            gutter={[30, 16]}
+            gutter={30}
             style={{
               display: "flex",
               flexDirection: "row",
@@ -45,16 +45,16 @@ function AdminContainer() {
             }}
             className="content-row"
           >
-            <Col span={2}>
+            <Col xs={24} sm={12} lg={6}>
               <InviteContainer />
             </Col>
-            <Col span={2}>
+            <Col xs={24} sm={12} lg={6}>
               <NewProjectContainer />
             </Col>
-            <Col span={2}>
+            <Col xs={24} sm={12} lg={6}>
               <AddPaymentContainer />
             </Col>
-            <Col span={8}>
+            <Col xs={24} sm={12} lg={6}>
               <ResumeContainer />
             </Col>
           </Row>

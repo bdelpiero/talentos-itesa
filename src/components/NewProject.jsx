@@ -31,7 +31,7 @@ function NewProject({
   return (
     <div className="Modal">
       <Card className="admin-cards" onClick={openModal}>
-        <Briefing className="icono-sider" />
+        <img src={Briefing} className="icono-sider" />
         <div className="admin-button">
           <h4 style={{ color: "#9e39ff" }}>Crear proyecto nuevo</h4>
         </div>

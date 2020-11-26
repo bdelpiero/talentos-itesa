@@ -138,7 +138,7 @@ function RegisterFreelancerContainer() {
     // e.preventDefault();
     // console.log("ESTO ES DATA", data);
 
-    signup(data.email, data.password,data.displayName)
+    signup(data.email, data.password, data.displayName)
       .then((res) => res.user.uid)
       .then((uid) => {
         db.collection("users").doc(uid).set({
@@ -189,12 +189,12 @@ function RegisterFreelancerContainer() {
 
   return (
     <div>
-      <div className='register-header'>
-        <Logo className='register-logo' />
+      <div className="register-header">
+        <img src={Logo} className="register-logo" />
       </div>
 
-      <div className='register-container'>
-        <div className='register-left'></div>
+      <div className="register-container">
+        <div className="register-left"></div>
         <RegisterFreelancer
           handleChange={handleChange}
           handleSubmit={handleSubmit}
