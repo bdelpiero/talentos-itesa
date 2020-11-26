@@ -23,7 +23,6 @@ function AdminContainer() {
     history.push("/");
   };
 
-  console.log("userContainer", currentUser);
   return (
     <Layout>
       <Sider className="sider-user"  >
