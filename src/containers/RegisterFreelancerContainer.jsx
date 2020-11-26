@@ -128,7 +128,6 @@ function RegisterFreelancerContainer() {
       <div className='register-header'>
       <img src={Logo} className='register-logo'/>
       </div>
-
       <div className='register-container'>
         {step !== 3 ? <div className='register-left'></div> : <Contract
         show={true}

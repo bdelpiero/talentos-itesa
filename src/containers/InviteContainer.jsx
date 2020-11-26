@@ -3,7 +3,7 @@ import InviteCard from "../components/InviteCard"
 import { db } from "../../firebase/firebase";
 import { authUser } from "../../auth/auth";
 import CheckCircle from "../../views/check.svg";
-import UserLogo from "../../views/man.svg";
+
 
 import {
 } from "@ant-design/icons";

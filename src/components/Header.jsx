@@ -1,11 +1,14 @@
-import React from "react";
-import { Row, Col, Typography, Avatar } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import React,{ useState} from "react";
 import logo from "../../views/logo-itesa.svg";
+import { authUser } from "../../auth/auth";
+
+import { UserOutlined } from "@ant-design/icons";
+import { Row, Col, Typography, Avatar } from "antd";
 
 const { Title, Text } = Typography;
 
 export default () => {
+  
   return (
     <>
       <Row align='top' justify='end' className='mini-logo'>

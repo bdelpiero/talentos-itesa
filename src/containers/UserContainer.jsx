@@ -33,17 +33,23 @@ export default () => {
         </Header>
         <Content
           className="content-user" 
+          xs={24} sm={12} md={8}
         >
           <Row
             className="content-row"
-            gutter={[32, 16]}
+            gutter={{ xs: 6, sm: 16, md: 24, lg: 32 }}
             justify="space-around"
             align="middle"
           >
             <CardsFreelancer />
           </Row>
 
-          <Row className="content-row">
+          
+          <Row className="content-row"
+           gutter={{ xs: 6, sm: 16, md: 24, lg: 32 }}
+           justify="space-around"
+            align="middle">
+              
             <PagosFreelace />
           </Row>
         </Content>
