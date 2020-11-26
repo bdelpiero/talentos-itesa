@@ -1,7 +1,7 @@
 import React from "react";
-import { Form, Input, Button, Checkbox, Row, Col, Typography,Spin } from "antd";
+import { Form, Input, Button, Typography,Alert } from "antd";
 
-export default ({ handleInputChange, handleSubmit, data, form,loading }) => {
+export default ({ handleInputChange, handleSubmit, data, form,isLogin }) => {
   const layout = {
     labelCol: {
       span: 8,
@@ -17,12 +17,6 @@ export default ({ handleInputChange, handleSubmit, data, form,loading }) => {
     },
   };
   const { Title } = Typography;
-
-  const onFinishFailed = (errorInfo) => {
-    form.resetFields();
-
-    console.log("Failed:", errorInfo);
-  };
 
   return (
     <div className='login-formContainer'>
@@ -70,8 +64,18 @@ export default ({ handleInputChange, handleSubmit, data, form,loading }) => {
             className='register-input'
           />
         </Form.Item>
+        {isLogin.errorCode && 
+        <Form.Item>
+        <Alert
+          message="Error"
+          description={isLogin.errorMessage}
+          type="error"
+          showIcon
+        />
+        </Form.Item>}
         <Form.Item>
           <Button
+            loading={isLogin.loading}
             style={{ backgroundColor: "#a77ffa", border: 0 }}
             shape='round'
             block
@@ -81,7 +85,6 @@ export default ({ handleInputChange, handleSubmit, data, form,loading }) => {
             LOGIN
           </Button>
         </Form.Item>
-        {loading && <Spin size="large" className='spinLoading' />}
       </Form>
     </div>
   );

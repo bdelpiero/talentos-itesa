@@ -1,12 +1,12 @@
 import React from "react";
 import { CloseCircleOutlined } from "@ant-design/icons";
-import UserLogo from "../../views/man.svg";
+import Logo from "../../views/man.svg";
 import { Modal, Button, Card } from "antd";
 function InviteCard({ handleChange, closeModal, success, openModal, modal }) {
   return (
     <div className="Modal">
       <Card className="admin-cards" onClick={openModal}>
-        <UserLogo className="icono-sider" />
+          <img src={Logo} className="icono-sider"/>
         <div className="admin-button">
           <h4 style={{ color: "#9e39ff" }}>Invitar perfiles</h4>
         </div>

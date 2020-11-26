@@ -14,10 +14,10 @@ function App() {
   return (
     <AuthProvider>
       <Switch>
-        <Route exact path="/login" component={LoginContainer} />
-        <Route exact path="/freelancer" component={UserContainer} />
-        <Route exact path="/admin" component={AdminContainer} />
-        <Route exact path="/pruebacard2" component={PagosFreelace} />
+        <Route  path="/login" component={LoginContainer} />
+        <Route  path="/freelancer" component={UserContainer} />
+        <Route  path="/admin" component={AdminContainer} />
+        <Route  path="/pruebacard2" component={PagosFreelace} />
         <Route path="/" component={RegisterFreelancerContainer} />
         <Redirect from="/" to="/" />
       </Switch>
