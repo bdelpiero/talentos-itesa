@@ -43,28 +43,13 @@ const config = {
         include: /\.module\.css$/,
       },
       {
-        test: /\.(png|jpe?g|gif)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-          },
-        ],
-      },
-      {
-        test: /\.(png|svg|jpg|gif|pdf)$/,
+        test: /.(png|svg|jpg|jpeg|gif)$/i,
         use: [
           {
             loader: "file-loader",
-            options: {
-              name: "[name].[ext]",
-            },
           },
         ],
       },
-      {
-        test: /\.svg$/,
-        use: ["@svgr/webpack"],
-      }
     ],
   },
   resolve: {

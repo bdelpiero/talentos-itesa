@@ -41,16 +41,11 @@ export function AuthProvider({ children }) {
   }
 
   useEffect(() => {
-    // setLoading(true)
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      console.log("entrando useEffect")
-      console.log("USEEFFECT LOADIN",loading)
-
       if(user){
         return db.collection('users').doc(user.uid).get()
             .then(UserInfo=>{
               const User=UserInfo.data()
-              console.log("USEEFFECT LOADIN",loading)
               setLoading(false);
               setCurrentUser(User)
                 if(User){

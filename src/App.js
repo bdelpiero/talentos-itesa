@@ -18,8 +18,8 @@ function App() {
         <Route exact path="/freelancer" component={UserContainer} />
         <Route exact path="/admin" component={AdminContainer} />
         <Route exact path="/pruebacard2" component={PagosFreelace} />
-        <Route path="/" component={RegisterFreelancerContainer} />
-        <Redirect from="/" to="/" />
+        <Route path="/register" component={RegisterFreelancerContainer} />
+        <Redirect from="/" to="/login" />
       </Switch>
     </AuthProvider>
   );
