@@ -12,8 +12,7 @@ import HeaderComponent from "../components/Header";
 import ResumeContainer from "../containers/ResumeContainer";
 import PendingPayments from "../components/PendingPayments";
 import Title from "antd/lib/skeleton/Title";
-import Error404 from '../components/404'
-
+import Error404 from "../components/404";
 
 function AdminContainer() {
   const { Header, Footer, Sider, Content } = Layout;
@@ -26,9 +25,11 @@ function AdminContainer() {
   };
 
   console.log("userContainer", currentUser);
-  return !currentUser ? <Error404/> : (
+  return !currentUser ? (
+    <Error404 />
+  ) : (
     <Layout>
-      <Sider className="sider-user"  >
+      <Sider className="sider-user">
         <Sidebar handleLogout={handleLogout} />
       </Sider>
 
@@ -39,7 +40,7 @@ function AdminContainer() {
 
         <Content className="content-user">
           <Row
-            gutter={[30, 16]}
+            gutter={30}
             style={{
               display: "flex",
               flexDirection: "row",
@@ -47,22 +48,21 @@ function AdminContainer() {
             }}
             className="content-row"
           >
-            <Col span={2}>
+            <Col xs={24} sm={12} lg={6}>
               <InviteContainer />
             </Col>
-            <Col span={2}>
+            <Col xs={24} sm={12} lg={6}>
               <NewProjectContainer />
             </Col>
-            <Col span={2}>
+            <Col xs={24} sm={12} lg={6}>
               <AddPaymentContainer />
             </Col>
-            <Col span={8}>
+            <Col xs={24} sm={12} lg={6}>
               <ResumeContainer />
             </Col>
           </Row>
 
           <Row className="content-row">
-            <Title>Pagos a realizar este mes</Title>
             <PendingPayments></PendingPayments>
           </Row>
         </Content>

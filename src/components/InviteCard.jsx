@@ -6,7 +6,7 @@ function InviteCard({ handleChange, closeModal, success, openModal, modal }) {
   return (
     <div className="Modal">
       <Card className="admin-cards" onClick={openModal}>
-          <img src={UserLogo} className="icono-sider"/>
+        <img src={UserLogo} className="icono-sider" />
         <div className="admin-button">
           <h4 style={{ color: "#9e39ff" }}>Invitar perfiles</h4>
         </div>
@@ -48,10 +48,7 @@ function InviteCard({ handleChange, closeModal, success, openModal, modal }) {
                   },
                 ]}
               >
-                <Input 
-                placeholder="Ej: talentos@itesa.com.ar" 
-                name="email" 
-                />
+                <Input placeholder="Ej: talentos@itesa.com.ar" name="email" />
               </Form.Item>
             </div>
             <div className="modal-input">

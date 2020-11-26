@@ -48,7 +48,8 @@ const config = {
           {
             loader: "file-loader",
           },
-        ],},
+        ],
+      },
     ],
   },
   resolve: {

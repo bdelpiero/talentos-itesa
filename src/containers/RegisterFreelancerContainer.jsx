@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import {useHistory} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 import RegisterFreelancer from "../components/RegisterFreelancer";
 import { db } from "../../firebase/firebase";
 import { authUser } from "../../auth/auth";
@@ -11,14 +11,13 @@ import SignedDocument from "../components/pdfs/SignedDocument";
 import Contract from "../components/pdfs/Contract";
 import { pdf } from "@react-pdf/renderer";
 
-
 function RegisterFreelancerContainer() {
   const signatureRef = useRef({});
-  const history = useHistory()
+  const history = useHistory();
   const { signup } = authUser();
   const [imageData, setImageData] = useState("");
   const [step, setStep] = useState(1);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const [errorSignature, setErrorSignature] = useState(false);
   const [invited, setInvited] = useState(true);
 
@@ -30,7 +29,7 @@ function RegisterFreelancerContainer() {
     confirm: "",
     freelancerType: "",
   });
-  
+
   const [bankData, setBankData] = useState({
     bankName: "",
     accountName: "",
@@ -41,17 +40,16 @@ function RegisterFreelancerContainer() {
     // dni: "",
     address: "",
   });
-  
+
   const saveSignature = (signature) => {
     setImageData(signature);
   };
 
   const handleChange = (e) => {
-  
     if (step == 1)
-    setData({
-      ...data,
-      [e.target.name]: e.target.value,
+      setData({
+        ...data,
+        [e.target.name]: e.target.value,
       });
     if (step == 2)
       setBankData({
@@ -82,8 +80,8 @@ function RegisterFreelancerContainer() {
   };
 
   const handleSubmit = (e, div) => {
-    if(!imageData) return setErrorSignature(true)
-    setIsLoading(true)
+    if (!imageData) return setErrorSignature(true);
+    setIsLoading(true);
     const blob = pdf(
       <SignedDocument
         imageData={imageData}
@@ -93,51 +91,55 @@ function RegisterFreelancerContainer() {
         address={bankData.address}
         freelancerType={data.freelancerType}
       />
-    )
+    );
 
-    signup(data.email, data.password,data.name)
+    signup(data.email, data.password, data.name)
       .then((res) => res.user.uid)
       .then((uid) => {
-        blob.toBlob()
-        .then((file) => {
+        blob.toBlob().then((file) => {
           const storageRef = storage.ref();
           const pdfsRef = storageRef.child(`pdfs/${uid}.pdf`);
           pdfsRef.put(file).then(function (snapshot) {
             console.log("Uploaded a blob or file!");
           });
         });
-        db.collection("users").doc(uid).set({
-          name: data.name,
-          lastName: data.lastName,
-          freelancerType: data.freelancerType,
-          bankDetails: bankData,
-        })
-        .then(() => {
-          setIsLoading(false)
-          history.push('/freelancer')
-        })
+        db.collection("users")
+          .doc(uid)
+          .set({
+            name: data.name,
+            lastName: data.lastName,
+            freelancerType: data.freelancerType,
+            bankDetails: bankData,
+          })
+          .then(() => {
+            setIsLoading(false);
+            history.push("/freelancer");
+          });
       })
       .then(() => {
-        db.collection('invites').doc(`${data.email}`).delete()
-      })
+        db.collection("invites").doc(`${data.email}`).delete();
+      });
   };
-
 
   return (
     <div>
-      <div className='register-header'>
-      <img src={Logo} className='register-logo'/>
+      <div className="register-header">
+        <img src={Logo} className="register-logo" />
       </div>
-      <div className='register-container'>
-        {step !== 3 ? <div className='register-left'></div> : <Contract
-        show={true}
-        name={data.name}
-        lastName={data.lastName}
-        cuit={bankData.cuit}
-        address={bankData.address}
-        freelancerType={data.freelancerType}
-        />}
-        
+      <div className="register-container">
+        {step !== 3 ? (
+          <div className="register-left"></div>
+        ) : (
+          <Contract
+            show={true}
+            name={data.name}
+            lastName={data.lastName}
+            cuit={bankData.cuit}
+            address={bankData.address}
+            freelancerType={data.freelancerType}
+          />
+        )}
+
         <RegisterFreelancer
           handleChange={handleChange}
           handleSubmit={handleSubmit}

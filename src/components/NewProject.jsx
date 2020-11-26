@@ -1,6 +1,6 @@
 import React from "react";
 import Briefing from "../../views/briefing.svg";
-import { Modal, Button, Card, Form, Input, Select,DatePicker } from "antd";
+import { Modal, Button, Card, Form, Input, Select, DatePicker } from "antd";
 import { CloseCircleOutlined } from "@ant-design/icons";
 
 function NewProject({
@@ -31,7 +31,7 @@ function NewProject({
   return (
     <div className="Modal">
       <Card className="admin-cards" onClick={openModal}>
-        <img className="icono-sider" src={Briefing}/>
+        <img src={Briefing} className="icono-sider" />
         <div className="admin-button">
           <h4 style={{ color: "#9e39ff" }}>Crear proyecto nuevo</h4>
         </div>
@@ -76,7 +76,7 @@ function NewProject({
               },
             ]}
           >
-            <Input/>
+            <Input />
           </Form.Item>
 
           <h5 style={{ color: "grey", marginLeft: "95px" }}>DURACIÓN</h5>
@@ -91,7 +91,7 @@ function NewProject({
               },
             ]}
           >
-            <Input/>
+            <Input />
           </Form.Item>
 
           <h5 style={{ color: "grey", marginLeft: "95px" }}>FECHA DE INICIO</h5>
@@ -103,7 +103,7 @@ function NewProject({
               { required: true, message: "Por favor ingrese fecha de inicio" },
             ]}
           >
-            <Input/>
+            <Input />
             {/* <DatePicker /> */}
           </Form.Item>
 
