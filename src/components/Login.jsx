@@ -1,8 +1,8 @@
 import React from "react";
-import {Link} from 'react-router-dom'
-import { Form, Input, Button, Typography,Alert } from "antd";
+import { Link } from "react-router-dom";
+import { Form, Input, Button, Typography, Alert } from "antd";
 
-export default ({ handleInputChange, handleSubmit, data, form,isLogin }) => {
+export default ({ handleInputChange, handleSubmit, data, form, isLogin }) => {
   const layout = {
     labelCol: {
       span: 8,
@@ -21,10 +21,7 @@ export default ({ handleInputChange, handleSubmit, data, form,isLogin }) => {
 
   return (
     <div className='login-formContainer'>
-      <Form
-        onFinish={handleSubmit}
-        form={form}
-        className='refister-form'>
+      <Form onFinish={handleSubmit} form={form} className='refister-form'>
         <h1 style={{ color: "gray", textAlign: "center" }}>Login</h1>
         <Form.Item
           name='email'
@@ -40,6 +37,7 @@ export default ({ handleInputChange, handleSubmit, data, form,isLogin }) => {
             placeholder='Email'
             value={data.email}
             onChange={handleInputChange}
+            className='register-input'
           />
         </Form.Item>
 
@@ -65,15 +63,16 @@ export default ({ handleInputChange, handleSubmit, data, form,isLogin }) => {
             className='register-input'
           />
         </Form.Item>
-        {isLogin.errorCode && 
-        <Form.Item>
-        <Alert
-          message="Error"
-          description={isLogin.errorMessage}
-          type="error"
-          showIcon
-        />
-        </Form.Item>}
+        {isLogin.errorCode && (
+          <Form.Item>
+            <Alert
+              message='Error'
+              description={isLogin.errorMessage}
+              type='error'
+              showIcon
+            />
+          </Form.Item>
+        )}
         <Form.Item>
           <Button
             loading={isLogin.loading}
@@ -87,14 +86,11 @@ export default ({ handleInputChange, handleSubmit, data, form,isLogin }) => {
           </Button>
         </Form.Item>
         <div className='register-link'>
-            <Link to='/register' style={{ color: "gray" }}>
-              Don't have an account? Register
-            </Link>
+          <Link to='/register' style={{ color: "gray" }}>
+            Don't have an account? Register
+          </Link>
         </div>
       </Form>
-     
     </div>
   );
 };
-
-
