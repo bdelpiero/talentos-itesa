@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import InviteCard from "../components/InviteCard"
+import InviteCard from "../components/InviteCard";
 import { db } from "../../firebase/firebase";
 import { authUser } from "../../auth/auth";
 import CheckCircle from "../../views/check.svg";
+import axios from "axios";
 
-
-import {
-} from "@ant-design/icons";
+import {} from "@ant-design/icons";
 import { Modal, Button, Card } from "antd";
 
 function InviteContainer() {
@@ -25,8 +24,19 @@ function InviteContainer() {
   };
   function success() {
     closeModal();
-    db.collection("invites").doc(`${email}`).set({email: email})
-    .then(() => {
+    axios
+      .post(
+        "https://us-central1-talentos-itesa.cloudfunctions.net/api/invite",
+        { email }
+      )
+      .then(() => {
+        console.log("email sent correctly");
+      })
+      .catch(() => console.log("couldn't send email"));
+    db.collection("invites")
+      .doc(`${email}`)
+      .set({ email: email })
+      .then(() => {
         Modal.success({
           bodyStyle: {
             display: "flex",
@@ -35,7 +45,7 @@ function InviteContainer() {
             justifyContent: "center",
           },
           content: (
-            <Card className="invite_msg" onClick={openModal}>
+            <Card className='invite_msg' onClick={openModal}>
               <h1>¡Solicitud Enviada!</h1>
               <h4> El perfil podrá crear su cuenta desde su email</h4>
             </Card>
@@ -55,7 +65,7 @@ function InviteContainer() {
   }
   return (
     <InviteCard
-    className="modal-outside"
+      className='modal-outside'
       handleChange={handleChange}
       closeModal={closeModal}
       success={success}

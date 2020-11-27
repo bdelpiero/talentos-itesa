@@ -31,11 +31,6 @@ export default () => {
   };
 
   const handleSubmit = () => {
-    axios
-      .get("https://us-central1-talentos-itesa.cloudfunctions.net/api/todos")
-      .then((res) => {
-        console.log(res.data);
-      });
     setIsLogin({ loading: true });
     login(data.email, data.password);
     setData({ email: "", password: "" });
