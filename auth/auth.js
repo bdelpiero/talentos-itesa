@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { auth, db } from "../firebase/firebase";
 import { useHistory } from "react-router-dom"
 import { useRecoilState } from "recoil";
-import { atomLogin } from "../src/atoms";
+import { atomLogin,user } from "../src/atoms";
 
 
 const AuthContext = React.createContext();
@@ -12,7 +12,7 @@ export function authUser() {
 }
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useRecoilState(user);
   const [loading, setLoading] = useState(true);
   const [isLogin, setIsLogin] = useRecoilState(atomLogin);
   const history = useHistory();
@@ -52,11 +52,14 @@ export function AuthProvider({ children }) {
   }
 
   useEffect(() => {
+    console.log("entra al useefec")
     const unsubscribe = auth.onAuthStateChanged((user) => {
+      console.log("usefect user",user)
       if(user){
         return db.collection('users').doc(user.uid).get()
             .then(UserInfo=>{
               const User=UserInfo.data()
+              console.log("aqui esta el usuario", User)
               setLoading(false);
               setCurrentUser(User)
               setIsLogin({loadin:false})
@@ -71,7 +74,7 @@ export function AuthProvider({ children }) {
             })
       }else{
         setLoading(false);
-        setCurrentUser(user);
+        setCurrentUser({});
       }
     });
     return unsubscribe;
