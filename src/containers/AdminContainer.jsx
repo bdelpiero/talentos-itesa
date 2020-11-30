@@ -13,11 +13,15 @@ import ResumeContainer from "../containers/ResumeContainer";
 import PendingPayments from "../components/PendingPayments";
 import Title from "antd/lib/skeleton/Title";
 import Error404 from "../components/404";
-
+import Navbar from "../components/Navbar";
 function AdminContainer() {
   const { Header, Footer, Sider, Content } = Layout;
   const { logout, currentUser } = authUser();
   const history = useHistory();
+  const [sidebar, setSidebar] = useState(true);
+  const showSidebar = () => {
+    setSidebar(!sidebar);
+  };
 
   const handleLogout = () => {
     logout();
@@ -28,26 +32,19 @@ function AdminContainer() {
   return !currentUser ? (
     <Error404 />
   ) : (
-    <Layout>
-      <Sider className="sider-user">
-        <Sidebar handleLogout={handleLogout} />
+    <>
+      <Sider className={sidebar ? "sider-user" : "sider-user-inactive"}>
+        <Sidebar handleLogout={handleLogout} showSidebar={showSidebar} />
       </Sider>
+      <div className="layout-prueba">
+        <Navbar showSidebar={showSidebar}></Navbar>
 
-      <Layout>
-        <Header className="header-user">
+        <div className="header">
           <HeaderComponent />
-        </Header>
+        </div>
 
-        <Content className="content-user">
-          <Row
-            gutter={30}
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-around",
-            }}
-            className="content-row"
-          >
+        <div className="admin-container">
+          <Row gutter={30} className="content-row">
             <Col xs={24} sm={12} lg={6}>
               <InviteContainer />
             </Col>
@@ -61,13 +58,14 @@ function AdminContainer() {
               <ResumeContainer />
             </Col>
           </Row>
-
-          <Row className="content-row">
+        </div>
+        <div className="admin-container">
+          {/*  <Row className="content-row">
             <PendingPayments></PendingPayments>
-          </Row>
-        </Content>
-      </Layout>
-    </Layout>
+          </Row> */}
+        </div>
+      </div>
+    </>
   );
 }
 
