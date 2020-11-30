@@ -46,7 +46,6 @@ function NewProject({
         onOk={success}
         closeIcon={<CloseCircleOutlined className="close-button" />}
         bodyStyle={{ color: "#9e39ff" }}
-        destroyOnClose={true}
       >
         <div className="modal-style">
           <br />

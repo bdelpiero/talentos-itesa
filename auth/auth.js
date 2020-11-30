@@ -62,7 +62,8 @@ export function AuthProvider({ children }) {
               setIsLogin({loadin:false})
                 if(User){
                   if(User.isAdmin){
-                    history.push("/admin")
+                    // console.log("aca redirije")
+                    // history.push("/admin")
                   }else{
                     history.push("/freelancer")
                 }

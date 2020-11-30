@@ -112,8 +112,10 @@ function RegisterFreelancerContainer() {
             bankDetails: bankData,
           })
           .then(() => {
-            setIsLoading(false);
-            history.push("/freelancer");
+            setTimeout(()=> {
+              setIsLoading(false)
+              history.push("/freelancer")
+            }, 6000);
           });
       })
       .then(() => {

@@ -142,7 +142,6 @@ trabajando con  user Cards
   margin: auto; 
   height: 300px !important; 
   min-height: 100% !important;
-  padding: 20px;
 }
 
 .bodyCard div {
@@ -153,10 +152,10 @@ trabajando con  user Cards
   
 }
 
-
+/* 
 h1 {
   color: white;
-}
+} */
 
 #subtittle {
   font-family: "Open Sans Semibold", arial;

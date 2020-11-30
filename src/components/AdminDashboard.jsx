@@ -1,38 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Route, Link, useHistory } from "react-router-dom";
-import { Layout, Row, Col } from "antd";
+import { Layout, Row, Col, } from "antd";
 import { authUser } from "../../auth/auth";
 
 // COMPONENTS & CONTAINERS
-import InviteContainer from "./InviteContainer";
-import AddPaymentContainer from "./AddPaymentContainer";
-import NewProjectContainer from "./NewProjectContainer";
-import Sidebar from "../components/Sidebar";
-import HeaderComponent from "../components/Header";
+import InviteContainer from "../containers/InviteContainer";
+import AddPaymentContainer from "../containers/AddPaymentContainer";
+import NewProjectContainer from "../containers/NewProjectContainer";
+import Sidebar from "./Sidebar";
+import HeaderComponent from "./Header";
 import ResumeContainer from "../containers/ResumeContainer";
-import PendingPayments from "../components/PendingPayments";
+import PendingPayments from "./PendingPayments";
 import Title from "antd/lib/skeleton/Title";
-import Error404 from "../components/404";
 
-function AdminContainer() {
+
+function AdminDashboard({handleLogout}) {
   const { Header, Footer, Sider, Content } = Layout;
-  const { logout, currentUser } = authUser();
-  const history = useHistory();
 
-  const handleLogout = () => {
-    logout();
-    history.push("/");
-  };
-
-  console.log("userContainer", currentUser);
-  return !currentUser ? (
-    <Error404 />
-  ) : (
-    <Layout>
-      <Sider className="sider-user">
-        <Sidebar handleLogout={handleLogout} />
-      </Sider>
-
+  return(
       <Layout>
         <Header className="header-user">
           <HeaderComponent />
@@ -65,10 +50,11 @@ function AdminContainer() {
           <Row className="content-row">
             <PendingPayments></PendingPayments>
           </Row>
+
         </Content>
       </Layout>
-    </Layout>
+
   );
 }
 
-export default AdminContainer;
+export default AdminDashboard;

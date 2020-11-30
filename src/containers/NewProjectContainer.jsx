@@ -76,7 +76,6 @@ function NewProjectContainer() {
   return (
     <NewProject
       handleChangeName={handleChangeName}
-      // handleChangeStatus={handleChangeStatus}
       handleChangeStartDate={handleChangeStartDate}
       handleChangeEndDate={handleChangeEndDate}
       handleChangeTerm={handleChangeTerm}
