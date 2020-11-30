@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import InviteCard from "../components/InviteCard"
+import InviteCard from "../components/InviteCard";
 import { db } from "../../firebase/firebase";
 import { authUser } from "../../auth/auth";
 import CheckCircle from "../../views/check.svg";
 
-
-import {
-} from "@ant-design/icons";
+import {} from "@ant-design/icons";
 import { Modal, Button, Card } from "antd";
 
 function InviteContainer() {
@@ -25,8 +23,10 @@ function InviteContainer() {
   };
   function success() {
     closeModal();
-    db.collection("invites").doc(`${email}`).set({email: email})
-    .then(() => {
+    db.collection("invites")
+      .doc(`${email}`)
+      .set({ email: email })
+      .then(() => {
         Modal.success({
           bodyStyle: {
             display: "flex",
@@ -42,7 +42,7 @@ function InviteContainer() {
           ),
           centered: "true",
           okText: "VOLVER",
-          icon: <CheckCircle style={{ color: "#9e39ff" }} />,
+          icon: <img src={CheckCircle} style={{ color: "#9e39ff" }} />,
           okButtonProps: {
             style: {
               backgroundColor: "#9e39ff",
@@ -55,7 +55,7 @@ function InviteContainer() {
   }
   return (
     <InviteCard
-    className="modal-outside"
+      className="modal-outside"
       handleChange={handleChange}
       closeModal={closeModal}
       success={success}
