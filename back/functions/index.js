@@ -1,12 +1,6 @@
 const functions = require("firebase-functions");
-const express = require("express");
-const cors = require("cors");
-const { invite } = require("./APIs/invite");
-const app = express();
+const invitationEmail = require("./api/invitationEmail");
 
-// Automatically allow cross-origin requests
-app.use(cors({ origin: true }));
-app.get("/invite", invite);
-
-// app.listen(port)
-exports.api = functions.https.onRequest(app);
+exports.watchCreate = functions.firestore
+  .document("invites/{mail}")
+  .onCreate(invitationEmail);

@@ -24,15 +24,6 @@ function InviteContainer() {
   };
   function success() {
     closeModal();
-    axios
-      .post(
-        "https://us-central1-talentos-itesa.cloudfunctions.net/api/invite",
-        { email }
-      )
-      .then(() => {
-        console.log("email sent correctly");
-      })
-      .catch(() => console.log("couldn't send email"));
     db.collection("invites")
       .doc(`${email}`)
       .set({ email: email })

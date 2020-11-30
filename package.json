@@ -20,6 +20,7 @@
     "axios": "^0.21.0",
     "express": "^4.17.1",
     "firebase": "^8.0.2",
+    "firebase-functions": "^3.11.0",
     "html2pdf.js": "^0.9.2",
     "nodemailer": "^6.4.16",
     "react": "^17.0.1",
