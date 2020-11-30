@@ -7,12 +7,16 @@ import HeaderComponent from "../components/Header";
 import PagosFreelace from "../components/PagosFreelace";
 import CardsFreelancer from "../components/CardsFreelancer";
 import Error404 from '../components/404'
+import { useRecoilState } from "recoil";
+import { user } from "../atoms/index";
+
 
 
 const { Header, Footer, Sider, Content } = Layout;
 
 export default () => {
-  const { logout, currentUser } = authUser();
+  const [currentUser, setCurrentUser] = useRecoilState(user);
+  const { logout } = authUser();
   const history = useHistory();
 
   const handleLogout = () => {
