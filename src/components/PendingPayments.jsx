@@ -23,7 +23,7 @@ class PendingPayments extends Component {
         <div className="Pagos">
           <Title level={2}>Pagos</Title>
         </div>
-        <Card>
+        <Card className="card2">
           <List
             itemLayout="horizontal"
             dataSource={data}

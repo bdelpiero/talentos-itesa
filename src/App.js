@@ -9,12 +9,14 @@ import LoginContainer from "./containers/LoginContainer";
 import AdminContainer1 from "./components/AdminContainer1";
 import PagosFreelace from "./components/PagosFreelace";
 import UserContainer from "./containers/UserContainer";
+import ForgotPassword from "./containers/ForgotPassContainer";
 
 function App() {
   return (
     <AuthProvider>
       <Switch>
         <Route exact path="/login" component={LoginContainer} />
+        <Route exact path="/forgotpassword" component={ForgotPassword} />
         <Route exact path="/freelancer" component={UserContainer} />
         <Route exact path="/admin" component={AdminContainer1} />
         <Route exact path="/pruebacard2" component={PagosFreelace} />

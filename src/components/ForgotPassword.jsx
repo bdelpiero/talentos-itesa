@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from 'react-router-dom'
 import { Form, Input, Button, Typography,Alert } from "antd";
 
-export default ({ handleInputChange, handleSubmit, data, form,isLogin }) => {
+export default ({ handleInputChange, handleSubmit, data, form,isLogin, message }) => {
   const layout = {
     labelCol: {
       span: 8,
@@ -25,7 +25,7 @@ export default ({ handleInputChange, handleSubmit, data, form,isLogin }) => {
         onFinish={handleSubmit}
         form={form}
         className='refister-form'>
-        <h1 style={{ color: "gray", textAlign: "center" }}>Login</h1>
+        <h1 style={{ color: "gray", textAlign: "center" }}>Reset Password</h1>         
         <Form.Item
           name='email'
           rules={[
@@ -42,29 +42,6 @@ export default ({ handleInputChange, handleSubmit, data, form,isLogin }) => {
             onChange={handleInputChange}
           />
         </Form.Item>
-
-        <Form.Item
-          name='password'
-          rules={[
-            {
-              required: true,
-              message: "Please input your password!",
-            },
-          ]}>
-          <Input.Password
-            name='password'
-            placeholder='Password'
-            value={data.password}
-            onChange={handleInputChange}
-            bordered={false}
-            style={{
-              borderBottomWidth: 0.3,
-              borderBottomStyle: "solid",
-              borderBottomColor: "lightgray",
-            }}
-            className='register-input'
-          />
-        </Form.Item>
         {isLogin.errorCode && 
         <Form.Item>
         <Alert
@@ -79,22 +56,22 @@ export default ({ handleInputChange, handleSubmit, data, form,isLogin }) => {
           <Button
             loading={isLogin.loading}
             style={{ backgroundColor: "#a77ffa", border: 0 }}
-            shape='round'
+            shape='round'          
             block
             type='primary'
             htmlType='submit'
             className='register-button'>
-            LOGIN
-          </Button>
+            Reset Password
+          </Button>          
         </Form.Item>
         <div className='register-link'>
             <Link to='/register' style={{ color: "gray" }}>
               Don't have an account? Register
             </Link>   
          </div>
-       <div className='register-link'>
-       <Link to='/forgotPassword' style={{ color: "gray" }}>
-            Forgot Password?
+       <div className='register-link' >
+       <Link to='/login' style={{ color: "gray" }}>
+            Login?
             </Link>
        </div>
       </Form>

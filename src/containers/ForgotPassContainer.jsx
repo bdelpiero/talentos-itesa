@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Login from "../components/Login";
+import ForgotPassword from "../components/ForgotPassword";
 import { authUser } from "../../auth/auth";
 import Logo from "../../views/logo-itesa.svg";
 import { useRecoilState } from "recoil";
@@ -11,11 +11,14 @@ import { Form } from "antd";
 export default () => {
   const [data, setData] = useState({
     email: "",
-    password: "",
   });
+  const [error, setError] = useState("")
   const [form] = Form.useForm();
   const [isLogin, setIsLogin] = useRecoilState(atomLogin);
   const { login } = authUser();
+  const {resetPassword }=authUser();
+  const [message, setMessage] = useState("")
+  
 
   const handleInputChange = (e) => {
     setData({
@@ -29,10 +32,12 @@ export default () => {
     });
   };
 
-  const handleSubmit = () => {
-    setIsLogin({ loading: true });
-    login(data.email, data.password);
-    setData({ email: "", password: "" });
+
+  const handleSubmit = () => {  
+    setMessage("")  
+    resetPassword(data.email);
+    setData({ email: ""});
+    setMessage("Check your inbox for further instructions")
     form.resetFields();
   };
 
@@ -43,12 +48,13 @@ export default () => {
       </div>
       <div className="login-container">
         <div className="register-left"></div>
-        <Login
+        <ForgotPassword
           handleInputChange={handleInputChange}
           handleSubmit={handleSubmit}
           data={data}
           form={form}
           isLogin={isLogin}
+          message={message}
         />
       </div>
     </div>
