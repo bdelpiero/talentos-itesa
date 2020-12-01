@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import RegisterFreelancer from "../components/RegisterFreelancer";
 import { db } from "../../firebase/firebase";
-import { authUser } from "../../auth/auth";
+import { authUser } from "../../firebase/auth/auth";
 import { storage } from "../../firebase/firebase";
 
 // UTILS
