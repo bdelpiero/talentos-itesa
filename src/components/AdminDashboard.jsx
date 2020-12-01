@@ -15,14 +15,14 @@ import Navbar from "../components/Navbar";
 
 
 
-function AdminDashboard({logout,history}) {
+function AdminDashboard({handleLogout}) {
   const { Content } = Layout;
 
   const [item, setItem] = React.useState(1);
 
   return (
     <Layout>
-      <Sidebar setItem={setItem} logout={logout}       history={history}/>
+      <Sidebar setItem={setItem} handleLogout={handleLogout} />
       <Layout>
         <Navbar />
         <HeaderComponent />
