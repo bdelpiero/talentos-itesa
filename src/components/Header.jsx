@@ -1,6 +1,6 @@
 import React,{ useState} from "react";
 import Logo from "../../views/logo-itesa.svg";
-import { authUser } from "../../auth/auth";
+import { authUser } from "../../firebase/auth";
 
 import { UserOutlined } from "@ant-design/icons";
 import { Row, Col, Typography, Avatar } from "antd";

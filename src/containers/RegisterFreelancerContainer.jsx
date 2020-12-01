@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import RegisterFreelancer from "../components/RegisterFreelancer";
 import { db } from "../../firebase/firebase";
-import { authUser } from "../../auth/auth";
+import { authUser } from "../../firebase/auth";
 import { storage } from "../../firebase/firebase";
 
 // UTILS
@@ -14,7 +14,7 @@ import { pdf } from "@react-pdf/renderer";
 function RegisterFreelancerContainer() {
   const signatureRef = useRef({});
   const history = useHistory();
-  const { signup } = authUser();
+  const { signup, setCurrentUser } = authUser();
   const [imageData, setImageData] = useState("");
   const [step, setStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
@@ -112,10 +112,12 @@ function RegisterFreelancerContainer() {
             bankDetails: bankData,
           })
           .then(() => {
-            setTimeout(()=> {
-              setIsLoading(false)
-              history.push("/freelancer")
-            }, 6000);
+            // db.once("value")
+            //   .doc(uid)
+            //   .get()
+            //   .then((user) => console.log(user.data()));
+            setIsLoading(false);
+            history.push("/freelancer");
           });
       })
       .then(() => {
@@ -125,12 +127,12 @@ function RegisterFreelancerContainer() {
 
   return (
     <div>
-      <div className="register-header">
-        <img src={Logo} className="register-logo" />
+      <div className='register-header'>
+        <img src={Logo} className='register-logo' />
       </div>
-      <div className="register-container">
+      <div className='register-container'>
         {step !== 3 ? (
-          <div className="register-left"></div>
+          <div className='register-left'></div>
         ) : (
           <Contract
             show={true}

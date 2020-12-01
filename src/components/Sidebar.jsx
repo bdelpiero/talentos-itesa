@@ -25,7 +25,7 @@ export default ({ logout, history }) => {
           if(key == 1) history.push('/admin')
           if(key == 2) history.push('/admin/projects')
           // if(key == 3) history.push('/admin/freelancers')
-          // if(key == 4) logout().then(()=> history.push('/login'))
+          if(key == 4) logout().then(()=> history.push('/login'))
         }}
         >
           <Menu.Item key="1" className='sider-cards'>

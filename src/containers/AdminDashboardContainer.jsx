@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory, Route, Switch, useRouteMatch} from "react-router-dom";
-import { authUser } from "../../auth/auth";
+import { authUser } from "../../firebase/auth";
 
 // SYTYLES
 import { Layout } from "antd";
@@ -23,9 +23,9 @@ function AdminDashboardContainer() {
     <Error404 />
   ) : (
       <Layout>
-        <Sidebar history={history}/>
+        <Sidebar logout={logout} history={history}/>
         <Layout>
-          <Navbar logout={logout} />
+          <Navbar/>
           <Header className="header-user">
             <HeaderComponent />
           </Header>

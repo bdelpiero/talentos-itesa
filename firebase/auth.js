@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
-import { auth, db } from "../firebase/firebase";
-import { useHistory } from "react-router-dom"
+import { auth, db } from './firebase';
+import { useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { atomLogin,user } from "../src/atoms";
-
+import { atomLogin, user } from "../src/atoms/index";
 
 const AuthContext = React.createContext();
 
@@ -22,17 +21,17 @@ export function AuthProvider({ children }) {
   }
 
   function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password)
-    .catch(function(error) {
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      setIsLogin({
-        loadin:false,
-        errorCode,
-        errorMessage
-      })
-    });
-
+    return auth
+      .signInWithEmailAndPassword(email, password)
+      .catch(function (error) {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        setIsLogin({
+          loadin: false,
+          errorCode,
+          errorMessage,
+        });
+      });
   }
 
   function logout() {
@@ -53,44 +52,45 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      if(user){
+      if (user) {
         // se guarda una referencia al usuario
-        const userRef=db.collection('users').doc(user.uid)
+        const userRef = db.collection("users").doc(user.uid);
         //se establece un observer que esta atento a los cambios en la base de datos
-        let observer = userRef.onSnapshot(docSnapshot => {
-          console.log(`cambios recividos`,docSnapshot.data());
-          //se setea el usuario nuevamente con los cambios
-          setCurrentUser(docSnapshot.data())
-        }, err => {
-          console.log(`Encountered error: ${err}`);
-        });
-        return userRef.get()
-            .then(UserInfo=>{
-              const User=UserInfo.data()
-              setLoading(false);
-              setCurrentUser(User)
-              setIsLogin({loadin:false})
-                if(User){
-                  if(User.isAdmin){
-                    // console.log("aca redirije")
-                    // history.push("/admin")
-                  }else{
-                    history.push("/freelancer")
-                }
-                }             
-              
-            }).catch(err => {
-              console.log('Error getting document', err);
-            })
-      }else{
+        let observer = userRef.onSnapshot(
+          (docSnapshot) => {
+            console.log(`cambios recividos`, docSnapshot.data());
+            //se setea el usuario nuevamente con los cambios
+            setCurrentUser(docSnapshot.data());
+          },
+          (err) => {
+            console.log(`Encountered error: ${err}`);
+          }
+        );
+        return userRef
+          .get()
+          .then((UserInfo) => {
+            const User = UserInfo.data();
+            setLoading(false);
+            setCurrentUser(User);
+            setIsLogin({ loadin: false });
+            if (User) {
+              if (User.isAdmin) {
+                history.push("/admin");
+              } else {
+                history.push("/freelancer");
+              }
+            }
+          })
+          .catch((err) => {
+            console.log("Error getting document", err);
+          });
+      } else {
         setLoading(false);
         setCurrentUser({});
       }
     });
     return unsubscribe;
   }, []);
-
-
 
   const value = {
     currentUser,

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Route, Link, useHistory } from "react-router-dom";
 import { Layout, Row, Col, } from "antd";
-import { authUser } from "../../auth/auth";
+import { authUser } from "../../firebase/auth";
 
 // COMPONENTS & CONTAINERS
 import InviteContainer from "../containers/InviteContainer";
