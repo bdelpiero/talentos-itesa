@@ -30,8 +30,8 @@ export default () => {
 // useEffect esta atento a los cambios en el usuario para renderizar el componente nuevamente
 
   useEffect(() => {
-    if(currentUser.invited){
-      return db.collection('projects').doc(currentUser.invited).get()
+    if(currentUser.projectInvited){
+      return db.collection('projects').doc(currentUser.projectInvited).get()
     .then(project => {
      
     console.log('Document data:', project.data());
