@@ -12,29 +12,35 @@ export default ({ handleLogout }) => {
   return (
     <>
       <Row justify="end" className="sider-user-row">
-        <div className="logout">
-          <Card className="card-sider">
-            <HomeOutlined className="icono-sider" />
-            <h3>Home</h3>
-          </Card>
-
-          <Link to="/admin/projects">
-            <Card className="card-sider">
-              <BarChartOutlined className="icono-sider" />
-              <h3>Proyectos</h3>
+        <div className="sidebar-row">
+          <Link to="/admin">
+            <Card hoverable className="card-sider">
+              <HomeOutlined className="icono-sider" />
+              <br/>
+              Home
             </Card>
           </Link>
 
-          <Card className="card-sider">
+          <Link to="/admin/projects">
+            <Card  hoverable className="card-sider">
+              <BarChartOutlined className="icono-sider" />
+              <br/>
+              Proyectos
+            </Card>
+          </Link>
+
+          <Card hoverable className="card-sider">
             <TeamOutlined className="icono-sider" />
-            <h3>Perfiles</h3>
+            <br/>
+            Perfiles
           </Card>
         </div>
 
-        <Row className="logout" align="bottom">
-          <Card className="card-sider" onClick={handleLogout}>
+        <Row className="sidebar-row" align="bottom">
+          <Card hoverable className="card-sider" onClick={handleLogout}>
             <LogoutOutlined className="icono-sider" />
-            <h3>Logout</h3>
+            <br/>
+            Logout
           </Card>
         </Row>
       </Row>

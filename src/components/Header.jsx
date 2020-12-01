@@ -1,5 +1,5 @@
 import React,{ useState} from "react";
-import logo from "../../views/logo-itesa.svg";
+import Logo from "../../views/logo-itesa.svg";
 import { authUser } from "../../auth/auth";
 
 import { UserOutlined } from "@ant-design/icons";
@@ -12,7 +12,7 @@ export default () => {
   return (
     <>
       <Row align='top' justify='end' className='mini-logo'>
-      <img src={logo}  className='logo'/>
+        <img src={Logo}  className='logo'/>
       </Row>
 
       <Row justify='space-between' align='top'>

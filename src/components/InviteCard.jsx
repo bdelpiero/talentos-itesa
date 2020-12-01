@@ -5,11 +5,12 @@ import { Modal, Button, Card, Input, Form } from "antd";
 function InviteCard({ handleChange, closeModal, success, openModal, modal }) {
   return (
     <div className="Modal">
-      <Card className="admin-cards" onClick={openModal}>
+      <Card 
+      className="admin-cards" 
+      style={{background: 'whitesmoke', border: 'none'}} 
+      onClick={openModal}>
         <img src={UserLogo} className="icono-sider" />
-        <div className="admin-button">
-          <h4 style={{ color: "#9e39ff" }}>Invitar perfiles</h4>
-        </div>
+        <p className='invite-button-text'> Invitar perfiles </p>
       </Card>
 
       <Modal

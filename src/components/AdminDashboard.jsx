@@ -19,38 +19,16 @@ function AdminDashboard({handleLogout}) {
 
   return(
       <Layout>
-        <Header className="header-user">
-          <HeaderComponent />
-        </Header>
-
         <Content className="content-user">
-          <Row
-            gutter={30}
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "space-around",
-            }}
-            className="content-row"
-          >
-            <Col xs={24} sm={12} lg={6}>
+          <Row className='admin-row'>
               <InviteContainer />
-            </Col>
-            <Col xs={24} sm={12} lg={6}>
               <NewProjectContainer />
-            </Col>
-            <Col xs={24} sm={12} lg={6}>
               <AddPaymentContainer />
-            </Col>
-            <Col xs={24} sm={12} lg={6}>
               <ResumeContainer />
-            </Col>
           </Row>
-
-          <Row className="content-row">
-            <PendingPayments></PendingPayments>
+          <Row>
+            <PendingPayments/>
           </Row>
-
         </Content>
       </Layout>
 

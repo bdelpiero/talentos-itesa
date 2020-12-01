@@ -7,7 +7,7 @@ trabajando con sider user
   min-width: 30vh !important;
   color: rgb(161, 148, 148);
   background-color: whitesmoke !important;
-  box-shadow: 3px 0px 5px -3px rgba(0, 0, 0, 0.75);
+  box-shadow: 3px 0px 5px -3px #636363
 }
 
 .sider-user-row {
@@ -15,38 +15,36 @@ trabajando con sider user
   width: 100%;
 }
 
-.logout {
+.sidebar-row {
   width: 100%;
 }
 
 .card-sider {
   margin: 10px auto !important;
   width: 80%;
-  height: 150px;
   background-color: whitesmoke !important;
   border: none !important;
-  border-radius: 5% !important;
+  border-radius: 3% !important;
   text-align: center !important;
+  font-size: 1rem;
 }
 
-.card-sider:hover {
-  box-shadow: -1px 3px 26px -6px rgba(0, 0, 0, 0.75);
+.card-sider:active svg {
+  color: #9e39ff;
 }
 
 .card-sider:active {
-  box-shadow: inset -1px 3px 26px -6px rgba(0, 0, 0, 0.75);
+  color: #9e39ff;
 }
+
 
 .icono-sider svg {
   display: block;
-  color: grey;
+  color: #636363;
   height: 3em;
   width: 3em;
 }
 
-.card-sider svg:hover {
-  color: rgb(228, 9, 217);
-}
 
 /* ----------------------
 trabajando con header user
@@ -82,24 +80,65 @@ trabajando con header user
 }
 
 /* ----------------------
+    RESUMEN COMPONENT
+---------------------- */
+
+.resumen-card .ant-card {
+  padding: 1.5rem;
+  margin: 0.5rem;
+  background-color: white;
+  background: white;
+}
+
+.resumen-title {
+  font-size: 1rem;
+  margin: 0;
+  color: #9e39ff;
+}
+
+.resumen-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 0px
+}
+
+.resumen-card-title {
+  font-size: 1.5rem;
+  margin: 0;
+  text-align: center;
+}
+
+.resumen-text {
+  font-size: 0.7rem;
+  margin: 0.3rem;
+  text-align: center;
+}
+
+.resumen-recordatorio {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ----------------------
 trabajando con content user
 ---------------------- */
 
 .content-user {
   height: 75vh;
   color: black;
-  width: 100%;
+  width: 95%;
   background-color: whitesmoke !important;
+  margin: 0 auto
 }
-.content-row {
-  height: 48%;
-  margin: 7px;
-}
+
 
 .site-layout-content {
   min-height: 530px;
   padding: 24px;
-  background: #fff;
+  background-color: whitesmoke !important;
 }
 #components-layout-demo-top .logo {
   float: left;
@@ -152,11 +191,6 @@ trabajando con  user Cards
   
 }
 
-/* 
-h1 {
-  color: white;
-} */
-
 #subtittle {
   font-family: "Open Sans Semibold", arial;
   color: #9e39ff;
@@ -179,81 +213,29 @@ h1 {
   text-align: center;
 }
 
-/* ----------------------
-trabajando con Pagos Freelance
----------------------- */
+/* --------------------------------------
+    FREELANCE PAYMENTS (ADMIN DASHBOARD)
+----------------------------------------- */
 
-.bodyCard2 {
-  font-family: "arial";
-  color: #0b2257;
-  font-size: 15px;
-  width: 95%;
-  border-radius: 42px;
-  height: 20% !important;
-  margin: auto;
-}
-.ant-card-body {
-  padding: 40px;
-}
-.space-align-container {
-  align-items: flex-start;
-  flex-wrap: wrap;
-  width: 90%;
-  height: 80%;
-}
-.space-align-block {
-  margin: 8% 4%;
-  padding: 4%;
-  flex: none;
-}
-.space-align-block .mock-block {
-  display: inline-block;
-  padding: 32px 8px 16px;
-  background: rgba(150, 150, 150, 0.2);
+.list-description {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
-
-.text2 {
-  font-family: "Open Sans Semibold";
-  color: black;
-  font-size: 75%;
-  font-stretch: expanded;
-}
-.textPagos {
-  font-family: "Open Sans Semibold";
-  color: #8990ad;
-}
-.Pagos{
-  text-align: left;
-  width: 95% !important;
-}
-
-.subtittle2 {
-  font-family: "Open Sans Semibold", arial;
-  color: #9e39ff;
-  font-size: 90%;
-}
-
-.buttonPagos2 {
-  background-color: #9e39ff;
-  color: white;
-  float: right;
-  align-content: center;
-  right: 0px;
-  width: 100%;
-  height: 50%;
+.list-button-payments {
   text-align: center;
+  width: 20%;
+  height: 100%;
+  color: white;
+  background-color: #9e39ff;
 }
 
-#imgPagos {
-  border-radius: 50%;
-  height: 80px;
-  width: 90px;
+.avatar-payments {
+  height: 3rem;
+  width: 3rem;
 }
 
-.titlePagos {
-  font-size: 30px;
-}
 /* ----------------------
 register freelancer
 ---------------------- */
@@ -364,34 +346,42 @@ componente de error
 ------------------- */
 
 .botonauth {
-  background-color: rgb(228, 9, 217) !important;
+  background-color: #9e39ff !important;
   border: 0;
 }
 /* ----------------------
 Trabajando con Admin Cards/DashBoard
 ---------------------- */
-.admin-cards {
+.admin-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.admin-cards .ant-card-body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 220px;
-  margin: 10px !important;
-  height: 180px;
-  background-color: whitesmoke !important;
-  border: none !important;
-  border-radius: 20% !important;
+  justify-content: space-around;
+  width: 14rem;
+  height: 11rem;
+  background-color: whitesmoke;
+  background: whitesmoke;
+  border-radius: 25% !important;
   text-align: center !important;
-  box-shadow: -1px 3px 26px -6px rgba(0, 0, 0, 0.75);
+  box-shadow: -1px 3px 15px -6px gray;
+  color: #9e39ff;
+  padding: 0;
 }
+
+.invite-button-text {
+  margin: 0
+}
+
 .admin-cards svg:hover {
-  color: rgb(228, 9, 217);
+  color: #9e39ff;
 }
-/* .admin-cards:hover {
-  box-shadow: -1px 3px 26px -6px rgba(0, 0, 0, 0.75);
-} */
-.admin-cards:active {
-  box-shadow: inset -1px 3px 26px -6px rgba(0, 0, 0, 0.75);
-}
+
 
 .invite_msg {
   margin: 10px !important;
@@ -412,7 +402,7 @@ Trabajando con Admin Cards/DashBoard
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  box-shadow: 1px 2px 11px -5px rgba(0, 0, 0, 0.75);
+  
 }
 
 .admin-button h4 {

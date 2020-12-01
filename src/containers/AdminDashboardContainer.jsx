@@ -15,7 +15,7 @@ import Error404 from "../components/404";
 import AdminDashboard from "../components/AdminDashboard";
 import Sidebar from "../components/Sidebar";
 import AllProjectsContainer from "../containers/AllProjectsContainer";
-import Header from "../components/Header"
+import HeaderComponent from "../components/Header"
 
 function AdminDashboardContainer() {
   const { logout, currentUser } = authUser();
@@ -29,22 +29,25 @@ function AdminDashboardContainer() {
   const { Header, Footer, Sider, Content } = Layout;
 
   let { path } = useRouteMatch();
-  console.log("---esto es path -----", path);
   return !currentUser ? (
     <Error404 />
   ) : (
-    <>
+    <Layout>
+      <Sider className="sider-user">
+        <Sidebar handleLogout={handleLogout} />
+      </Sider>
       <Layout>
-        <Sider className="sider-user">
-          <Sidebar handleLogout={handleLogout} />
-        </Sider>
-
-        <Switch>
-          <Route path={`${path}/projects`} component={AllProjectsContainer} />
-          <Route path={`${path}`} component={AdminDashboard} />
-        </Switch>
+        <Header className="header-user">
+          <HeaderComponent/>
+        </Header>
+        <Content>
+          <Switch>
+            <Route path={`${path}/projects`} component={AllProjectsContainer} />
+            <Route path={`${path}`} component={AdminDashboard} />
+          </Switch>
+        </Content>
       </Layout>
-    </>
+    </Layout>
   );
 }
 

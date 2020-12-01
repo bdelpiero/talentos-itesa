@@ -13,9 +13,7 @@ function AllProjectsContainer() {
       });
   }, []);
 
-  return <AllProjects 
-  projects={projects}
-  />;
+  return <AllProjects projects={projects} />;
 }
 
 export default AllProjectsContainer;
