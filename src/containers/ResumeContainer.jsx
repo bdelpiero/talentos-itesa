@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Resume from "../components/Resume";
-import { authUser } from "../../firebase/auth/auth";
 import { Form } from "antd";
 import { Link, useHistory } from "react-router-dom";
 

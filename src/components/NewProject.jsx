@@ -30,7 +30,11 @@ function NewProject({
 
   return (
     <div className="Modal">
-      <Card className="admin-cards" onClick={openModal}>
+      <Card 
+      className="admin-cards" 
+      style={{background: 'whitesmoke', border: 'none'}} 
+      onClick={openModal}
+      >
         <img src={Briefing} className="icono-sider" />
         <div className="admin-button">
           <h4 style={{ color: "#9e39ff" }}>Crear proyecto nuevo</h4>
@@ -46,7 +50,6 @@ function NewProject({
         onOk={success}
         closeIcon={<CloseCircleOutlined className="close-button" />}
         bodyStyle={{ color: "#9e39ff" }}
-        destroyOnClose={true}
       >
         <div className="modal-style">
           <br />

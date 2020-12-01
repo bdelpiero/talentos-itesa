@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { authUser } from "../../firebase/auth/auth";
+import { authUser } from "../../firebase/auth";
 import { Layout, Row, Col } from "antd";
 import Sidebar from "../components/Sidebar";
 import HeaderComponent from "../components/Header";

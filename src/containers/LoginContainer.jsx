@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Login from "../components/Login";
-import { authUser } from "../../firebase/auth/auth";
+import { authUser } from "../../firebase/auth";
 import Logo from "../../views/logo-itesa.svg";
 import { useRecoilState } from "recoil";
 import { atomLogin } from "../atoms";

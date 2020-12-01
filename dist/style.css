@@ -1,68 +1,100 @@
 /* ----------------------
-trabajando con sider user
+    SIDEBAR + NAVBAR
 ---------------------- */
 
-.sider-user {
+@media (min-width: 1023px) {
+  .navbar-style {
+    display: none;
+  }
+  .mini-logo {
+    height: 25%;
+    line-height: 20px !important;
+    margin-top: 4px;
+    margin-bottom: 2px;
+  }
+}
+
+@media (max-width: 991px) {
+  .navbar-style {
+    display: flex;
+    width: 100%;
+    height: auto;
+    background-color: #9e39ff;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .logo-mobile {
+    margin: 0.8rem;
+    justify-content: end;
+    float: right;
+  }
+  .menu-bars {
+    align-items: center;
+    margin: 0.8rem;
+    font-size: 1.8rem;
+    background: none;
+    color: black;
+  }
+  .mini-logo {
+    display:none
+  }
+}
+
+.sider-admin {
   height: 100vh;
-  min-width: 30vh !important;
   color: rgb(161, 148, 148);
   background-color: whitesmoke !important;
-  box-shadow: 3px 0px 5px -3px rgba(0, 0, 0, 0.75);
-}
-
-.sider-user-row {
-  height: 100vh;
-  width: 100%;
-}
-
-.logout {
-  width: 100%;
-}
-
-.card-sider {
-  margin: 10px auto !important;
-  width: 90%;
-  height: 150px;
-  background-color: whitesmoke !important;
-  border: none !important;
-  border-radius: 5% !important;
-  text-align: center !important;
-}
-
-.card-sider:hover {
-  box-shadow: -1px 3px 26px -6px rgba(0, 0, 0, 0.75);
-}
-
-.card-sider:active {
-  box-shadow: inset -1px 3px 26px -6px rgba(0, 0, 0, 0.75);
 }
 
 .icono-sider svg {
   display: block;
-  color: grey;
-  height: 4em;
-  width: 4em;
+  color: #636363;
+  height: 3em;
+  width: 3em;
 }
 
-.card-sider svg:hover {
-  color: rgb(228, 9, 217);
+.sider-cards {
+  color: #636363;
+  padding: 5rem !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+  background-color: whitesmoke !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.sider-cards:hover {
+  color: #9e39ff;
+}
+
+.text-sider-buttons {
+  margin: 0 auto !important;
+}
+
+.icon-sider-buttons {
+  margin: 0 auto !important;
+  font-size: 3rem !important;
+}
+
+.ant-menu-item-selected {
+  color: #9e39ff !important;
+}
+
+.ant-menu .ant-menu-item::after {
+  color: #9e39ff !important;
+  border-right: 3px solid  #9e39ff !important
 }
 
 /* ----------------------
-trabajando con header user
+        HEADER
 ---------------------- */
 
 .ant-layout-header {
   color: black;
   background-color: whitesmoke !important;
   height: 22vh !important;
-}
-
-.mini-logo {
-  height: 25%;
-  line-height: 20px !important;
-  margin-top: 4px;
-  margin-bottom: 2px;
 }
 
 .ant-avatar {
@@ -82,24 +114,65 @@ trabajando con header user
 }
 
 /* ----------------------
+    RESUMEN COMPONENT
+---------------------- */
+
+.resumen-card .ant-card {
+  padding: 1.5rem;
+  margin: 0.5rem;
+  background-color: white;
+  background: white;
+}
+
+.resumen-title {
+  font-size: 1rem;
+  margin: 0;
+  color: #9e39ff;
+}
+
+.resumen-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 0px
+}
+
+.resumen-card-title {
+  font-size: 1.5rem;
+  margin: 0;
+  text-align: center;
+}
+
+.resumen-text {
+  font-size: 0.7rem;
+  margin: 0.3rem;
+  text-align: center;
+}
+
+.resumen-recordatorio {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ----------------------
 trabajando con content user
 ---------------------- */
 
 .content-user {
   height: 75vh;
   color: black;
-  width: 100%;
+  width: 95%;
   background-color: whitesmoke !important;
+  margin: 0 auto
 }
-.content-row {
-  height: 60%;
-  margin: 7px;
-}
+
 
 .site-layout-content {
   min-height: 530px;
   padding: 24px;
-  background: #fff;
+  background-color: whitesmoke !important;
 }
 #components-layout-demo-top .logo {
   float: left;
@@ -137,7 +210,7 @@ trabajando con  user Cards
   font-family: "arial";
   color: #0b2257;
   font-size: 100%;  
-  width: 300px;
+  width: 400px;
   border-radius:42px;  
   margin: auto; 
   height: 300px !important; 
@@ -150,11 +223,6 @@ trabajando con  user Cards
   height: 90% !important; 
   box-sizing: content-box;
   
-}
-
-
-h1 {
-  color: white;
 }
 
 #subtittle {
@@ -179,81 +247,29 @@ h1 {
   text-align: center;
 }
 
-/* ----------------------
-trabajando con Pagos Freelance
----------------------- */
+/* --------------------------------------
+    FREELANCE PAYMENTS (ADMIN DASHBOARD)
+----------------------------------------- */
 
-.bodyCard2 {
-  font-family: "arial";
-  color: #0b2257;
-  font-size: 15px;
-  width: 95%;
-  border-radius: 42px;
-  height: 20% !important;
-  margin: auto;
-}
-.ant-card-body {
-  padding: 10px;
-}
-.space-align-container {
-  align-items: flex-start;
-  flex-wrap: wrap;
-  width: 90%;
-  height: 80%;
-}
-.space-align-block {
-  margin: 8% 4%;
-  padding: 4%;
-  flex: none;
-}
-.space-align-block .mock-block {
-  display: inline-block;
-  padding: 32px 8px 16px;
-  background: rgba(150, 150, 150, 0.2);
+.list-description {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
-
-.text2 {
-  font-family: "Open Sans Semibold";
-  color: black;
-  font-size: 75%;
-  font-stretch: expanded;
-}
-.textPagos {
-  font-family: "Open Sans Semibold";
-  color: #8990ad;
-}
-.Pagos{
-  text-align: left;
-  width: 95% !important;
-}
-
-.subtittle2 {
-  font-family: "Open Sans Semibold", arial;
-  color: #9e39ff;
-  font-size: 90%;
-}
-
-.buttonPagos2 {
-  background-color: #9e39ff;
-  color: white;
-  float: right;
-  align-content: center;
-  right: 0px;
-  width: 100%;
-  height: 50%;
+.list-button-payments {
   text-align: center;
+  width: 20%;
+  height: 100%;
+  color: white;
+  background-color: #9e39ff;
 }
 
-#imgPagos {
-  border-radius: 50%;
-  height: 80px;
-  width: 90px;
+.avatar-payments {
+  height: 3rem;
+  width: 3rem;
 }
 
-.titlePagos {
-  font-size: 30px;
-}
 /* ----------------------
 register freelancer
 ---------------------- */
@@ -364,34 +380,42 @@ componente de error
 ------------------- */
 
 .botonauth {
-  background-color: rgb(228, 9, 217) !important;
+  background-color: #9e39ff !important;
   border: 0;
 }
 /* ----------------------
 Trabajando con Admin Cards/DashBoard
 ---------------------- */
-.admin-cards {
+.admin-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.admin-cards .ant-card-body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 220px;
-  margin: 10px !important;
-  height: 180px;
-  background-color: whitesmoke !important;
-  border: none !important;
-  border-radius: 20% !important;
+  justify-content: space-around;
+  width: 14rem;
+  height: 11rem;
+  background-color: whitesmoke;
+  background: whitesmoke;
+  border-radius: 25% !important;
   text-align: center !important;
-  box-shadow: -1px 3px 26px -6px rgba(0, 0, 0, 0.75);
+  box-shadow: -1px 3px 15px -6px gray;
+  color: #9e39ff;
+  padding: 0;
 }
-.admin-cards svg:hover {
-  color: rgb(228, 9, 217);
+
+.invite-button-text {
+  margin: 0
 }
-/* .admin-cards:hover {
-  box-shadow: -1px 3px 26px -6px rgba(0, 0, 0, 0.75);
-} */
-.admin-cards:active {
-  box-shadow: inset -1px 3px 26px -6px rgba(0, 0, 0, 0.75);
+
+.admin-cards :hover {
+  color: #9e39ff;
 }
+
 
 .invite_msg {
   margin: 10px !important;
@@ -412,7 +436,7 @@ Trabajando con Admin Cards/DashBoard
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  box-shadow: 1px 2px 11px -5px rgba(0, 0, 0, 0.75);
+  
 }
 
 .admin-button h4 {

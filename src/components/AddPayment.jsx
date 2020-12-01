@@ -6,11 +6,12 @@ import { Modal, Button, Card } from "antd";
 function AddPayment() {
   return (
     <div className="Modal">
-      <Card className="admin-cards">
+      <Card 
+      className="admin-cards"
+      style={{background: 'whitesmoke', border: 'none'}} 
+      >
         <img src={Briefing} className="icono-sider" />
-        <div className="admin-button">
-          <h4 style={{ color: "#9e39ff" }}>Ingresar un pago</h4>
-        </div>
+        <p className='invite-button-text'> Ingresar un pago </p>
       </Card>
     </div>
   );
