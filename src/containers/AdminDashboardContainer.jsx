@@ -1,14 +1,9 @@
-import React, { useEffect, useState } from "react";
-import {
-  useHistory,
-  Route,
-  Switch,
-  Redirect,
-  BrowserRouter,
-  useRouteMatch,
-} from "react-router-dom";
+import React, { useState } from "react";
+import { useHistory, Route, Switch, useRouteMatch} from "react-router-dom";
 import { authUser } from "../../auth/auth";
-import { Layout, Row, Col } from "antd";
+
+// SYTYLES
+import { Layout } from "antd";
 
 // COMPONENTS & CONTAINERS
 import Error404 from "../components/404";
@@ -20,53 +15,29 @@ import Navbar from '../components/Navbar'
 
 function AdminDashboardContainer() {
   const { logout, currentUser } = authUser();
+  const { Header, Content } = Layout;
   const history = useHistory();
-  const [sidebar, setSidebar] = useState(true)
+  const { path } = useRouteMatch();
 
-  const handleLogout = () => {
-    logout();
-    history.push("/");
-  };
-
-  const showSidebar = () => {
-    setSidebar(!sidebar)
-  }
-
-  const { Header, Footer, Sider, Content } = Layout;
-
-  let { path } = useRouteMatch();
   return !currentUser ? (
     <Error404 />
   ) : (
-    <>
       <Layout>
-        <Sider className='sider-user'
-        breakpoint="lg"
-        collapsedWidth="0"
-        onBreakpoint={broken => {
-          console.log(broken);
-        }}
-        onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
-        }}
-        >
-          <Sidebar handleLogout={handleLogout} />
-        </Sider>
-      <Layout>
-        <Navbar showSidebar={showSidebar}/>
-        <Header className="header-user">
-          <HeaderComponent/>
-        </Header>
-        <Content>
-          <Switch>
-            <Route path={`${path}/projects`} component={AllProjectsContainer} />
-            <Route path={`${path}`} component={AdminDashboard} />
-          </Switch>
-        </Content>
+        <Sidebar history={history}/>
+        <Layout>
+          <Navbar logout={logout} />
+          <Header className="header-user">
+            <HeaderComponent />
+          </Header>
+          <Content>
+            <Switch>
+              <Route path={`${path}/projects`} component={AllProjectsContainer} />
+              <Route path={`${path}`} component={AdminDashboard} />
+            </Switch>
+          </Content>
+        </Layout>
       </Layout>
-      </Layout>
-    </>
-  );
+    );
 }
 
 export default AdminDashboardContainer;

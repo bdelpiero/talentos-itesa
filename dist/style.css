@@ -1,17 +1,8 @@
 /* ----------------------
-trabajando con sider user
+    SIDEBAR + NAVBAR
 ---------------------- */
 
 @media (min-width: 1023px) {
-  .sider-user {
-    left: 0% !important;
-    height: 100vh;
-    min-width: 30vh !important;
-    color: rgb(161, 148, 148);
-    background-color: whitesmoke !important;
-    box-shadow: 0px 0px 5px -3px #636363;
-  }
-
   .navbar-style {
     display: none;
   }
@@ -23,10 +14,7 @@ trabajando con sider user
   }
 }
 
-@media (max-width: 1025px) {
-  .sider-user {
-    display: none
-  }
+@media (max-width: 991px) {
   .navbar-style {
     display: flex;
     width: 100%;
@@ -52,33 +40,11 @@ trabajando con sider user
   }
 }
 
-.sider-user-row {
+.sider-admin {
   height: 100vh;
-  width: 100%;
-}
-
-.sidebar-row {
-  width: 100%;
-}
-
-.card-sider {
-  margin: 10px auto !important;
-  width: 80%;
+  color: rgb(161, 148, 148);
   background-color: whitesmoke !important;
-  border: none !important;
-  border-radius: 3% !important;
-  text-align: center !important;
-  font-size: 1rem;
 }
-
-.card-sider:active svg {
-  color: #9e39ff;
-}
-
-.card-sider:active {
-  color: #9e39ff;
-}
-
 
 .icono-sider svg {
   display: block;
@@ -87,9 +53,42 @@ trabajando con sider user
   width: 3em;
 }
 
+.sider-cards {
+  color: #636363;
+  padding: 5rem !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+  background-color: whitesmoke !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.sider-cards:hover {
+  color: #9e39ff;
+}
+
+.text-sider-buttons {
+  margin: 0 auto !important;
+}
+
+.icon-sider-buttons {
+  margin: 0 auto !important;
+  font-size: 3rem !important;
+}
+
+.ant-menu-item-selected {
+  color: #9e39ff !important;
+}
+
+.ant-menu .ant-menu-item::after {
+  color: #9e39ff !important;
+  border-right: 3px solid  #9e39ff !important
+}
 
 /* ----------------------
-trabajando con header user
+        HEADER
 ---------------------- */
 
 .ant-layout-header {
@@ -413,7 +412,7 @@ Trabajando con Admin Cards/DashBoard
   margin: 0
 }
 
-.admin-cards svg:hover {
+.admin-cards :hover {
   color: #9e39ff;
 }
 
