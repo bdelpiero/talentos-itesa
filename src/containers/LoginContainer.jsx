@@ -7,6 +7,7 @@ import { useRecoilState } from "recoil";
 import { isLoading } from "../atoms";
 import { atomLogin } from "../atoms";
 import { Form } from "antd";
+import axios from "axios";
 
 export default () => {
   const [data, setData] = useState({
@@ -38,12 +39,12 @@ export default () => {
 
   return (
     <div>
-      <div className="register-header">
-        <img src={Logo} className="register-logo" />
+      <div className='register-header'>
+        <img src={Logo} className='register-logo' />
       </div>
 
-      <div className="login-container">
-        <div className="register-left"></div>
+      <div className='login-container'>
+        <div className='register-left'></div>
         <Login
           handleInputChange={handleInputChange}
           handleSubmit={handleSubmit}

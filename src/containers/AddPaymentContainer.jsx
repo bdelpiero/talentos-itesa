@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import AddPayment from "../components/AddPayment";
 import { db } from "../../firebase/firebase";
-import { authUser } from "../../auth/auth";
+import { authUser } from "../../firebase/auth/auth";
 
 import {
   CheckCircleOutlined,
