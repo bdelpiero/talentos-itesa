@@ -7,7 +7,7 @@ import { Row, Col, Typography, Avatar } from "antd";
 
 const { Title, Text } = Typography;
 
-export default () => {
+export default ({user}) => {
   
   return (
     <>
@@ -19,12 +19,12 @@ export default () => {
         <Col>
           <Title className='dashboard'>Dashboard</Title>
           <Text type='secondary' className='subtitulo'>
-            Bienvenido a Itesa, xxx
+            Bienvenido a Itesa, {/* user.name */} :)
           </Text>
         </Col>
         <Col className='avatar'>
           <Avatar size={64} icon={<UserOutlined />} className='avatar' />
-          <Text type='secondary'>nombre de usuario</Text>
+          <Text type='secondary'>{/* user.name */} {/* user.lastName */}</Text>
         </Col>
       </Row>
     </>

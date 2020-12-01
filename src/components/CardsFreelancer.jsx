@@ -1,14 +1,19 @@
 import React from "react";
 import { Button, Card, DatePicker, InputNumber, Col } from 'antd';
+import { useRecoilState } from "recoil";
+import { projectInvited } from "../atoms/index";
+
 
 export default () => {
+  const [projectI, setProjectI] = useRecoilState(projectInvited);
+  console.log("project en carfrelance", projectI)
   return (
     <>
       <Col xs={24} sm={12} md={8} >
-        <Card className="bodyCard">
+       {projectI.name ? ( <Card className="bodyCard">
           <h3 id="tittleCard">OFERTA DE PROYECTO</h3>
           <p id="subtittle">PROYECTO</p>
-          <p>"ITS202|SATAPP"</p>
+          <p>"{projectI.name}"</p>
           <p id="subtittle">DURACION</p>
           <p>4 Semanas</p>
           <p id="subtittle">MONTO</p>
@@ -20,7 +25,12 @@ export default () => {
             Firma Contrato
           </Button></div>
           
-        </Card>
+        </Card>)
+        :
+        <Card className="bodyCard">
+        <h3 id="tittleCard">OFERTA DE PROYECTO</h3>
+        <p id="subtittle">NO TIENES PROJECTOS</p>
+      </Card>}
       </Col>
       <Col xs={24} sm={12} md={8}>
         <Card className="bodyCard">
