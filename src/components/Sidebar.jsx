@@ -2,7 +2,7 @@ import React from "react";
 import {Layout, Menu } from "antd";
 import { BarChartOutlined, HomeOutlined, TeamOutlined, LogoutOutlined } from '@ant-design/icons';
 
-export default ({ logout, history,setItem }) => {
+export default ({ handleLogout,setItem }) => {
   const { Sider } = Layout
   
   return (
@@ -25,7 +25,7 @@ export default ({ logout, history,setItem }) => {
             if (key == 1);
             if (key == 2);
             // if(key == 3) history.push('/admin/freelancers')
-            if (key == 4) logout().then(() => history.push("/login"));
+            if (key == 4) handleLogout();
           }}
         >
           <Menu.Item
