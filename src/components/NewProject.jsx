@@ -115,7 +115,7 @@ function NewProject({
           </h5>
           <Form.Item
             name="endDate"
-            onChange={handleChangeEndDate}
+
             className="modal-formularios"
             rules={[
               {
@@ -124,8 +124,16 @@ function NewProject({
               },
             ]}
           >
-            <Input />
-            {/* <DatePicker /> */}
+            {/* <DatePicker 
+               id="endDate"
+               name= "endDate"
+               onChange={handleChangeEndDate}
+               style={{ width:"80%", marginLeft:'20px'}} 
+               onChange={this.onChange}
+               format="DD/MM/YYYY"
+               placeholder={'Fecha de Finalizacion'}
+
+            /> */}
           </Form.Item>
 
           <div className="modal-input">

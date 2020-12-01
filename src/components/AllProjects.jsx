@@ -1,6 +1,9 @@
 import React from "react";
-import { Table, Tag, Space, Button } from "antd";
+import { Table, Tag, Space, Button, Card, List, Avatar, Row, Col } from "antd";
 // import ModalUser from "../components/ModalAddUser"
+import { Typography } from "antd";
+
+const { Title } = Typography;
 
 function AllProjects({ projects }) {
   const columns = [
@@ -30,14 +33,27 @@ function AllProjects({ projects }) {
       key: "action",
       render: (text, record) => (
         <div>
-          <Space size="middle" >
-          <Button style={{ color: "#9749f8" }}> VER MÁS </Button>
-              {/* <ModalUser/> */}
+          <Space size="middle">
+            <Button style={{ color: "#9749f8" }}> VER MÁS </Button>
+            {/* <ModalUser/> */}
           </Space>
-          <Space size="middle" >
-          <Button style={{ color: "#9749f8" }}> INVITAR </Button>
-              {/* <ModalUser/> */}
-              </Space>
+          <Space size="middle">
+            <Button style={{ color: "#9749f8" }}> INVITAR </Button>
+            {/* <ModalUser/> */}
+          </Space>
+        </div>
+      ),
+    },
+
+    {
+      title: "",
+      key: "delete",
+      render: (text, record) => (
+        <div>
+          <Space size="middle">
+            <Button style={{ color: "#9749f8" }}> ELIMINAR </Button>
+            {/* <ModalUser/> */}
+          </Space>
         </div>
       ),
     },
@@ -47,8 +63,24 @@ function AllProjects({ projects }) {
     return project.data();
   });
 
-  console.log(data)
-  return <Table columns={columns} dataSource={data} />;
+  console.log(data, "esto es data ");
+  return (
+    <div style={{ width: "100%" }}>
+      <Row>
+        <Col span={12}>
+        <Title> Todos los Proyectos </Title>
+        </Col>
+        <Col span={12}>
+        <Button style={{float:"right"}}> CREAR PROYECTO </Button>
+        </Col>
+      </Row>
+
+      <div>
+        <Table columns={columns} dataSource={data} />
+      </div>
+    </div>
+  );
 }
 
 export default AllProjects;
+

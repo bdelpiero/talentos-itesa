@@ -3,14 +3,16 @@ import Logo from "../../views/logo-itesa.svg";
 import { authUser } from "../../firebase/auth";
 
 import { UserOutlined } from "@ant-design/icons";
-import { Row, Col, Typography, Avatar } from "antd";
+import { Row, Col, Typography, Avatar, Layout } from "antd";
 
 const { Title, Text } = Typography;
+
+const { Header} = Layout;
 
 export default ({user}) => {
   
   return (
-    <>
+    <Header className="header-user">
       <Row align='top' justify='end' className='mini-logo'>
         <img src={Logo}  className='logo'/>
       </Row>
@@ -27,6 +29,6 @@ export default ({user}) => {
           <Text type='secondary'>{/* user.name */} {/* user.lastName */}</Text>
         </Col>
       </Row>
-    </>
+      </Header>
   );
 };

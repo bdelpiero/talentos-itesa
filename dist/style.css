@@ -96,6 +96,9 @@
   background-color: whitesmoke !important;
   height: 22vh !important;
 }
+.ant-layout{
+  background-color: whitesmoke !important;
+}
 
 .ant-avatar {
   margin-right: 10px !important;

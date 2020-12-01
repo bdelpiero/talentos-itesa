@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Route, Link, useHistory } from "react-router-dom";
-import { Layout, Row, Col, } from "antd";
+import React from "react";
+import { Layout, Row} from "antd";
 import { authUser } from "../../firebase/auth";
 
 // COMPONENTS & CONTAINERS
@@ -11,27 +10,42 @@ import Sidebar from "./Sidebar";
 import HeaderComponent from "./Header";
 import ResumeContainer from "../containers/ResumeContainer";
 import PendingPayments from "./PendingPayments";
-import Title from "antd/lib/skeleton/Title";
+import AllProjectsContainer from "../containers/AllProjectsContainer";
+import Navbar from "../components/Navbar";
 
 
-function AdminDashboard({handleLogout}) {
-  const { Header, Footer, Sider, Content } = Layout;
 
-  return(
+function AdminDashboard({logout,history}) {
+  const { Content } = Layout;
+
+  const [item, setItem] = React.useState(1);
+
+  return (
+    <Layout>
+      <Sidebar setItem={setItem} logout={logout}       history={history}/>
       <Layout>
+        <Navbar />
+        <HeaderComponent />
         <Content className="content-user">
-          <Row className='admin-row'>
-              <InviteContainer />
-              <NewProjectContainer />
-              <AddPaymentContainer />
-              <ResumeContainer />
-          </Row>
-          <Row>
-            <PendingPayments/>
-          </Row>
+          {item == 1 && (
+            <>
+              <Row className="admin-row">
+                <InviteContainer />
+                <NewProjectContainer />
+                <AddPaymentContainer />
+                <ResumeContainer />
+              </Row>
+              <Row>
+                <PendingPayments />
+              </Row>
+            </>
+          )}
+          {item == 2 && (
+              <AllProjectsContainer />
+          )}
         </Content>
       </Layout>
-
+    </Layout>
   );
 }
 
