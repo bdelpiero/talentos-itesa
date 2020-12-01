@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Link, useHistory } from "react-router-dom";
 import { authUser } from "../../auth/auth";
 import { Layout, Row, Col } from "antd";
@@ -8,7 +8,8 @@ import PagosFreelace from "../components/PagosFreelace";
 import CardsFreelancer from "../components/CardsFreelancer";
 import Error404 from '../components/404'
 import { useRecoilState } from "recoil";
-import { user } from "../atoms/index";
+import { user,projectInvited } from "../atoms/index";
+import {db} from '../../firebase/firebase'
 
 
 
@@ -16,6 +17,8 @@ const { Header, Footer, Sider, Content } = Layout;
 
 export default () => {
   const [currentUser, setCurrentUser] = useRecoilState(user);
+  const [projectI, setProjectI] = useRecoilState(projectInvited);
+
   const { logout } = authUser();
   const history = useHistory();
 
@@ -23,7 +26,27 @@ export default () => {
     logout();
     history.push("/login");
   };
-  console.log("userContainer", currentUser);
+
+// useEffect esta atento a los cambios en el usuario para renderizar el componente nuevamente
+
+  useEffect(() => {
+    if(currentUser.invited){
+      return db.collection('projects').doc(currentUser.invited).get()
+    .then(project => {
+     
+    console.log('Document data:', project.data());
+    setProjectI(project.data())
+  
+    })
+    .catch(err => {
+      console.log('Error getting document', err);
+    });
+    }else{
+      setProjectI({})
+
+    }
+  }, [currentUser]);
+
 
   return !currentUser ? <Error404/> :
    (
@@ -33,7 +56,7 @@ export default () => {
       </Sider>
       <Layout>
         <Header className="header-user">
-          <HeaderComponent />
+          <HeaderComponent user={currentUser}/>
         </Header>
         <Content
           className="content-user" 
@@ -45,7 +68,7 @@ export default () => {
             justify="space-around"
             align="middle"
           >
-            <CardsFreelancer />
+            <CardsFreelancer/>
           </Row>
 
           
