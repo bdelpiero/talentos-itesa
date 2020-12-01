@@ -40,7 +40,7 @@ function AdminContainer() {
 
       <Layout>
         <Header className="header-user">
-          <HeaderComponent />
+          <HeaderComponent user={currentUser}/>
         </Header>
 
         <Content className="content-user">

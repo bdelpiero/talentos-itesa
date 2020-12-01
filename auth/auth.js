@@ -52,14 +52,21 @@ export function AuthProvider({ children }) {
   }
 
   useEffect(() => {
-    console.log("entra al useefec")
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      console.log("usefect user",user)
       if(user){
-        return db.collection('users').doc(user.uid).get()
+        // se guarda una referencia al usuario
+        const userRef=db.collection('users').doc(user.uid)
+        //se establece un observer que esta atento a los cambios en la base de datos
+        let observer = userRef.onSnapshot(docSnapshot => {
+          console.log(`cambios recividos`,docSnapshot.data());
+          //se setea el usuario nuevamente con los cambios
+          setCurrentUser(docSnapshot.data())
+        }, err => {
+          console.log(`Encountered error: ${err}`);
+        });
+        return userRef.get()
             .then(UserInfo=>{
               const User=UserInfo.data()
-              console.log("aqui esta el usuario", User)
               setLoading(false);
               setCurrentUser(User)
               setIsLogin({loadin:false})
@@ -71,6 +78,8 @@ export function AuthProvider({ children }) {
                 }
                 }             
               
+            }).catch(err => {
+              console.log('Error getting document', err);
             })
       }else{
         setLoading(false);
