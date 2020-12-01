@@ -6,7 +6,7 @@ import { useRecoilState } from "recoil";
 
 import { isLoading } from "../atoms";
 import { atomLogin } from "../atoms";
-import { Form } from "antd";
+import { Form, message } from "antd";
 
 export default () => {
   const [data, setData] = useState({
@@ -18,6 +18,9 @@ export default () => {
   const { login } = authUser();
   const {resetPassword }=authUser();
   const [message, setMessage] = useState("")
+  const info = () => {
+    message.info("Check your inbox for further instructions");
+  };
   
 
   const handleInputChange = (e) => {
@@ -34,7 +37,6 @@ export default () => {
 
 
   const handleSubmit = () => {  
-    setMessage("")  
     resetPassword(data.email);
     setData({ email: ""});
     setMessage("Check your inbox for further instructions")

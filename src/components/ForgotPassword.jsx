@@ -1,24 +1,10 @@
 import React from "react";
 import {Link} from 'react-router-dom'
-import { Form, Input, Button, Typography,Alert } from "antd";
+import { Form, Input, Button, Typography,Alert, message } from "antd";
 
-export default ({ handleInputChange, handleSubmit, data, form,isLogin, message }) => {
-  const layout = {
-    labelCol: {
-      span: 8,
-    },
-    wrapperCol: {
-      span: 16,
-    },
-  };
-  const tailLayout = {
-    wrapperCol: {
-      offset: 6,
-      span: 16,
-    },
-  };
-  const { Title } = Typography;
-
+export default ({ handleInputChange, handleSubmit, data, form,isLogin, setMessage }) => {
+  
+ 
   return (
     <div className='login-formContainer'>
       <Form
@@ -60,20 +46,20 @@ export default ({ handleInputChange, handleSubmit, data, form,isLogin, message }
             block
             type='primary'
             htmlType='submit'
-            className='register-button'>
+            className='register-button'>             
             Reset Password
           </Button>          
-        </Form.Item>
-        <div className='register-link'>
-            <Link to='/register' style={{ color: "gray" }}>
-              Don't have an account? Register
-            </Link>   
-         </div>
+        </Form.Item>        
        <div className='register-link' >
        <Link to='/login' style={{ color: "gray" }}>
             Login?
             </Link>
-       </div>
+       </div>      
+       <div className='register-link'>
+            <Link to='/register' style={{ color: "gray" }}>
+              Don't have an account? Register
+            </Link>   
+         </div> 
       </Form>
      
     </div>
