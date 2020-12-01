@@ -2,12 +2,54 @@
 trabajando con sider user
 ---------------------- */
 
-.sider-user {
-  height: 100vh;
-  min-width: 30vh !important;
-  color: rgb(161, 148, 148);
-  background-color: whitesmoke !important;
-  box-shadow: 3px 0px 5px -3px #636363
+@media (min-width: 1023px) {
+  .sider-user {
+    left: 0% !important;
+    height: 100vh;
+    min-width: 30vh !important;
+    color: rgb(161, 148, 148);
+    background-color: whitesmoke !important;
+    box-shadow: 0px 0px 5px -3px #636363;
+  }
+
+  .navbar-style {
+    display: none;
+  }
+  .mini-logo {
+    height: 25%;
+    line-height: 20px !important;
+    margin-top: 4px;
+    margin-bottom: 2px;
+  }
+}
+
+@media (max-width: 1025px) {
+  .sider-user {
+    display: none
+  }
+  .navbar-style {
+    display: flex;
+    width: 100%;
+    height: auto;
+    background-color: #9e39ff;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .logo-mobile {
+    margin: 0.8rem;
+    justify-content: end;
+    float: right;
+  }
+  .menu-bars {
+    align-items: center;
+    margin: 0.8rem;
+    font-size: 1.8rem;
+    background: none;
+    color: black;
+  }
+  .mini-logo {
+    display:none
+  }
 }
 
 .sider-user-row {
@@ -54,13 +96,6 @@ trabajando con header user
   color: black;
   background-color: whitesmoke !important;
   height: 22vh !important;
-}
-
-.mini-logo {
-  height: 25%;
-  line-height: 20px !important;
-  margin-top: 4px;
-  margin-bottom: 2px;
 }
 
 .ant-avatar {

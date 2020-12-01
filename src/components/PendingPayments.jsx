@@ -8,7 +8,7 @@ const { Title } = Typography;
 
 const data = [
   {
-    valor: "$80.000",
+    valor: "$50000",
   },
   {
     valor: "$80.000",
@@ -26,7 +26,7 @@ class PendingPayments extends Component {
             itemLayout="horizontal"
             dataSource={data}
             renderItem={(item) => (
-              <List.Item>
+              <List.Item key={item.valor}>
                 <List.Item.Meta
                   avatar={ 
                   <Avatar

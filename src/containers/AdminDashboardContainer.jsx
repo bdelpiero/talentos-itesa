@@ -16,15 +16,21 @@ import AdminDashboard from "../components/AdminDashboard";
 import Sidebar from "../components/Sidebar";
 import AllProjectsContainer from "../containers/AllProjectsContainer";
 import HeaderComponent from "../components/Header"
+import Navbar from '../components/Navbar'
 
 function AdminDashboardContainer() {
   const { logout, currentUser } = authUser();
   const history = useHistory();
+  const [sidebar, setSidebar] = useState(true)
 
   const handleLogout = () => {
     logout();
     history.push("/");
   };
+
+  const showSidebar = () => {
+    setSidebar(!sidebar)
+  }
 
   const { Header, Footer, Sider, Content } = Layout;
 
@@ -32,11 +38,22 @@ function AdminDashboardContainer() {
   return !currentUser ? (
     <Error404 />
   ) : (
-    <Layout>
-      <Sider className="sider-user">
-        <Sidebar handleLogout={handleLogout} />
-      </Sider>
+    <>
       <Layout>
+        <Sider className='sider-user'
+        breakpoint="lg"
+        collapsedWidth="0"
+        onBreakpoint={broken => {
+          console.log(broken);
+        }}
+        onCollapse={(collapsed, type) => {
+          console.log(collapsed, type);
+        }}
+        >
+          <Sidebar handleLogout={handleLogout} />
+        </Sider>
+      <Layout>
+        <Navbar showSidebar={showSidebar}/>
         <Header className="header-user">
           <HeaderComponent/>
         </Header>
@@ -47,7 +64,8 @@ function AdminDashboardContainer() {
           </Switch>
         </Content>
       </Layout>
-    </Layout>
+      </Layout>
+    </>
   );
 }
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Card, Row } from "antd";
+import { Card, Row, Layout} from "antd";
 import {
   LogoutOutlined,
   BarChartOutlined,
@@ -9,8 +9,8 @@ import {
 } from "@ant-design/icons";
 
 export default ({ handleLogout }) => {
+  const {Sider} = Layout
   return (
-    <>
       <Row justify="end" className="sider-user-row">
         <div className="sidebar-row">
           <Link to="/admin">
@@ -44,6 +44,5 @@ export default ({ handleLogout }) => {
           </Card>
         </Row>
       </Row>
-    </>
   );
 };
