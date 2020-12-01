@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { auth, db } from "../firebase";
 import { useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { atomLogin } from "../../src/atoms";
+import { atomLogin, user } from "../../src/atoms/index";
 
 const AuthContext = React.createContext();
 
@@ -11,32 +11,13 @@ export function authUser() {
 }
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useRecoilState(user);
   const [loading, setLoading] = useState(true);
   const [isLogin, setIsLogin] = useRecoilState(atomLogin);
   const history = useHistory();
 
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password);
-    // .then((data) => {
-    //   console.log("id", data.user.uid);
-    //   db.collection("users")
-    //     .doc(data.user.uid)
-    //     .get()
-    //     .then((UserInfo) => {
-    //       const User = UserInfo.data();
-    //       setLoading(false);
-    //       setCurrentUser(User);
-    //       setIsLogin({ loadin: false });
-    //       if (User) {
-    //         if (User.isAdmin) {
-    //           history.push("/admin");
-    //         } else {
-    //           history.push("/freelancer");
-    //         }
-    //       }
-    //     });
-    // });
   }
 
   function login(email, password) {
@@ -72,9 +53,20 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        return db
-          .collection("users")
-          .doc(user.uid)
+        // se guarda una referencia al usuario
+        const userRef = db.collection("users").doc(user.uid);
+        //se establece un observer que esta atento a los cambios en la base de datos
+        let observer = userRef.onSnapshot(
+          (docSnapshot) => {
+            console.log(`cambios recividos`, docSnapshot.data());
+            //se setea el usuario nuevamente con los cambios
+            setCurrentUser(docSnapshot.data());
+          },
+          (err) => {
+            console.log(`Encountered error: ${err}`);
+          }
+        );
+        return userRef
           .get()
           .then((UserInfo) => {
             const User = UserInfo.data();
@@ -88,17 +80,19 @@ export function AuthProvider({ children }) {
                 history.push("/freelancer");
               }
             }
+          })
+          .catch((err) => {
+            console.log("Error getting document", err);
           });
       } else {
         setLoading(false);
-        setCurrentUser(user);
+        setCurrentUser({});
       }
     });
     return unsubscribe;
   }, []);
 
   const value = {
-    setCurrentUser,
     currentUser,
     login,
     signup,
