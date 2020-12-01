@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import InviteCard from "../components/InviteCard";
 import { db } from "../../firebase/firebase";
-import { authUser } from "../../auth/auth";
+import { authUser } from "../../firebase/auth/auth";
 import CheckCircle from "../../views/check.svg";
 import axios from "axios";
 

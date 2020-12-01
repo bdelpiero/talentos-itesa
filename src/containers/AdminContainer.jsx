@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Route, Link, useHistory } from "react-router-dom";
 import { Layout, Row, Col } from "antd";
-import { authUser } from "../../auth/auth";
+import { authUser } from "../../firebase/auth/auth";
 
 // COMPONENTS & CONTAINERS
 import InviteContainer from "./InviteContainer";
@@ -15,7 +15,6 @@ import Title from "antd/lib/skeleton/Title";
 import Error404 from "../components/404";
 import { useRecoilState } from "recoil";
 import { user } from "../atoms/index";
-
 
 function AdminContainer() {
   const { Header, Footer, Sider, Content } = Layout;
@@ -34,16 +33,16 @@ function AdminContainer() {
     <Error404 />
   ) : (
     <Layout>
-      <Sider className="sider-user">
+      <Sider className='sider-user'>
         <Sidebar handleLogout={handleLogout} />
       </Sider>
 
       <Layout>
-        <Header className="header-user">
-          <HeaderComponent user={currentUser}/>
+        <Header className='header-user'>
+          <HeaderComponent user={currentUser} />
         </Header>
 
-        <Content className="content-user">
+        <Content className='content-user'>
           <Row
             gutter={30}
             style={{
@@ -51,8 +50,7 @@ function AdminContainer() {
               flexDirection: "row",
               justifyContent: "space-around",
             }}
-            className="content-row"
-          >
+            className='content-row'>
             <Col xs={24} sm={12} lg={6}>
               <InviteContainer />
             </Col>
@@ -67,7 +65,7 @@ function AdminContainer() {
             </Col>
           </Row>
 
-          <Row className="content-row">
+          <Row className='content-row'>
             <PendingPayments></PendingPayments>
           </Row>
         </Content>

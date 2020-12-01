@@ -1,13 +1,10 @@
 import React, { useState } from "react";
 import Login from "../components/Login";
-import { authUser } from "../../auth/auth";
+import { authUser } from "../../firebase/auth/auth";
 import Logo from "../../views/logo-itesa.svg";
 import { useRecoilState } from "recoil";
-
-import { isLoading } from "../atoms";
 import { atomLogin } from "../atoms";
 import { Form } from "antd";
-import axios from "axios";
 
 export default () => {
   const [data, setData] = useState({
