@@ -1,9 +1,13 @@
 import React from "react";
+import { useRecoilState } from "recoil";
+import { user } from "../atoms/index";
 import {Layout, Menu } from "antd";
 import { BarChartOutlined, HomeOutlined, TeamOutlined, LogoutOutlined } from '@ant-design/icons';
 
-export default ({ logout, history,setItem }) => {
+export default ({ handleLogout, setItem }) => {
+  const [currentUser, setCurrentUser] = useRecoilState(user);
   const { Sider } = Layout
+  console.log("buscando admin", currentUser.isAdmin)
   
   return (
     <Sider
@@ -25,7 +29,7 @@ export default ({ logout, history,setItem }) => {
             if (key == 1);
             if (key == 2);
             // if(key == 3) history.push('/admin/freelancers')
-            if (key == 4) logout().then(() => history.push("/login"));
+            if (key == 4) handleLogout();
           }}
         >
           <Menu.Item
@@ -51,14 +55,14 @@ export default ({ logout, history,setItem }) => {
               <p className="text-sider-buttons">Proyectos</p>
             </div>
           </Menu.Item>
-
+            {currentUser.isAdmin ?
           <Menu.Item key="3" className="sider-cards">
             <div>
               <TeamOutlined className="icon-sider-buttons " />
               <p className="text-sider-buttons">Perfiles</p>
             </div>
           </Menu.Item>
-
+               : null }
           <Menu.Item key="4" className="sider-cards">
             <div>
               <LogoutOutlined className="icon-sider-buttons " />
