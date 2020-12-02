@@ -13,6 +13,7 @@ import ResumeContainer from "../containers/ResumeContainer";
 import PendingPayments from "./PendingPayments";
 import AllProjectsContainer from "../containers/AllProjectsContainer";
 import Navbar from "../components/Navbar";
+import { SingleProject } from "../components/SingleProject";
 
 function AdminDashboard({ handleLogout }) {
   const { Content } = Layout;
@@ -51,7 +52,8 @@ function AdminDashboard({ handleLogout }) {
               </Row>
             </>
           )}
-          {item == 2 && <AllProjectsContainer />}
+          {item == 2 && <AllProjectsContainer setItem={setItem} />}
+          {item == 3 && <SingleProject />}
         </Content>
       </Layout>
     </Layout>

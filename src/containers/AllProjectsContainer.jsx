@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { db } from "../../firebase/firebase";
 import AllProjects from "../components/AllProjects";
 
-function AllProjectsContainer() {
+function AllProjectsContainer({ setItem }) {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
@@ -28,9 +28,17 @@ function AllProjectsContainer() {
         });
   }
 
-  return <AllProjects 
-  deleteProject={deleteProject}
-  projects={projects} />;
+  function handleClick() {
+    setItem(3);
+  }
+
+  return (
+    <AllProjects
+      deleteProject={deleteProject}
+      projects={projects}
+      handleClick={handleClick}
+    />
+  );
 }
 
 export default AllProjectsContainer;

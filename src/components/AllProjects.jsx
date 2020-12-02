@@ -7,7 +7,7 @@ import NewProjectContainer from "../containers/NewProjectContainer"
 
 const { Title } = Typography;
 
-function AllProjects({ projects, deleteProject }) {
+function AllProjects({ projects, deleteProject, handleClick }) {
   const columns = [
     {
       title: "PROYECTOS",
@@ -35,7 +35,7 @@ function AllProjects({ projects, deleteProject }) {
       key: "action",
       render: () => (
         <div>
-            <Button className="modal-button"> VER MÁS </Button>
+            <Button className="modal-button" onClick={handleClick} > VER MÁS </Button>
         </div>
       ),
     },
@@ -53,7 +53,6 @@ function AllProjects({ projects, deleteProject }) {
     {
       title: "",
       key: "delete",
-
       render: (proyecto) => {
         return (
           <div>
@@ -63,14 +62,12 @@ function AllProjects({ projects, deleteProject }) {
               >
                 ELIMINAR
               </Button>
-              {/* <ModalUser/> */}
           </div>
         );
       },
     },
   ];
 
-  // const data = projects
   
   return (
     <div style={{ width: "100%" }}>
@@ -79,10 +76,7 @@ function AllProjects({ projects, deleteProject }) {
           <Title> Todos los Proyectos </Title>
         </Col>
         <Col span={4}>
-          {/* <Button style={{ float: "right" }}>  */}
           <NewProjectContainer />
-          {/* CREAR PROYECTO */}
-          {/* </Button> */}
         </Col>
       </Row>
 
