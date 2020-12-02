@@ -6,7 +6,7 @@ import InviteProjectContainer from "../containers/InviteProjectContainer";
 
 const { Title } = Typography;
 
-function AllProjects({ projects, deleteProject }) {
+function AllProjects({ projects, deleteProject, handleClick }) {
   const columns = [
     {
       title: "PROYECTOS",
@@ -35,7 +35,10 @@ function AllProjects({ projects, deleteProject }) {
       render: (text, record) => (
         <div>
           <Space size="middle">
-            <Button style={{ color: "#9749f8" }}> VER MÁS </Button>
+            <Button style={{ color: "#9749f8" }} onClick={handleClick}>
+              {" "}
+              VER MÁS{" "}
+            </Button>
             {/* <ModalUser/> */}
           </Space>
           <Space size="middle">
@@ -51,7 +54,7 @@ function AllProjects({ projects, deleteProject }) {
       key: "delete",
 
       render: (proyectos) => {
-        console.log(proyectos, " dentro del render")
+        console.log(proyectos, " dentro del render");
         return (
           <div>
             <Space size="middle">

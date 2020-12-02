@@ -12,6 +12,13 @@
     margin-top: 4px;
     margin-bottom: 2px;
   }
+  .single-icon {
+    color: #9749f8;
+    font-size: 1.3rem;
+  }
+  .add-user {
+    margin-left: 2rem;
+  }
 }
 
 @media (max-width: 991px) {
@@ -37,6 +44,13 @@
   }
   .mini-logo {
     display: none;
+  }
+  .single-icon {
+    color: #9749f8;
+    font-size: 1.3rem;
+  }
+  .add-user {
+    margin-left: 2rem;
   }
 }
 

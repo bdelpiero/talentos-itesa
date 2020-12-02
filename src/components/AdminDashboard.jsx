@@ -1,5 +1,5 @@
 import React from "react";
-import { Layout, Row} from "antd";
+import { Layout, Row } from "antd";
 import { authUser } from "../../firebase/auth";
 
 // COMPONENTS & CONTAINERS
@@ -12,10 +12,9 @@ import ResumeContainer from "../containers/ResumeContainer";
 import PendingPayments from "./PendingPayments";
 import AllProjectsContainer from "../containers/AllProjectsContainer";
 import Navbar from "../components/Navbar";
+import { SingleProject } from "../components/SingleProject";
 
-
-
-function AdminDashboard({handleLogout}) {
+function AdminDashboard({ handleLogout }) {
   const { Content } = Layout;
 
   const [item, setItem] = React.useState(1);
@@ -40,9 +39,8 @@ function AdminDashboard({handleLogout}) {
               </Row>
             </>
           )}
-          {item == 2 && (
-              <AllProjectsContainer />
-          )}
+          {item == 2 && <AllProjectsContainer setItem={setItem} />}
+          {item == 3 && <SingleProject />}
         </Content>
       </Layout>
     </Layout>
