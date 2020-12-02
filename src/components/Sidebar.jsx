@@ -19,6 +19,7 @@ export default ({ handleLogout,setItem }) => {
         trigger={null}
       >
         <Menu
+          className='ulList-sider'
           mode="inline"
           defaultSelectedKeys={["1"]}
           onClick={({ item, key, keyPath, domEvent }) => {

@@ -49,9 +49,7 @@ export default () => {
     <Error404 />
   ) : (
     <Layout>
-      <Sider className='sider-user' justify='center'>
         <Sidebar handleLogout={handleLogout} />
-      </Sider>
       <Layout>
         <Header className='header-user'>
           <HeaderComponent user={currentUser} />
