@@ -58,6 +58,7 @@
   height: 100vh;
   color: rgb(161, 148, 148);
   background-color: whitesmoke !important;
+  box-shadow: 3px 1px 5px 0px rgba(0, 0, 0, 0.5);
 }
 
 .icono-sider svg {
@@ -69,7 +70,7 @@
 
 .sider-cards {
   color: #636363;
-  padding: 5rem !important;
+  padding: 4rem !important;
   margin: 0 auto !important;
   text-align: center !important;
   background-color: whitesmoke !important;
@@ -81,6 +82,7 @@
 
 .sider-cards:hover {
   color: #9e39ff;
+  /* box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.8); */
 }
 
 .text-sider-buttons {
@@ -94,11 +96,43 @@
 
 .ant-menu-item-selected {
   color: #9e39ff !important;
+  /* box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.8); */
 }
 
-.ant-menu .ant-menu-item::after {
+.ant-menu-item-selected div {
+  box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.8);
+}
+
+.ant-menu-item-active {
   color: #9e39ff !important;
-  border-right: 3px solid #9e39ff !important;
+}
+
+.ulList-sider {
+  height: 100vh;
+  background-color: whitesmoke !important;
+}
+#logout {
+  position: absolute;
+  bottom: 0%;
+  width: 198px;
+}
+.ant-menu .ant-menu-item::after {
+  border-right: none !important;
+}
+.sider-bottons {
+  background-color: whitesmoke;
+  width: 150px;
+  height: 150px;
+  border-radius: 5%;
+}
+.sider-bottons:hover {
+  box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.8);
+}
+.sider-bottons:active {
+  box-shadow: inset 0px 0px 13px 0px rgba(0, 0, 0, 0.8);
+}
+.sider-bottons svg {
+  margin-top: 15px;
 }
 
 /* ----------------------
