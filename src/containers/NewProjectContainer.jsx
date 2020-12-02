@@ -19,11 +19,13 @@ function NewProjectContainer() {
 
   const handleChangeStartDate = (value, dateString) => {
     console.log(value,'esto es start date')
+    console.log(dateString,'esto es datestring')
     setStartDate(dateString);
   };
 
   const handleChangeEndDate = (value, dateString) => {
     console.log(value,'esto es end date')
+    console.log(dateString,'esto es datestring')
     setEndDate(dateString);
   };
 
@@ -40,6 +42,7 @@ function NewProjectContainer() {
   };
 
   function success(){
+    closeModal()
     db.collection("projects")
       .add({
         name,

@@ -6,11 +6,8 @@ import { CloseCircleOutlined } from "@ant-design/icons";
 function NewProject({
   handleChangeName,
   handleChangeTerm,
-  handleChangeStatus,
   handleChangeStartDate,
   handleChangeEndDate,
-  handleSubmit,
-  status,
   closeModal,
   success,
   openModal,
@@ -30,10 +27,10 @@ function NewProject({
 
   return (
     <div className="Modal">
-      <Card 
-      className="admin-cards" 
-      style={{background: 'whitesmoke', border: 'none'}} 
-      onClick={openModal}
+      <Card
+        className="admin-cards"
+        style={{ background: "whitesmoke", border: "none" }}
+        onClick={openModal}
       >
         <img src={Briefing} className="icono-sider" />
         <div className="admin-button">
@@ -62,7 +59,7 @@ function NewProject({
         <Form
           {...layout}
           initialValues={{ remember: true }}
-          onFinish={handleSubmit}
+          onFinish={success}
           // onFinishFailed={onFinishFailed}
         >
           <h5 style={{ color: "grey", marginLeft: "95px" }}>
@@ -100,14 +97,19 @@ function NewProject({
           <h5 style={{ color: "grey", marginLeft: "95px" }}>FECHA DE INICIO</h5>
           <Form.Item
             name="startDate"
-            onChange={handleChangeStartDate}
             className="modal-formularios"
             rules={[
               { required: true, message: "Por favor ingrese fecha de inicio" },
             ]}
           >
-            <Input />
-            {/* <DatePicker /> */}
+            <DatePicker
+              id="startDate"
+              name="startDate"
+              onChange={handleChangeStartDate}
+              style={{ width: "100%" }}
+              format="DD/MM/YYYY"
+              placeholder={"Fecha de Inicio"}
+            />
           </Form.Item>
 
           <h5 style={{ color: "grey", marginLeft: "95px" }}>
@@ -115,7 +117,6 @@ function NewProject({
           </h5>
           <Form.Item
             name="endDate"
-
             className="modal-formularios"
             rules={[
               {
@@ -124,16 +125,14 @@ function NewProject({
               },
             ]}
           >
-            {/* <DatePicker 
-               id="endDate"
-               name= "endDate"
-               onChange={handleChangeEndDate}
-               style={{ width:"80%", marginLeft:'20px'}} 
-               onChange={this.onChange}
-               format="DD/MM/YYYY"
-               placeholder={'Fecha de Finalizacion'}
-
-            /> */}
+            <DatePicker
+              id="endDate"
+              name="endDate"
+              onChange={handleChangeEndDate}
+              style={{ width: "100%" }}
+              format="DD/MM/YYYY"
+              placeholder={"Fecha de Finalizacion"}
+            />
           </Form.Item>
 
           <div className="modal-input">
