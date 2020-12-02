@@ -12,6 +12,13 @@
     margin-top: 4px;
     margin-bottom: 2px;
   }
+  .single-icon {
+    color: #9749f8;
+    font-size: 1.3rem;
+  }
+  .add-user {
+    margin-left: 2rem;
+  }
 }
 
 @media (max-width: 991px) {
@@ -36,7 +43,14 @@
     color: black;
   }
   .mini-logo {
-    display:none
+    display: none;
+  }
+  .single-icon {
+    color: #9749f8;
+    font-size: 1.3rem;
+  }
+  .add-user {
+    margin-left: 2rem;
   }
 }
 
@@ -84,7 +98,7 @@
 
 .ant-menu .ant-menu-item::after {
   color: #9e39ff !important;
-  border-right: 3px solid  #9e39ff !important
+  border-right: 3px solid #9e39ff !important;
 }
 
 /* ----------------------
@@ -96,7 +110,7 @@
   background-color: whitesmoke !important;
   height: 22vh !important;
 }
-.ant-layout{
+.ant-layout {
   background-color: whitesmoke !important;
 }
 
@@ -137,7 +151,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding: 0px
+  padding: 0px;
 }
 
 .resumen-card-title {
@@ -153,7 +167,7 @@
 }
 
 .resumen-recordatorio {
-  display:flex;
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
@@ -168,9 +182,8 @@ trabajando con content user
   color: black;
   width: 95%;
   background-color: whitesmoke !important;
-  margin: 0 auto
+  margin: 0 auto;
 }
-
 
 .site-layout-content {
   min-height: 530px;
@@ -212,20 +225,17 @@ trabajando con  user Cards
 .bodyCard {
   font-family: "arial";
   color: #0b2257;
-  font-size: 100%;  
-  border-radius:42px;  
-  margin: auto; 
-  min-height: 100% !important;    
+  font-size: 100%;
+  border-radius: 42px;
+  margin: auto;
+  min-height: 100% !important;
   width: 25em;
-  height: 20em !important; 
+  height: 20em !important;
   background-color: whitesmoke;
-  background: whitesmoke; 
+  background: whitesmoke;
   box-shadow: -1px 3px 15px -6px gray;
   padding: 0;
-  
 }
-
-
 
 #subtittle {
   font-family: "Open Sans Semibold", arial;
@@ -244,20 +254,13 @@ trabajando con  user Cards
 trabajando con  user Cards
 ---------------------- */
 
-.Payments{
+.Payments {
   width: 95% !important;
   content: center;
   padding: 1em;
-  border-radius:20px;  
+  border-radius: 20px;
   margin: auto;
-
-
 }
-
-
-
-
-
 
 .buttonCard {
   background-color: #9e39ff;
@@ -350,7 +353,7 @@ register freelancer
 .register-button {
   background-color: #a77ffa;
   border: 0;
-  margin: 1vh 0
+  margin: 1vh 0;
 }
 
 .register-button span {
@@ -430,7 +433,7 @@ Trabajando con Admin Cards/DashBoard
 }
 
 .invite-button-text {
-  margin: 0
+  margin: 0;
 }
 
 .admin-cards :hover {
@@ -456,7 +459,6 @@ Trabajando con Admin Cards/DashBoard
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  
 }
 
 .admin-button h4 {
@@ -494,23 +496,23 @@ Trabajando con Admin Cards/DashBoard
   font-size: 16px;
 }
 
-.ant-modal-footer{
-padding: 0;
-border-top: none;
+.ant-modal-footer {
+  padding: 0;
+  border-top: none;
 }
 
 .ant-modal-content {
   border-radius: 20px;
 }
 
-.modal-input{
+.modal-input {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
-.modal-formularios{
+.modal-formularios {
   width: 180%;
-  margin-left: 95px
+  margin-left: 95px;
 }
