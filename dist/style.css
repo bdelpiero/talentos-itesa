@@ -514,3 +514,17 @@ border-top: none;
   width: 180%;
   margin-left: 95px
 }
+
+.modal-button{
+  box-shadow: -1px 3px 15px -6px gray;
+  border: none;
+  background-color:#FBF7FF;
+  color:#9e39ff;
+  border-radius:20px
+}
+
+.ant-btn:hover, .ant-btn:focus {
+
+  background: none;
+  border-color:#9e39ff;
+}

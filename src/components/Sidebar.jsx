@@ -35,7 +35,6 @@ export default ({ handleLogout, setItem }) => {
           <Menu.Item
             key="1"
             className="sider-cards"
-            button
             onClick={() => setItem(1)}
           >
             <div>
@@ -47,7 +46,6 @@ export default ({ handleLogout, setItem }) => {
           <Menu.Item
             key="2"
             className="sider-cards"
-            button
             onClick={() => setItem(2)}
           >
             <div>
