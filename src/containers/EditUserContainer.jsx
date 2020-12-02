@@ -20,11 +20,20 @@ import {
 
 const { Title, Text } = Typography;
 
-// export default ({ user }) => {
+function getBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+}
 
-export default ({ user }) => {
-  console.log("user en el avatar", user.avatar);
+export default ({ user, setCurrentUser }) => {
   const [modal, setModal] = useState(false);
+  const [userName, setUserName] = useState(user.name || "");
+  const [userLastName, setUserLastName] = useState(user.lastName || "");
+
   const openModal = () => {
     setModal(true);
   };
@@ -39,31 +48,37 @@ export default ({ user }) => {
 
   const handleChange = (e) => {
     if (!e.target.files) return;
-    console.log(e.target.files[0]);
+
     const file = e.target.files[0];
     setImage(file);
     setPreviewUrl(URL.createObjectURL(file));
   };
-  // const handleInputChange = () => {
 
-  // }
+  const handleInputChange = (e) => {
+    if (e.target.name == "userName") setUserName(e.target.value);
+    if (e.target.name == "userLastName") setUserLastName(e.target.value);
+  };
 
   const handleSubmit = async (e) => {
-    console.log("image", image);
     const file = image;
     const storageRef = storage.ref();
     const task = storageRef.child(`images/${file.name}`);
     await task.put(file);
     await task.getDownloadURL().then((downloadUrl) => {
-      console.log("downloadUlr", downloadUrl);
+      //console.log("downloadUlr", downloadUrl);
       db.collection("users")
         .doc(user.id)
         .update({
-          avatar: downloadUrl,
+          avatar: downloadUrl || user.avatar,
+          name: userName,
+          lastName: userLastName,
         })
-        .then(() => console.log("cambios realizados con éxito"))
+        .then(() => {
+          console.log("cambios realizados con éxito");
+        })
         .catch((err) => console.log(err));
     });
+    closeModal();
   };
 
   return (
@@ -90,35 +105,44 @@ export default ({ user }) => {
         bodyStyle={{ color: "#9e39ff" }}>
         <>
           <div className='modal-style'>
+            <h1>Editar perfil</h1>
             <br />
-            {/* <Upload onChange={handleChange}>
-              <Button icon={<UploadOutlined />}>Upload</Button>
-            </Upload> */}
             {previewUrl ? (
               <Avatar size={64} src={previewUrl} className='avatar' />
             ) : (
               <Avatar size={64} icon={<UserOutlined />} className='avatar' />
             )}
-            <input type='file' onChange={handleChange} />
-            <Button onClick={handleSubmit}>Confirmar cambios</Button>
+            <label
+              style={{
+                border: "1px solid #ccc",
+                display: "inline-block",
+                padding: "6 12",
+                cursor: "pointer",
+              }}>
+              <input
+                style={{ display: "none" }}
+                type='file'
+                onChange={handleChange}
+                accept='image/png, image/jpeg'
+              />
+              Upload image
+            </label>
 
-            {/* <Form onFinish={handleSubmit}>
+            <Form onFinish={handleSubmit}>
               <div>
                 <Form.Item
-                  style={{ width: "60%", marginLeft: "95px" }}
-                  name='name'
-                  onChange={handleChange}
-                  rules={[
-                    {
-                      required: true,
-                      message: "El email es requerido",
-                    },
-                    {
-                      message: "Ingrese un mail válido",
-                      type: "email",
-                    },
-                  ]}>
-                  <Input placeholder='Ej: talentos@itesa.com.ar' name='email' />
+                  // style={{ width: "60%", marginLeft: "95px" }}
+                  name='userName'
+                  onChange={handleInputChange}>
+                  <Input placeholder={userName} name='userName' />
+                </Form.Item>
+              </div>
+              <div>
+                <Form.Item
+                  // style={{ width: "60%", marginLeft: "95px" }}
+                  name='userLastName'
+                  onChange={handleInputChange}>
+                  <Input placeholder={userLastName} name='userLastName' />
                 </Form.Item>
               </div>
               <div className='modal-input'>
@@ -126,7 +150,7 @@ export default ({ user }) => {
                   Confirmar cambios
                 </button>
               </div>
-            </Form> */}
+            </Form>
           </div>
           {/* <h5 style={{ color: "grey", marginLeft: "95px" }}>MAIL DEL PERFIL</h5>
           <Form onFinish={success}>

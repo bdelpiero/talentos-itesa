@@ -6,7 +6,7 @@ import EditUserContainer from "../containers/EditUserContainer";
 
 const { Title, Text } = Typography;
 
-export default ({ user }) => {
+export default ({ user, setCurrentUser }) => {
   return (
     <>
       <Row align='top' justify='end' className='mini-logo'>
@@ -21,7 +21,7 @@ export default ({ user }) => {
           </Text>
         </Col>
         <Col className='avatar'>
-          <EditUserContainer user={user} />
+          <EditUserContainer user={user} setCurrentUser={setCurrentUser} />
           {/* <div>
             <Avatar size={64} icon={<UserOutlined />} className='avatar' />
             <Text type='secondary'>

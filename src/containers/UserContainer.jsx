@@ -54,7 +54,7 @@ export default () => {
       </Sider>
       <Layout>
         <Header className='header-user'>
-          <HeaderComponent user={currentUser} />
+          <HeaderComponent user={currentUser} setCurrentUser={setCurrentUser} />
         </Header>
         <Content className='content-user' xs={24} sm={12} md={8}>
           <Row
