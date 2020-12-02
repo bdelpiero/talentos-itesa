@@ -8,7 +8,7 @@ const { Title } = Typography;
 
 const data = [
   {
-    valor: "$50000",
+    valor: "$50.000",
   },
   {
     valor: "$80.000",

@@ -213,20 +213,19 @@ trabajando con  user Cards
   font-family: "arial";
   color: #0b2257;
   font-size: 100%;  
-  width: 400px;
   border-radius:42px;  
   margin: auto; 
-  height: 300px !important; 
-  min-height: 100% !important;
-}
-
-.bodyCard div {
-  display: flex;
-  flex-direction: column; 
-  height: 90% !important; 
-  box-sizing: content-box;
+  min-height: 100% !important;    
+  width: 25em;
+  height: 20em !important; 
+  background-color: whitesmoke;
+  background: whitesmoke; 
+  box-shadow: -1px 3px 15px -6px gray;
+  padding: 0;
   
 }
+
+
 
 #subtittle {
   font-family: "Open Sans Semibold", arial;
@@ -240,6 +239,25 @@ trabajando con  user Cards
   font-size: 100%;
   font-stretch: expanded;
 }
+
+/* ----------------------
+trabajando con  user Cards
+---------------------- */
+
+.Payments{
+  width: 95% !important;
+  content: center;
+  padding: 1em;
+  border-radius:20px;  
+  margin: auto;
+
+
+}
+
+
+
+
+
 
 .buttonCard {
   background-color: #9e39ff;
@@ -400,11 +418,11 @@ Trabajando con Admin Cards/DashBoard
   flex-direction: column;
   justify-content: center;
   justify-content: space-around;
-  width: 14rem;
-  height: 11rem;
+  width: 12rem;
+  height: 10rem;
   background-color: whitesmoke;
   background: whitesmoke;
-  border-radius: 25% !important;
+  border-radius: 20% !important;
   text-align: center !important;
   box-shadow: -1px 3px 15px -6px gray;
   color: #9e39ff;
@@ -418,7 +436,6 @@ Trabajando con Admin Cards/DashBoard
 .admin-cards :hover {
   color: #9e39ff;
 }
-
 
 .invite_msg {
   margin: 10px !important;

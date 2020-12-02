@@ -11,92 +11,69 @@ const data = [
   {
     valor: "$80.000",
   },
+  {
+    valor: "$20.000",
+  },
+  {
+    valor: "$80.000",
+  },
+  {
+    valor: "$20.000",
+  },
 ];
 
 class PagosFreelace extends Component {
   render() {
     return (
-      <Col xs={24} sm={12} md={24}>
-        <div className="Pagos">
-          <Title level={2}>Pagos</Title>
-        </div>
-        <Card className="bodyCard2">
-          <List
+      <>
+          <Title level={3} style={{width: '100%'}}>
+            Pagos 
+          </Title> 
+          <Card className="Payments" >       
+          <List           
             itemLayout="horizontal"
             dataSource={data}
             renderItem={(item) => (
-              <List.Item>
-                <List.Item.Meta
-                  avatar={
-                    <Avatar
-                      id="imgPagos"
-                      src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                    />
+              <List.Item key={item.valor}>                
+                <List.Item.Meta                
+                  avatar={ 
+                  <Avatar
+                    className='avatar-payments'
+                    id="avatar-payments"
+                    src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                  />
                   }
-                  title={
-                    <a href="/freelance" className="titlePagos">
-                      {item.valor}
-                    </a>
-                  }
+                  title={item.valor}
                   description={
-                    <Row justify="end">
-                      <Col xs={24} sm={12} md={6}>
-                        <p className="subtittle2">Proyecto:</p>
-                        <p className="text2">ITS202|Satapp</p>
-                      </Col>
-                      <Col xs={24} sm={12} md={6}>
-                        <p className="subtittle2">Factura:</p>
-                        <p className="text2">1 de 4</p>
-                      </Col>
-                      <Col xs={24} sm={12} md={6}>
-                        <p className="subtittle2">Fecha de pago</p>
-                        <p className="text2">02/05/2020</p>
-                      </Col>
-                      <Col xs={24} sm={12} md={6}>
-                        <>
-                          <Button className="buttonPagos2" shape="round">
-                            Ver comprobante de pago <DownloadOutlined />{" "}
-                          </Button>
-                        </>
-                      </Col>
-                    </Row>
+                      <Row>
+                        <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} className='list-description'>
+                          <p>Proyecto:</p>
+                          <p>ITS202|Satapp</p>
+                        </Col>
+                        <Col xs={{ span: 11, offset: 1 }} lg={{ span: 6, offset: 2 }}className='list-description'>
+                          <p>Factura:</p>
+                          <p>1 de 4</p>
+                        </Col>
+                        <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }} className='list-description'>
+                          <p>Fecha de pago:</p>
+                          <p>02/05/2020</p>
+                        </Col>
+                      </Row>
                   }
                 />
+                <Button className="list-button-payments" shape="round">
+                  Ver comprobante de pago <DownloadOutlined />{" "}
+                </Button>
+                
               </List.Item>
             )}
           />
-        </Card>
-      </Col>
-    );
+      </Card>
+      </>
+    )
   }
 }
 
 export default PagosFreelace;
 
-{
-  /* <Card className="bodyCard2" >
-          <div className="space-align-container">
-            <div className="space-align-block">
-            <h3 className="textPagos">$ 80.000</h3>
-              <img id="imgPagos" src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar"></img>
-            <Row justify="end">                                          
-                <Col span={5}>
-                  <p className="subtittle2">Proyecto:</p>
-                  <p className="text2">ITS202|Satapp</p>
-                </Col>
-                <Col span={5}>
-                  <p className="subtittle2">Factura:</p>
-                  <p className="text2">1 de 4</p>
-                </Col>
-                <Col span={5}>
-                  <p className="subtittle2">Fecha de pago</p>
-                  <p className="text2">02/05/2020</p>
-                </Col>
-                <Col span={5}>
-                <Button className="buttonPagos" shape="round" >Ver comprobante de pago <DownloadOutlined /> </Button>
-                </Col>
-              </Row>
-            </div>            
-          </div>
-        </Card> */
-}
+

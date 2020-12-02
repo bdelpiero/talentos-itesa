@@ -10,6 +10,7 @@ import Error404 from "../components/404";
 import { useRecoilState } from "recoil";
 import { user, projectInvited } from "../atoms/index";
 import { db } from "../../firebase/firebase";
+import Navbar from "../components/Navbar";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -19,6 +20,8 @@ export default () => {
 
   const { logout } = authUser();
   const history = useHistory();
+  const { Content } = Layout;
+  const [item, setItem] = React.useState(1);
 
   const handleLogout = () => {
     logout();
@@ -48,28 +51,16 @@ export default () => {
   return !currentUser ? (
     <Error404 />
   ) : (
-    <Layout>
-      <Sider className='sider-user' justify='center'>
-        <Sidebar handleLogout={handleLogout} />
-      </Sider>
+    <Layout>      
+        <Sidebar setItem={setItem} handleLogout={handleLogout} />      
       <Layout>
-        <Header className='header-user'>
-          <HeaderComponent user={currentUser} />
-        </Header>
-        <Content className='content-user' xs={24} sm={12} md={8}>
-          <Row
-            className='content-row'
-            gutter={{ xs: 6, sm: 16, md: 24, lg: 32 }}
-            justify='space-around'
-            align='middle'>
+        <Navbar />
+          <HeaderComponent user={currentUser} />        
+        <Content className='content-user' >
+          <Row  className="admin-row">
             <CardsFreelancer />
           </Row>
-
-          <Row
-            className='content-row'
-            gutter={{ xs: 6, sm: 16, md: 24, lg: 32 }}
-            justify='space-around'
-            align='middle'>
+          <Row >
             <PagosFreelace />
           </Row>
         </Content>
