@@ -4,7 +4,6 @@ import RegisterFreelancer from "../components/RegisterFreelancer";
 import { db } from "../../firebase/firebase";
 import { authUser } from "../../firebase/auth/auth";
 import { storage } from "../../firebase/firebase";
-
 // UTILS
 import Logo from "../../views/logo-itesa.svg";
 import SignedDocument from "../components/pdfs/SignedDocument";
@@ -106,6 +105,7 @@ function RegisterFreelancerContainer() {
         db.collection("users")
           .doc(uid)
           .set({
+            id: uid,
             name: data.name,
             lastName: data.lastName,
             freelancerType: data.freelancerType,

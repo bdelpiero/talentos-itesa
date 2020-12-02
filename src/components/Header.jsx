@@ -1,16 +1,16 @@
-import React,{ useState} from "react";
+import React, { useState } from "react";
 import logo from "../../views/logo-itesa.svg";
 import { UserOutlined } from "@ant-design/icons";
 import { Row, Col, Typography, Avatar } from "antd";
+import EditUserContainer from "../containers/EditUserContainer";
 
 const { Title, Text } = Typography;
 
-export default ({user}) => {
-  
+export default ({ user }) => {
   return (
     <>
       <Row align='top' justify='end' className='mini-logo'>
-      <img src={logo}  className='logo'/>
+        <img src={logo} className='logo' />
       </Row>
 
       <Row justify='space-between' align='top'>
@@ -21,8 +21,13 @@ export default ({user}) => {
           </Text>
         </Col>
         <Col className='avatar'>
-          <Avatar size={64} icon={<UserOutlined />} className='avatar' />
-          <Text type='secondary'>{user.name} {user.lastName}</Text>
+          <EditUserContainer user={user} />
+          {/* <div>
+            <Avatar size={64} icon={<UserOutlined />} className='avatar' />
+            <Text type='secondary'>
+              {user.name} {user.lastName}
+            </Text>
+          </div> */}
         </Col>
       </Row>
     </>
