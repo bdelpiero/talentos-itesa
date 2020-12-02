@@ -5,16 +5,16 @@ import { Form, Input, Button, Typography, Alert } from "antd";
 export default ({ handleInputChange, handleSubmit, data, form, isLogin }) => {
   const layout = {
     labelCol: {
-      span: 8,
+      span: 2,
     },
     wrapperCol: {
-      span: 16,
+      span: 2,
     },
   };
   const tailLayout = {
     wrapperCol: {
-      offset: 8,
-      span: 16,
+      offset: 2,
+      span: 2,
     },
   };
   const { Title } = Typography;
@@ -90,6 +90,11 @@ export default ({ handleInputChange, handleSubmit, data, form, isLogin }) => {
             Don't have an account? Register
           </Link>
         </div>
+        <div className='register-link'>
+       <Link to='/forgotPassword' style={{ color: "gray" }}>
+            Forgot Password?
+            </Link>
+       </div>
       </Form>
     </div>
   );
