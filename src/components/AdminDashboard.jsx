@@ -1,6 +1,7 @@
 import React from "react";
-import { Layout, Row } from "antd";
+import { Layout, Row, Card } from "antd";
 import { authUser } from "../../firebase/auth";
+import Briefing from "../../views/briefing.svg";
 
 // COMPONENTS & CONTAINERS
 import InviteContainer from "../containers/InviteContainer";
@@ -30,7 +31,19 @@ function AdminDashboard({ handleLogout }) {
             <>
               <Row className="admin-row">
                 <InviteContainer />
-                <NewProjectContainer />
+
+                <Card
+                  className="admin-cards"
+                  style={{ background: "whitesmoke", border: "none" }}
+                >
+                  <img src={Briefing} className="icono-sider" />
+                  {/* <div className="admin-button">
+                    <h4 style={{ color: "#9e39ff" }}>Crear proyecto nuevo</h4>
+                  </div> */}
+                  <NewProjectContainer />
+                </Card>
+
+
                 <AddPaymentContainer />
                 <ResumeContainer />
               </Row>

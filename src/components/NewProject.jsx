@@ -1,5 +1,5 @@
 import React from "react";
-import Briefing from "../../views/briefing.svg";
+
 import { Modal, Button, Card, Form, Input, Select, DatePicker } from "antd";
 import { CloseCircleOutlined } from "@ant-design/icons";
 
@@ -27,16 +27,9 @@ function NewProject({
 
   return (
     <div className="Modal">
-      <Card
-        className="admin-cards"
-        style={{ background: "whitesmoke", border: "none" }}
-        onClick={openModal}
-      >
-        <img src={Briefing} className="icono-sider" />
-        <div className="admin-button">
-          <h4 style={{ color: "#9e39ff" }}>Crear proyecto nuevo</h4>
-        </div>
-      </Card>
+      <Button onClick={openModal} className="modal-button">
+        Crear Proyecto
+      </Button>
 
       <Modal
         visible={modal}
