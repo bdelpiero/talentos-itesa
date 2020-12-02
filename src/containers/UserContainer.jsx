@@ -54,15 +54,18 @@ export default () => {
     <Layout>      
         <Sidebar setItem={setItem} handleLogout={handleLogout} />      
       <Layout>
+        
         <Navbar />
           <HeaderComponent user={currentUser} />        
         <Content className='content-user' >
           <Row  className="admin-row">
             <CardsFreelancer />
           </Row>
+
           <Row >
             <PagosFreelace />
           </Row>
+
         </Content>
         {/* <Footer style={{ textAlign: 'center' }}>Talentos ITESA ©2020 Created by Plataforma 5</Footer> */}
       </Layout>
