@@ -23,6 +23,7 @@ export default ({ handleLogout, setItem }) => {
         trigger={null}
       >
         <Menu
+          className='ulList-sider'
           mode="inline"
           defaultSelectedKeys={["1"]}
           onClick={({ item, key, keyPath, domEvent }) => {
@@ -38,7 +39,7 @@ export default ({ handleLogout, setItem }) => {
             button
             onClick={() => setItem(1)}
           >
-            <div>
+            <div className='sider-bottons'>
               <HomeOutlined className="icon-sider-buttons " />
               <p className="text-sider-buttons">Home</p>
             </div>
@@ -50,21 +51,21 @@ export default ({ handleLogout, setItem }) => {
             button
             onClick={() => setItem(2)}
           >
-            <div>
+            <div className='sider-bottons'>
               <BarChartOutlined className="icon-sider-buttons " />
               <p className="text-sider-buttons">Proyectos</p>
             </div>
           </Menu.Item>
             {currentUser.isAdmin ?
           <Menu.Item key="3" className="sider-cards">
-            <div>
+            <div className='sider-bottons'>
               <TeamOutlined className="icon-sider-buttons " />
               <p className="text-sider-buttons">Perfiles</p>
             </div>
           </Menu.Item>
                : null }
-          <Menu.Item key="4" className="sider-cards">
-            <div>
+          <Menu.Item key="4" className="sider-cards" id='logout'>
+            <div className='sider-bottons'>
               <LogoutOutlined className="icon-sider-buttons " />
               <p className="text-sider-buttons">Logout</p>
             </div>
