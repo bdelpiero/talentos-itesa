@@ -13,7 +13,19 @@ function AllProjectsContainer() {
       });
   }, []);
 
-  return <AllProjects projects={projects} />;
+  const deleteProject = (project)=>{
+    
+      db.collection("projects")
+        .doc(project.id)
+        .delete()
+        .then(() => {
+          console.log("project deleted")
+        });
+  }
+
+  return <AllProjects 
+  deleteProject={deleteProject}
+  projects={projects} />;
 }
 
 export default AllProjectsContainer;

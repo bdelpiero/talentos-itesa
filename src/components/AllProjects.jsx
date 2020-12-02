@@ -2,10 +2,11 @@ import React from "react";
 import { Table, Tag, Space, Button, Card, List, Avatar, Row, Col } from "antd";
 // import ModalUser from "../components/ModalAddUser"
 import { Typography } from "antd";
+import InviteProjectContainer from "../containers/InviteProjectContainer";
 
 const { Title } = Typography;
 
-function AllProjects({ projects }) {
+function AllProjects({ projects, deleteProject }) {
   const columns = [
     {
       title: "PROYECTOS",
@@ -38,7 +39,7 @@ function AllProjects({ projects }) {
             {/* <ModalUser/> */}
           </Space>
           <Space size="middle">
-            <Button style={{ color: "#9749f8" }}> INVITAR </Button>
+            <InviteProjectContainer />
             {/* <ModalUser/> */}
           </Space>
         </div>
@@ -48,30 +49,38 @@ function AllProjects({ projects }) {
     {
       title: "",
       key: "delete",
-      render: (text, record) => (
-        <div>
-          <Space size="middle">
-            <Button style={{ color: "#9749f8" }}> ELIMINAR </Button>
-            {/* <ModalUser/> */}
-          </Space>
-        </div>
-      ),
+
+      render: (proyectos) => {
+        console.log(proyectos, " dentro del render")
+        return (
+          <div>
+            <Space size="middle">
+              <Button style={{ color: "#9749f8" }} onClick={deleteProject}>
+                ELIMINAR
+              </Button>
+              {/* <ModalUser/> */}
+            </Space>
+          </div>
+        );
+      },
     },
   ];
 
   const data = projects.map((project) => {
-    return project.data();
+    let proyectos = project.data();
+    proyectos.id = project.id;
+    // console.log(proyectos, " estos son los proyectos con id");
+    return proyectos;
   });
 
-  console.log(data, "esto es data ");
   return (
     <div style={{ width: "100%" }}>
       <Row>
         <Col span={12}>
-        <Title> Todos los Proyectos </Title>
+          <Title> Todos los Proyectos </Title>
         </Col>
         <Col span={12}>
-        <Button style={{float:"right"}}> CREAR PROYECTO </Button>
+          <Button style={{ float: "right" }}> CREAR PROYECTO </Button>
         </Col>
       </Row>
 
@@ -83,4 +92,3 @@ function AllProjects({ projects }) {
 }
 
 export default AllProjects;
-
