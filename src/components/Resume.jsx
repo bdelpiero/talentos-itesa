@@ -1,29 +1,37 @@
 import React from 'react'
-import {Card,Row,Col} from 'antd'
+import {Card,Row,Col, Divider} from 'antd'
 import {RightCircleOutlined } from '@ant-design/icons';
 
-export default ({handleLogout})=>{
+export default ()=>{
     return (
-    <div>   
-        <Card bordered={false} title="TU RESUMEN" bordered={false} >
-            <h3></h3>
-            
-            <Row gutter={24}>
-            <Col span={8}>
-            Proyectos on going
-            </Col>
-            <Col span={8}>
-            Pagos pendientes
-            </Col>
-            <Col span={8}>
-            Proyectos totales
-            </Col>
+    <div>
+        <Card className='resumen-card'>
+            <Row className='resumen-title'>
+            TU RESUMEN
             </Row>
-            <hr/>
-            <h6> RECORDATORIO </h6>
-            <RightCircleOutlined />
+            <Divider style={{margin: '1rem auto'}}/>
+            <Row gutter={24}>
+            <Col span={8} className='resumen-col' style={{padding: 0}}>
+            <p className='resumen-card-title' >2</p>
+            <p className='resumen-text'> Proyectos on going </p>
+            </Col>
+            <Col span={8} className='resumen-col' style={{padding: 0}}>
+            <p className='resumen-card-title' >$ 1000</p>
+            <p className='resumen-text'> Pagos pendientes </p>
+            </Col>
+            <Col span={8} className='resumen-col' style={{padding: 0}}>
+            <p className='resumen-card-title' >100</p>
+            <p className='resumen-text'> Proyectos totales</p>
+            </Col>
+            <Divider style={{margin: '1rem auto'}}/>
+            </Row>
+            <Row className='resumen-recordatorio'>
+                <p style={{ color: '#9e39ff', fontSize: '0.5rem'}}>RECORDATORIO</p>
+                <br/>
+                <RightCircleOutlined />
+            </Row>
         </Card>
-        </div>
+    </div>
     )
 }
 

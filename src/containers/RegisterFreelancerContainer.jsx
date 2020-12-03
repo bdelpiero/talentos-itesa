@@ -2,8 +2,11 @@ import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import RegisterFreelancer from "../components/RegisterFreelancer";
 import { db } from "../../firebase/firebase";
-import { authUser } from "../../firebase/auth/auth";
+import { authUser } from "../../firebase/auth";
 import { storage } from "../../firebase/firebase";
+import { atomLogin } from "../atoms/index";
+import { useRecoilState } from "recoil";
+
 // UTILS
 import Logo from "../../views/logo-itesa.svg";
 import SignedDocument from "../components/pdfs/SignedDocument";
@@ -14,13 +17,12 @@ import axios from "axios";
 function RegisterFreelancerContainer() {
   const signatureRef = useRef({});
   const history = useHistory();
-  const { signup, setCurrentUser } = authUser();
+  const { signup } = authUser();
   const [imageData, setImageData] = useState("");
   const [step, setStep] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLogin, setIsLogin] = useRecoilState(atomLogin);
   const [errorSignature, setErrorSignature] = useState(false);
   const [invited, setInvited] = useState(true);
-  const [contractUrl, setContractUrl] = useState("");
 
   const [data, setData] = useState({
     name: "",
@@ -82,7 +84,7 @@ function RegisterFreelancerContainer() {
 
   const handleSubmit = (e, div) => {
     if (!imageData) return setErrorSignature(true);
-    setIsLoading(true);
+    setIsLogin({ loading: true });
     const blob = pdf(
       <SignedDocument
         imageData={imageData}
@@ -116,10 +118,10 @@ function RegisterFreelancerContainer() {
                 nonDisclosure: downloadUrl,
                 email: data.email,
               })
-              .then(() => {
-                setIsLoading(false);
-                history.push("/freelancer");
-              })
+              // .then(() => {
+              //   setIsLoading(false);
+              //   history.push("/freelancer");
+              // })
               .then(() => {
                 db.collection("invites").doc(`${data.email}`).delete();
               });
@@ -160,7 +162,7 @@ function RegisterFreelancerContainer() {
           setData={setData}
           errorSignature={errorSignature}
           setErrorSignature={setErrorSignature}
-          isLoading={isLoading}
+          isLogin={isLogin.loading}
         />
       </div>
     </div>

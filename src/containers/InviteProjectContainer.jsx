@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import InviteCard from "../components/InviteCard";
+import InviteProject from "../components/InviteProject";
 import { db } from "../../firebase/firebase";
 import { authUser } from "../../firebase/auth";
 import CheckCircle from "../../views/check.svg";
 import { Modal, Card } from "antd";
 
-function InviteContainer() {
+function InviteProjectContainer() {
   const { signup } = authUser();
   const [modal, setModal] = useState(false);
-  const [email, setEmail] = useState("");
+  const [project, setProject] = useState("");
   const openModal = () => {
     setModal(true);
   };
@@ -17,13 +17,13 @@ function InviteContainer() {
     setModal(false);
   };
   const handleChange = (e) => {
-    setEmail(e.target.value);
+    setProject(e.target.value);
   };
   function success() {
     closeModal();
-    db.collection("invites")
-      .doc(`${email}`)
-      .set({ email: email })
+    db.collection("users")
+      .doc(`${email}`) // sobre el id del usuario 
+      .set({ email: email }) // deberia agregar el id del project
       .then(() => {
         Modal.success({
           bodyStyle: {
@@ -52,7 +52,7 @@ function InviteContainer() {
       });
   }
   return (
-    <InviteCard
+    <InviteProject
       className='modal-outside'
       handleChange={handleChange}
       closeModal={closeModal}
@@ -63,4 +63,4 @@ function InviteContainer() {
   );
 }
 
-export default InviteContainer;
+export default InviteProjectContainer;

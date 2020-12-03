@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { authUser } from "../../firebase/auth/auth";
-import { Layout, Row, Col } from "antd";
+import { authUser } from "../../firebase/auth";
+import { Layout, Row, Result, Button } from "antd";
 import Sidebar from "../components/Sidebar";
 import HeaderComponent from "../components/Header";
 import PagosFreelace from "../components/PagosFreelace";
@@ -10,7 +10,8 @@ import Error404 from "../components/404";
 import { useRecoilState } from "recoil";
 import { user, projectInvited } from "../atoms/index";
 import { db } from "../../firebase/firebase";
-
+import Navbar from "../components/Navbar";
+import ContractProject from "../components/ContractProject";
 const { Header, Footer, Sider, Content } = Layout;
 
 export default () => {
@@ -19,6 +20,8 @@ export default () => {
 
   const { logout } = authUser();
   const history = useHistory();
+  const { Content } = Layout;
+  const [item, setItem] = React.useState(1);
 
   const handleLogout = () => {
     logout();
@@ -49,29 +52,26 @@ export default () => {
     <Error404 />
   ) : (
     <Layout>
-      <Sider className='sider-user' justify='center'>
-        <Sidebar handleLogout={handleLogout} />
-      </Sider>
+      <Sidebar setItem={setItem} handleLogout={handleLogout} />
       <Layout>
-        <Header className='header-user'>
-          <HeaderComponent user={currentUser} setCurrentUser={setCurrentUser} />
-        </Header>
-        <Content className='content-user' xs={24} sm={12} md={8}>
-          <Row
-            className='content-row'
-            gutter={{ xs: 6, sm: 16, md: 24, lg: 32 }}
-            justify='space-around'
-            align='middle'>
-            <CardsFreelancer />
-          </Row>
-
-          <Row
-            className='content-row'
-            gutter={{ xs: 6, sm: 16, md: 24, lg: 32 }}
-            justify='space-around'
-            align='middle'>
-            <PagosFreelace />
-          </Row>
+        <Navbar />
+        <HeaderComponent user={currentUser} setCurrentUser={setCurrentUser} />
+        <Content className='content-user'>
+          {item == 1 && (
+            <>
+              <Row className='admin-row'>
+                <CardsFreelancer setItem={setItem} />
+              </Row>
+              <Row>
+                <PagosFreelace />
+              </Row>
+            </>
+          )}
+          {item == 5 && (
+            <>
+              <ContractProject />
+            </>
+          )}
         </Content>
         {/* <Footer style={{ textAlign: 'center' }}>Talentos ITESA ©2020 Created by Plataforma 5</Footer> */}
       </Layout>

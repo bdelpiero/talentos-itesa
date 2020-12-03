@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
-import { auth, db } from "../firebase";
+import { auth, db } from './firebase';
 import { useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
-import { atomLogin, user } from "../../src/atoms/index";
+import { atomLogin, user } from "../src/atoms/index";
 
 const AuthContext = React.createContext();
 

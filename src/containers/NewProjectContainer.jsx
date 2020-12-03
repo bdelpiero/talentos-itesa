@@ -7,8 +7,8 @@ import { Modal, Form} from "antd";
 function NewProjectContainer() {
   const [name, setName] = useState("");
   const [status, setStatus] = useState("On Development");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [startDate, setStartDate] = useState([]);
+  const [endDate, setEndDate] = useState([]);
   const [term, setTerm] = useState("");
   const [modal, setModal] = useState(false);
   const [form] =Form.useForm()
@@ -17,12 +17,16 @@ function NewProjectContainer() {
     setName(e.target.value);
   };
 
-  const handleChangeStartDate = (e) => {
-    setStartDate(e.target.value);
+  const handleChangeStartDate = (value, dateString) => {
+    console.log(value,'esto es start date')
+    console.log(dateString,'esto es datestring')
+    setStartDate(dateString);
   };
 
-  const handleChangeEndDate = (e) => {
-    setEndDate(e.target.value);
+  const handleChangeEndDate = (value, dateString) => {
+    console.log(value,'esto es end date')
+    console.log(dateString,'esto es datestring')
+    setEndDate(dateString);
   };
 
   const handleChangeTerm = (e) => {
@@ -38,6 +42,7 @@ function NewProjectContainer() {
   };
 
   function success(){
+    closeModal()
     db.collection("projects")
       .add({
         name,
@@ -76,7 +81,6 @@ function NewProjectContainer() {
   return (
     <NewProject
       handleChangeName={handleChangeName}
-      // handleChangeStatus={handleChangeStatus}
       handleChangeStartDate={handleChangeStartDate}
       handleChangeEndDate={handleChangeEndDate}
       handleChangeTerm={handleChangeTerm}

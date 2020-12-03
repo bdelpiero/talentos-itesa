@@ -1,14 +1,22 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import logo from "../../views/logo-itesa.svg";
 import { UserOutlined } from "@ant-design/icons";
-import { Row, Col, Typography, Avatar } from "antd";
+import { Row, Col, Typography, Avatar, Layout } from "antd";
 import EditUserContainer from "../containers/EditUserContainer";
-
+import { useRecoilState } from "recoil";
+import { user } from "../atoms/index";
 const { Title, Text } = Typography;
 
-export default ({ user, setCurrentUser }) => {
+
+const { Header} = Layout;
+
+export default () => {
+  const [currentUser, setCurrentUser] = useRecoilState(user);
+  //console.log("buscando user", currentUser.lastName)
+
   return (
-    <>
+    <Header className="header-user">
       <Row align='top' justify='end' className='mini-logo'>
         <img src={logo} className='logo' />
       </Row>
@@ -17,7 +25,7 @@ export default ({ user, setCurrentUser }) => {
         <Col>
           <Title className='dashboard'>Dashboard</Title>
           <Text type='secondary' className='subtitulo'>
-            Bienvenido a Itesa, {user.name} :)
+            Bienvenido a Itesa, {currentUser.name + " " + currentUser.lastName} :)
           </Text>
         </Col>
         <Col className='avatar'>
@@ -30,6 +38,6 @@ export default ({ user, setCurrentUser }) => {
           </div> */}
         </Col>
       </Row>
-    </>
+      </Header>
   );
 };

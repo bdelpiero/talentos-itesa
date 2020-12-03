@@ -4,13 +4,13 @@ import { useRecoilState } from "recoil";
 import { projectInvited } from "../atoms/index";
 
 
-export default () => {
+export default ({setItem}) => {
   const [projectI, setProjectI] = useRecoilState(projectInvited);
   console.log("project en carfrelance", projectI)
   return (
     <>
-      <Col xs={24} sm={12} md={8} >
-       {projectI.name ? ( <Card className="bodyCard">
+      
+       {projectI && projectI.name ? ( <Card className="bodyCard">
           <h3 id="tittleCard">OFERTA DE PROYECTO</h3>
           <p id="subtittle">PROYECTO</p>
           <p>"{projectI.name}"</p>
@@ -21,18 +21,20 @@ export default () => {
           "$50.000"            
           </p>
           <div>
-          <Button className="buttonCard" shape="round">
+          <Button 
+          onClick={()=>setItem(5)}
+          className="buttonCard" 
+          shape="round">
             Firma Contrato
-          </Button></div>
-          
+          </Button></div>          
         </Card>)
         :
         <Card className="bodyCard">
         <h3 id="tittleCard">OFERTA DE PROYECTO</h3>
-        <p id="subtittle">NO TIENES PROJECTOS</p>
+        <p id="subtittle">NO TIENES PROYECTOS</p>
       </Card>}
-      </Col>
-      <Col xs={24} sm={12} md={8}>
+      
+      
         <Card className="bodyCard">
           <h3 id="tittleCard">PROXIMO PAGO</h3>
           <p id="subtittle">PROYECTO</p>
@@ -50,12 +52,12 @@ export default () => {
           </Button></div>
           
         </Card>
-      </Col>
-      <Col xs={24} sm={12} md={8}>
+      
+      
         <Card className="bodyCard">
            <h3 id="tittleCard">MI BANCO</h3>
           <p id="subtittle">CBU/Alias</p>
-          <p>Banco EL pepino</p>
+          <p>Banco EL P5</p>
           <p id="subtittle">TITULAR</p>
           <p>Agustin Fregossi</p>
           <p id="subtittle">BANCO</p>
@@ -65,7 +67,7 @@ export default () => {
             Modificar datos
           </Button></div>                 
         </Card>
-      </Col>
+      
     </>
   );
 };
