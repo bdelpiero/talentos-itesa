@@ -91,7 +91,7 @@ export default ({ handleInputChange, handleSubmit, data, form, isLogin }) => {
           </Link>
         </div>
         <div className='register-link'>
-       <Link to='/forgotPassword' style={{ color: "gray" }}>
+       <Link to='/reset-password' style={{ color: "gray" }}>
             Forgot Password?
             </Link>
        </div>

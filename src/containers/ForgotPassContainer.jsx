@@ -1,27 +1,21 @@
 import React, { useState } from "react";
 import ForgotPassword from "../components/ForgotPassword";
 import { authUser } from "../../firebase/auth";
+
 import Logo from "../../views/logo-itesa.svg";
 import { useRecoilState } from "recoil";
 
-import { isLoading } from "../atoms";
 import { atomLogin } from "../atoms";
-import { Form, message } from "antd";
+import { Form } from "antd";
 
 export default () => {
-  const [data, setData] = useState({
-    email: "",
-  });
-  const [error, setError] = useState("")
+  const [data, setData] = useState({ email: "" });
+  const [error, setError] = useState(false)
+  const [success, setSuccess] = useState(false)
   const [form] = Form.useForm();
   const [isLogin, setIsLogin] = useRecoilState(atomLogin);
-  const { login } = authUser();
-  const {resetPassword }=authUser();
+  const { resetPassword } = authUser();
   const [message, setMessage] = useState("")
-  const info = () => {
-    message.info("Check your inbox for further instructions");
-  };
-  
 
   const handleInputChange = (e) => {
     setData({
@@ -36,11 +30,21 @@ export default () => {
   };
 
 
-  const handleSubmit = () => {  
-    resetPassword(data.email);
-    setData({ email: ""});
-    setMessage("Check your inbox for further instructions")
-    form.resetFields();
+  const handleSubmit = () => {
+    setError(false)
+    setSuccess(false)
+    resetPassword(data.email).then(res => {
+      if (res) {
+        setError(true)
+        setMessage("This email is not registered")
+      } else {
+        setError(false)
+        setSuccess(true)
+        form.resetFields();
+        setData({ email: "" });
+        setMessage("Check your inbox for further instructions")
+      }
+    })
   };
 
   return (
@@ -57,6 +61,8 @@ export default () => {
           form={form}
           isLogin={isLogin}
           message={message}
+          error={error}
+          success={success}
         />
       </div>
     </div>

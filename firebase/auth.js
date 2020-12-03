@@ -19,7 +19,7 @@ export function AuthProvider({ children }) {
 
 
   function signup(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password);
+    return auth.createUserWithEmailAndPassword(email, password).catch(err => console.log(err))
   }
 
   function login(email, password) {
@@ -37,26 +37,26 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
-    console.log("ACA ESTA EL OBSERVER EN LOGOUT",observer)
+    
     observer.observer()
-    return auth.signOut();
+    return auth.signOut().catch(err => console.log(err))
   }
 
   function resetPassword(email) {
-    return auth.sendPasswordResetEmail(email);
+    return auth.sendPasswordResetEmail(email).catch(err => err)
   }
 
   function updateEmail(email) {
-    return currentUser.updateEmail(email);
+    return currentUser.updateEmail(email).catch(err => console.log(err))
   }
 
   function updatePassword(password) {
-    return currentUser.updatePassword(password);
+    return currentUser.updatePassword(password).catch(err => console.log(err))
   }
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
-      console.log("ACTIVO EL ON AUTH STATE CHANGE")
+
       if (authUser) {
         // se guarda una referencia al usuario
         const userRef = db.collection("users").doc(authUser.uid);
@@ -64,7 +64,7 @@ export function AuthProvider({ children }) {
 
  let obs =  userRef.onSnapshot(
           (docSnapshot) => {
-            console.log(`cambios recividos`, docSnapshot.data());
+           
             //se setea el usuario nuevamente con los cambios
             setCurrentUser(docSnapshot.data());
           },
@@ -73,7 +73,7 @@ export function AuthProvider({ children }) {
           }
         );
         setObserver({observer:obs})
-        console.log("OBSERVER", observer)
+      
         return userRef
           .get()
           .then((UserInfo) => {
