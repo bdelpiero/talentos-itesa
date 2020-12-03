@@ -151,6 +151,14 @@
 }
 
 /* ----------------------
+    CONTRACTPROJECT COMPONENT
+---------------------- */
+.col-contract {
+  height: 75vh;
+  background-color: whitesmoke;
+}
+
+/* ----------------------
     RESUMEN COMPONENT
 ---------------------- */
 
