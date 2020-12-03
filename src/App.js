@@ -16,7 +16,7 @@ function App() {
     <AuthProvider>
       <Switch>
         <Route exact path='/login' component={LoginContainer} />
-        <Route exact path='/forgotPassword' component={ForgotPassContainer} />
+        <Route exact path='/reset-password' component={ForgotPassContainer} />
         <Route exact path='/freelancer' component={UserContainer} />
         <Route exact path='/admin' component={AdminDashboardContainer} />
         <Route exact path='/pruebacard2' component={PagosFreelace} />

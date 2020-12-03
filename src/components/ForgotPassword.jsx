@@ -1,8 +1,8 @@
 import React from "react";
 import {Link} from 'react-router-dom'
-import { Form, Input, Button, Typography,Alert, message } from "antd";
+import { Form, Input, Button,Alert } from "antd";
 
-export default ({ handleInputChange, handleSubmit, data, form,isLogin, setMessage }) => {
+export default ({ handleInputChange, handleSubmit, data, form, isLogin, message, error, success }) => {
   
  
   return (
@@ -21,23 +21,30 @@ export default ({ handleInputChange, handleSubmit, data, form,isLogin, setMessag
               message: "Please input your username!",
             },
           ]}>
+            <div>
           <Input
             name='email'
             placeholder='Email'
             value={data.email}
             onChange={handleInputChange}
+            
           />
-        </Form.Item>
-        {isLogin.errorCode && 
-        <Form.Item>
-        <Alert
-          message="Error"
-          description={isLogin.errorMessage}          
-          type="error"
-          showIcon
-        />
-       </Form.Item>
+          {error && <Alert
+            style={{marginTop: '1.5rem'}}
+            message={message}
+            type="error"
+            showIcon
+            />
           }
+          {success && <Alert
+            style={{marginTop: '1.5rem'}}
+            message={message}
+            type="success"
+            showIcon
+            />
+          }
+            </div>
+        </Form.Item>
         <Form.Item>
           <Button
             loading={isLogin.loading}
