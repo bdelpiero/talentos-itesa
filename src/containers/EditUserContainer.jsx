@@ -43,7 +43,6 @@ export default ({ user, setCurrentUser }) => {
   };
 
   const [image, setImage] = useState("");
-  //const [url, setUrl] = useState("");
   const [previewUrl, setPreviewUrl] = useState(user.avatar || "");
 
   const handleChange = (e) => {
@@ -65,7 +64,6 @@ export default ({ user, setCurrentUser }) => {
     const task = storageRef.child(`images/${file.name}`);
     await task.put(file);
     await task.getDownloadURL().then((downloadUrl) => {
-      //console.log("downloadUlr", downloadUrl);
       db.collection("users")
         .doc(user.id)
         .update({
@@ -96,88 +94,83 @@ export default ({ user, setCurrentUser }) => {
       <Modal
         visible={modal}
         centered='true'
-        // cancelButtonProps={{ hidden: true }}
-        // okButtonProps={{
-        //   hidden: true,
-        // }}
+        cancelButtonProps={{ hidden: true }}
+        okButtonProps={{
+          hidden: true,
+        }}
         onCancel={closeModal}
         // closeIcon={<CloseCircleOutlined className='close-button' />}
         bodyStyle={{ color: "#9e39ff" }}>
         <>
-          <div className='modal-style'>
-            <h1>Editar perfil</h1>
-            <br />
-            {previewUrl ? (
-              <Avatar size={64} src={previewUrl} className='avatar' />
-            ) : (
-              <Avatar size={64} icon={<UserOutlined />} className='avatar' />
-            )}
-            <label
-              style={{
-                border: "1px solid #ccc",
-                display: "inline-block",
-                padding: "6 12",
-                cursor: "pointer",
-              }}>
-              <input
-                style={{ display: "none" }}
-                type='file'
-                onChange={handleChange}
-                accept='image/png, image/jpeg'
-              />
-              Upload image
-            </label>
+          <div className='modal-editProfile-container'>
+            <h1 className='modal-editProfile-header'>Editar datos de perfil</h1>
+            <div className='modal-editProfile'>
+              <div className='modal-editProfile-avatar'>
+                <br />
 
-            <Form onFinish={handleSubmit}>
-              <div>
-                <Form.Item
-                  // style={{ width: "60%", marginLeft: "95px" }}
-                  name='userName'
-                  onChange={handleInputChange}>
-                  <Input placeholder={userName} name='userName' />
-                </Form.Item>
+                <br />
+                <label
+                  style={{
+                    cursor: "pointer",
+                  }}>
+                  <input
+                    style={{ display: "none" }}
+                    type='file'
+                    onChange={handleChange}
+                    accept='image/png, image/jpeg'
+                  />
+                  {previewUrl ? (
+                    <Avatar size={100} src={previewUrl} className='avatar' />
+                  ) : (
+                    <Avatar
+                      size={100}
+                      icon={<UserOutlined />}
+                      className='avatar'
+                    />
+                  )}
+                </label>
               </div>
-              <div>
-                <Form.Item
-                  // style={{ width: "60%", marginLeft: "95px" }}
-                  name='userLastName'
-                  onChange={handleInputChange}>
-                  <Input placeholder={userLastName} name='userLastName' />
-                </Form.Item>
-              </div>
+
+              <Form>
+                <div>
+                  <Form.Item
+                    // style={{ width: "60%", marginLeft: "95px" }}
+                    name='userName'
+                    onChange={handleInputChange}>
+                    <Input placeholder={userName} name='userName' />
+                  </Form.Item>
+                </div>
+
+                <div>
+                  <Form.Item
+                    style={{ marginBottom: 0 }}
+                    name='userLastName'
+                    onChange={handleInputChange}>
+                    <Input placeholder={userLastName} name='userLastName' />
+                  </Form.Item>
+                </div>
+              </Form>
+            </div>
+            <div className='modal-editProfile-buttons'>
               <div className='modal-input'>
-                <button className='ok-button' type='submit'>
+                <button
+                  onClick={handleSubmit}
+                  className='modal-editProfile-button'
+                  // style={{ backgroundColor: "lightgrey" }}
+                >
                   Confirmar cambios
                 </button>
               </div>
-            </Form>
+              {/* <div className='modal-input'>
+                <button
+                  className='modal-editProfile-button'
+                  // style={{ backgroundColor: "lightgrey" }}
+                  onClick={() => closeModal()}>
+                  Cancelar
+                </button>
+                </div> */}
+            </div>
           </div>
-          {/* <h5 style={{ color: "grey", marginLeft: "95px" }}>MAIL DEL PERFIL</h5>
-          <Form onFinish={success}>
-            <div>
-              <Form.Item
-                style={{ width: "60%", marginLeft: "95px" }}
-                name='email'
-                onChange={handleChange}
-                rules={[
-                  {
-                    required: true,
-                    message: "El email es requerido",
-                  },
-                  {
-                    message: "Ingrese un mail válido",
-                    type: "email",
-                  },
-                ]}>
-                <Input placeholder='Ej: talentos@itesa.com.ar' name='email' />
-              </Form.Item>
-            </div>
-            <div className='modal-input'>
-              <button className='ok-button' type='submit'>
-                INVITAR
-              </button>
-            </div>
-          </Form> */}
         </>
       </Modal>
     </>

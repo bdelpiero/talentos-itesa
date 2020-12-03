@@ -136,22 +136,20 @@ trabajando con  user Cards
 .bodyCard {
   font-family: "arial";
   color: #0b2257;
-  font-size: 100%;  
+  font-size: 100%;
   width: 300px;
-  border-radius:42px;  
-  margin: auto; 
-  height: 300px !important; 
+  border-radius: 42px;
+  margin: auto;
+  height: 300px !important;
   min-height: 100% !important;
 }
 
 .bodyCard div {
   display: flex;
-  flex-direction: column; 
-  height: 90% !important; 
+  flex-direction: column;
+  height: 90% !important;
   box-sizing: content-box;
-  
 }
-
 
 h1 {
   color: white;
@@ -212,7 +210,6 @@ trabajando con Pagos Freelance
   background: rgba(150, 150, 150, 0.2);
 }
 
-
 .text2 {
   font-family: "Open Sans Semibold";
   color: black;
@@ -223,7 +220,7 @@ trabajando con Pagos Freelance
   font-family: "Open Sans Semibold";
   color: #8990ad;
 }
-.Pagos{
+.Pagos {
   text-align: left;
   width: 95% !important;
 }
@@ -313,7 +310,7 @@ register freelancer
 .register-button {
   background-color: #a77ffa;
   border: 0;
-  margin: 1vh 0
+  margin: 1vh 0;
 }
 
 .register-button span {
@@ -450,23 +447,74 @@ Trabajando con Admin Cards/DashBoard
   font-size: 16px;
 }
 
-.ant-modal-footer{
-padding: 0;
-border-top: none;
+.ant-modal-footer {
+  padding: 0;
+  border-top: none;
 }
 
 .ant-modal-content {
   border-radius: 20px;
 }
 
-.modal-input{
+.modal-input {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
-.modal-formularios{
+.modal-formularios {
   width: 180%;
-  margin-left: 95px
+  margin-left: 95px;
+}
+
+.modal-editProfile-container {
+  padding: 15px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* height: 300px; */
+}
+
+.modal-editProfile {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  /* font-family: Raleway; */
+  height: 200px;
+}
+
+.modal-editProfile-header {
+  font-size: 24px;
+  color: black;
+  text-align: center;
+  font-weight: 300;
+}
+
+.modal-editProfile-avatar {
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-editProfile-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-editProfile-button {
+  background-color: #9e39ff;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 7px;
+  margin: 0 10px;
+  width: auto;
+  font-family: "arial";
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
 }
