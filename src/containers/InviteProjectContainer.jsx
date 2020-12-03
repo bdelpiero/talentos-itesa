@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import InviteProject from "../components/InviteProject";
 import { db } from "../../firebase/firebase";
-import { authUser } from "../../firebase/auth";
+
 import CheckCircle from "../../views/check.svg";
 import { Modal, Card } from "antd";
 
 function InviteProjectContainer({ proyecto }) {
-  const { signup } = authUser();
   const [modal, setModal] = useState(false);
-  const [projects, setProjects] = useState([]);
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState("");
   const openModal = () => {
@@ -44,11 +42,14 @@ function InviteProjectContainer({ proyecto }) {
     const usersProject = proyecto.users
       ? [...proyecto.users, selectedUser]
       : [selectedUser];
-    db.collection("projects").doc(proyecto.id).update({ users: usersProject });
-
-    db.collection("users")
-      .doc(selectedUser)
-      .set({ projectInvited: proyecto.id }, { merge: true });
+    db.collection("projects")
+      .doc(proyecto.id)
+      .update({ users: usersProject })
+      .then(() => {
+        db.collection("users")
+          .doc(selectedUser)
+          .update({ projectInvited: proyecto.id });
+      });
   }
 
   function success() {

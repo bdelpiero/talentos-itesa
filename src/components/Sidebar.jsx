@@ -12,8 +12,8 @@ import {
 export default ({ handleLogout, setItem }) => {
   const [currentUser, setCurrentUser] = useRecoilState(user);
   const { Sider } = Layout;
-  console.log("buscando admin", currentUser.isAdmin);
 
+  console.log("ESTE CONSOLOG ES EN SIDEBAR", currentUser);
   return (
     <Sider
       breakpoint="lg"
@@ -38,24 +38,14 @@ export default ({ handleLogout, setItem }) => {
           if (key == 4) handleLogout();
         }}
       >
-        <Menu.Item
-          key="1"
-          className="sider-cards"
-          button
-          onClick={() => setItem(1)}
-        >
+        <Menu.Item key="1" className="sider-cards" onClick={() => setItem(1)}>
           <div className="sider-bottons">
             <HomeOutlined className="icon-sider-buttons " />
             <p className="text-sider-buttons">Home</p>
           </div>
         </Menu.Item>
 
-        <Menu.Item
-          key="2"
-          className="sider-cards"
-          button
-          onClick={() => setItem(2)}
-        >
+        <Menu.Item key="2" className="sider-cards" onClick={() => setItem(2)}>
           <div className="sider-bottons">
             <BarChartOutlined className="icon-sider-buttons " />
             <p className="text-sider-buttons">Proyectos</p>

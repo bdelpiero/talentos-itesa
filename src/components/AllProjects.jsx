@@ -1,6 +1,6 @@
 import React from "react";
 import { Table, Tag, Space, Button, Card, List, Avatar, Row, Col } from "antd";
-// import ModalUser from "../components/ModalAddUser"
+
 import { Typography, Spin } from "antd";
 import InviteProjectContainer from "../containers/InviteProjectContainer";
 import NewProjectContainer from "../containers/NewProjectContainer";

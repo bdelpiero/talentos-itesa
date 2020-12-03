@@ -56,7 +56,7 @@ export default () => {
       <Sidebar setItem={setItem} handleLogout={handleLogout} />
       <Layout>
         <Navbar />
-        <HeaderComponent user={currentUser} />
+        <HeaderComponent user={currentUser} setCurrentUser={setCurrentUser} />
         <Content className="content-user">
           {item == 1 && (
             <>

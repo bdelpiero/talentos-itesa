@@ -94,10 +94,10 @@ function InviteProject({
                       placeholder="Perfil"
                       allowClear
                     >
-                      {users.map((user) => {
+                      {users.map((user1) => {
                         return (
-                          <Option key={user.id} value={user.id}>
-                            {user.name}
+                          <Option key={user1.id} value={user1.id}>
+                            {user1.name}
                           </Option>
                         );
                       })}

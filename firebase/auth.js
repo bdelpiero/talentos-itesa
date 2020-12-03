@@ -15,6 +15,8 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [isLogin, setIsLogin] = useRecoilState(atomLogin);
   const history = useHistory();
+  const [observer, setObserver] = useState({observer: ""})
+
 
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password);
@@ -35,6 +37,8 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
+    console.log("ACA ESTA EL OBSERVER EN LOGOUT",observer)
+    observer.observer()
     return auth.signOut();
   }
 
@@ -51,12 +55,14 @@ export function AuthProvider({ children }) {
   }
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      console.log("ACTIVO EL ON AUTH STATE CHANGE")
+      if (authUser) {
         // se guarda una referencia al usuario
-        const userRef = db.collection("users").doc(user.uid);
+        const userRef = db.collection("users").doc(authUser.uid);
         //se establece un observer que esta atento a los cambios en la base de datos
-        let observer = userRef.onSnapshot(
+
+ let obs =  userRef.onSnapshot(
           (docSnapshot) => {
             console.log(`cambios recividos`, docSnapshot.data());
             //se setea el usuario nuevamente con los cambios
@@ -66,6 +72,8 @@ export function AuthProvider({ children }) {
             console.log(`Encountered error: ${err}`);
           }
         );
+        setObserver({observer:obs})
+        console.log("OBSERVER", observer)
         return userRef
           .get()
           .then((UserInfo) => {
@@ -91,7 +99,7 @@ export function AuthProvider({ children }) {
     });
     return unsubscribe;
   }, []);
-
+  
   const value = {
     currentUser,
     login,
