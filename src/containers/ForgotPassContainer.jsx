@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ForgotPassword from "../components/ForgotPassword";
 import { authUser } from "../../firebase/auth";
+
 import Logo from "../../views/logo-itesa.svg";
 import { useRecoilState } from "recoil";
 
@@ -36,7 +37,8 @@ export default () => {
   };
 
 
-  const handleSubmit = () => {  
+  const handleSubmit = () => { 
+    
     resetPassword(data.email);
     setData({ email: ""});
     setMessage("Check your inbox for further instructions")
