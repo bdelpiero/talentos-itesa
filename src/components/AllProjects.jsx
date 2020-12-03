@@ -46,9 +46,9 @@ function AllProjects({ projects, deleteProject, handleClick }) {
     {
       title: "",
       key: "action",
-      render: () => (
+      render: (proyecto) => (
         <div>
-          <InviteProjectContainer />
+          <InviteProjectContainer proyecto={proyecto} />
         </div>
       ),
     },
@@ -84,7 +84,7 @@ function AllProjects({ projects, deleteProject, handleClick }) {
 
       <div>
         {/* <Spin delay={900} tip={"Cargando proyectos ..."}> */}
-          <Table columns={columns} dataSource={projects} />
+        <Table columns={columns} dataSource={projects} />
         {/* </Spin> */}
       </div>
     </div>

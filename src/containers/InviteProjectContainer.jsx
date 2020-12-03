@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import InviteProject from "../components/InviteProject";
 import { db } from "../../firebase/firebase";
 import { authUser } from "../../firebase/auth";
 import CheckCircle from "../../views/check.svg";
 import { Modal, Card } from "antd";
 
-function InviteProjectContainer() {
+function InviteProjectContainer({ proyecto }) {
   const { signup } = authUser();
   const [modal, setModal] = useState(false);
-  const [project, setProject] = useState("");
+  const [projects, setProjects] = useState([]);
+  const [users, setUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState("");
   const openModal = () => {
     setModal(true);
   };
@@ -16,13 +18,43 @@ function InviteProjectContainer() {
   const closeModal = () => {
     setModal(false);
   };
-  const handleChange = (e) => {
+  /*   const handleChange = (e) => {
     setProject(e.target.value);
-  };
+  }; */
+  /*  useEffect(() => {
+    db.collection("projects")
+      .get()
+      .then((projects) => {
+        setProjects(projects.docs);
+      });
+  }, []); */
+  useEffect(() => {
+    db.collection("users")
+      .get()
+      .then((users) => {
+        setUsers(
+          users.docs.map((users) => {
+            return users.data();
+          })
+        );
+      });
+  }, []);
+
+  function handleFinish() {
+    const usersProject = proyecto.users
+      ? [...proyecto.users, selectedUser]
+      : [selectedUser];
+    db.collection("projects").doc(proyecto.id).update({ users: usersProject });
+
+    db.collection("users")
+      .doc(selectedUser)
+      .set({ projectInvited: proyecto.id }, { merge: true });
+  }
+
   function success() {
     closeModal();
     db.collection("users")
-      .doc(`${email}`) // sobre el id del usuario 
+      .doc(`${email}`) // sobre el id del usuario
       .set({ email: email }) // deberia agregar el id del project
       .then(() => {
         Modal.success({
@@ -33,7 +65,7 @@ function InviteProjectContainer() {
             justifyContent: "center",
           },
           content: (
-            <Card className='invite_msg' onClick={openModal}>
+            <Card className="invite_msg" onClick={openModal}>
               <h1>¡Solicitud Enviada!</h1>
               <h4> El perfil podrá crear su cuenta desde su email</h4>
             </Card>
@@ -53,12 +85,16 @@ function InviteProjectContainer() {
   }
   return (
     <InviteProject
-      className='modal-outside'
-      handleChange={handleChange}
+      className="modal-outside"
+      /*  handleChange={handleChange} */
       closeModal={closeModal}
       success={success}
       openModal={openModal}
       modal={modal}
+      users={users}
+      handleFinish={handleFinish}
+      selectedUser={selectedUser}
+      setSelectedUser={setSelectedUser}
     />
   );
 }

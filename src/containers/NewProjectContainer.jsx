@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../../firebase/firebase";
 import NewProject from "../components/NewProject";
-import {CheckCircleOutlined} from "@ant-design/icons";
-import { Modal, Form} from "antd";
+import { CheckCircleOutlined } from "@ant-design/icons";
+import { Modal, Form } from "antd";
 
 function NewProjectContainer() {
   const [name, setName] = useState("");
@@ -11,21 +11,21 @@ function NewProjectContainer() {
   const [endDate, setEndDate] = useState([]);
   const [term, setTerm] = useState("");
   const [modal, setModal] = useState(false);
-  const [form] =Form.useForm()
+  const [form] = Form.useForm();
 
   const handleChangeName = (e) => {
     setName(e.target.value);
   };
 
   const handleChangeStartDate = (value, dateString) => {
-    console.log(value,'esto es start date')
-    console.log(dateString,'esto es datestring')
+    console.log(value, "esto es start date");
+    console.log(dateString, "esto es datestring");
     setStartDate(dateString);
   };
 
   const handleChangeEndDate = (value, dateString) => {
-    console.log(value,'esto es end date')
-    console.log(dateString,'esto es datestring')
+    console.log(value, "esto es end date");
+    console.log(dateString, "esto es datestring");
     setEndDate(dateString);
   };
 
@@ -41,8 +41,8 @@ function NewProjectContainer() {
     setModal(false);
   };
 
-  function success(){
-    closeModal()
+  function success() {
+    closeModal();
     db.collection("projects")
       .add({
         name,
@@ -62,7 +62,7 @@ function NewProjectContainer() {
             flexDirection: "column",
             justifyContent: "center",
           },
-          content: "Solicitud Enviada!",
+          content: "¡Proyecto Creado!",
           centered: "true",
           okText: "VOLVER",
           icon: <CheckCircleOutlined style={{ color: "#9e39ff" }} />,
@@ -75,8 +75,7 @@ function NewProjectContainer() {
           },
         });
       });
-      
-  };
+  }
 
   return (
     <NewProject
