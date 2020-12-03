@@ -16,6 +16,10 @@
     color: #9749f8;
     font-size: 1.3rem;
   }
+  #download-icon {
+    color: #9749f8;
+    font-size: 1.3rem;
+  }
   .add-user {
     margin-left: 2rem;
   }
@@ -51,6 +55,10 @@
   }
   .add-user {
     margin-left: 2rem;
+  }
+  #download-icon {
+    color: #9749f8;
+    font-size: 1.3rem;
   }
 }
 
