@@ -17,7 +17,7 @@ export function AuthProvider({ children }) {
   const history = useHistory();
 
   function signup(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password);
+    return auth.createUserWithEmailAndPassword(email, password).catch(err => console.log(err))
   }
 
   function login(email, password) {
@@ -35,19 +35,19 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
-    return auth.signOut();
+    return auth.signOut().catch(err => console.log(err))
   }
 
   function resetPassword(email) {
-    return auth.sendPasswordResetEmail(email);
+    return auth.sendPasswordResetEmail(email).catch(err => err)
   }
 
   function updateEmail(email) {
-    return currentUser.updateEmail(email);
+    return currentUser.updateEmail(email).catch(err => console.log(err))
   }
 
   function updatePassword(password) {
-    return currentUser.updatePassword(password);
+    return currentUser.updatePassword(password).catch(err => console.log(err))
   }
 
   useEffect(() => {
