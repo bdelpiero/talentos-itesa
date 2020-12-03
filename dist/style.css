@@ -66,7 +66,7 @@
   height: 100vh;
   color: rgb(161, 148, 148);
   background-color: whitesmoke !important;
-  box-shadow: 3px 1px 5px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 3px 1px 5px 0px rgba(78, 77, 77, 0.345);
 }
 
 .icono-sider svg {
@@ -108,7 +108,7 @@
 }
 
 .ant-menu-item-selected div {
-  box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.8);
+  box-shadow: 0px 0px 13px 0px rgba(78, 77, 77, 0.345);
 }
 
 .ant-menu-item-active {
@@ -134,10 +134,10 @@
   border-radius: 5%;
 }
 .sider-bottons:hover {
-  box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.8);
+  box-shadow: 0px 0px 13px 0px rgba(78, 77, 77, 0.345);
 }
 .sider-bottons:active {
-  box-shadow: inset 0px 0px 13px 0px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0px 0px 13px 0px rgba(78, 77, 77, 0.345);
 }
 .sider-bottons svg {
   margin-top: 15px;
