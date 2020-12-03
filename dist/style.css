@@ -276,6 +276,24 @@ trabajando con  user Cards
   font-family: "arial";
   color: #0b2257;
   font-size: 100%;
+<<<<<<< HEAD
+  width: 300px;
+  border-radius: 42px;
+  margin: auto;
+  height: 300px !important;
+  min-height: 100% !important;
+}
+
+.bodyCard div {
+  display: flex;
+  flex-direction: column;
+  height: 90% !important;
+  box-sizing: content-box;
+}
+
+h1 {
+  color: white;
+=======
   border-radius: 42px;
   margin: auto;
   min-height: 100% !important;
@@ -285,6 +303,7 @@ trabajando con  user Cards
   background: whitesmoke;
   box-shadow: -1px 3px 15px -6px gray;
   padding: 0;
+>>>>>>> a2e7f9a628bece9636ae895b026da1e9ac4b3857
 }
 
 #subtittle {
@@ -325,10 +344,61 @@ trabajando con  user Cards
     FREELANCE PAYMENTS (ADMIN DASHBOARD)
 ----------------------------------------- */
 
+<<<<<<< HEAD
+.bodyCard2 {
+  font-family: "arial";
+  color: #0b2257;
+  font-size: 15px;
+  width: 95%;
+  border-radius: 42px;
+  height: 20% !important;
+  margin: auto;
+}
+.ant-card-body {
+  padding: 10px;
+}
+.space-align-container {
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 90%;
+  height: 80%;
+}
+.space-align-block {
+  margin: 8% 4%;
+  padding: 4%;
+  flex: none;
+}
+.space-align-block .mock-block {
+  display: inline-block;
+  padding: 32px 8px 16px;
+  background: rgba(150, 150, 150, 0.2);
+}
+
+.text2 {
+  font-family: "Open Sans Semibold";
+  color: black;
+  font-size: 75%;
+  font-stretch: expanded;
+}
+.textPagos {
+  font-family: "Open Sans Semibold";
+  color: #8990ad;
+}
+.Pagos {
+  text-align: left;
+  width: 95% !important;
+}
+
+.subtittle2 {
+  font-family: "Open Sans Semibold", arial;
+  color: #9e39ff;
+  font-size: 90%;
+=======
 .list-description {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+>>>>>>> a2e7f9a628bece9636ae895b026da1e9ac4b3857
 }
 
 .list-button-payments {
@@ -564,6 +634,58 @@ Trabajando con Admin Cards/DashBoard
 
 .modal-formularios {
   width: 180%;
+  margin-left: 95px;
+}
+
+.modal-editProfile-container {
+  padding: 15px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* height: 300px; */
+}
+
+.modal-editProfile {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  /* font-family: Raleway; */
+  height: 200px;
+}
+
+.modal-editProfile-header {
+  font-size: 24px;
+  color: black;
+  text-align: center;
+  font-weight: 300;
+}
+
+.modal-editProfile-avatar {
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-editProfile-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-editProfile-button {
+  background-color: #9e39ff;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 7px;
+  margin: 0 10px;
+  width: auto;
+  font-family: "arial";
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
   margin-left: 95px
 }
 

@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.3.0",
+    "@google-cloud/storage": "^5.5.0",
     "@react-firebase/auth": "^0.2.10",
     "@react-pdf/renderer": "^1.6.12",
     "antd": "^4.8.4",
