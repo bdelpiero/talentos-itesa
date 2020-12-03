@@ -23,7 +23,7 @@ function RegisterFreelancer({
   setData,
   errorSignature,
   setErrorSignature,
-  isLoading
+  isLogin
 }) {
   return (
     <div className='register-formContainer'>
@@ -347,11 +347,11 @@ function RegisterFreelancer({
             type='primary'
             htmlType='submit'
             className='register-button'
+            loading={isLogin}
             >
               Register
             </Button>
             <div style={{display: 'flex', justifyContent: 'center'}}>
-            { isLoading && <Spin indicator={antIcon}  />}
             </div>
           <div className='register-steps'>
             <Button shape='round'> </Button>

@@ -12,6 +12,17 @@
     margin-top: 4px;
     margin-bottom: 2px;
   }
+  .single-icon {
+    color: #9749f8;
+    font-size: 1.3rem;
+  }
+  #download-icon {
+    color: #9749f8;
+    font-size: 1.3rem;
+  }
+  .add-user {
+    margin-left: 2rem;
+  }
 }
 
 @media (max-width: 991px) {
@@ -37,6 +48,17 @@
   }
   .mini-logo {
     display: none;
+  }
+  .single-icon {
+    color: #9749f8;
+    font-size: 1.3rem;
+  }
+  .add-user {
+    margin-left: 2rem;
+  }
+  #download-icon {
+    color: #9749f8;
+    font-size: 1.3rem;
   }
 }
 
@@ -148,6 +170,14 @@
 }
 .logo {
   height: 100%;
+}
+
+/* ----------------------
+    CONTRACTPROJECT COMPONENT
+---------------------- */
+.col-contract {
+  height: 75vh;
+  background-color: whitesmoke;
 }
 
 /* ----------------------
@@ -534,5 +564,19 @@ Trabajando con Admin Cards/DashBoard
 
 .modal-formularios {
   width: 180%;
-  margin-left: 95px;
+  margin-left: 95px
+}
+
+.modal-button{
+  box-shadow: -1px 3px 15px -6px gray;
+  border: none;
+  background-color:#FBF7FF;
+  color:#9e39ff;
+  border-radius:20px
+}
+
+.ant-btn:hover, .ant-btn:focus {
+
+  background: none;
+  border-color:#9e39ff;
 }

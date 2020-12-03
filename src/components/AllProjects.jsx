@@ -3,10 +3,11 @@ import { Table, Tag, Space, Button, Card, List, Avatar, Row, Col } from "antd";
 // import ModalUser from "../components/ModalAddUser"
 import { Typography } from "antd";
 import InviteProjectContainer from "../containers/InviteProjectContainer";
+import NewProjectContainer from "../containers/NewProjectContainer"
 
 const { Title } = Typography;
 
-function AllProjects({ projects, deleteProject }) {
+function AllProjects({ projects, deleteProject, handleClick }) {
   const columns = [
     {
       title: "PROYECTOS",
@@ -32,16 +33,19 @@ function AllProjects({ projects, deleteProject }) {
     {
       title: "",
       key: "action",
-      render: (text, record) => (
+      render: () => (
         <div>
-          <Space size="middle">
-            <Button style={{ color: "#9749f8" }}> VER MÁS </Button>
-            {/* <ModalUser/> */}
-          </Space>
-          <Space size="middle">
+            <Button className="modal-button" onClick={handleClick} > VER MÁS </Button>
+        </div>
+      ),
+    },
+
+    {
+      title: "",
+      key: "action",
+      render: () => (
+        <div>
             <InviteProjectContainer />
-            {/* <ModalUser/> */}
-          </Space>
         </div>
       ),
     },
@@ -49,43 +53,35 @@ function AllProjects({ projects, deleteProject }) {
     {
       title: "",
       key: "delete",
-
-      render: (proyectos) => {
-        console.log(proyectos, " dentro del render")
+      render: (proyecto) => {
         return (
           <div>
-            <Space size="middle">
-              <Button style={{ color: "#9749f8" }} onClick={deleteProject}>
+              <Button
+                className="modal-button"
+                onClick={()=>deleteProject(proyecto)}
+              >
                 ELIMINAR
               </Button>
-              {/* <ModalUser/> */}
-            </Space>
           </div>
         );
       },
     },
   ];
 
-  const data = projects.map((project) => {
-    let proyectos = project.data();
-    proyectos.id = project.id;
-    // console.log(proyectos, " estos son los proyectos con id");
-    return proyectos;
-  });
-
+  
   return (
     <div style={{ width: "100%" }}>
       <Row>
-        <Col span={12}>
+        <Col span={20}>
           <Title> Todos los Proyectos </Title>
         </Col>
-        <Col span={12}>
-          <Button style={{ float: "right" }}> CREAR PROYECTO </Button>
+        <Col span={4}>
+          <NewProjectContainer />
         </Col>
       </Row>
 
       <div>
-        <Table columns={columns} dataSource={data} />
+        <Table columns={columns} dataSource={projects} />
       </div>
     </div>
   );

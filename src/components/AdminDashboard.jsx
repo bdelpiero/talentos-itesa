@@ -1,6 +1,7 @@
 import React from "react";
-import { Layout, Row} from "antd";
+import { Layout, Row, Card } from "antd";
 import { authUser } from "../../firebase/auth";
+import Briefing from "../../views/briefing.svg";
 
 // COMPONENTS & CONTAINERS
 import InviteContainer from "../containers/InviteContainer";
@@ -12,10 +13,10 @@ import ResumeContainer from "../containers/ResumeContainer";
 import PendingPayments from "./PendingPayments";
 import AllProjectsContainer from "../containers/AllProjectsContainer";
 import Navbar from "../components/Navbar";
+import { SingleProject } from "../components/SingleProject";
+import { OurCommunity } from "./OurCommunity";
 
-
-
-function AdminDashboard({handleLogout}) {
+function AdminDashboard({ handleLogout }) {
   const { Content } = Layout;
 
   const [item, setItem] = React.useState(1);
@@ -31,7 +32,19 @@ function AdminDashboard({handleLogout}) {
             <>
               <Row className="admin-row">
                 <InviteContainer />
-                <NewProjectContainer />
+
+                <Card
+                  className="admin-cards"
+                  style={{ background: "whitesmoke", border: "none" }}
+                >
+                  <img src={Briefing} className="icono-sider" />
+                  {/* <div className="admin-button">
+                    <h4 style={{ color: "#9e39ff" }}>Crear proyecto nuevo</h4>
+                  </div> */}
+                  <NewProjectContainer />
+                </Card>
+
+
                 <AddPaymentContainer />
                 <ResumeContainer />
               </Row>
@@ -40,9 +53,9 @@ function AdminDashboard({handleLogout}) {
               </Row>
             </>
           )}
-          {item == 2 && (
-              <AllProjectsContainer />
-          )}
+          {item == 2 && <AllProjectsContainer setItem={setItem} />}
+          {item == 3 && <SingleProject />}
+          {item == 5 && <OurCommunity />}
         </Content>
       </Layout>
     </Layout>

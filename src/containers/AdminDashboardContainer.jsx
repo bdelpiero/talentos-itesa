@@ -14,8 +14,6 @@ function AdminDashboardContainer() {
   const { logout } = authUser();
   const history = useHistory();
 
-  
-
   const handleLogout = () => {
     logout();
     history.push("/login");
