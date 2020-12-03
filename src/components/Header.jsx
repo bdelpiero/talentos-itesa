@@ -14,12 +14,12 @@ export default () => {
   //console.log("buscando user", currentUser.lastName)
   console.log("ESTE CONSOLOG ES EN HEADER", currentUser);
   return (
-    <Header className="header-user">
+    <Header>
       <Row align="top" justify="end" className="mini-logo">
         <img src={logo} className="logo" />
       </Row>
 
-      <Row justify="space-between" align="top">
+      <Row justify="space-between" className="header-user" align="top">
         <Col>
           <Title className="dashboard">Dashboard</Title>
           <Text type="secondary" className="subtitulo">

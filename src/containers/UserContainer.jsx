@@ -12,6 +12,7 @@ import { user, projectInvited } from "../atoms/index";
 import { db } from "../../firebase/firebase";
 import Navbar from "../components/Navbar";
 import ContractProject from "../components/ContractProject";
+import PendingPayments from "../components/PendingPayments";
 const { Header, Footer, Sider, Content } = Layout;
 
 export default () => {
@@ -64,7 +65,7 @@ export default () => {
                 <CardsFreelancer setItem={setItem} />
               </Row>
               <Row>
-                <PagosFreelace />
+                <PendingPayments />
               </Row>
             </>
           )}

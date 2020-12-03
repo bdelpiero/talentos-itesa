@@ -40,7 +40,7 @@ function InviteProject({
           <Form onFinish={handleFinish}>
             <div style={{ width: "70%", marginLeft: "38px" }}>
               <h1>Asignar Proyecto</h1>
-              <h5 style={{ color: "grey" }}>NOMBRE DEL PROYECTO</h5>
+
               {/* 
               <Form.Item>
                 <Select placeholder="Seleccione Proyecto" allowClear>
@@ -51,9 +51,9 @@ function InviteProject({
 
             <br />
             <div>
-              <h5 style={{ width: "70%", marginLeft: "38px", color: "grey" }}>
+              {/*  <h5 style={{ width: "70%", marginLeft: "38px", color: "grey" }}>
                 NOMBRE DEL PROYECTO
-              </h5>
+              </h5> */}
               <Row>
                 <Col span={1} style={{ justifyItems: "center" }}></Col>
                 <Col span={3} style={{ alignContent: "center" }}>
@@ -94,12 +94,14 @@ function InviteProject({
                       placeholder="Perfil"
                       allowClear
                     >
-                      {users.map((user1) => {
-                        return (
-                          <Option key={user1.id} value={user1.id}>
-                            {user1.name}
-                          </Option>
-                        );
+                      {users.map((user) => {
+                        if (!user.isAdmin) {
+                          return (
+                            <Option key={user.id} value={user.id}>
+                              {user.name}
+                            </Option>
+                          );
+                        }
                       })}
                     </Select>
                   </Form.Item>
@@ -144,11 +146,11 @@ function InviteProject({
               </Row>
             </div>
             <Row>
-              <div className="modal-input">
+              {/* <div className="modal-input">
                 <button className="ok-button" type="submit">
                   Add a Row
                 </button>
-              </div>
+              </div> */}
             </Row>
             <div className="modal-input">
               <button className="ok-button" type="submit">

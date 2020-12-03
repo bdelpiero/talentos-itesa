@@ -147,6 +147,9 @@
         HEADER
 ---------------------- */
 
+.header-user {
+  margin-top: 15px;
+}
 .ant-layout-header {
   color: black;
   background-color: whitesmoke !important;
@@ -292,10 +295,6 @@ trabajando con  user Cards
   flex-direction: column;
   height: 90% !important;
   box-sizing: content-box;
-}
-
-h1 {
-  color: white;
 }
 
 #subtittle {
