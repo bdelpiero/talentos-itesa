@@ -165,6 +165,9 @@ import {
 
 const EditableContext = React.createContext();
 
+const { Option } = Select;
+const { RangePicker } = DatePicker;
+
 const EditableRow = ({ index, ...props }) => {
   const [form] = Form.useForm();
   return (
@@ -252,52 +255,84 @@ export default class InviteProject extends React.Component {
       {
         title: "Perfil",
         dataIndex: "perfil",
-        width: "30%",
-        editable: true,
+        render: () => (
+          <div>
+            <Select style={{ width: 120 }} placeholder="Perfil">
+              <Option value="1"> Juan Garrido </Option>
+              <Option value="2"> Nano Gato </Option>
+            </Select>
+          </div>
+        ),
       },
       {
         title: "Plazos",
         dataIndex: "plazos",
-        editable: true,
+        render: () => (
+          <RangePicker
+            style={{ width: "240px" }}
+            placeholder={["Inicio", "Fin"]}
+            format="DD/MM/YYYY"
+          />
+        ),
       },
       {
         title: "Servicios",
         dataIndex: "servicios",
-        editable: true,
+        render: () => (
+          <div>
+            <Select style={{ width: 150 }} placeholder="Servicios">
+              <Option value="developer"> developer </Option>
+              <Option value="designer"> designer</Option>
+            </Select>
+          </div>
+        ),
       },
       {
         title: "Cuota 1",
         dataIndex: "cuota1",
-        editable: true,
+        render: () => (
+          <Input prefix="$" ></Input>
+        ),
       },
       {
         title: "Cuota 2",
         dataIndex: "cuota2",
-        editable: true,
+        render: () => (
+          <div>
+            <Input prefix="$" ></Input>
+          </div>
+        ),
       },
       {
         title: "Cuota 3",
         dataIndex: "cuota3",
-        editable: true,
+        render: () => (
+          <div>
+            <Input prefix="$" ></Input>
+          </div>
+        ),
       },
       {
         title: "Cuota 4",
         dataIndex: "cuota4",
-        editable: true,
+        render: () => (
+          <div>
+            <Input prefix="$" ></Input>
+          </div>
+        ),
       },
-
     ];
     this.state = {
       dataSource: [
         {
           key: "0",
-          perfil:'1 ',
-          servicios:'1 ',
-          plazos:'1 ',
-          cuota1:' 1',
-          cuota2:' 1',
-          cuota3:' 1',
-          cuota4:' 1',
+          perfil: "",
+          servicios: " ",
+          plazos: " ",
+          cuota1: " ",
+          cuota2: " ",
+          cuota3: " ",
+          cuota4: " ",
         },
       ],
       count: 2,
@@ -316,14 +351,14 @@ export default class InviteProject extends React.Component {
   handleAdd() {
     const { count, dataSource } = this.state;
     const newData = {
-          key: "0",
-          perfil:'perfil de usuario',
-          servicios:null,
-          plazos:' ',
-          cuota1:" ",
-          cuota2:' 1',
-          cuota3:' 1',
-          cuota4:' 1',
+      key: "0",
+      perfil: "perfil de usuario",
+      servicios: null,
+      plazos: " ",
+      cuota1: " ",
+      cuota2: " 1",
+      cuota3: " 1",
+      cuota4: " 1",
     };
     this.setState({
       dataSource: [...dataSource, newData],
@@ -386,7 +421,7 @@ export default class InviteProject extends React.Component {
           onCancel={closeModal}
           closeIcon={<CloseCircleOutlined className="close-button" />}
           bodyStyle={{ color: "#9e39ff" }}
-          width={1000}
+          width={1200}
         >
           <div>
             <Form>
@@ -413,6 +448,12 @@ export default class InviteProject extends React.Component {
                   Add a row
                 </Button>
               </div>
+
+              <div className="modal-input">
+              <button className="ok-button" type="submit">
+               CONFIRMAR
+             </button>
+            </div>
             </Form>
           </div>
           <br />

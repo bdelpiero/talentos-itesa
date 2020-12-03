@@ -47,7 +47,11 @@ export default ({ handleLogout, setItem }) => {
           <Menu.Item
             key="2"
             className="sider-cards"
-            onClick={() => setItem(2)}
+            onClick={()=> setItem(2)}
+
+            // function myFunction() {
+            //   setTimeout(function(){ alert("Hello"); }, 3000);
+            // }
           >
             <div className='sider-bottons'>
               <BarChartOutlined className="icon-sider-buttons " />

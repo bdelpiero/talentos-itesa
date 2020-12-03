@@ -42,13 +42,12 @@ function NewProject({
         bodyStyle={{ color: "#9e39ff" }}
       >
         <div className="modal-style">
-          <br />
           <h1>Crear Proyecto</h1>
           <p style={{ color: "grey" }}>
             Ingrese los datos para crear el proyecto
           </p>
-          <br />
         </div>
+        <br/>
         <Form
           {...layout}
           initialValues={{ remember: true }}
