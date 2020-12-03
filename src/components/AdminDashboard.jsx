@@ -2,6 +2,7 @@ import React from "react";
 import { Layout, Row, Card } from "antd";
 import { authUser } from "../../firebase/auth";
 import Briefing from "../../views/briefing.svg";
+import UserLogo from "../../views/man.svg";
 
 // COMPONENTS & CONTAINERS
 import InviteContainer from "../containers/InviteContainer";
@@ -31,19 +32,21 @@ function AdminDashboard({ handleLogout }) {
           {item == 1 && (
             <>
               <Row className="admin-row">
-                <InviteContainer />
+                <Card
+                  className="admin-cards"
+                  style={{ background: "whitesmoke", border: "none" }}
+                >
+                  <img src={UserLogo} className="icono-sider" />
+                  <InviteContainer />
+                </Card>
 
                 <Card
                   className="admin-cards"
                   style={{ background: "whitesmoke", border: "none" }}
                 >
                   <img src={Briefing} className="icono-sider" />
-                  {/* <div className="admin-button">
-                    <h4 style={{ color: "#9e39ff" }}>Crear proyecto nuevo</h4>
-                  </div> */}
                   <NewProjectContainer />
                 </Card>
-
 
                 <AddPaymentContainer />
                 <ResumeContainer />
