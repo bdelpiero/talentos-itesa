@@ -4,13 +4,13 @@ import { useRecoilState } from "recoil";
 import { projectInvited } from "../atoms/index";
 
 
-export default () => {
+export default ({setItem}) => {
   const [projectI, setProjectI] = useRecoilState(projectInvited);
   console.log("project en carfrelance", projectI)
   return (
     <>
       
-       {projectI.name ? ( <Card className="bodyCard">
+       {projectI && projectI.name ? ( <Card className="bodyCard">
           <h3 id="tittleCard">OFERTA DE PROYECTO</h3>
           <p id="subtittle">PROYECTO</p>
           <p>"{projectI.name}"</p>
@@ -21,7 +21,10 @@ export default () => {
           "$50.000"            
           </p>
           <div>
-          <Button className="buttonCard" shape="round">
+          <Button 
+          onClick={()=>setItem(5)}
+          className="buttonCard" 
+          shape="round">
             Firma Contrato
           </Button></div>          
         </Card>)

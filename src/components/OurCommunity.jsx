@@ -141,41 +141,6 @@ export const OurCommunity = () => {
           </List.Item>
         )}
       />
-      {/* {data.map((data) => {
-        return (
-          <Row>
-            <Col xs={2} sm={2} md={2} lg={2}>
-              <Checkbox onChange={onChange}></Checkbox>
-            </Col>
-            <Col xs={2} sm={2} md={2} lg={2}>
-              <h3>{data.id}</h3>
-            </Col>
-            <Col xs={1} sm={1} md={1} lg={1}>
-              <Avatar src={data.imgUrl} />
-            </Col>
-
-            <Col xs={5} sm={5} md={5} lg={5}>
-              <h3>{data.name}</h3>
-            </Col>
-
-            <Col xs={4} sm={4} md={4} lg={4}>
-              <h3>{data.amount}</h3>
-            </Col>
-            <Col xs={4} sm={4} md={4} lg={4}>
-              <h3>{data.date}</h3>
-            </Col>
-            {data.state === "En Proyecto" ? (
-              <Col xs={4} sm={4} md={4} lg={4}>
-                <Tag color="red">En Proyecto</Tag>
-              </Col>
-            ) : (
-              <Col xs={4} sm={4} md={4} lg={4}>
-                <Tag color="green">Libre</Tag>
-              </Col>
-            )}
-          </Row>
-        );
-      })} */}
     </>
   );
 };

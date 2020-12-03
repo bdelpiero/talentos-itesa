@@ -9,22 +9,28 @@ function AllProjectsContainer({ setItem }) {
     db.collection("projects")
       .get()
       .then((projects) => {
-        setProjects(projects.docs);
+        // console.log(projects.docs.id, "aca estan todos los proyectos!")
+        setProjects(projects.docs.map((project)=>{
+          let proyecto = project.data()
+          proyecto.id = project.id
+          proyecto.key = project.id
+          return proyecto
+        }));
       });
   }, []);
+
+  const deleteProject = (project)=>{
+      db.collection("projects")
+        .doc(project.id)
+        .delete()
+        .then(() => {
+          setProjects(projects.filter(proyect=> proyect.id !== project.id))
+        });
+  }
 
   function handleClick() {
     setItem(3);
   }
-
-  const deleteProject = (project) => {
-    db.collection("projects")
-      .doc(project.id)
-      .delete()
-      .then(() => {
-        console.log("project deleted");
-      });
-  };
 
   return (
     <AllProjects
