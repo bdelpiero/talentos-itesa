@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { authUser } from "../../firebase/auth";
-import { Layout, Row, Result, Button  } from "antd";
+import { Layout, Row, Result, Button } from "antd";
 import Sidebar from "../components/Sidebar";
 import HeaderComponent from "../components/Header";
 import PagosFreelace from "../components/PagosFreelace";
@@ -11,7 +11,7 @@ import { useRecoilState } from "recoil";
 import { user, projectInvited } from "../atoms/index";
 import { db } from "../../firebase/firebase";
 import Navbar from "../components/Navbar";
-import ContractProject from '../components/ContractProject'
+import ContractProject from "../components/ContractProject";
 const { Header, Footer, Sider, Content } = Layout;
 
 export default () => {
@@ -51,24 +51,27 @@ export default () => {
   return !currentUser ? (
     <Error404 />
   ) : (
-    <Layout>      
-        <Sidebar setItem={setItem} handleLogout={handleLogout} />      
+    <Layout>
+      <Sidebar setItem={setItem} handleLogout={handleLogout} />
       <Layout>
         <Navbar />
-          <HeaderComponent user={currentUser} />        
-        <Content className='content-user' >
-         {item ==1 && (<>
-         <Row  className="admin-row">
-            <CardsFreelancer setItem={setItem}/>
-          </Row>
-          <Row >
-            <PagosFreelace />
-          </Row>
-          </>)}
-          {item ==5 && <>
-            <ContractProject />
-          </>
-          }
+        <HeaderComponent user={currentUser} setCurrentUser={setCurrentUser} />
+        <Content className='content-user'>
+          {item == 1 && (
+            <>
+              <Row className='admin-row'>
+                <CardsFreelancer setItem={setItem} />
+              </Row>
+              <Row>
+                <PagosFreelace />
+              </Row>
+            </>
+          )}
+          {item == 5 && (
+            <>
+              <ContractProject />
+            </>
+          )}
         </Content>
         {/* <Footer style={{ textAlign: 'center' }}>Talentos ITESA ©2020 Created by Plataforma 5</Footer> */}
       </Layout>
