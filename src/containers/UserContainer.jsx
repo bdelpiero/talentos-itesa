@@ -12,6 +12,7 @@ import { user, projectInvited } from "../atoms/index";
 import { db } from "../../firebase/firebase";
 import Navbar from "../components/Navbar";
 import ContractProject from "../components/ContractProject";
+import PendingPayments from "../components/PendingPayments";
 const { Header, Footer, Sider, Content } = Layout;
 
 export default () => {
@@ -31,6 +32,7 @@ export default () => {
   // useEffect esta atento a los cambios en el usuario para renderizar el componente nuevamente
 
   useEffect(() => {
+    console.log("ACA ESTA EL CURRENT USER", currentUser);
     if (currentUser.projectInvited) {
       return db
         .collection("projects")
@@ -56,14 +58,14 @@ export default () => {
       <Layout>
         <Navbar />
         <HeaderComponent user={currentUser} setCurrentUser={setCurrentUser} />
-        <Content className='content-user'>
+        <Content className="content-user">
           {item == 1 && (
             <>
-              <Row className='admin-row'>
+              <Row className="admin-row">
                 <CardsFreelancer setItem={setItem} />
               </Row>
               <Row>
-                <PagosFreelace />
+                <PendingPayments />
               </Row>
             </>
           )}

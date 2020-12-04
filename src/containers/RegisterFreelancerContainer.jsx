@@ -117,9 +117,9 @@ function RegisterFreelancerContainer() {
                 bankDetails: bankData,
                 nonDisclosure: downloadUrl,
                 email: data.email,
+                projectInvited: "",
               })
               .then(() => {
-                //setIsLoading(false);
                 history.push("/freelancer");
               })
               .then(() => {

@@ -106,9 +106,6 @@ export default ({ user, setCurrentUser }) => {
             <h1 className='modal-editProfile-header'>Editar datos de perfil</h1>
             <div className='modal-editProfile'>
               <div className='modal-editProfile-avatar'>
-                <br />
-
-                <br />
                 <label
                   style={{
                     cursor: "pointer",
