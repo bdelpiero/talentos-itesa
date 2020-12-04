@@ -276,12 +276,15 @@ trabajando con  user Cards
   font-family: "arial";
   color: #0b2257;
   font-size: 100%;
-<<<<<<< HEAD
-  width: 300px;
   border-radius: 42px;
   margin: auto;
-  height: 300px !important;
   min-height: 100% !important;
+  width: 25em;
+  height: 20em !important;
+  background-color: whitesmoke;
+  background: whitesmoke;
+  box-shadow: -1px 3px 15px -6px gray;
+  padding: 0;
 }
 
 .bodyCard div {
@@ -293,17 +296,6 @@ trabajando con  user Cards
 
 h1 {
   color: white;
-=======
-  border-radius: 42px;
-  margin: auto;
-  min-height: 100% !important;
-  width: 25em;
-  height: 20em !important;
-  background-color: whitesmoke;
-  background: whitesmoke;
-  box-shadow: -1px 3px 15px -6px gray;
-  padding: 0;
->>>>>>> a2e7f9a628bece9636ae895b026da1e9ac4b3857
 }
 
 #subtittle {
@@ -344,7 +336,6 @@ trabajando con  user Cards
     FREELANCE PAYMENTS (ADMIN DASHBOARD)
 ----------------------------------------- */
 
-<<<<<<< HEAD
 .bodyCard2 {
   font-family: "arial";
   color: #0b2257;
@@ -393,12 +384,11 @@ trabajando con  user Cards
   font-family: "Open Sans Semibold", arial;
   color: #9e39ff;
   font-size: 90%;
-=======
+}
 .list-description {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
->>>>>>> a2e7f9a628bece9636ae895b026da1e9ac4b3857
 }
 
 .list-button-payments {
@@ -686,19 +676,19 @@ Trabajando con Admin Cards/DashBoard
   font-size: 12px;
   font-weight: bold;
   cursor: pointer;
-  margin-left: 95px
+  margin-left: 95px;
 }
 
-.modal-button{
+.modal-button {
   box-shadow: -1px 3px 15px -6px gray;
   border: none;
-  background-color:#FBF7FF;
-  color:#9e39ff;
-  border-radius:20px
+  background-color: #fbf7ff;
+  color: #9e39ff;
+  border-radius: 20px;
 }
 
-.ant-btn:hover, .ant-btn:focus {
-
+.ant-btn:hover,
+.ant-btn:focus {
   background: none;
-  border-color:#9e39ff;
+  border-color: #9e39ff;
 }

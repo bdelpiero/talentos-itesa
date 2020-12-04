@@ -118,10 +118,10 @@ function RegisterFreelancerContainer() {
                 nonDisclosure: downloadUrl,
                 email: data.email,
               })
-              // .then(() => {
-              //   setIsLoading(false);
-              //   history.push("/freelancer");
-              // })
+              .then(() => {
+                //setIsLoading(false);
+                history.push("/freelancer");
+              })
               .then(() => {
                 db.collection("invites").doc(`${data.email}`).delete();
               });

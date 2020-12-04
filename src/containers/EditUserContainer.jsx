@@ -156,8 +156,7 @@ export default ({ user, setCurrentUser }) => {
                 <button
                   onClick={handleSubmit}
                   className='modal-editProfile-button'
-                  // style={{ backgroundColor: "lightgrey" }}
-                >
+                  style={{ margin: 0 }}>
                   Confirmar cambios
                 </button>
               </div>
