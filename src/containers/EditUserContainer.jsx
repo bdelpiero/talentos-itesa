@@ -83,48 +83,46 @@ export default ({ user, setCurrentUser }) => {
     <>
       <div onClick={openModal}>
         {user.avatar ? (
-          <Avatar size={64} src={user.avatar} className="avatar" />
+          <Avatar size={64} src={user.avatar} className='avatar' />
         ) : (
-          <Avatar size={64} icon={<UserOutlined />} className="avatar" />
+          <Avatar size={64} icon={<UserOutlined />} className='avatar' />
         )}
-        <Text type="secondary">
+        <Text type='secondary'>
           {user.name} {user.lastName}
         </Text>
       </div>
       <Modal
         visible={modal}
-        centered="true"
+        centered='true'
         cancelButtonProps={{ hidden: true }}
         okButtonProps={{
           hidden: true,
         }}
         onCancel={closeModal}
         // closeIcon={<CloseCircleOutlined className='close-button' />}
-        bodyStyle={{ color: "#9e39ff" }}
-      >
+        bodyStyle={{ color: "#9e39ff" }}>
         <>
-          <div className="modal-editProfile-container">
-            <h1 className="modal-editProfile-header">Editar datos de perfil</h1>
-            <div className="modal-editProfile">
-              <div className="modal-editProfile-avatar">
+          <div className='modal-editProfile-container'>
+            <h1 className='modal-editProfile-header'>Editar datos de perfil</h1>
+            <div className='modal-editProfile'>
+              <div className='modal-editProfile-avatar'>
                 <label
                   style={{
                     cursor: "pointer",
-                  }}
-                >
+                  }}>
                   <input
                     style={{ display: "none" }}
-                    type="file"
+                    type='file'
                     onChange={handleChange}
-                    accept="image/png, image/jpeg"
+                    accept='image/png, image/jpeg'
                   />
                   {previewUrl ? (
-                    <Avatar size={100} src={previewUrl} className="avatar" />
+                    <Avatar size={100} src={previewUrl} className='avatar' />
                   ) : (
                     <Avatar
                       size={100}
                       icon={<UserOutlined />}
-                      className="avatar"
+                      className='avatar'
                     />
                   )}
                 </label>
@@ -134,33 +132,39 @@ export default ({ user, setCurrentUser }) => {
                 <div>
                   <Form.Item
                     // style={{ width: "60%", marginLeft: "95px" }}
-                    name="userName"
-                    onChange={handleInputChange}
-                  >
-                    <Input placeholder={userName} name="userName" />
+                    name='userName'
+                    onChange={handleInputChange}>
+                    <Input placeholder={userName} name='userName' />
                   </Form.Item>
                 </div>
 
                 <div>
                   <Form.Item
                     style={{ marginBottom: 0 }}
-                    name="userLastName"
-                    onChange={handleInputChange}
-                  >
-                    <Input placeholder={userLastName} name="userLastName" />
+                    name='userLastName'
+                    onChange={handleInputChange}>
+                    <Input placeholder={userLastName} name='userLastName' />
                   </Form.Item>
                 </div>
               </Form>
             </div>
-            <div className="modal-editProfile-buttons">
-              <div className="modal-input">
-                <button
+            <div className='modal-editProfile-buttons'>
+              <div className='modal-input'>
+                {/* <button
                   onClick={handleSubmit}
-                  className="modal-editProfile-button"
-                  style={{ marginLeft: 0 }}
-                >
+                  className='modal-editProfile-button'
+                  style={{ margin: 0 }}>
+                  Confirmar cambios
+                </button> */}
+                <button
+                  className='ok-button'
+                  type='submit'
+                  onClick={handleSubmit}>
                   Confirmar cambios
                 </button>
+                {/* <div className='Modal' onClick={handleSubmit}>
+                  <Button className='modal-button'>Confirmar cambios</Button>
+                </div> */}
               </div>
               {/* <div className='modal-input'>
                 <button
