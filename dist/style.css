@@ -78,23 +78,49 @@
   color: #636363;
   height: 3em;
   width: 3em;
+.list-menu-sider {
+background-color: whitesmoke !important;
+height: 100% !important;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+}
+
+.ant-menu::before , .ant-menu::after {
+  display: none !important
 }
 
 .sider-cards {
   color: #636363;
-  padding: 4rem !important;
-  margin: 0 auto !important;
+  margin: 0rem auto !important;
+  padding: 0 !important;
+  height: 10rem !important;
   text-align: center !important;
   background-color: whitesmoke !important;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
 }
 
 .sider-cards:hover {
   color: #9e39ff;
-  /* box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.8); */
+}
+
+.sider-buttons {
+  background-color: whitesmoke;
+  width: 90% !important;
+  height: 9rem !important;
+  margin: 0.7rem !important;
+  padding: 0 auto !important;
+  border-radius: 5%;
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sider-buttons:hover {
+  box-shadow: 0px 0px 13px 0px rgba(78, 77, 77, 0.345);
+}
+.sider-buttons:active {
+  box-shadow: inset 0px 0px 13px 0px rgba(126, 126, 126, 0.345);
 }
 
 .text-sider-buttons {
@@ -103,7 +129,7 @@
 
 .icon-sider-buttons {
   margin: 0 auto !important;
-  font-size: 3rem !important;
+  font-size: 3.5rem !important;
 }
 
 .ant-menu-item-selected {
@@ -119,33 +145,13 @@
   color: #9e39ff !important;
 }
 
-.ulList-sider {
-  height: 100vh;
-  background-color: whitesmoke !important;
-}
 #logout {
-  position: absolute;
-  bottom: 0%;
-  width: 198px;
-}
+  align-self: flex-end !important;
+} 
 .ant-menu .ant-menu-item::after {
   border-right: none !important;
 }
-.sider-bottons {
-  background-color: whitesmoke;
-  width: 150px;
-  height: 150px;
-  border-radius: 5%;
-}
-.sider-bottons:hover {
-  box-shadow: 0px 0px 13px 0px rgba(78, 77, 77, 0.345);
-}
-.sider-bottons:active {
-  box-shadow: inset 0px 0px 13px 0px rgba(78, 77, 77, 0.345);
-}
-.sider-bottons svg {
-  margin-top: 15px;
-}
+
 
 /* ----------------------
         HEADER
@@ -499,9 +505,16 @@ register freelancer
 }
 
 .register-button {
-  background-color: #a77ffa;
-  border: 0;
-  margin: 1vh 0;
+background-image: linear-gradient(to right, #ff6e7f 0%,  #a77ffa  40%) !important
+}
+
+.register-button {
+   text-align: center !important;
+   transition: 0.5s !important;
+   background-size: 200% auto !important;
+   border-color: lightgray !important;
+   background: #a77ffa;
+   text-decoration: none !important;
 }
 
 .register-button span {
@@ -523,7 +536,7 @@ register freelancer
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 1rem
 }
 
 .register-link a {

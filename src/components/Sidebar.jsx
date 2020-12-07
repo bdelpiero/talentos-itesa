@@ -13,7 +13,6 @@ export default ({ handleLogout, setItem }) => {
   const [currentUser, setCurrentUser] = useRecoilState(user);
   const { Sider } = Layout;
 
-  console.log("ESTE CONSOLOG ES EN SIDEBAR", currentUser);
   return (
     <Sider
       breakpoint="lg"
@@ -28,43 +27,42 @@ export default ({ handleLogout, setItem }) => {
       trigger={null}
     >
       <Menu
-        className="ulList-sider"
-        mode="inline"
+        className='list-menu-sider '
+        mode="vertical"
         defaultSelectedKeys={["1"]}
-        onClick={({ item, key, keyPath, domEvent }) => {
-          if (key == 1);
-          if (key == 2);
-          // if(key == 3) history.push('/admin/freelancers')
-          if (key == 4) handleLogout();
-        }}
+        onClick={({ item, key, keyPath, domEvent }) => { if (key == 4) handleLogout()}}
       >
+        <Menu.ItemGroup>
         <Menu.Item key="1" className="sider-cards" onClick={() => setItem(1)}>
-          <div className="sider-bottons">
+          <div className="sider-buttons">
             <HomeOutlined className="icon-sider-buttons " />
             <p className="text-sider-buttons">Home</p>
           </div>
         </Menu.Item>
 
         <Menu.Item key="2" className="sider-cards" onClick={() => setItem(2)}>
-          <div className="sider-bottons">
+          <div className="sider-buttons">
             <BarChartOutlined className="icon-sider-buttons " />
             <p className="text-sider-buttons">Proyectos</p>
           </div>
         </Menu.Item>
         {currentUser.isAdmin ? (
           <Menu.Item key="3" className="sider-cards" onClick={() => setItem(5)}>
-            <div className="sider-bottons">
+            <div className="sider-buttons">
               <TeamOutlined className="icon-sider-buttons " />
               <p className="text-sider-buttons">Perfiles</p>
             </div>
           </Menu.Item>
         ) : null}
+        </Menu.ItemGroup>
+        <Menu.ItemGroup>
         <Menu.Item key="4" className="sider-cards" id="logout">
-          <div className="sider-bottons">
+          <div className="sider-buttons">
             <LogoutOutlined className="icon-sider-buttons " />
             <p className="text-sider-buttons">Logout</p>
           </div>
         </Menu.Item>
+        </Menu.ItemGroup>
       </Menu>
     </Sider>
   );
