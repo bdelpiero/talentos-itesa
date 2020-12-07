@@ -9,13 +9,13 @@ import {
   StyleSheet,
   Image,
 } from "@react-pdf/renderer";
-import Martin from '../../../views/firma_martin.png'
+import Martin from "../../../views/firma_martin.png";
 
 const styles = StyleSheet.create({
   viewer: {
-    width: "75%",
-    margin: "1rem",
-    height: "45rem",
+    width: "100%",
+    // margin: "1rem",
+    height: "100%",
   },
   page: {
     flexDirection: "row",
@@ -184,10 +184,10 @@ const Contract = ({
             Itesa y la Parte Receptora evalúan actualmente la celebración de un
             contrato de prestación de servicios por el cual la Parte Receptora
             se obligaría a prestar a Itesa los siguientes servicios (los
-            “Servicios”): {freelancerType.toUpperCase()}. Para tales efectos, Itesa comunicará
-            a la Parte Receptora, o le dará acceso a, determinada Información
-            Confidencial, cuyo tratamiento será regulado por las disposiciones
-            de este Acuerdo.
+            “Servicios”): {freelancerType.toUpperCase()}. Para tales efectos,
+            Itesa comunicará a la Parte Receptora, o le dará acceso a,
+            determinada Información Confidencial, cuyo tratamiento será regulado
+            por las disposiciones de este Acuerdo.
           </Text>
           <Text style={styles.textContent}>
             Las Partes dejan expresa constancia que mientras no suscriban el

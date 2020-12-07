@@ -2,13 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import SignatureCanvas from "react-signature-canvas";
 import { Form, Input, Select, Button, Steps, Alert } from "antd";
-import { Spin } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
-
+import { Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const { Step } = Steps;
 const antIcon = <LoadingOutlined style={{ fontSize: 40 }} spin />;
- 
+
 function RegisterFreelancer({
   handleChange,
   handleSubmit,
@@ -23,7 +22,7 @@ function RegisterFreelancer({
   setData,
   errorSignature,
   setErrorSignature,
-  isLogin
+  isLogin,
 }) {
   return (
     <div className='register-formContainer'>
@@ -44,8 +43,7 @@ function RegisterFreelancer({
           <Form.Item
             hasFeedback
             name='freelancerType'
-            rules={[{ required: true, message: "Please select an option" }]}
-            >
+            rules={[{ required: true, message: "Please select an option" }]}>
             <Select
             onChange={(value) => {
               setData({...data, 'freelancerType': value});
@@ -71,8 +69,8 @@ function RegisterFreelancer({
             rules={[
               {
                 required: true,
-                message: "Name is required"
-              }
+                message: "Name is required",
+              },
             ]}>
             <Input placeholder='Nombre' name='name' />
           </Form.Item>
@@ -83,8 +81,8 @@ function RegisterFreelancer({
             rules={[
               {
                 required: true,
-                message: "Last Name is required"
-              }
+                message: "Last Name is required",
+              },
             ]}>
             <Input placeholder='Apellido' name='lastName' />
           </Form.Item>
@@ -99,8 +97,8 @@ function RegisterFreelancer({
               },
               {
                 message: "Must be a valid email",
-                type: "email"
-              }
+                type: "email",
+              },
             ]}>
             <Input placeholder='Email' name='email' />
           </Form.Item>
@@ -111,7 +109,7 @@ function RegisterFreelancer({
             rules={[
               {
                 required: true,
-                message: "Password is required"
+                message: "Password is required",
               },
               {
                 min: 6,
@@ -139,7 +137,7 @@ function RegisterFreelancer({
             rules={[
               {
                 required: true,
-                message: 'Confirm your password'
+                message: "Confirm your password",
               },
               ({ getFieldValue }) => ({
                 validator(rule, value) {
@@ -190,9 +188,7 @@ function RegisterFreelancer({
         </Form>
       )}
       {step == 2 && (
-        <Form
-          onFinish={handleConfirm}
-          className='refister-form'>
+        <Form onFinish={handleConfirm} className='refister-form'>
           <h1 style={{ color: "gray", textAlign: "center" }}>
             Registrá tus datos fiscales
           </h1>
@@ -203,10 +199,10 @@ function RegisterFreelancer({
             rules={[
               {
                 required: true,
-                message: 'CUIT is required'
+                message: "CUIT is required",
               },
             ]}>
-            <Input placeholder='CUIT' name='cuit' />
+            <Input className='register-input' placeholder='CUIT' name='cuit' />
           </Form.Item>
           <Form.Item
             name='address'
@@ -215,10 +211,14 @@ function RegisterFreelancer({
             rules={[
               {
                 required: true,
-                message: 'Address is required'
+                message: "Address is required",
               },
             ]}>
-            <Input placeholder='Address' name='address' />
+            <Input
+              className='register-input'
+              placeholder='Address'
+              name='address'
+            />
           </Form.Item>
           <Form.Item
             name='alias'
@@ -227,10 +227,14 @@ function RegisterFreelancer({
             rules={[
               {
                 required: true,
-                message: 'Alias is required'
+                message: "Alias is required",
               },
             ]}>
-            <Input placeholder='Alias de cuenta' name='alias' />
+            <Input
+              className='register-input'
+              placeholder='Alias de cuenta'
+              name='alias'
+            />
           </Form.Item>
           <Form.Item
             name='bankName'
@@ -239,10 +243,14 @@ function RegisterFreelancer({
             rules={[
               {
                 required: true,
-                message: 'Bank Name is required'
+                message: "Bank Name is required",
               },
             ]}>
-            <Input placeholder='Banco' name='bankName' />
+            <Input
+              className='register-input'
+              placeholder='Banco'
+              name='bankName'
+            />
           </Form.Item>
           <Form.Item
             name='accountName'
@@ -251,10 +259,14 @@ function RegisterFreelancer({
             rules={[
               {
                 required: true,
-                message: 'Account Name is required'
+                message: "Account Name is required",
               },
             ]}>
-            <Input placeholder='Titular de cuenta' name='accountName' />
+            <Input
+              className='register-input'
+              placeholder='Titular de cuenta'
+              name='accountName'
+            />
           </Form.Item>
 
           <Form.Item
@@ -264,10 +276,14 @@ function RegisterFreelancer({
             rules={[
               {
                 required: true,
-                message: 'Invoice type is required'
+                message: "Invoice type is required",
               },
             ]}>
-            <Input placeholder='Tipo de factura a emitir' name='type' />
+            <Input
+              className='register-input'
+              placeholder='Tipo de factura a emitir'
+              name='type'
+            />
           </Form.Item>
           <Form.Item>
             <Button
@@ -300,8 +316,8 @@ function RegisterFreelancer({
           <h1 style={{ color: "gray", textAlign: "center" }}>
             Firma del acuerdo de confidencialidad
           </h1>
-         <br />
-         {errorSignature && (
+          <br />
+          {errorSignature && (
             <Alert
               message='You need to sign the document to complete the register'
               type='error'
@@ -309,69 +325,71 @@ function RegisterFreelancer({
               style={{ margin: 5 }}
             />
           )}
-          <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
-          <SignatureCanvas
-            ref={signatureRef}
-            velocityFilterWeight={0.3}
-            penColor='black'
-            canvasProps={{
-              width: 400,
-              height: 150,
-              className: "sigCanvas",
-              style: { border: "1px solid #000000", borderRadius: '25px' },
-            }}
-            onEnd={
-              () =>{
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}>
+            <SignatureCanvas
+              ref={signatureRef}
+              velocityFilterWeight={0.3}
+              penColor='black'
+              canvasProps={{
+                width: 350,
+                height: 150,
+                className: "sigCanvas",
+                style: { border: "1px solid #000000", borderRadius: "25px" },
+              }}
+              onEnd={() => {
                 saveSignature(
                   signatureRef.current.getTrimmedCanvas().toDataURL("image/jpg")
-                ) //base64
-                setErrorSignature(false)
-            }}
-          />
-          <Button
-            onClick={handleClick}
-            style={{ backgroundColor: 'lightgray', border: 0, width: '30%' }}
-            shape='round'
-            block
-            type='primary'
-            htmlType='submit'
-            className='register-button'
-            onClick={() => {
-              signatureRef.current.clear();
-              saveSignature(null);
+                ); //base64
+                setErrorSignature(false);
               }}
-            >
+            />
+            <Button
+              onClick={handleClick}
+              style={{ backgroundColor: "lightgray", border: 0, width: "30%" }}
+              shape='round'
+              block
+              type='primary'
+              htmlType='submit'
+              className='register-button'
+              onClick={() => {
+                signatureRef.current.clear();
+                saveSignature(null);
+              }}>
               Reset
             </Button>
           </div>
           <br />
           <Button
             onClick={handleSubmit}
-            style={{ backgroundColor: '#a77ffa', border: 0 }}
+            style={{ backgroundColor: "#a77ffa", border: 0 }}
             shape='round'
             block
             type='primary'
             htmlType='submit'
             className='register-button'
-            loading={isLogin}
-            >
-              Register
-            </Button>
-            <div style={{display: 'flex', justifyContent: 'center'}}>
-            </div>
+            loading={isLogin}>
+            Register
+          </Button>
+          <div style={{ display: "flex", justifyContent: "center" }}></div>
           <div className='register-steps'>
             <Button shape='round'> </Button>
-            <Button shape='round' > {' '}</Button>
-            <Button shape='round' style={{ backgroundColor: "green" }}> </Button>
+            <Button shape='round'> </Button>
+            <Button shape='round' style={{ backgroundColor: "green" }}>
+              {" "}
+            </Button>
           </div>
           <div className='register-link'>
             <Link to='/login' style={{ color: "gray" }}>
               Already have an account? Login
             </Link>
           </div>
-
         </div>
-
       )}
     </div>
   );
