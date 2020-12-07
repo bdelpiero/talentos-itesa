@@ -32,12 +32,6 @@ export default () => {
             user={currentUser}
             setCurrentUser={setCurrentUser}
           />
-          {/* <div>
-            <Avatar size={64} icon={<UserOutlined />} className='avatar' />
-            <Text type='secondary'>
-              {user.name} {user.lastName}
-            </Text>
-          </div> */}
         </Col>
       </Row>
     </Header>

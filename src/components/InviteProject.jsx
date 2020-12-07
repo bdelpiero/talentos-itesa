@@ -3,6 +3,9 @@ import { CloseCircleOutlined } from "@ant-design/icons";
 import UserLogo from "../../views/man.svg";
 import { Modal, Button, Row, Col, Input, Form, DatePicker, Select } from "antd";
 
+const { Option } = Select;
+const { RangePicker } = DatePicker;
+
 function InviteProject({
   handleChange,
   closeModal,
