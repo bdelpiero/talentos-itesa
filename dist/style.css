@@ -7,10 +7,9 @@
     display: none;
   }
   .mini-logo {
-    height: 25%;
+    height: 40px;
     line-height: 20px !important;
-    margin-top: 4px;
-    margin-bottom: 2px;
+    margin-bottom: 15px;
   }
   .single-icon {
     color: #9749f8;
@@ -167,7 +166,8 @@
 .ant-layout-header {
   color: black;
   background-color: whitesmoke !important;
-  height: 22vh !important;
+  height: auto !important;
+  margin: 20px 0;
 }
 .ant-layout {
   background-color: whitesmoke !important;
@@ -183,6 +183,7 @@
 }
 .subtitulo {
   display: flex !important;
+  line-height: 2rem;
   color: red;
 }
 .logo {
@@ -303,7 +304,7 @@ trabajando con  user Cards
   box-shadow: -1px 3px 15px -6px gray;
   padding: 30px;
   position: relative;
-  margin: 20px auto;
+  margin: 0 auto 20px auto;
 }
 
 .ant-card-body {
