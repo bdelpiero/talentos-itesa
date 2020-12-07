@@ -11,17 +11,15 @@ const { Header } = Layout;
 
 export default () => {
   const [currentUser, setCurrentUser] = useRecoilState(user);
-  //console.log("buscando user", currentUser.lastName)
-  console.log("ESTE CONSOLOG ES EN HEADER", currentUser);
+
   return (
     <Header>
       <Row align="top" justify="end" className="mini-logo">
         <img src={logo} className="logo" />
       </Row>
-
       <Row justify="space-between" className="header-user" align="top">
         <Col>
-          <Title className="dashboard">Dashboard</Title>
+          <Title level={1} className="dashboard">Dashboard</Title>
           <Text type="secondary" className="subtitulo">
             Bienvenido a Itesa, {currentUser.name + " " + currentUser.lastName}
             {" :)"}

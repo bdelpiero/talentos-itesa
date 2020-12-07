@@ -53,6 +53,12 @@ function RegisterFreelancer({
             value={data.freelancerType} 
             allowClear 
             placeholder='Tipo de freelancer'
+            bordered={false}
+            style={{
+              borderBottomWidth: 0.3,
+              borderBottomStyle: "solid",
+              borderBottomColor: "lightgray",
+            }}
             >
               <Select.Option value='developer'>Developer</Select.Option>
               <Select.Option value='designer'>Designer</Select.Option>

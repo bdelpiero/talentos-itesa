@@ -38,6 +38,12 @@ export default ({ handleInputChange, handleSubmit, data, form, isLogin }) => {
             value={data.email}
             onChange={handleInputChange}
             className='register-input'
+            bordered={false}
+            style={{
+              borderBottomWidth: 0.3,
+              borderBottomStyle: "solid",
+              borderBottomColor: "lightgray",
+            }}
           />
         </Form.Item>
 
@@ -76,12 +82,13 @@ export default ({ handleInputChange, handleSubmit, data, form, isLogin }) => {
         <Form.Item>
           <Button
             loading={isLogin.loading}
-            style={{ backgroundColor: "#a77ffa", border: 0 }}
             shape='round'
             block
             type='primary'
             htmlType='submit'
-            className='register-button'>
+            className='register-button'            
+            >
+
             LOGIN
           </Button>
         </Form.Item>
