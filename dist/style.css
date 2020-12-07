@@ -69,6 +69,15 @@
   box-shadow: 3px 1px 5px 0px rgba(78, 77, 77, 0.345);
 }
 
+.admin-card-icon {
+  height: 4rem;
+}
+
+.icono-sider svg {
+  display: block;
+  color: #636363;
+  height: 3em;
+  width: 3em;
 .list-menu-sider {
 background-color: whitesmoke !important;
 height: 100% !important;
@@ -232,11 +241,11 @@ trabajando con content user
 ---------------------- */
 
 .content-user {
-  height: 75vh;
+  height: auto;
   color: black;
   width: 95%;
   background-color: whitesmoke !important;
-  margin: 0 auto;
+  margin: 20px auto;
 }
 
 .site-layout-content {
@@ -284,18 +293,26 @@ trabajando con  user Cards
   margin: auto;
   min-height: 100% !important;
   width: 25em;
-  height: 20em !important;
+  height: 22em !important;
   background-color: whitesmoke;
   background: whitesmoke;
   box-shadow: -1px 3px 15px -6px gray;
   padding: 0;
 }
 
-.bodyCard div {
+.bodyCard > div {
   display: flex;
   flex-direction: column;
   height: 90% !important;
+  margin: 20px;
   box-sizing: content-box;
+}
+
+.card-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 #subtittle {
@@ -324,12 +341,13 @@ trabajando con  user Cards
 }
 
 .buttonCard {
-  background-color: #9e39ff;
+  width: 150px;
+  /* background-color: #9e39ff;
   color: white;
   float: right;
   width: 200px;
   height: 30px;
-  text-align: center;
+  text-align: center; */
 }
 
 /* --------------------------------------
@@ -622,7 +640,7 @@ Trabajando con Admin Cards/DashBoard
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: Raleway;
+  /* font-family: Raleway; */
 }
 
 .modal-outside {
