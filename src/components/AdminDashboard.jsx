@@ -28,27 +28,30 @@ function AdminDashboard({ handleLogout }) {
       <Layout>
         <Navbar />
         <HeaderComponent />
-        <Content className="content-user">
+        <Content className='content-user'>
           {item == 1 && (
             <>
-              <Row className="admin-row">
+              <Row className='admin-row'>
                 <Card
-                  className="admin-cards"
-                  style={{ background: "whitesmoke", border: "none" }}
-                >
-                  <img src={UserLogo} className="icono-sider" />
+                  className='admin-cards'
+                  style={{ background: "whitesmoke", border: "none" }}>
+                  <img src={UserLogo} className='admin-card-icon ' />
                   <InviteContainer />
                 </Card>
 
                 <Card
-                  className="admin-cards"
-                  style={{ background: "whitesmoke", border: "none" }}
-                >
-                  <img src={Briefing} className="icono-sider" />
+                  className='admin-cards'
+                  style={{ background: "whitesmoke", border: "none" }}>
+                  <img src={Briefing} className='admin-card-icon' />
                   <NewProjectContainer />
                 </Card>
-
-                <AddPaymentContainer />
+                <Card
+                  className='admin-cards'
+                  style={{ background: "whitesmoke", border: "none" }}>
+                  <img src={Briefing} className='admin-card-icon' />
+                  {/* <p className='invite-button-text'> Ingresar un pago </p> */}
+                  <AddPaymentContainer />
+                </Card>
                 <ResumeContainer />
               </Row>
               <Row>

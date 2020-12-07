@@ -9,64 +9,72 @@ export default ({ setItem }) => {
   return (
     <>
       {projectI && projectI.name ? (
-        <Card className="bodyCard">
-          <h3 id="tittleCard">OFERTA DE PROYECTO</h3>
-          <p id="subtittle">PROYECTO</p>
+        <Card className='bodyCard'>
+          <h3 id='tittleCard'>OFERTA DE PROYECTO</h3>
+          <p id='subtittle'>PROYECTO</p>
           <p>"{projectI.name}"</p>
-          <p id="subtittle">DURACION</p>
+          <p id='subtittle'>DURACION</p>
           <p>{projectI.term}</p>
-          <p id="subtittle">MONTO</p>
+          <p id='subtittle'>MONTO</p>
           <p>"$50.000"</p>
           <div>
-            <Button
+            {/* <Button
               onClick={() => setItem(5)}
-              className="buttonCard"
-              shape="round"
-            >
+              className='buttonCard'
+              shape='round'>
               Firma Contrato
-            </Button>
+            </Button> */}
+            <div className='Modal card-button-container'>
+              <Button
+                onClick={() => setItem(5)}
+                className='modal-button buttonCard'>
+                Firmar Contrato
+              </Button>
+            </div>
           </div>
         </Card>
       ) : (
-        <Card className="bodyCard">
-          <h3 id="tittleCard">OFERTA DE PROYECTO</h3>
-          <p id="subtittle">NO TIENES PROYECTOS</p>
+        <Card className='bodyCard'>
+          <h3 id='tittleCard'>OFERTA DE PROYECTO</h3>
+          <p id='subtittle'>NO TIENES PROYECTOS</p>
         </Card>
       )}
 
-      <Card className="bodyCard">
-        <h3 id="tittleCard">PROXIMO PAGO</h3>
-        <p id="subtittle">PROYECTO</p>
+      <Card className='bodyCard'>
+        <h3 id='tittleCard'>PROXIMO PAGO</h3>
+        <p id='subtittle'>PROYECTO</p>
         <p>"ITS202|SATAPP"</p>
-        <p id="subtittle">FECHA DE PAGO</p>
+        <p id='subtittle'>FECHA DE PAGO</p>
         <input
-          type="date"
-          id="start"
-          name="trip-start"
-          min="2021-01-01"
-          max="2029-12-31"
-        ></input>
-        <p id="subtittle">MONTO</p>
+          type='date'
+          id='start'
+          name='trip-start'
+          min='2021-01-01'
+          max='2029-12-31'></input>
+        <p id='subtittle'>MONTO</p>
         <p>"$50.000"</p>
         <div>
-          <Button className="buttonCard" shape="round">
+          {/* <Button className="buttonCard" shape="round">
             Cargar Factura
-          </Button>
+          </Button> */}
+          <div className='Modal card-button-container'>
+            <Button className='modal-button buttonCard'>Cargar Factura</Button>
+          </div>
         </div>
       </Card>
 
-      <Card className="bodyCard">
-        <h3 id="tittleCard">MI BANCO</h3>
-        <p id="subtittle">CBU/Alias</p>
+      <Card className='bodyCard'>
+        <h3 id='tittleCard'>MI BANCO</h3>
+        <p id='subtittle'>CBU/Alias</p>
         <p>Banco EL P5</p>
-        <p id="subtittle">TITULAR</p>
+        <p id='subtittle'>TITULAR</p>
         <p>Agustin Fregossi</p>
-        <p id="subtittle">BANCO</p>
+        <p id='subtittle'>BANCO</p>
         <p>{"Santnader Rio"}</p>
         <div>
-          <Button className="buttonCard" shape="round">
-            Modificar datos
-          </Button>
+          <div className='Modal card-button-container'>
+            <Button className='modal-button buttonCard'>Modificar Datos</Button>
+          </div>
         </div>
       </Card>
     </>
