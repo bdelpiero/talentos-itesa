@@ -429,9 +429,26 @@ register freelancer
   display: flex;
   height: 80vh;
   width: 100vw;
-  margin: 0;
+  margin: 20px;
+}
+.register-contract {
+  width: 60vw;
 }
 
+@media (max-width: 950px) {
+  .register-container {
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    height: auto;
+    margin: 40px 0;
+  }
+  .register-contract {
+    margin: auto;
+    height: 80vh;
+    width: 80vw;
+  }
+}
 .register-logo {
   margin-top: 50px;
   margin-right: 8%;
@@ -452,6 +469,15 @@ register freelancer
   flex-basis: 50vw;
   padding: 0 8%;
   margin: 10vh 0;
+}
+
+.register-container .ant-select-selector {
+  border: 0 !important;
+}
+
+.register-input {
+  border: 0;
+  border-bottom: 0.3px solid lightgray;
 }
 
 .register-form input {
