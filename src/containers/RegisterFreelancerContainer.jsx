@@ -117,10 +117,10 @@ function RegisterFreelancerContainer() {
                 bankDetails: bankData,
                 nonDisclosure: downloadUrl,
                 email: data.email,
+                projectInvited: "",
               })
-             .then(() => {
-                 setIsLoading(false);
-                 
+              .then(() => {
+                history.push("/freelancer");
               })
               .then(() => {
                 db.collection("invites").doc(`${data.email}`).delete();
@@ -132,12 +132,12 @@ function RegisterFreelancerContainer() {
 
   return (
     <div>
-      <div className='register-header'>
-        <img src={Logo} className='register-logo' />
+      <div className="register-header">
+        <img src={Logo} className="register-logo" />
       </div>
-      <div className='register-container'>
+      <div className="register-container">
         {step !== 3 ? (
-          <div className='register-left'></div>
+          <div className="register-left"></div>
         ) : (
           <Contract
             show={true}
