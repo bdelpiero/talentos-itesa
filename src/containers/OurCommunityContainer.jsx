@@ -29,6 +29,25 @@ export const OurCommunityContainer = () => {
     setCurrentPage(page);
   }
 
+  const filterByColumn = (e, column) => {
+    if (e.target.innerHTML == "all") return setCurrentUsers(allUsers);
+    if (column === "projectInvited") return filterByState(e);
+    setCurrentUsers(
+      allUsers.filter(
+        (user) =>
+          user[column] && user[column].toLowerCase() == e.target.innerHTML
+      )
+    );
+  };
+
+  const filterByState = (e) => {
+    if (e.target.innerHTML == "En Proyecto")
+      return setCurrentUsers(
+        allUsers.filter((user) => user.projectInvited !== "")
+      );
+    setCurrentUsers(allUsers.filter((user) => user.projectInvited === ""));
+  };
+
   useEffect(() => {
     db.collection("users")
       .where("isAdmin", "==", false)
@@ -53,13 +72,16 @@ export const OurCommunityContainer = () => {
   return (
     <>
       <OurCommunity
+        currentPage={currentPage}
+        filterByState={filterByState}
+        filterByColumn={filterByColumn}
         onChange={onChange}
         users={users}
         currentUsers={currentUsers}
         usersPerPage={usersPerPage}
         handlePageChange={handlePageChange}
         isLoading={isLoading}
-      ></OurCommunity>
+        setCurrentUsers={setCurrentUsers}></OurCommunity>
     </>
   );
 };

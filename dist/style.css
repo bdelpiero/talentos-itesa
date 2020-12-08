@@ -758,3 +758,37 @@ Trabajando con Admin Cards/DashBoard
   background: none;
   border-color: #9e39ff;
 }
+
+/* ----------------
+      OurCommunity component
+------------------- */
+
+.ourCommunity-dropDown {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+}
+
+.ourCommunity-dropDown h3 {
+  margin: 0;
+}
+.ourCommunity-dropDown span {
+  margin-left: 20px;
+}
+
+.ourCommunity-filterButtons {
+  display: flex;
+  flex-direction: column;
+  border: solid grey;
+  border-width: 0.2px;
+  width: 130px;
+}
+.ourCommunity-filterButtons button {
+  border: 0;
+  text-align: left;
+}
+
+.ourCommunity-filterButtons button:hover {
+  background-color: #dddcdc;
+}

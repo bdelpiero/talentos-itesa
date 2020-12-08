@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   List,
   Typography,
@@ -15,7 +15,7 @@ import {
   Menu,
   Pagination,
 } from "antd";
-import { DownloadOutlined } from "@ant-design/icons";
+import { DownloadOutlined, DownOutlined } from "@ant-design/icons";
 const { Title, Paragraph } = Typography;
 
 export const OurCommunity = ({
@@ -26,37 +26,77 @@ export const OurCommunity = ({
   users,
   handlePageChange,
   isLoading,
+  setCurrentUsers,
+  filterByColumn,
+  filterByState,
+  currentPage,
 }) => {
   const pageNumbers = Math.ceil(currentUsers.length / usersPerPage);
-  console.log("NUMERO DE USERS", pageNumbers, currentUsers.length);
+
+  const actividadOptions = (
+    <div className='ourCommunity-filterButtons'>
+      <button onClick={(e) => filterByColumn(e, "freelancerType")}>
+        developer
+      </button>
+      <button onClick={(e) => filterByColumn(e, "freelancerType")}>
+        designer
+      </button>
+      <button onClick={(e) => filterByColumn(e, "freelancerType")}>all</button>
+    </div>
+  );
+  const estadoOptions = (
+    <div className='ourCommunity-filterButtons'>
+      <button onClick={(e) => filterByColumn(e, "projectInvited")}>
+        En Proyecto
+      </button>
+      <button onClick={(e) => filterByColumn(e, "projectInvited")}>
+        Libre
+      </button>
+      <button onClick={(e) => filterByColumn(e, "projectInvited")}>all</button>
+    </div>
+  );
+
   return (
     <>
       <List
-        size="large"
+        size='large'
         header={
           <>
             <Form onFinish={onFinishSearch}>
               <Input
                 style={{ marginBottom: "1rem" }}
                 onChange={onChange}
-                placeholder="Buscar freelancer por nombre o email"
+                placeholder='Buscar freelancer por nombre o email'
               />
             </Form>
             <Row>
-              <Col xs={1} sm={1} md={1} lg={1}></Col>
+              <Col xs={2} sm={2} md={2} lg={2}>
+                {" "}
+              </Col>
 
               <Col xs={5} sm={5} md={5} lg={5}>
-                <h3>Nombre</h3>
-              </Col>
-              <Col xs={8} sm={8} md={8} lg={8}>
-                <h3>Tipo de freelancer</h3>
+                <h3>NOMBRE</h3>
               </Col>
               <Col xs={5} sm={5} md={5} lg={5}>
-                <h3>Email</h3>
+                <Dropdown overlay={actividadOptions}>
+                  <div className='ourCommunity-dropDown'>
+                    <h3>ACTIVIDAD</h3>
+                    <DownOutlined />
+                  </div>
+                </Dropdown>
+              </Col>
+              <Col xs={7} sm={7} md={7} lg={7}>
+                <h3>EMAIL</h3>
               </Col>
               <Col xs={4} sm={4} md={4} lg={4}>
-                <h3>Estado</h3>
+                <Dropdown overlay={estadoOptions}>
+                  <div className='ourCommunity-dropDown'>
+                    <h3>ESTADO</h3>
+                    <DownOutlined />
+                  </div>
+                </Dropdown>
               </Col>
+              <Col xs={1} sm={1} md={1} lg={1}></Col>
             </Row>
           </>
         }
@@ -64,41 +104,42 @@ export const OurCommunity = ({
         dataSource={users}
         renderItem={(item) => (
           <>
-            <List.Item>
-              <Col xs={1} sm={1} md={1} lg={1}>
+            <Row style={{ padding: "16px 26px" }}>
+              <Col xs={2} sm={2} md={2} lg={2}>
                 <Avatar src={item.avatar} />
               </Col>
 
               <Col xs={5} sm={5} md={5} lg={5}>
-                <h3>{item.name + " " + item.lastName}</h3>
+                <h4>{item.name + " " + item.lastName}</h4>
               </Col>
 
-              <Col xs={4} sm={4} md={4} lg={4}>
-                <h3>{item.freelancerType}</h3>
+              <Col xs={5} sm={5} md={5} lg={5}>
+                <h4>{item.freelancerType}</h4>
               </Col>
               <Col xs={7} sm={7} md={7} lg={7}>
-                <h3>{item.email}</h3>
+                <h4>{item.email}</h4>
               </Col>
               {item.projectInvited !== "" ? (
                 <Col xs={4} sm={4} md={4} lg={4}>
-                  <Tag color="red">En Proyecto</Tag>
+                  <Tag color='red'>En Proyecto</Tag>
                 </Col>
               ) : (
                 <Col xs={4} sm={4} md={4} lg={4}>
-                  <Tag color="green">Libre</Tag>
+                  <Tag color='green'>Libre</Tag>
                 </Col>
               )}
               <Col xs={1} sm={1} md={1} lg={1}>
-                <DownloadOutlined id="download-icon" />
+                <DownloadOutlined id='download-icon' />
               </Col>
-            </List.Item>
+            </Row>
           </>
         )}
       />
       <Pagination
+        style={{ display: "flex", justifyContent: "flex-end", padding: 20 }}
+        current={currentPage}
         onChange={(page, pageSize) => handlePageChange(page, pageSize)}
         pageSize={usersPerPage}
-        defaultCurrent={1}
         total={currentUsers.length}
       />
     </>
