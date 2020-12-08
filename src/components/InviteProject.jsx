@@ -18,24 +18,23 @@ function InviteProject({
   setSelectedUser,
 }) {
   return (
-    <div className="Modal">
-      <Button className="modal-button" onClick={openModal}>
+    <div className='Modal'>
+      <Button className='modal-button' onClick={openModal}>
         {" "}
         INVITAR
       </Button>
 
       <Modal
         visible={modal}
-        centered="true"
+        centered='true'
         cancelButtonProps={{ hidden: true }}
         okButtonProps={{
           hidden: true,
         }}
         onCancel={closeModal}
-        closeIcon={<CloseCircleOutlined className="close-button" />}
+        closeIcon={<CloseCircleOutlined className='close-button' />}
         bodyStyle={{ color: "#9e39ff" }}
-        width={1000}
-      >
+        width={1000}>
         <>
           <Form onFinish={handleFinish}>
             <div style={{ width: "70%", marginLeft: "38px" }}>
@@ -82,7 +81,7 @@ function InviteProject({
             <div>
               <Row>
                 <Col span={1}>
-                  <input type="checkbox" />
+                  <input type='checkbox' />
                 </Col>
                 <Col span={3}>
                   <Form.Item>
@@ -91,9 +90,8 @@ function InviteProject({
                       onChange={(value) => {
                         setSelectedUser(value);
                       }}
-                      placeholder="Perfil"
-                      allowClear
-                    >
+                      placeholder='Perfil'
+                      allowClear>
                       {users.map((user) => {
                         if (!user.isAdmin) {
                           return (
@@ -108,16 +106,16 @@ function InviteProject({
                 </Col>
                 <Col span={3}>
                   <Form.Item>
-                    <RangePicker placeholder="Plazo" />
+                    <RangePicker placeholder='Plazo' />
                   </Form.Item>
                 </Col>
                 <Col span={3}>
                   <Form.Item>
-                    <Select placeholder="Servicio" allowClear>
-                      <Option key="male" value="male">
+                    <Select placeholder='Servicio' allowClear>
+                      <Option key='male' value='male'>
                         Developer
                       </Option>
-                      <Option key="female" value="female">
+                      <Option key='female' value='female'>
                         Disigner
                       </Option>
                     </Select>
@@ -152,8 +150,8 @@ function InviteProject({
                 </button>
               </div> */}
             </Row>
-            <div className="modal-input">
-              <button className="ok-button" type="submit">
+            <div className='modal-input'>
+              <button className='ok-button' type='submit'>
                 CONFIRMAR
               </button>
             </div>

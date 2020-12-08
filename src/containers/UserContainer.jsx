@@ -72,10 +72,10 @@ export default () => {
         
         <Navbar />
         <HeaderComponent user={currentUser} setCurrentUser={setCurrentUser} />
-        <Content className="content-user">
+        <Content className='content-user'>
           {item == 1 && (
             <>
-              <Row className="admin-row">
+              <Row className='userCards-row'>
                 <CardsFreelancer setItem={setItem} />
               </Row>
               <Row>

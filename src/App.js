@@ -6,7 +6,6 @@ import { AuthProvider } from '../firebase/auth';
 import RegisterFreelancerContainer from "./containers/RegisterFreelancerContainer";
 import LoginContainer from "./containers/LoginContainer";
 import AdminDashboardContainer from "./containers/AdminDashboardContainer";
-
 import UserContainer from "./containers/UserContainer";
 import ForgotPassContainer from "./containers/ForgotPassContainer";
 

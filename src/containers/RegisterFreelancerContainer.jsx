@@ -132,21 +132,23 @@ function RegisterFreelancerContainer() {
 
   return (
     <div>
-      <div className="register-header">
-        <img src={Logo} className="register-logo" />
+      <div className='register-header'>
+        <img src={Logo} className='register-logo' />
       </div>
-      <div className="register-container">
+      <div className='register-container'>
         {step !== 3 ? (
-          <div className="register-left"></div>
+          <div className='register-left'></div>
         ) : (
-          <Contract
-            show={true}
-            name={data.name}
-            lastName={data.lastName}
-            cuit={bankData.cuit}
-            address={bankData.address}
-            freelancerType={data.freelancerType}
-          />
+          <div className='register-contract'>
+            <Contract
+              show={true}
+              name={data.name}
+              lastName={data.lastName}
+              cuit={bankData.cuit}
+              address={bankData.address}
+              freelancerType={data.freelancerType}
+            />
+          </div>
         )}
 
         <RegisterFreelancer
