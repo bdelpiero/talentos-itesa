@@ -81,7 +81,7 @@ export default ({ user, setCurrentUser }) => {
 
   return (
     <>
-      <div onClick={openModal}>
+      <div onClick={openModal} style={{ cursor: "pointer" }}>
         {user.avatar ? (
           <Avatar size={64} src={user.avatar} className='avatar' />
         ) : (
