@@ -11,7 +11,9 @@ function AddPayment() {
       style={{background: 'whitesmoke', border: 'none'}} 
       >
         <img src={Briefing} className="icono-sider" />
-        <p className='invite-button-text'> Ingresar un pago </p>
+        <Button className="modal-button" style={{width:'70%',marginLeft:'15%'}}>
+        Ingresar un Pago
+      </Button>
       </Card>
     </div>
   );

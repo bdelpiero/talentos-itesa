@@ -40,7 +40,7 @@ function InviteContainer() {
           ),
           centered: "true",
           okText: "VOLVER",
-          icon: <CheckCircle style={{ color: "#9e39ff" }} />,
+          icon: <img src={CheckCircle} className="icono-sider" />,
           okButtonProps: {
             style: {
               backgroundColor: "#9e39ff",

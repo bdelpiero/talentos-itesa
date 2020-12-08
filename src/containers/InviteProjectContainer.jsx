@@ -9,9 +9,32 @@ function InviteProjectContainer({ proyecto }) {
   const [modal, setModal] = useState(false);
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState("");
+  const [asignData, setAsignData] = useState({
+    selectedUser:"",
+    plazos:[],
+    servicios:"",
+    cuota1:{
+      fecha:[],
+      monto: 0
+    },
+    cuota2:{
+      fecha:[],
+      monto: 0
+    },
+    cuota3:{
+      fecha:[],
+      monto: 0
+    },
+    cuota4:{
+      fecha:[],
+      monto: 0
+    },
+  })
+
   const openModal = () => {
     setModal(true);
   };
+
 
   const closeModal = () => {
     setModal(false);
@@ -38,7 +61,27 @@ function InviteProjectContainer({ proyecto }) {
       });
   }, []);
 
+  const handleChange = (e)=>{
+    setAsignData({
+      ...asignData,
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  const handleMonto = (e)=>{
+    setAsignData({
+      ...asignData,
+      [e.target.name] : {...asignData[e.target.name], monto : e.target.value } ,
+    });
+    console.log("aca esta asign data ", asignData)
+  }
+
+
+
+  // db.collection('projects').doc(project.id).collection("invitedUser").doc("id del usuario").set()
+
   function handleFinish() {
+    closeModal();
     const usersProject = proyecto.users
       ? [...proyecto.users, selectedUser]
       : [selectedUser];
@@ -49,14 +92,7 @@ function InviteProjectContainer({ proyecto }) {
         db.collection("users")
           .doc(selectedUser)
           .update({ projectInvited: proyecto.id });
-      });
-  }
-
-  function success() {
-    closeModal();
-    db.collection("users")
-      .doc(`${email}`) // sobre el id del usuario
-      .set({ email: email }) // deberia agregar el id del project
+      })
       .then(() => {
         Modal.success({
           bodyStyle: {
@@ -67,13 +103,12 @@ function InviteProjectContainer({ proyecto }) {
           },
           content: (
             <Card className="invite_msg" onClick={openModal}>
-              <h1>¡Solicitud Enviada!</h1>
-              <h4> El perfil podrá crear su cuenta desde su email</h4>
+              <h1>¡Perfil Invitado!</h1>
             </Card>
           ),
           centered: "true",
           okText: "VOLVER",
-          icon: <CheckCircle style={{ color: "#9e39ff" }} />,
+          icon: <img src={CheckCircle} className="icono-sider" />,
           okButtonProps: {
             style: {
               backgroundColor: "#9e39ff",
@@ -84,18 +119,23 @@ function InviteProjectContainer({ proyecto }) {
         });
       });
   }
+
+  
   return (
     <InviteProject
       className="modal-outside"
-      /*  handleChange={handleChange} */
+      handleChange={handleChange}
+      handleMonto = {handleMonto}
       closeModal={closeModal}
-      success={success}
+      // success={success}
       openModal={openModal}
       modal={modal}
       users={users}
       handleFinish={handleFinish}
       selectedUser={selectedUser}
       setSelectedUser={setSelectedUser}
+      asignData={asignData}
+      setAsignData={setAsignData}
     />
   );
 }
