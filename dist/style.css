@@ -179,7 +179,7 @@
 
 @media (min-width: 991px) {
   .header-user {
-    margin: 1.5rem;
+    margin: 1.5rem !important;
     padding: 0 !important;
     height: 15% !important;
   }
@@ -237,8 +237,8 @@
 ---------------------- */
 
 .resumen-card .ant-card {
-  padding: 1.5rem;
-  margin: 0.5rem;
+  padding: 1.5rem !important;
+  margin: 0.5rem !important;
   background-color: white;
   background: white;
 }
@@ -344,7 +344,7 @@ trabajando con  user Cards
 .ant-card-body {
   /* height: 100% !important; */
   margin: 0 !important;
-  padding: 0;
+  padding: 1rem;
 }
 
 .bodyCard > div {
