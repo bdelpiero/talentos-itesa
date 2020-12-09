@@ -1,18 +1,22 @@
 import React from "react";
 import { Button, Card, DatePicker, InputNumber, Col } from "antd";
 import { useRecoilState } from "recoil";
-import { projectInvited } from "../atoms/index";
+import { user,projectInvited } from "../atoms/index";
+import MiBancoContainer from "../containers/MiBancoContainer";
 
 export default ({ setItem }) => {
+  const [currentUser, setCurrentUser] = useRecoilState(user);
   const [projectI, setProjectI] = useRecoilState(projectInvited);
   console.log("project en carfrelance", projectI);
+  //console.log("user buscando datos del banco", currentUser.bankDetails)
+
   return (
     <>
       {projectI && projectI.name ? (
         <Card className='bodyCard'>
           <h3 id='tittleCard'>OFERTA DE PROYECTO</h3>
           <p id='subtittle'>PROYECTO</p>
-          <p>"{projectI.name}"</p>
+          <p>{projectI.name}</p>
           <p id='subtittle'>DURACION</p>
           <p>{projectI.term}</p>
           <p id='subtittle'>MONTO</p>
@@ -43,7 +47,7 @@ export default ({ setItem }) => {
       <Card className='bodyCard'>
         <h3 id='tittleCard'>PROXIMO PAGO</h3>
         <p id='subtittle'>PROYECTO</p>
-        <p>"ITS202|SATAPP"</p>
+        <p>{projectI.name}</p>
         <p id='subtittle'>FECHA DE PAGO</p>
         <input
           type='date'
@@ -66,15 +70,15 @@ export default ({ setItem }) => {
       <Card className='bodyCard'>
         <h3 id='tittleCard'>MI BANCO</h3>
         <p id='subtittle'>CBU/Alias</p>
-        <p>Banco EL P5</p>
+        <p>{currentUser.bankDetails.alias}</p>
         <p id='subtittle'>TITULAR</p>
-        <p>Agustin Fregossi</p>
+        <p>{currentUser.bankDetails.accountName}</p>
         <p id='subtittle'>BANCO</p>
-        <p>{"Santnader Rio"}</p>
+        <p>{currentUser.bankDetails.bankName}</p>
         <div>
-          <div className='Modal card-button-container'>
-            <Button className='modal-button buttonCard'>Modificar Datos</Button>
-          </div>
+          
+            <MiBancoContainer/>
+          
         </div>
       </Card>
     </>
