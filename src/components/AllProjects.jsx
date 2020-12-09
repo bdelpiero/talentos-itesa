@@ -39,9 +39,12 @@ function AllProjects({ projects, deleteProject, handleClick,changeStatus }) {
     {
       title: "",
       key: "action",
-      render: () => (
+      render: (proyecto) => (
         <div>
-          <Button className="modal-button" onClick={handleClick}>
+          <Button
+            className="modal-button"
+            onClick={() => handleClick(proyecto)}
+          >
             {" "}
             VER MÁS{" "}
           </Button>

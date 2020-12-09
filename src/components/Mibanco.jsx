@@ -24,7 +24,7 @@ function MiBanco({
   };
 
   return (
-    <div className='Modal card-button-container'>
+    <div style={{display:"flex",flexDirection: "column",position:"absolute", right:20, bottom:40}}>
       <Button onClick={openModal} className="modal-button buttonCard">
         Modificar Datos
       </Button>
@@ -57,7 +57,7 @@ function MiBanco({
           </h5>
           <Form.Item
             className="modal-formularios"
-            name="name"
+            name="bankName"
             onChange={handleChangeBank}
             rules={[
               {
@@ -66,14 +66,14 @@ function MiBanco({
               },
             ]}
           >
-            <Input />
+            <Input  name="bankName"/>
           </Form.Item>
           <h5 style={{ color: "grey", marginLeft: "95px" }}>
             Name
           </h5>
           <Form.Item
             className="modal-formularios"
-            name="name"
+            name="accountName"
             onChange={handleChangeBank}
             rules={[
               {
@@ -82,14 +82,14 @@ function MiBanco({
               },
             ]}
           >
-            <Input />
+            <Input name="accountName"/>
           </Form.Item>
           <h5 style={{ color: "grey", marginLeft: "95px" }}>
             alias
           </h5>
           <Form.Item
             className="modal-formularios"
-            name="name"
+            name="alias"
             onChange={handleChangeBank}
             rules={[
               {
@@ -98,14 +98,14 @@ function MiBanco({
               },
             ]}
           >
-            <Input />
+            <Input name="alias"/>
           </Form.Item>
           <h5 style={{ color: "grey", marginLeft: "95px" }}>
             Cuit
           </h5>
           <Form.Item
             className="modal-formularios"
-            name="name"
+            name="cuit"
             onChange={handleChangeBank}
             rules={[
               {
@@ -114,14 +114,14 @@ function MiBanco({
               },
             ]}
           >
-            <Input />
+            <Input name="cuit"/>
           </Form.Item>
           <h5 style={{ color: "grey", marginLeft: "95px" }}>
           Tipo de Factura
           </h5>
           <Form.Item
             className="modal-formularios"
-            name="name"
+            name="type"
             onChange={handleChangeBank}
             rules={[
               {
@@ -130,14 +130,14 @@ function MiBanco({
               },
             ]}
           >
-            <Input />
+            <Input name="type"/>
           </Form.Item>
           <h5 style={{ color: "grey", marginLeft: "95px" }}>
             Direccion
           </h5>
           <Form.Item
             className="modal-formularios"
-            name="name"
+            name="address"
             onChange={handleChangeBank}
             rules={[
               {
@@ -146,7 +146,7 @@ function MiBanco({
               },
             ]}
           >
-            <Input />
+            <Input name="address" />
           </Form.Item>
           
           <div className="modal-input">

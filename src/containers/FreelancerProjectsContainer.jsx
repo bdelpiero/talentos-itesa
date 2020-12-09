@@ -8,7 +8,9 @@ import { Modal, Card } from "antd";
 function FreelancerProjectsContainer() {
   const { signup } = authUser();
   const [modal, setModal] = useState(false);
-  const [email, setEmail] = useState("");
+
+
+  
   const openModal = () => {
     setModal(true);
   };
@@ -55,7 +57,7 @@ function FreelancerProjectsContainer() {
     <FreelancerProjects
       className='modal-outside'
       handleChange={handleChange}
-      
+
       closeModal={closeModal}
       success={success}
       openModal={openModal}

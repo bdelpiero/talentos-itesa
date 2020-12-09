@@ -6,10 +6,12 @@ import MiBancoContainer from "../containers/MiBancoContainer";
 
 
 export default ({setItem}) => {
+  const [currentUser,serCurrentUser]=useRecoilState(user)
   const [invitedProject, setInvitedProject] = useRecoilState(projectInvited);
   const [carrusel, setCarrusel] = useState(0);
 
   console.log("project en carfrelance", invitedProject)
+  console.log("user en carfrelance", currentUser)
 
   const CardsOferts =(props)=>{
     if(props.inviteds.length > 0){
@@ -91,7 +93,7 @@ export default ({setItem}) => {
       <Card className='bodyCard'>
         <h3 id='tittleCard'>PROXIMO PAGO</h3>
         <p id='subtittle'>PROYECTO</p>
-        <p>{projectI.name}</p>
+        <p>{}</p>
         <p id='subtittle'>FECHA DE PAGO</p>
         <input
           type='date'
@@ -105,7 +107,7 @@ export default ({setItem}) => {
           {/* <Button className="buttonCard" shape="round">
             Cargar Factura
           </Button> */}
-          <div className='Modal card-button-container'>
+          <div style={{display:"flex",flexDirection: "column",position:"absolute", right:20, bottom:40}}>
             <Button className='modal-button buttonCard'>Cargar Factura</Button>
           </div>
         </div>
@@ -119,11 +121,7 @@ export default ({setItem}) => {
         <p>{currentUser.bankDetails.accountName}</p>
         <p id='subtittle'>BANCO</p>
         <p>{currentUser.bankDetails.bankName}</p>
-        <div>
-          
-            <MiBancoContainer/>
-          
-        </div>
+        <div> <MiBancoContainer/></div>
       </Card>
     </>
   );

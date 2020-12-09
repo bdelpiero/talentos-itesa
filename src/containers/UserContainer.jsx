@@ -102,9 +102,8 @@ export default () => {
           )}
           {
             item == 2 && (
-              <Row className='userCards-row'>
+              
               <FreelancerProjectContainer />
-              </Row>
             )
           }
           {item == 5 && (

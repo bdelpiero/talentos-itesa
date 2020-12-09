@@ -2,32 +2,36 @@ import React, { useEffect, useState } from "react";
 import { db } from "../../firebase/firebase";
 import { CheckCircleOutlined } from "@ant-design/icons";
 import { Modal, Form } from "antd";
-import MiBanco from "../components/Mibanco";
+import MiBanco from "../components/MiBanco";
 import { useRecoilState } from "recoil";
 import { user,projectInvited } from "../atoms/index";
 
 
 function MiBancoContainer() {
  
-  const [currentUser, setCurrentUse] = useRecoilState(user);  
+  const [currentUser, setcurrentUser] = useRecoilState(user);  
   const [modal, setModal] = useState(false);  
   const [form] = Form.useForm();
 
 
+
   const [bankData, setBankData] = useState({
-    bankName:  "",
-    accountName:  "" ,
-    alias:   "",
-    // cbu: "",
-    cuit:   "",
-    type:   "",
-    // dni: "",
-    address:  "",
+    accountName: currentUser.bankDetails.accountName || "" ,
+    alias:  currentUser.bankDetails.alias || "",
+    cuit:  currentUser.bankDetails.cuit || "",
+    type: currentUser.bankDetails.type ||  "",
+    address: currentUser.bankDetails.address || "",
   });
 
   
   const handleChangeBank = (e) => {
-    setBankData(e.target.value);    
+      console.log("esto es e target name",e.target.name)
+        
+    setBankData({
+     ...bankData,
+     [e.target.name]:e.target.value     
+    });  
+   
   };
 
  
@@ -41,9 +45,9 @@ function MiBancoContainer() {
 
   function success() {
     closeModal();
-    db.collection("users").doc(user.bankDetails)
+    db.collection("users").doc(currentUser.id)
       .update({
-        bankDetails:setBankData
+        bankDetails:bankData
       })
       .then(() => {
         console.log("cambios realizados con éxito");
