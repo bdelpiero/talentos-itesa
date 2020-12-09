@@ -16,7 +16,10 @@ export const allUsersInProject = atom({
 
 export const projectInvited = atom({
   key: "projectInvited", // unique ID (with respect to other atoms/selectors)
-  default: {}, // default value (aka initial value)
+  default: {
+    invited:[],
+    observer:''
+  }, // default value (aka initial value)
 });
 
 export const isLoading = atom({

@@ -4,6 +4,7 @@ import AllProjects from "../components/AllProjects";
 
 function AllProjectsContainer({ setItem, setProject }) {
   const [projects, setProjects] = useState([]);
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     db.collection("projects").onSnapshot((projects) => {
@@ -23,7 +24,19 @@ function AllProjectsContainer({ setItem, setProject }) {
     db.collection("projects").doc(project.id).delete();
   };
 
-  function handleClick(proyecto) {
+  const changeStatus = (project) => {
+    if (project.status == "on Development") {
+      db.collection("projects").doc(project.id).update({
+        status: "finished",
+      });
+    } else {
+      db.collection("projects").doc(project.id).update({
+        status: "on Development",
+      });
+    }
+  };
+
+  function handleClick() {
     setItem(3);
     setProject(proyecto);
   }
@@ -33,6 +46,7 @@ function AllProjectsContainer({ setItem, setProject }) {
       deleteProject={deleteProject}
       projects={projects}
       handleClick={handleClick}
+      changeStatus={changeStatus}
     />
   );
 }
