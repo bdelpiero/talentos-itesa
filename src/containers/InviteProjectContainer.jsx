@@ -11,6 +11,7 @@ function InviteProjectContainer({ proyecto }) {
   const [selectedUser, setSelectedUser] = useState("");
   const [asignData, setAsignData] = useState({
     plazos:[],
+    status:"pending",
     servicios:"",
     cuota1:{
       fecha:[],
@@ -69,7 +70,7 @@ function InviteProjectContainer({ proyecto }) {
 
   function handleFinish() {
     closeModal();
-    const getUser = users.filter((user)=> user.id == selectedUser)
+    const getUser = users.filter((user)=> user.id == selectedUser)[0]
     console.log("esto es getUser -----",getUser)
     const usersProject = proyecto.users
       ? [...proyecto.users, selectedUser]
