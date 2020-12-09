@@ -194,13 +194,11 @@
   }
 }
 
-
 @media (max-width: 991px) {
   .header-user {
-    display: none
+    display: none;
   }
 }
-
 
 .ant-layout-header {
   color: black;
@@ -216,7 +214,7 @@
 .header-title {
   display: flex;
   align-items: center;
-  margin: 0 !important
+  margin: 0 !important;
 }
 
 .ant-avatar {
@@ -341,7 +339,7 @@ trabajando con  user Cards
   margin: auto;
   min-height: 100% !important;
   width: 25em;
-  height: 22em !important;
+  height: 22.5em !important;
   background-color: whitesmoke;
   background: whitesmoke;
   box-shadow: -1px 3px 15px -6px gray;
@@ -349,6 +347,27 @@ trabajando con  user Cards
   position: relative;
   margin: 0 auto 20px auto;
 }
+
+.bodyCardProjects {
+  font-family: "arial";
+  color: #0b2257;
+  font-size: 100%;
+  border-radius: 42px;
+  margin: auto;
+  min-height: 100% !important;
+  width: 30em;
+  height: auto !important;
+  background-color: whitesmoke;
+  background: whitesmoke;
+  box-shadow: -1px 3px 15px -6px gray;
+  padding: 20px;
+  position: relative;
+}
+
+.buttonProjects {
+  margin-bottom: 15px;
+}
+
 
 .ant-card-body {
   /* height: 100% !important; */
@@ -381,7 +400,6 @@ trabajando con  user Cards
 #tittleCard {
   font-family: "Open Sans Semibold";
   color: #8990ad;
-  font-size: 100%;
   font-stretch: expanded;
 }
 
@@ -405,6 +423,24 @@ trabajando con  user Cards
   width: 200px;
   height: 30px;
   text-align: center; */
+}
+
+.oferts-button {
+  justify-content: space-around;
+  display: inline-flex;
+  /* margin: 0 30%; */
+  /* margin-top: 50px; */
+  margin: 5px 0;
+}
+.oferts-button button {
+  width: 20%;
+  height: 3px !important;
+  min-height: 3px !important;
+  background-color: whitesmoke;
+}
+
+.oferts-button button:focus:active {
+  background-color: #9e39ff;
 }
 
 /* --------------------------------------
@@ -644,7 +680,7 @@ Trabajando con Admin Cards/DashBoard
     color: #9e39ff;
     border-radius: 20px;
   }
-  
+
   .admin-cards .ant-card-body {
     display: flex;
     flex-direction: column;
@@ -659,14 +695,11 @@ Trabajando con Admin Cards/DashBoard
     box-shadow: -1px 3px 15px -6px gray;
     color: #9e39ff;
     padding: 0;
-    margin: 0.5rem !important
+    margin: 0.5rem !important;
   }
-
 }
 
-
 @media (max-width: 991px) {
-
   .admin-row {
     display: flex;
     flex-direction: column;
@@ -688,8 +721,8 @@ Trabajando con Admin Cards/DashBoard
     margin: 0.5rem auto !important;
   }
 
-  .admin-cards .ant-card-body img{
-    display: none
+  .admin-cards .ant-card-body img {
+    display: none;
   }
 
   .admin-card-icon {
@@ -708,7 +741,6 @@ Trabajando con Admin Cards/DashBoard
     color: #9e39ff;
     border-radius: 20px;
   }
-
 }
 
 .admin-cards :hover {
@@ -718,8 +750,6 @@ Trabajando con Admin Cards/DashBoard
 .invite-button-text {
   margin: 0;
 }
-
-
 
 .invite_msg {
   margin: 10px !important;
@@ -796,6 +826,14 @@ Trabajando con Admin Cards/DashBoard
 .modal-formularios {
   width: 180%;
   margin-left: 95px;
+}
+
+.modal-button {
+  box-shadow: -1px 3px 15px -6px gray;
+  border: none;
+  background-color: #fbf7ff;
+  color: #9e39ff;
+  border-radius: 20px;
 }
 
 .modal-editProfile-container {

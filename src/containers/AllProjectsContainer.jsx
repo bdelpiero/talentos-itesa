@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { db } from "../../firebase/firebase";
 import AllProjects from "../components/AllProjects";
 
-function AllProjectsContainer({ setItem }) {
+function AllProjectsContainer({ setItem, setProject }) {
   const [projects, setProjects] = useState([]);
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     db.collection("projects").onSnapshot((projects) => {
@@ -23,8 +24,21 @@ function AllProjectsContainer({ setItem }) {
     db.collection("projects").doc(project.id).delete();
   };
 
-  function handleClick() {
+  const changeStatus = (project) => {
+    if (project.status == "on Development") {
+      db.collection("projects").doc(project.id).update({
+        status: "finished",
+      });
+    } else {
+      db.collection("projects").doc(project.id).update({
+        status: "on Development",
+      });
+    }
+  };
+
+  function handleClick(proyecto) {
     setItem(3);
+    setProject(proyecto);
   }
 
   return (
@@ -32,6 +46,7 @@ function AllProjectsContainer({ setItem }) {
       deleteProject={deleteProject}
       projects={projects}
       handleClick={handleClick}
+      changeStatus={changeStatus}
     />
   );
 }

@@ -4,10 +4,11 @@ import { Table, Tag, Space, Button, Card, List, Avatar, Row, Col } from "antd";
 import { Typography, Spin } from "antd";
 import InviteProjectContainer from "../containers/InviteProjectContainer";
 import NewProjectContainer from "../containers/NewProjectContainer";
+import {DeleteOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
 
-function AllProjects({ projects, deleteProject, handleClick }) {
+function AllProjects({ projects, deleteProject, handleClick,changeStatus }) {
   const columns = [
     {
       title: "PROYECTOS",
@@ -31,11 +32,19 @@ function AllProjects({ projects, deleteProject, handleClick }) {
       dataIndex: "endDate",
     },
     {
+      title: "Estado",
+      key: "status",
+      dataIndex: "status",
+    },
+    {
       title: "",
       key: "action",
-      render: () => (
+      render: (proyecto) => (
         <div>
-          <Button className="modal-button" onClick={handleClick}>
+          <Button
+            className="modal-button"
+            onClick={() => handleClick(proyecto)}
+          >
             {" "}
             VER MÁS{" "}
           </Button>
@@ -55,6 +64,23 @@ function AllProjects({ projects, deleteProject, handleClick }) {
 
     {
       title: "",
+      key: "changeStatus",
+      render: (proyecto) => {
+        return (
+          <div>
+            <Button
+              className="modal-button"
+              onClick={() => changeStatus(proyecto)}
+            >
+              ESTADO
+            </Button>
+          </div>
+        );
+      },
+    },
+
+    {
+      title: "",
       key: "delete",
       render: (proyecto) => {
         return (
@@ -63,7 +89,7 @@ function AllProjects({ projects, deleteProject, handleClick }) {
               className="modal-button"
               onClick={() => deleteProject(proyecto)}
             >
-              ELIMINAR
+              <DeleteOutlined />
             </Button>
           </div>
         );

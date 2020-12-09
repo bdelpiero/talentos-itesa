@@ -40,12 +40,22 @@ export default ({ handleLogout, setItem }) => {
           </div>
         </Menu.Item>
 
+        {currentUser.isAdmin ? (
         <Menu.Item key="2" className="sider-cards" onClick={() => setItem(2)}>
           <div className="sider-buttons">
             <BarChartOutlined className="icon-sider-buttons " />
             <p className="text-sider-buttons">Proyectos</p>
           </div>
         </Menu.Item>
+        ) : (
+          <Menu.Item key="2" className="sider-cards" onClick={() => setItem(2)}>
+          <div className="sider-buttons">
+            <BarChartOutlined className="icon-sider-buttons " />
+            <p className="text-sider-buttons"> Mis Proyectos</p>
+          </div>
+        </Menu.Item>
+        )}
+        
         {currentUser.isAdmin ? (
           <Menu.Item key="3" className="sider-cards" onClick={() => setItem(5)}>
             <div className="sider-buttons">
