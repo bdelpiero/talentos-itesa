@@ -114,16 +114,30 @@ style={{textAlign:"center"}}
                     style={{ width: "90%",margin:"0 5%" }}
                     format="DD/MM/YYYY"
                     placeholder={["Inicio","Finalizacion"]} 
+                    onChange={(value,dataString)=>{
+                      setAsignData({
+                        ...asignData,
+                        plazos: dataString ,
+                      });
+                    }}
                     />
                   </Form.Item>
                 </Col>
                 <Col span={3}  >
                   <Form.Item>
-                    <Select placeholder="Servicio" allowClear style={{ width: "90%",margin:"0 5%" }}>
-                      <Option key="male" value="male">
+                    <Select 
+                    placeholder="Servicio" 
+                    allowClear 
+                    style={{ width: "90%",margin:"0 5%" }}
+                    onChange={(value) => {
+                      setAsignData({...asignData, servicios: value});
+                    }}
+                    value={asignData.servicios} 
+                    >
+                      <Option key="developer" value="developer">
                         Developer
                       </Option>
-                      <Option key="female" value="female">
+                      <Option key="designer" value="designer">
                         Disigner
                       </Option>
                     </Select>

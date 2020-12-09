@@ -10,7 +10,6 @@ function InviteProjectContainer({ proyecto }) {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState("");
   const [asignData, setAsignData] = useState({
-    selectedUser:"",
     plazos:[],
     servicios:"",
     cuota1:{
@@ -39,16 +38,7 @@ function InviteProjectContainer({ proyecto }) {
   const closeModal = () => {
     setModal(false);
   };
-  /*   const handleChange = (e) => {
-    setProject(e.target.value);
-  }; */
-  /*  useEffect(() => {
-    db.collection("projects")
-      .get()
-      .then((projects) => {
-        setProjects(projects.docs);
-      });
-  }, []); */
+
   useEffect(() => {
     db.collection("users")
       .get()
@@ -77,17 +67,19 @@ function InviteProjectContainer({ proyecto }) {
   }
 
 
-
-  // db.collection('projects').doc(project.id).collection("invitedUser").doc("id del usuario").set()
-
   function handleFinish() {
     closeModal();
+    const getUser = users.filter((user)=> user.id == selectedUser)
+    console.log("esto es getUser -----",getUser)
     const usersProject = proyecto.users
       ? [...proyecto.users, selectedUser]
       : [selectedUser];
     db.collection("projects")
       .doc(proyecto.id)
-      .update({ users: usersProject })
+      .collection("invitedUser")
+      .doc(selectedUser)
+      .set({...asignData, ...getUser
+      })
       .then(() => {
         db.collection("users")
           .doc(selectedUser)
@@ -127,7 +119,6 @@ function InviteProjectContainer({ proyecto }) {
       handleChange={handleChange}
       handleMonto = {handleMonto}
       closeModal={closeModal}
-      // success={success}
       openModal={openModal}
       modal={modal}
       users={users}
