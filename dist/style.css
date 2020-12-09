@@ -50,13 +50,13 @@
     margin: 0 !important;
     padding: 0 !important;
     width: 50% !important;
-    display: flex !important;
-    justify-content: space-around !important;
   }
 
   .logo-navbar img {
     width: auto !important;
     height:30px !important;
+    display: flex !important;
+    align-self: center;
   }
 
   .menu-bars {
