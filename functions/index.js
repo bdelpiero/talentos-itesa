@@ -1,6 +1,7 @@
 const functions = require("firebase-functions");
 const invitationEmail = require("./api/invitationEmail");
 const registeredEmail = require("./api/registeredEmail");
+const invitationToProject = require("./api/invitationToProject");
 const express = require("express");
 const cors = require("cors");
 
@@ -22,5 +23,9 @@ exports.watchCreate = functions.firestore
 exports.sendContract = functions.firestore
   .document("users/{userId}")
   .onCreate(registeredEmail);
+
+  exports.inviteToProject = functions.firestore
+  .document("projects/{projectId}/invitedUser/{userId}")
+  .onCreate(invitationToProject)
 
 //exports.sendContract = functions.storage.object().onFinalize(registeredEmail);

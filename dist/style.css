@@ -341,6 +341,27 @@ trabajando con  user Cards
   margin: 0 auto 20px auto;
 }
 
+.bodyCardProjects {
+  font-family: "arial";
+  color: #0b2257;
+  font-size: 100%;
+  border-radius: 42px;
+  margin: auto;
+  min-height: 100% !important;
+  width: 30em;
+  height: auto !important;
+  background-color: whitesmoke;
+  background: whitesmoke;
+  box-shadow: -1px 3px 15px -6px gray;
+  padding: 20px;
+  position: relative;
+}
+
+.buttonProjects {
+  margin-bottom: 15px;
+}
+
+
 .ant-card-body {
   /* height: 100% !important; */
   margin: 0 !important;
@@ -372,7 +393,6 @@ trabajando con  user Cards
 #tittleCard {
   font-family: "Open Sans Semibold";
   color: #8990ad;
-  font-size: 100%;
   font-stretch: expanded;
 }
 
