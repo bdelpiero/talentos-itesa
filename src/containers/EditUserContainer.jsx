@@ -81,7 +81,7 @@ export default ({ user, setCurrentUser }) => {
 
   return (
     <>
-      <div onClick={openModal}>
+      <div onClick={openModal} style={{ cursor: "pointer" }}>
         {user.avatar ? (
           <Avatar size={55} src={user.avatar} className='avatar' />
         ) : (
@@ -150,12 +150,21 @@ export default ({ user, setCurrentUser }) => {
             </div>
             <div className='modal-editProfile-buttons'>
               <div className='modal-input'>
-                <button
+                {/* <button
                   onClick={handleSubmit}
                   className='modal-editProfile-button'
                   style={{ margin: 0 }}>
                   Confirmar cambios
+                </button> */}
+                <button
+                  className='ok-button'
+                  type='submit'
+                  onClick={handleSubmit}>
+                  Confirmar cambios
                 </button>
+                {/* <div className='Modal' onClick={handleSubmit}>
+                  <Button className='modal-button'>Confirmar cambios</Button>
+                </div> */}
               </div>
               {/* <div className='modal-input'>
                 <button

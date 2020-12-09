@@ -12,7 +12,7 @@
   }
 
   .mini-logo {
-    height: 25%;
+    height: 40px;
     line-height: 20px !important;
     margin: 0.5rem 0 0.5rem 0;
   }
@@ -86,6 +86,9 @@
   color: rgb(161, 148, 148);
   background-color: whitesmoke !important;
   box-shadow: 3px 1px 5px 0px rgba(78, 77, 77, 0.345);
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
 }
 
 .icono-sider svg {
@@ -96,15 +99,16 @@
 }
 
 .list-menu-sider {
-background-color: whitesmoke !important;
-height: 100% !important;
-display: flex;
-flex-direction: column;
-justify-content: space-between;
+  background-color: whitesmoke !important;
+  height: 100% !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.ant-menu::before , .ant-menu::after {
-  display: none !important
+.ant-menu::before,
+.ant-menu::after {
+  display: none !important;
 }
 
 .sider-cards {
@@ -164,11 +168,10 @@ justify-content: space-between;
 
 #logout {
   align-self: flex-end !important;
-} 
+}
 .ant-menu .ant-menu-item::after {
   border-right: none !important;
 }
-
 
 /* ----------------------
         HEADER
@@ -193,6 +196,8 @@ justify-content: space-between;
 .ant-layout-header {
   color: black;
   background-color: whitesmoke !important;
+  height: auto !important;
+  margin: 20px 0;
 }
 
 .ant-layout {
@@ -212,6 +217,7 @@ justify-content: space-between;
 
 .subtitulo {
   display: flex !important;
+  line-height: 2rem;
   color: red;
 }
 .logo {
@@ -278,7 +284,7 @@ trabajando con content user
   color: black;
   width: 95%;
   background-color: whitesmoke !important;
-  margin: 20px auto;
+  margin: auto;
 }
 
 .site-layout-content {
@@ -330,14 +336,23 @@ trabajando con  user Cards
   background-color: whitesmoke;
   background: whitesmoke;
   box-shadow: -1px 3px 15px -6px gray;
+  padding: 30px;
+  position: relative;
+  margin: 0 auto 20px auto;
+}
+
+.ant-card-body {
+  /* height: 100% !important; */
+  margin: 0 !important;
   padding: 0;
 }
 
 .bodyCard > div {
   display: flex;
   flex-direction: column;
-  height: 90% !important;
-  margin: 20px;
+  justify-content: space-flex-start;
+  /* height: 90% !important; */
+  /* margin: 20px; */
   box-sizing: content-box;
 }
 
@@ -395,9 +410,6 @@ trabajando con  user Cards
   border-radius: 42px;
   height: 20% !important;
   margin: auto;
-}
-.ant-card-body {
-  padding: 10px;
 }
 .space-align-container {
   align-items: flex-start;
@@ -538,16 +550,20 @@ register freelancer
 }
 
 .register-button {
-background-image: linear-gradient(to right, #ff6e7f 0%,  #a77ffa  40%) !important
+  background-image: linear-gradient(
+    to right,
+    #ff6e7f 0%,
+    #a77ffa 40%
+  ) !important;
 }
 
 .register-button {
-   text-align: center !important;
-   transition: 0.5s !important;
-   background-size: 200% auto !important;
-   border-color: lightgray !important;
-   background: #a77ffa;
-   text-decoration: none !important;
+  text-align: center !important;
+  transition: 0.5s !important;
+  background-size: 200% auto !important;
+  border-color: lightgray !important;
+  background: #a77ffa;
+  text-decoration: none !important;
 }
 
 .register-button span {
@@ -569,7 +585,7 @@ background-image: linear-gradient(to right, #ff6e7f 0%,  #a77ffa  40%) !importan
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 1rem
+  margin-top: 1rem;
 }
 
 .register-link a {
@@ -837,4 +853,38 @@ Trabajando con Admin Cards/DashBoard
 .ant-btn:focus {
   background: none;
   border-color: #9e39ff;
+}
+
+/* ----------------
+      OurCommunity component
+------------------- */
+
+.ourCommunity-dropDown {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+}
+
+.ourCommunity-dropDown h3 {
+  margin: 0;
+}
+.ourCommunity-dropDown span {
+  margin-left: 20px;
+}
+
+.ourCommunity-filterButtons {
+  display: flex;
+  flex-direction: column;
+  border: solid grey;
+  border-width: 0.2px;
+  width: 130px;
+}
+.ourCommunity-filterButtons button {
+  border: 0;
+  text-align: left;
+}
+
+.ourCommunity-filterButtons button:hover {
+  background-color: #dddcdc;
 }
