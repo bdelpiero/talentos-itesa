@@ -114,6 +114,7 @@ function RegisterFreelancerContainer() {
             lastName: data.lastName,
             freelancerType: data.freelancerType,
             bankDetails: bankData,
+            email:data.email
           })
       })
       .then(() => {
