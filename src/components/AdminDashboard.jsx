@@ -1,6 +1,5 @@
 import React from "react";
 import { Layout, Row, Card } from "antd";
-import { authUser } from "../../firebase/auth";
 import Briefing from "../../views/briefing.svg";
 import UserLogo from "../../views/man.svg";
 
@@ -26,9 +25,9 @@ function AdminDashboard({ handleLogout }) {
     <Layout>
       <Sidebar setItem={setItem} handleLogout={handleLogout} />
       <Layout>
-        <Navbar />
-        <HeaderComponent />
-        <Content className="content-user">
+        <Navbar setItem={setItem} />
+        <HeaderComponent/>
+        <Content className='content-user'>
           {item == 1 && (
             <>
               <Row className="admin-row">
