@@ -20,36 +20,28 @@ function InviteProject({
   setAsignData
 }) {
   return (
-    <div className="Modal">
-      <Button className="modal-button" onClick={openModal}>
+    <div className='Modal'>
+      <Button className='modal-button' onClick={openModal}>
         {" "}
         INVITAR
       </Button>
 
       <Modal
         visible={modal}
-        centered="true"
+        centered='true'
         cancelButtonProps={{ hidden: true }}
         okButtonProps={{
           hidden: true,
         }}
         onOk={handleFinish}
         onCancel={closeModal}
-        closeIcon={<CloseCircleOutlined className="close-button" />}
+        closeIcon={<CloseCircleOutlined className='close-button' />}
         bodyStyle={{ color: "#9e39ff" }}
-        width={1000}
-      >
+        width={1000}>
         <>
           <Form onFinish={handleFinish}>
             <div style={{ width: "70%", marginLeft: "30px" }}>
               <h1>Asignar Proyecto</h1>
-
-              {/* 
-              <Form.Item>
-                <Select placeholder="Seleccione Proyecto" allowClear>
-                  <Option key="" value="male"> ITESA 2020 </Option>
-                </Select>
-              </Form.Item> */}
             </div>
 
             <br />
@@ -93,9 +85,8 @@ style={{textAlign:"center"}}
                       onChange={(value) => {
                         setSelectedUser(value);
                       }}
-                      placeholder="Perfil"
-                      allowClear
-                    >
+                      placeholder='Perfil'
+                      allowClear>
                       {users.map((user) => {
                         if (!user.isAdmin) {
                           return (
@@ -240,8 +231,8 @@ style={{textAlign:"center"}}
                 </button>
               </div> */}
             </Row>
-            <div className="modal-input">
-              <button className="ok-button" type="submit">
+            <div className='modal-input'>
+              <button className='ok-button' type='submit'>
                 CONFIRMAR
               </button>
             </div>

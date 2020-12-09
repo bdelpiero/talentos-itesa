@@ -6,15 +6,11 @@ import { Modal, Button, Card } from "antd";
 function AddPayment() {
   return (
     <div className="Modal">
-      <Card 
-      className="admin-cards"
-      style={{background: 'whitesmoke', border: 'none'}} 
-      >
-        <img src={Briefing} className="icono-sider" />
-        <Button className="modal-button" style={{width:'70%',marginLeft:'15%'}}>
+
+        <Button className="modal-button" >
         Ingresar un Pago
       </Button>
-      </Card>
+
     </div>
   );
 }

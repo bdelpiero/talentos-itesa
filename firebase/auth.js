@@ -37,9 +37,10 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
-    
     observer.observer()
-    return auth.signOut().catch(err => console.log(err))
+    return auth.signOut()
+    .then(() => history.push('/login'))
+    .catch(err => console.log(err))
   }
 
   function resetPassword(email) {

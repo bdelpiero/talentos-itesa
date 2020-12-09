@@ -114,6 +114,7 @@ function RegisterFreelancerContainer() {
                 name: data.name,
                 lastName: data.lastName,
                 freelancerType: data.freelancerType,
+                isAdmin: false,
                 bankDetails: bankData,
                 nonDisclosure: downloadUrl,
                 email: data.email,
@@ -139,14 +140,16 @@ function RegisterFreelancerContainer() {
         {step !== 3 ? (
           <div className="register-left"></div>
         ) : (
-          <Contract
-            show={true}
-            name={data.name}
-            lastName={data.lastName}
-            cuit={bankData.cuit}
-            address={bankData.address}
-            freelancerType={data.freelancerType}
-          />
+          <div className="register-contract">
+            <Contract
+              show={true}
+              name={data.name}
+              lastName={data.lastName}
+              cuit={bankData.cuit}
+              address={bankData.address}
+              freelancerType={data.freelancerType}
+            />
+          </div>
         )}
 
         <RegisterFreelancer

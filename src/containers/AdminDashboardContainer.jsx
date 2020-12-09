@@ -1,5 +1,4 @@
 import React from "react";
-import { useHistory, useRouteMatch } from "react-router-dom";
 import { authUser } from "../../firebase/auth";
 import { useRecoilState } from "recoil";
 import { user } from "../atoms/index";
@@ -11,12 +10,11 @@ import AdminDashboard from "../components/AdminDashboard";
 function AdminDashboardContainer() {
   const [currentUser, setCurrentUser] = useRecoilState(user);
   const { logout } = authUser();
-  const history = useHistory();
+
   console.log("ESTE CONSOLOG ES EN ADMINDASH", currentUser);
-  const handleLogout = () => {
-    logout();
-    history.push("/login");
-  };
+  
+  const handleLogout = () => logout()
+
   return !currentUser ? (
     <Error404 />
   ) : (

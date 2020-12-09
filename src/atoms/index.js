@@ -5,6 +5,10 @@ export const user = atom({
   default: '', // default value (aka initial value)
 });
 
+export const allUsersState = atom({
+  key: "allUsersState",
+  default: []
+})
 
 export const projectInvited = atom({
   key: "projectInvited", // unique ID (with respect to other atoms/selectors)
