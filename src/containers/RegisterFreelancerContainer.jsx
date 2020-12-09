@@ -12,7 +12,6 @@ import Logo from "../../views/logo-itesa.svg";
 import SignedDocument from "../components/pdfs/SignedDocument";
 import Contract from "../components/pdfs/Contract";
 import { pdf } from "@react-pdf/renderer";
-import axios from "axios";
 
 function RegisterFreelancerContainer() {
   const signatureRef = useRef({});
@@ -128,6 +127,18 @@ function RegisterFreelancerContainer() {
               });
           });
         });
+        db.collection("users")
+          .doc(uid)
+          .set({
+            name: data.name,
+            lastName: data.lastName,
+            freelancerType: data.freelancerType,
+            bankDetails: bankData,
+            email:data.email
+          })
+      })
+      .then(() => {
+        db.collection("invites").doc(`${data.email}`).delete();
       });
   };
 
