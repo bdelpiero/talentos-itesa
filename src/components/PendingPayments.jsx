@@ -18,7 +18,7 @@ const data = [
 class PendingPayments extends Component {
   render() {
     return (
-      <div style={{width: '100%'}}>
+      <div className='resumen-card'>
           <Title level={3} style={{width: '100%'}}>
             Pagos a realizar este mes
           </Title>

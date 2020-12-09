@@ -37,7 +37,19 @@ export default ({ handleInputChange, handleSubmit, data, form, isLogin }) => {
             placeholder='Email'
             value={data.email}
             onChange={handleInputChange}
+            // style={{
+            //   border: 0,
+            //   borderBottomWidth: 0.3,
+            //   borderBottomStyle: "solid",
+            //   borderBottomColor: "lightgray",
+            // }}
             className='register-input'
+            bordered={false}
+            style={{
+              borderBottomWidth: 0.3,
+              borderBottomStyle: "solid",
+              borderBottomColor: "lightgray",
+            }}
           />
         </Form.Item>
 
@@ -54,12 +66,12 @@ export default ({ handleInputChange, handleSubmit, data, form, isLogin }) => {
             placeholder='Password'
             value={data.password}
             onChange={handleInputChange}
-            bordered={false}
-            style={{
-              borderBottomWidth: 0.3,
-              borderBottomStyle: "solid",
-              borderBottomColor: "lightgray",
-            }}
+            // bordered={false}
+            // style={{
+            //   borderBottomWidth: 0.3,
+            //   borderBottomStyle: "solid",
+            //   borderBottomColor: "lightgray",
+            // }}
             className='register-input'
           />
         </Form.Item>
@@ -76,12 +88,13 @@ export default ({ handleInputChange, handleSubmit, data, form, isLogin }) => {
         <Form.Item>
           <Button
             loading={isLogin.loading}
-            style={{ backgroundColor: "#a77ffa", border: 0 }}
             shape='round'
             block
             type='primary'
             htmlType='submit'
-            className='register-button'>
+            className='register-button'            
+            >
+
             LOGIN
           </Button>
         </Form.Item>
@@ -91,10 +104,10 @@ export default ({ handleInputChange, handleSubmit, data, form, isLogin }) => {
           </Link>
         </div>
         <div className='register-link'>
-       <Link to='/forgotPassword' style={{ color: "gray" }}>
+          <Link to='/reset-password' style={{ color: "gray" }}>
             Forgot Password?
-            </Link>
-       </div>
+          </Link>
+        </div>
       </Form>
     </div>
   );

@@ -7,8 +7,6 @@ import { storage } from "../../firebase/firebase";
 import { atomLogin } from "../atoms/index";
 import { useRecoilState } from "recoil";
 
-
-
 // UTILS
 import Logo from "../../views/logo-itesa.svg";
 import SignedDocument from "../components/pdfs/SignedDocument";
@@ -85,7 +83,7 @@ function RegisterFreelancerContainer() {
 
   const handleSubmit = (e, div) => {
     if (!imageData) return setErrorSignature(true);
-    setIsLogin({loading:true});
+    setIsLogin({ loading: true });
     const blob = pdf(
       <SignedDocument
         imageData={imageData}
@@ -99,12 +97,34 @@ function RegisterFreelancerContainer() {
 
     signup(data.email, data.password, data.name)
       .then((res) => res.user.uid)
-      .then((uid) => {
-        blob.toBlob().then((file) => {
+      .then(async (uid) => {
+        await blob.toBlob().then(async (file) => {
           const storageRef = storage.ref();
           const pdfsRef = storageRef.child(`pdfs/${uid}.pdf`);
-          pdfsRef.put(file).then(function (snapshot) {
+          await pdfsRef.put(file).then(function (snapshot) {
             console.log("Uploaded a blob or file!");
+          });
+          await pdfsRef.getDownloadURL().then((downloadUrl) => {
+            console.log("archivo enviado por front", downloadUrl);
+            db.collection("users")
+              .doc(uid)
+              .set({
+                id: uid,
+                name: data.name,
+                lastName: data.lastName,
+                freelancerType: data.freelancerType,
+                isAdmin: false,
+                bankDetails: bankData,
+                nonDisclosure: downloadUrl,
+                email: data.email,
+                projectInvited: "",
+              })
+              .then(() => {
+                history.push("/freelancer");
+              })
+              .then(() => {
+                db.collection("invites").doc(`${data.email}`).delete();
+              });
           });
         });
         db.collection("users")
@@ -124,21 +144,23 @@ function RegisterFreelancerContainer() {
 
   return (
     <div>
-      <div className='register-header'>
-        <img src={Logo} className='register-logo' />
+      <div className="register-header">
+        <img src={Logo} className="register-logo" />
       </div>
-      <div className='register-container'>
+      <div className="register-container">
         {step !== 3 ? (
-          <div className='register-left'></div>
+          <div className="register-left"></div>
         ) : (
-          <Contract
-            show={true}
-            name={data.name}
-            lastName={data.lastName}
-            cuit={bankData.cuit}
-            address={bankData.address}
-            freelancerType={data.freelancerType}
-          />
+          <div className="register-contract">
+            <Contract
+              show={true}
+              name={data.name}
+              lastName={data.lastName}
+              cuit={bankData.cuit}
+              address={bankData.address}
+              freelancerType={data.freelancerType}
+            />
+          </div>
         )}
 
         <RegisterFreelancer

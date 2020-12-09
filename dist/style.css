@@ -2,17 +2,25 @@
     SIDEBAR + NAVBAR
 ---------------------- */
 
-@media (min-width: 1023px) {
-  .navbar-style {
+@media (min-width: 991px) {
+  .navbar-display {
     display: none;
   }
+
+  .header-display {
+    display: none !important;
+  }
+
   .mini-logo {
-    height: 25%;
+    height: 40px;
     line-height: 20px !important;
-    margin-top: 4px;
-    margin-bottom: 2px;
+    margin: 0.5rem 0 0.5rem 0;
   }
   .single-icon {
+    color: #9749f8;
+    font-size: 1.3rem;
+  }
+  #download-icon {
     color: #9749f8;
     font-size: 1.3rem;
   }
@@ -22,19 +30,34 @@
 }
 
 @media (max-width: 991px) {
-  .navbar-style {
+  .navbar-display {
     display: flex;
     width: 100%;
     height: auto;
-    background-color: #9e39ff;
-    align-items: flex-start;
-    justify-content: space-between;
+    background-color: whitesmoke !important;
   }
-  .logo-mobile {
-    margin: 0.8rem;
-    justify-content: end;
-    float: right;
+
+  .ant-menu-item-selected {
+    border-bottom: 2px solid #9749f8 !important;
   }
+
+  .ant-menu-item:hover {
+    border-bottom: 2px solid #9749f8 !important;
+  }
+
+  .logo-navbar-container {
+    width: auto !important;
+    height: 100% !important;
+    background-color: whitesmoke;
+    margin: 0 1rem 0 1rem;
+  }
+
+  .logo-navbar-container img {
+    width: auto !important;
+    height: 30px !important;
+    margin: 0 auto;
+  }
+
   .menu-bars {
     align-items: center;
     margin: 0.8rem;
@@ -52,13 +75,20 @@
   .add-user {
     margin-left: 2rem;
   }
+  #download-icon {
+    color: #9749f8;
+    font-size: 1.3rem;
+  }
 }
 
 .sider-admin {
   height: 100vh;
   color: rgb(161, 148, 148);
   background-color: whitesmoke !important;
-  box-shadow: 3px 1px 5px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 3px 1px 5px 0px rgba(78, 77, 77, 0.345);
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
 }
 
 .icono-sider svg {
@@ -68,21 +98,50 @@
   width: 3em;
 }
 
-.sider-cards {
-  color: #636363;
-  padding: 4rem !important;
-  margin: 0 auto !important;
-  text-align: center !important;
+.list-menu-sider {
   background-color: whitesmoke !important;
+  height: 100% !important;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: space-between;
+}
+
+.ant-menu::before,
+.ant-menu::after {
+  display: none !important;
+}
+
+.sider-cards {
+  color: #636363;
+  margin: 0rem auto !important;
+  padding: 0 !important;
+  height: 10rem !important;
+  text-align: center !important;
+  background-color: whitesmoke !important;
 }
 
 .sider-cards:hover {
   color: #9e39ff;
-  /* box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.8); */
+}
+
+.sider-buttons {
+  background-color: whitesmoke;
+  width: 90% !important;
+  height: 9rem !important;
+  margin: 0.7rem !important;
+  padding: 0 auto !important;
+  border-radius: 5%;
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sider-buttons:hover {
+  box-shadow: 0px 0px 13px 0px rgba(78, 77, 77, 0.345);
+}
+.sider-buttons:active {
+  box-shadow: inset 0px 0px 13px 0px rgba(126, 126, 126, 0.345);
 }
 
 .text-sider-buttons {
@@ -91,7 +150,7 @@
 
 .icon-sider-buttons {
   margin: 0 auto !important;
-  font-size: 3rem !important;
+  font-size: 3.5rem !important;
 }
 
 .ant-menu-item-selected {
@@ -100,52 +159,53 @@
 }
 
 .ant-menu-item-selected div {
-  box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.8);
+  box-shadow: 0px 0px 13px 0px rgba(78, 77, 77, 0.345);
 }
 
 .ant-menu-item-active {
   color: #9e39ff !important;
 }
 
-.ulList-sider {
-  height: 100vh;
-  background-color: whitesmoke !important;
-}
 #logout {
-  position: absolute;
-  bottom: 0%;
-  width: 198px;
+  align-self: flex-end !important;
 }
 .ant-menu .ant-menu-item::after {
   border-right: none !important;
-}
-.sider-bottons {
-  background-color: whitesmoke;
-  width: 150px;
-  height: 150px;
-  border-radius: 5%;
-}
-.sider-bottons:hover {
-  box-shadow: 0px 0px 13px 0px rgba(0, 0, 0, 0.8);
-}
-.sider-bottons:active {
-  box-shadow: inset 0px 0px 13px 0px rgba(0, 0, 0, 0.8);
-}
-.sider-bottons svg {
-  margin-top: 15px;
 }
 
 /* ----------------------
         HEADER
 ---------------------- */
 
+@media (min-width: 991px) {
+  .header-user {
+    margin: 1.5rem !important;
+    padding: 0 !important;
+    height: 15% !important;
+  }
+}
+
+@media (max-width: 991px) {
+  .header-user {
+    display: none;
+  }
+}
+
 .ant-layout-header {
   color: black;
   background-color: whitesmoke !important;
-  height: 22vh !important;
+  height: auto !important;
+  margin: 20px 0;
 }
+
 .ant-layout {
   background-color: whitesmoke !important;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  margin: 0 !important;
 }
 
 .ant-avatar {
@@ -153,11 +213,9 @@
   box-shadow: -1px 0px 16px -6px rgba(0, 0, 0, 0.75);
 }
 
-.dashboard {
-  margin-bottom: 0 !important;
-}
 .subtitulo {
   display: flex !important;
+  line-height: 2rem;
   color: red;
 }
 .logo {
@@ -177,8 +235,8 @@
 ---------------------- */
 
 .resumen-card .ant-card {
-  padding: 1.5rem;
-  margin: 0.5rem;
+  padding: 1.5rem !important;
+  margin: 0.5rem !important;
   background-color: white;
   background: white;
 }
@@ -220,11 +278,11 @@ trabajando con content user
 ---------------------- */
 
 .content-user {
-  height: 75vh;
+  height: auto;
   color: black;
   width: 95%;
   background-color: whitesmoke !important;
-  margin: 0 auto;
+  margin: auto;
 }
 
 .site-layout-content {
@@ -272,11 +330,35 @@ trabajando con  user Cards
   margin: auto;
   min-height: 100% !important;
   width: 25em;
-  height: 20em !important;
+  height: 22.5em !important;
   background-color: whitesmoke;
   background: whitesmoke;
   box-shadow: -1px 3px 15px -6px gray;
-  padding: 0;
+  padding: 30px;
+  position: relative;
+  margin: 0 auto 20px auto;
+}
+
+.ant-card-body {
+  /* height: 100% !important; */
+  margin: 0 !important;
+  padding: 1rem;
+}
+
+.bodyCard > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-flex-start;
+  /* height: 90% !important; */
+  /* margin: 20px; */
+  box-sizing: content-box;
+}
+
+.card-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
 }
 
 #subtittle {
@@ -305,18 +387,83 @@ trabajando con  user Cards
 }
 
 .buttonCard {
-  background-color: #9e39ff;
+  width: 150px;
+  /* background-color: #9e39ff;
   color: white;
   float: right;
   width: 200px;
   height: 30px;
-  text-align: center;
+  text-align: center; */
+}
+
+.oferts-button {
+  justify-content: space-around;
+  display: inline-flex;
+  /* margin: 0 30%; */
+  /* margin-top: 50px; */
+  margin: 5px 0;
+}
+.oferts-button button {
+  width: 20%;
+  height: 3px !important;
+  min-height: 3px !important;
+  background-color: whitesmoke;
+}
+
+.oferts-button button:focus:active {
+  background-color: #9e39ff;
 }
 
 /* --------------------------------------
     FREELANCE PAYMENTS (ADMIN DASHBOARD)
 ----------------------------------------- */
 
+.bodyCard2 {
+  font-family: "arial";
+  color: #0b2257;
+  font-size: 15px;
+  width: 95%;
+  border-radius: 42px;
+  height: 20% !important;
+  margin: auto;
+}
+.space-align-container {
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 90%;
+  height: 80%;
+}
+.space-align-block {
+  margin: 8% 4%;
+  padding: 4%;
+  flex: none;
+}
+.space-align-block .mock-block {
+  display: inline-block;
+  padding: 32px 8px 16px;
+  background: rgba(150, 150, 150, 0.2);
+}
+
+.text2 {
+  font-family: "Open Sans Semibold";
+  color: black;
+  font-size: 75%;
+  font-stretch: expanded;
+}
+.textPagos {
+  font-family: "Open Sans Semibold";
+  color: #8990ad;
+}
+.Pagos {
+  text-align: left;
+  width: 95% !important;
+}
+
+.subtittle2 {
+  font-family: "Open Sans Semibold", arial;
+  color: #9e39ff;
+  font-size: 90%;
+}
 .list-description {
   display: flex;
   flex-direction: row;
@@ -362,9 +509,26 @@ register freelancer
   display: flex;
   height: 80vh;
   width: 100vw;
-  margin: 0;
+  margin: 20px;
+}
+.register-contract {
+  width: 60vw;
 }
 
+@media (max-width: 950px) {
+  .register-container {
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    height: auto;
+    margin: 40px 0;
+  }
+  .register-contract {
+    margin: auto;
+    height: 80vh;
+    width: 80vw;
+  }
+}
 .register-logo {
   margin-top: 50px;
   margin-right: 8%;
@@ -387,15 +551,35 @@ register freelancer
   margin: 10vh 0;
 }
 
+.register-container .ant-select-selector {
+  border: 0 !important;
+}
+
+.register-input {
+  border: 0;
+  border-bottom: 0.3px solid lightgray;
+}
+
 .register-form input {
   border: 0;
   border-bottom: 0.3px solid lightgray;
 }
 
 .register-button {
-  background-color: #a77ffa;
-  border: 0;
-  margin: 1vh 0;
+  background-image: linear-gradient(
+    to right,
+    #ff6e7f 0%,
+    #a77ffa 40%
+  ) !important;
+}
+
+.register-button {
+  text-align: center !important;
+  transition: 0.5s !important;
+  background-size: 200% auto !important;
+  border-color: lightgray !important;
+  background: #a77ffa;
+  text-decoration: none !important;
 }
 
 .register-button span {
@@ -417,7 +601,7 @@ register freelancer
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 1rem;
 }
 
 .register-link a {
@@ -452,34 +636,90 @@ componente de error
 /* ----------------------
 Trabajando con Admin Cards/DashBoard
 ---------------------- */
-.admin-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+
+@media (min-width: 991px) {
+  .admin-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .modal-button {
+    box-shadow: -1px 3px 15px -6px gray;
+    border: none;
+    background-color: #fbf7ff;
+    color: #9e39ff;
+    border-radius: 20px;
+  }
+
+  .admin-cards .ant-card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: space-around;
+    width: 12rem;
+    height: 10rem;
+    background-color: whitesmoke;
+    background: whitesmoke;
+    border-radius: 20% !important;
+    text-align: center !important;
+    box-shadow: -1px 3px 15px -6px gray;
+    color: #9e39ff;
+    padding: 0;
+    margin: 0.5rem !important;
+  }
 }
 
-.admin-cards .ant-card-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  justify-content: space-around;
-  width: 12rem;
-  height: 10rem;
-  background-color: whitesmoke;
-  background: whitesmoke;
-  border-radius: 20% !important;
-  text-align: center !important;
-  box-shadow: -1px 3px 15px -6px gray;
-  color: #9e39ff;
-  padding: 0;
-}
+@media (max-width: 991px) {
+  .admin-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
 
-.invite-button-text {
-  margin: 0;
+  .admin-cards .ant-card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
+    width: 18rem !important;
+    height: auto;
+    background-color: whitesmoke;
+    background: whitesmoke;
+    color: #9e39ff;
+    padding: 0 !important;
+    margin: 0.5rem auto !important;
+  }
+
+  .admin-cards .ant-card-body img {
+    display: none;
+  }
+
+  .admin-card-icon {
+    height: 2rem;
+  }
+
+  .modal-button {
+    height: auto;
+    width: 100% !important;
+    font-size: 1rem;
+    text-align: center;
+    padding: 5px 15px 5px 15px !important;
+    box-shadow: -1px 3px 15px -6px gray;
+    border: none;
+    background-color: whitesmoke;
+    color: #9e39ff;
+    border-radius: 20px;
+  }
 }
 
 .admin-cards :hover {
   color: #9e39ff;
+}
+
+.invite-button-text {
+  margin: 0;
 }
 
 .invite_msg {
@@ -521,7 +761,7 @@ Trabajando con Admin Cards/DashBoard
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: Raleway;
+  /* font-family: Raleway; */
 }
 
 .modal-outside {
@@ -567,8 +807,102 @@ Trabajando con Admin Cards/DashBoard
   border-radius: 20px;
 }
 
+.modal-editProfile-container {
+  padding: 15px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* height: 300px; */
+}
+
+.modal-editProfile {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  /* font-family: Raleway; */
+  height: 200px;
+}
+
+.modal-editProfile-header {
+  font-size: 24px;
+  color: black;
+  text-align: center;
+  font-weight: 300;
+}
+
+.modal-editProfile-avatar {
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-editProfile-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-editProfile-button {
+  background-color: #9e39ff;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  padding: 7px;
+  margin: 0 10px;
+  width: auto;
+  font-family: "arial";
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 95px;
+}
+
+.modal-button {
+  box-shadow: -1px 3px 15px -6px gray;
+  border: none;
+  background-color: #fbf7ff;
+  color: #9e39ff;
+  border-radius: 20px;
+}
+
 .ant-btn:hover,
 .ant-btn:focus {
   background: none;
   border-color: #9e39ff;
+}
+
+/* ----------------
+      OurCommunity component
+------------------- */
+
+.ourCommunity-dropDown {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+}
+
+.ourCommunity-dropDown h3 {
+  margin: 0;
+}
+.ourCommunity-dropDown span {
+  margin-left: 20px;
+}
+
+.ourCommunity-filterButtons {
+  display: flex;
+  flex-direction: column;
+  border: solid grey;
+  border-width: 0.2px;
+  width: 130px;
+}
+.ourCommunity-filterButtons button {
+  border: 0;
+  text-align: left;
+}
+
+.ourCommunity-filterButtons button:hover {
+  background-color: #dddcdc;
 }

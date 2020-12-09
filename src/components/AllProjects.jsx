@@ -1,9 +1,9 @@
 import React from "react";
 import { Table, Tag, Space, Button, Card, List, Avatar, Row, Col } from "antd";
-// import ModalUser from "../components/ModalAddUser"
-import { Typography } from "antd";
+
+import { Typography, Spin } from "antd";
 import InviteProjectContainer from "../containers/InviteProjectContainer";
-import NewProjectContainer from "../containers/NewProjectContainer"
+import NewProjectContainer from "../containers/NewProjectContainer";
 
 const { Title } = Typography;
 
@@ -35,7 +35,10 @@ function AllProjects({ projects, deleteProject, handleClick }) {
       key: "action",
       render: () => (
         <div>
-            <Button className="modal-button" onClick={handleClick} > VER MÁS </Button>
+          <Button className="modal-button" onClick={handleClick}>
+            {" "}
+            VER MÁS{" "}
+          </Button>
         </div>
       ),
     },
@@ -43,9 +46,9 @@ function AllProjects({ projects, deleteProject, handleClick }) {
     {
       title: "",
       key: "action",
-      render: () => (
+      render: (proyecto) => (
         <div>
-            <InviteProjectContainer />
+          <InviteProjectContainer proyecto={proyecto} />
         </div>
       ),
     },
@@ -56,19 +59,18 @@ function AllProjects({ projects, deleteProject, handleClick }) {
       render: (proyecto) => {
         return (
           <div>
-              <Button
-                className="modal-button"
-                onClick={()=>deleteProject(proyecto)}
-              >
-                ELIMINAR
-              </Button>
+            <Button
+              className="modal-button"
+              onClick={() => deleteProject(proyecto)}
+            >
+              ELIMINAR
+            </Button>
           </div>
         );
       },
     },
   ];
 
-  
   return (
     <div style={{ width: "100%" }}>
       <Row>
@@ -81,7 +83,9 @@ function AllProjects({ projects, deleteProject, handleClick }) {
       </Row>
 
       <div>
+        {/* <Spin delay={900} tip={"Cargando proyectos ..."}> */}
         <Table columns={columns} dataSource={projects} />
+        {/* </Spin> */}
       </div>
     </div>
   );

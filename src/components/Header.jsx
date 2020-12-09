@@ -1,37 +1,33 @@
-import React,{ useState} from "react";
-import Logo from "../../views/logo-itesa.svg";
-import { authUser } from "../../firebase/auth";
-import { useRecoilState } from "recoil";
-import { user } from "../atoms/index";
-
+import React, { useState } from "react";
+import logo from "../../views/logo-itesa.svg";
 import { UserOutlined } from "@ant-design/icons";
 import { Row, Col, Typography, Avatar, Layout } from "antd";
-
+import EditUserContainer from "../containers/EditUserContainer";
+import { useRecoilState } from "recoil";
+import { user } from "../atoms/index";
 const { Title, Text } = Typography;
 
-const { Header} = Layout;
+const { Header } = Layout;
 
 export default () => {
-  const [currentUser, setCurrentUser] = useRecoilState(user);
-  console.log("buscando user", currentUser.lastName)
-  return (
-    <Header className="header-user">
-      <Row align='top' justify='end' className='mini-logo'>
-        <img src={Logo}  className='logo'/>
-      </Row>
 
-      <Row justify='space-between' align='top'>
-        <Col>
-          <Title className='dashboard'>Dashboard</Title>
-          <Text type='secondary' className='subtitulo'>
-            Bienvenido a Itesa, {currentUser.name + " " + currentUser.lastName} :)
-          </Text>
-        </Col>
-        <Col className='avatar'>
-          <Avatar size={64} icon={<UserOutlined />} className='avatar' />
-          <Text type='secondary'>{currentUser.name + " " + currentUser.lastName}</Text>
-        </Col>
+  const [currentUser, setCurrentUser] = useRecoilState(user);
+
+  return (
+    <Header className='header-user'>
+      <Row align='center' justify='end' className='mini-logo'>
+        <img src={logo} className='logo' />
       </Row>
-      </Header>
+      <Row justify="space-between"  align="center" wrap={true}>
+        <span>
+          <Title className='header-title' level={2}>Dashboard</Title>
+          <Text>Bienvenido a Itesa, {currentUser.name + ' '} :) </Text>
+        </span>
+          <EditUserContainer
+            user={currentUser}
+            setCurrentUser={setCurrentUser}
+          />
+      </Row>
+    </Header>
   );
 };
