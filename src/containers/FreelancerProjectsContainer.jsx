@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import InviteCard from "../components/InviteCard";
+import FreelancerProjects from "../components/FreelancerProjects";
 import { db } from "../../firebase/firebase";
 import { authUser } from "../../firebase/auth";
 import CheckCircle from "../../views/check.svg";
 import { Modal, Card } from "antd";
 
-function InviteContainer() {
+function FreelancerProjectsContainer() {
   const { signup } = authUser();
   const [modal, setModal] = useState(false);
   const [email, setEmail] = useState("");
@@ -52,9 +52,10 @@ function InviteContainer() {
       });
   }
   return (
-    <InviteCard
+    <FreelancerProjects
       className='modal-outside'
       handleChange={handleChange}
+      
       closeModal={closeModal}
       success={success}
       openModal={openModal}
@@ -63,4 +64,4 @@ function InviteContainer() {
   );
 }
 
-export default InviteContainer;
+export default FreelancerProjectsContainer;

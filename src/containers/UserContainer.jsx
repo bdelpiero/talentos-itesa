@@ -1,18 +1,23 @@
 import React, { useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { authUser } from "../../firebase/auth";
-import { Layout, Row, Result, Button } from "antd";
-import Sidebar from "../components/Sidebar";
-import HeaderComponent from "../components/Header";
-import PagosFreelace from "../components/PagosFreelace";
-import CardsFreelancer from "../components/CardsFreelancer";
-import Error404 from "../components/404";
+import { db } from "../../firebase/firebase";
 import { useRecoilState } from "recoil";
 import { user, projectInvited } from "../atoms/index";
-import { db } from "../../firebase/firebase";
+
+// COMPONENTES Y CONTAINERS
+import Sidebar from "../components/Sidebar";
+import HeaderComponent from "../components/Header";
+import Error404 from "../components/404";
+import PagosFreelace from "../components/PagosFreelace";
+import CardsFreelancer from "../components/CardsFreelancer";
 import Navbar from "../components/Navbar";
 import ContractProject from "../components/ContractProject";
 import PendingPayments from "../components/PendingPayments";
+import FreelancerProjectContainer from "../containers/FreelancerProjectsContainer";
+
+import { Layout, Row} from "antd";
+
 const { Header, Footer, Sider, Content } = Layout;
 
 export default () => {
@@ -69,6 +74,13 @@ export default () => {
               </Row>
             </>
           )}
+          {
+            item == 2 && (
+              <Row className='userCards-row'>
+              <FreelancerProjectContainer />
+              </Row>
+            )
+          }
           {item == 5 && (
             <>
               <ContractProject />

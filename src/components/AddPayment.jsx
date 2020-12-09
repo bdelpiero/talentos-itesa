@@ -5,8 +5,12 @@ import { Modal, Button, Card } from "antd";
 
 function AddPayment() {
   return (
-    <div className='Modal'>
-      <Button className='modal-button'>Ingresar un pago</Button>
+    <div className="Modal">
+
+        <Button className="modal-button" >
+        Ingresar un Pago
+      </Button>
+
     </div>
   );
 }
