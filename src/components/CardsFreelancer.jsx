@@ -1,49 +1,93 @@
-import React from "react";
-import { Button, Card, DatePicker, InputNumber, Col } from "antd";
+import React, {useState} from "react";
+import { Button, Card, Carousel } from 'antd';
 import { useRecoilState } from "recoil";
 import { user,projectInvited } from "../atoms/index";
 import MiBancoContainer from "../containers/MiBancoContainer";
 
-export default ({ setItem }) => {
-  const [currentUser, setCurrentUser] = useRecoilState(user);
-  const [projectI, setProjectI] = useRecoilState(projectInvited);
-  console.log("project en carfrelance", projectI);
-  //console.log("user buscando datos del banco", currentUser.bankDetails)
+
+export default ({setItem}) => {
+  const [invitedProject, setInvitedProject] = useRecoilState(projectInvited);
+  const [carrusel, setCarrusel] = useState(0);
+
+  console.log("project en carfrelance", invitedProject)
+
+  const CardsOferts =(props)=>{
+    if(props.inviteds.length > 0){
+      console.log("entro al primer if")
+      if(props.inviteds.length > 1){
+        console.log("mas de un proyecto",props.inviteds, carrusel)
+//el carrucel no funciono, hay que buscar otra manera
+        return (
+          <Card className="bodyCard" >
+          <h3 id="tittleCard">OFERTA DE PROYECTO</h3>
+          <p id="subtittle">PROYECTO</p>
+          <p>"{props.inviteds[carrusel].proyecto}"</p>
+          <p id="subtittle">DURACION</p>
+          <p>{props.inviteds[carrusel].duracion}</p>
+          <p id="subtittle">MONTO</p>
+          <p>
+          "${props.inviteds[carrusel].monto}"            
+          </p>
+          <div> 
+
+          <Button 
+          onClick={()=>setItem(5)}
+          className='modal-button buttonCard' 
+          shape="round">
+            Firma Contrato
+          </Button></div>   
+          <div className='oferts-button'>
+            {props.inviteds.map((p,i)=>{
+              return <Button shape='round' key={i} onClick={()=>setCarrusel(i)}> </Button>
+            })}
+          </div>       
+        </Card>
+        )
+      }else{
+        return (
+          <Card className="bodyCard" key={props.inviteds[0].proyecto}>
+            <h3 id="tittleCard">OFERTA DE PROYECTO</h3>
+            <p id="subtittle">PROYECTO</p>
+            <p>"{props.inviteds[0].proyecto}"</p>
+            <p id="subtittle">DURACION</p>
+            <p>{props.inviteds[0].duracion}</p>
+            <p id="subtittle">MONTO</p>
+            <p>
+            "${props.inviteds[0].monto}"            
+            </p>
+            <div>
+            <Button 
+            autofocus
+            onClick={()=>setItem(5)}
+            className="modal-button buttonCard" 
+            shape="round">
+              Firma Contrato
+            </Button></div>          
+          </Card>
+        )
+      }
+    }else{
+      return (
+        <Card className="bodyCard">
+          <h3 id="tittleCard">OFERTA DE PROYECTO</h3>
+          <p id="subtittle">NO TIENES PROYECTOS</p>
+        </Card>
+      )
+    }
+  
+    
+  }
+  
+
+
+
+
 
   return (
+    
     <>
-      {projectI && projectI.name ? (
-        <Card className='bodyCard'>
-          <h3 id='tittleCard'>OFERTA DE PROYECTO</h3>
-          <p id='subtittle'>PROYECTO</p>
-          <p>{projectI.name}</p>
-          <p id='subtittle'>DURACION</p>
-          <p>{projectI.term}</p>
-          <p id='subtittle'>MONTO</p>
-          <p>"$50.000"</p>
-          <div>
-            {/* <Button
-              onClick={() => setItem(5)}
-              className='buttonCard'
-              shape='round'>
-              Firma Contrato
-            </Button> */}
-            <div className='Modal card-button-container'>
-              <Button
-                onClick={() => setItem(5)}
-                className='modal-button buttonCard'>
-                Firmar Contrato
-              </Button>
-            </div>
-          </div>
-        </Card>
-      ) : (
-        <Card className='bodyCard'>
-          <h3 id='tittleCard'>OFERTA DE PROYECTO</h3>
-          <p id='subtittle'>NO TIENES PROYECTOS</p>
-        </Card>
-      )}
-
+      {invitedProject.invited && <CardsOferts inviteds={invitedProject.invited}/>}
+    
       <Card className='bodyCard'>
         <h3 id='tittleCard'>PROXIMO PAGO</h3>
         <p id='subtittle'>PROYECTO</p>
