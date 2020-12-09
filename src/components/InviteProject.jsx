@@ -36,44 +36,34 @@ function InviteProject({
         bodyStyle={{ color: "#9e39ff" }}
         width={1000}>
         <>
-          <Form onFinish={handleFinish}>
+          <Form onFinish={handleFinish} style={{ width: "auto" }}>
             <div style={{ width: "70%", marginLeft: "38px" }}>
               <h1>Asignar Proyecto</h1>
-
-              {/* 
-              <Form.Item>
-                <Select placeholder="Seleccione Proyecto" allowClear>
-                  <Option key="" value="male"> ITESA 2020 </Option>
-                </Select>
-              </Form.Item> */}
             </div>
 
             <br />
             <div>
-              {/*  <h5 style={{ width: "70%", marginLeft: "38px", color: "grey" }}>
-                NOMBRE DEL PROYECTO
-              </h5> */}
               <Row>
                 <Col span={1} style={{ justifyItems: "center" }}></Col>
                 <Col span={3} style={{ alignContent: "center" }}>
                   <h6> Perfil </h6>
                 </Col>
-                <Col span={3}>
+                <Col span={2}>
                   <h6> Plazos </h6>
                 </Col>
-                <Col span={3}>
+                <Col span={2}>
                   <h6> Servicios</h6>
                 </Col>
-                <Col span={3}>
+                <Col span={4}>
                   <h6> Cuota 1 </h6>
                 </Col>
-                <Col span={3}>
+                <Col span={4}>
                   <h6> Cuota 2</h6>
                 </Col>
-                <Col span={3}>
+                <Col span={4}>
                   <h6> Cuota 3</h6>
                 </Col>
-                <Col>
+                <Col span={4}>
                   <h6> Cuota 4</h6>
                 </Col>
               </Row>
@@ -104,12 +94,12 @@ function InviteProject({
                     </Select>
                   </Form.Item>
                 </Col>
-                <Col span={3}>
+                <Col span={2}>
                   <Form.Item>
                     <RangePicker placeholder='Plazo' />
                   </Form.Item>
                 </Col>
-                <Col span={3}>
+                <Col span={2}>
                   <Form.Item>
                     <Select placeholder='Servicio' allowClear>
                       <Option key='male' value='male'>
@@ -121,25 +111,50 @@ function InviteProject({
                     </Select>
                   </Form.Item>
                 </Col>
-                <Col span={3}>
-                  <Form.Item>
-                    <Input></Input>
-                  </Form.Item>
+                <Col span={4}>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      marginLeft: "5%",
+                    }}>
+                    <Form.Item style={{ width: "45%" }}>
+                      <Input placeholder={"monto"}></Input>
+                    </Form.Item>
+                    <Form.Item style={{ width: "45%" }}>
+                      <DatePicker />
+                    </Form.Item>
+                  </div>
                 </Col>
-                <Col span={3}>
-                  <Form.Item>
-                    <Input></Input>
-                  </Form.Item>
+                <Col span={4}>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <Form.Item style={{ width: "45%" }}>
+                      <Input placeholder={"monto"}></Input>
+                    </Form.Item>
+                    <Form.Item style={{ width: "45%" }}>
+                      <DatePicker />
+                    </Form.Item>
+                  </div>
                 </Col>
-                <Col span={3}>
-                  <Form.Item>
-                    <Input></Input>
-                  </Form.Item>
+                <Col span={4}>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <Form.Item style={{ width: "45%" }}>
+                      <Input placeholder={"monto"}></Input>
+                    </Form.Item>
+                    <Form.Item style={{ width: "45%" }}>
+                      <DatePicker />
+                    </Form.Item>
+                  </div>
                 </Col>
-                <Col span={3}>
-                  <Form.Item>
-                    <Input></Input>
-                  </Form.Item>
+                <Col span={4}>
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <Form.Item style={{ width: "45%" }}>
+                      <Input placeholder={"monto"}></Input>
+                    </Form.Item>
+                    <Form.Item style={{ width: "45%" }}>
+                      <DatePicker />
+                    </Form.Item>
+                  </div>
                 </Col>
               </Row>
             </div>

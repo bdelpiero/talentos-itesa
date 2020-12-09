@@ -81,11 +81,11 @@ export default ({ user, setCurrentUser }) => {
 
   return (
     <>
-      <div onClick={openModal}>
+      <div onClick={openModal} style={{ cursor: "pointer" }}>
         {user.avatar ? (
-          <Avatar size={64} src={user.avatar} className='avatar' />
+          <Avatar size={55} src={user.avatar} className='avatar' />
         ) : (
-          <Avatar size={64} icon={<UserOutlined />} className='avatar' />
+          <Avatar size={55} icon={<UserOutlined />} className='avatar' />
         )}
         <Text type='secondary'>
           {user.name} {user.lastName}

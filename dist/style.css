@@ -2,14 +2,19 @@
     SIDEBAR + NAVBAR
 ---------------------- */
 
-@media (min-width: 1023px) {
-  .navbar-style {
+@media (min-width: 991px) {
+  .navbar-display {
     display: none;
   }
+
+  .header-display {
+    display: none !important;
+  }
+
   .mini-logo {
     height: 40px;
     line-height: 20px !important;
-    margin-bottom: 15px;
+    margin: 0.5rem 0 0.5rem 0;
   }
   .single-icon {
     color: #9749f8;
@@ -25,19 +30,34 @@
 }
 
 @media (max-width: 991px) {
-  .navbar-style {
+  .navbar-display {
     display: flex;
     width: 100%;
     height: auto;
-    background-color: #9e39ff;
-    align-items: flex-start;
-    justify-content: space-between;
+    background-color: whitesmoke !important;
   }
-  .logo-mobile {
-    margin: 0.8rem;
-    justify-content: end;
-    float: right;
+
+  .ant-menu-item-selected {
+    border-bottom: 2px solid #9749f8 !important;
   }
+
+  .ant-menu-item:hover {
+    border-bottom: 2px solid #9749f8 !important;
+  }
+
+  .logo-navbar-container {
+    width: auto !important;
+    height:100% !important;
+    background-color: whitesmoke;
+    margin: 0 1rem 0 1rem
+  }
+
+  .logo-navbar-container img {
+    width: auto !important;
+    height:30px !important;
+    margin: 0 auto;
+  }
+
   .menu-bars {
     align-items: center;
     margin: 0.8rem;
@@ -71,16 +91,13 @@
   top: 0;
 }
 
-.admin-card-icon {
-  height: 4rem;
-}
-
 .icono-sider svg {
   display: block;
   color: #636363;
   height: 3em;
   width: 3em;
 }
+
 .list-menu-sider {
   background-color: whitesmoke !important;
   height: 100% !important;
@@ -160,17 +177,37 @@
         HEADER
 ---------------------- */
 
-.header-user {
-  margin-top: 15px;
+@media (min-width: 991px) {
+  .header-user {
+    margin: 1.5rem;
+    padding: 0 !important;
+    height: 15% !important;
+  }
 }
+
+
+@media (max-width: 991px) {
+  .header-user {
+    display: none
+  }
+}
+
+
 .ant-layout-header {
   color: black;
   background-color: whitesmoke !important;
   height: auto !important;
   margin: 20px 0;
 }
+
 .ant-layout {
   background-color: whitesmoke !important;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  margin: 0 !important
 }
 
 .ant-avatar {
@@ -178,9 +215,6 @@
   box-shadow: -1px 0px 16px -6px rgba(0, 0, 0, 0.75);
 }
 
-.dashboard {
-  margin-bottom: 0 !important;
-}
 .subtitulo {
   display: flex !important;
   line-height: 2rem;
@@ -586,35 +620,97 @@ componente de error
 /* ----------------------
 Trabajando con Admin Cards/DashBoard
 ---------------------- */
-.admin-row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+
+@media (min-width: 991px) {
+  .admin-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .modal-button {
+    box-shadow: -1px 3px 15px -6px gray;
+    border: none;
+    background-color: #fbf7ff;
+    color: #9e39ff;
+    border-radius: 20px;
+  }
+  
+  .admin-cards .ant-card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: space-around;
+    width: 12rem;
+    height: 10rem;
+    background-color: whitesmoke;
+    background: whitesmoke;
+    border-radius: 20% !important;
+    text-align: center !important;
+    box-shadow: -1px 3px 15px -6px gray;
+    color: #9e39ff;
+    padding: 0;
+    margin: 0.5rem !important
+  }
+
 }
 
-.admin-cards .ant-card-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  justify-content: space-around;
-  width: 12rem;
-  height: 10rem;
-  background-color: whitesmoke;
-  background: whitesmoke;
-  border-radius: 20% !important;
-  text-align: center !important;
-  box-shadow: -1px 3px 15px -6px gray;
+
+@media (max-width: 991px) {
+
+  .admin-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .admin-cards .ant-card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
+    width: 18rem !important;
+    height: auto;
+    background-color: whitesmoke;
+    background: whitesmoke;
+    color: #9e39ff;
+    padding: 0 !important;
+    margin: 0.5rem auto !important;
+  }
+
+  .admin-cards .ant-card-body img{
+    display: none
+  }
+
+  .admin-card-icon {
+    height: 2rem;
+  }
+
+  .modal-button {
+    height: auto;
+    width: 100% !important;
+    font-size: 1rem;
+    text-align: center;
+    padding: 5px 15px 5px 15px !important;
+    box-shadow: -1px 3px 15px -6px gray;
+    border: none;
+    background-color: whitesmoke;
+    color: #9e39ff;
+    border-radius: 20px;
+  }
+
+}
+
+.admin-cards :hover {
   color: #9e39ff;
-  padding: 0;
 }
 
 .invite-button-text {
   margin: 0;
 }
 
-.admin-cards :hover {
-  color: #9e39ff;
-}
+
 
 .invite_msg {
   margin: 10px !important;
@@ -757,4 +853,38 @@ Trabajando con Admin Cards/DashBoard
 .ant-btn:focus {
   background: none;
   border-color: #9e39ff;
+}
+
+/* ----------------
+      OurCommunity component
+------------------- */
+
+.ourCommunity-dropDown {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+}
+
+.ourCommunity-dropDown h3 {
+  margin: 0;
+}
+.ourCommunity-dropDown span {
+  margin-left: 20px;
+}
+
+.ourCommunity-filterButtons {
+  display: flex;
+  flex-direction: column;
+  border: solid grey;
+  border-width: 0.2px;
+  width: 130px;
+}
+.ourCommunity-filterButtons button {
+  border: 0;
+  text-align: left;
+}
+
+.ourCommunity-filterButtons button:hover {
+  background-color: #dddcdc;
 }
