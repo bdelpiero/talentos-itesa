@@ -18,6 +18,7 @@ import {
   DeleteOutlined,
   UserAddOutlined,
 } from "@ant-design/icons";
+import InviteProjectContainer from "../containers/InviteProjectContainer";
 
 const { Title, Paragraph } = Typography;
 
@@ -26,10 +27,6 @@ export const SingleProject = ({
   project,
   projectUsersData,
 }) => {
-  console.log("ACA ESTAN LOS USERS", projectUsersData);
-  const projectUsers = projectUsersData.filter((user) => {
-    if (user.projectInvited === project.id) return user;
-  });
   const [editableDesc, setEditableDesc] = useState(
     "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum culpa, reprehenderit eius cumque labore in ducimus odio, corrupti sapiente perspiciatis vero recusandae aspernatur deleniti totam rerum porro est cum doloremque."
   );
@@ -54,15 +51,14 @@ export const SingleProject = ({
           </Paragraph>
         </Col>
         <Col xs={24} sm={12} md={12} lg={12}>
-          {/* "VER POR QUE CON EL TEXTO SE PUEDE OCUPAR EL 100% DE LA PANTALLA EN
-          CELULAR, ARREGLAR ESTE DETALLE" */}
           <Title level={5}>
             Freelancers en proyecto{" "}
-            <UserAddOutlined className="single-icon add-user" />
+            <InviteProjectContainer proyecto={project} />
+            {/* <UserAddOutlined className="single-icon add-user" /> */}
           </Title>{" "}
           <List
             itemLayout="horizontal"
-            dataSource={projectUsers}
+            dataSource={projectUsersData}
             renderItem={(item) => (
               <List.Item>
                 <List.Item.Meta

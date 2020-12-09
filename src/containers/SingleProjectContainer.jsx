@@ -4,7 +4,6 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { allUsersState, allUsersInProject } from "../atoms/index";
 import { db } from "../../firebase/firebase";
 export const SingleProjectContainer = ({ project }) => {
-  const allUsers = useRecoilValue(allUsersState);
   const [projectUsersData, setProjectUsersData] = useState([]);
 
   useEffect(() => {
@@ -14,7 +13,6 @@ export const SingleProjectContainer = ({ project }) => {
       .onSnapshot((data) => {
         setProjectUsersData(
           data.docs.map((data) => {
-            /* console.log("ACA ESTA LA DATA", data.data()); */
             return data.data();
           })
         );
@@ -32,7 +30,6 @@ export const SingleProjectContainer = ({ project }) => {
   return (
     <>
       <SingleProject
-        allUsers={allUsers}
         delUserFromProject={delUserFromProject}
         projectUsersData={projectUsersData}
         project={project}

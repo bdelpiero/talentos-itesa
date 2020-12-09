@@ -36,7 +36,7 @@ function AllProjectsContainer({ setItem, setProject }) {
     }
   };
 
-  function handleClick() {
+  function handleClick(proyecto) {
     setItem(3);
     setProject(proyecto);
   }
