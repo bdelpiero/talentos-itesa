@@ -9,6 +9,10 @@ export const allUsersState = atom({
   key: "allUsersState",
   default: []
 })
+export const allUsersInProject = atom({
+  key: "allUsersInProject",
+  default:[]
+})
 
 export const projectInvited = atom({
   key: "projectInvited", // unique ID (with respect to other atoms/selectors)

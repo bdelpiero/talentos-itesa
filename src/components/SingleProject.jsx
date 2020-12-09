@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   Row,
   Col,
@@ -19,27 +20,16 @@ import {
 } from "@ant-design/icons";
 
 const { Title, Paragraph } = Typography;
-const data = [
-  {
-    title: "Juan Garrido",
-  },
-  {
-    title: "Chino San",
-  },
-  {
-    title: "Bruno DelP",
-  },
-  {
-    title: "Armando Rico",
-  },
-  {
-    title: "Williams Saya",
-  },
-  {
-    title: "Millas Marcos",
-  },
-];
-export const SingleProject = () => {
+
+export const SingleProject = ({
+  delUserFromProject,
+  project,
+  projectUsersData,
+}) => {
+  console.log("ACA ESTAN LOS USERS", projectUsersData);
+  const projectUsers = projectUsersData.filter((user) => {
+    if (user.projectInvited === project.id) return user;
+  });
   const [editableDesc, setEditableDesc] = useState(
     "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum culpa, reprehenderit eius cumque labore in ducimus odio, corrupti sapiente perspiciatis vero recusandae aspernatur deleniti totam rerum porro est cum doloremque."
   );
@@ -72,17 +62,18 @@ export const SingleProject = () => {
           </Title>{" "}
           <List
             itemLayout="horizontal"
-            dataSource={data}
+            dataSource={projectUsers}
             renderItem={(item) => (
               <List.Item>
                 <List.Item.Meta
-                  avatar={
-                    <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-                  }
-                  title={<a href="https://ant.design">{item.title}</a>}
-                  description="Developer"
+                  avatar={<Avatar src={item.avatar} />}
+                  title={item.name}
+                  description={item.freelancerType}
                 />
-                <DeleteOutlined className="single-icon" />
+                <DeleteOutlined
+                  onClick={() => delUserFromProject(item.id)}
+                  className="single-icon"
+                />
               </List.Item>
             )}
           />
