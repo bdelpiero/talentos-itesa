@@ -83,9 +83,9 @@ export default ({ user, setCurrentUser }) => {
     <>
       <div onClick={openModal}>
         {user.avatar ? (
-          <Avatar size={64} src={user.avatar} className='avatar' />
+          <Avatar size={55} src={user.avatar} className='avatar' />
         ) : (
-          <Avatar size={64} icon={<UserOutlined />} className='avatar' />
+          <Avatar size={55} icon={<UserOutlined />} className='avatar' />
         )}
         <Text type='secondary'>
           {user.name} {user.lastName}

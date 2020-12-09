@@ -26,8 +26,8 @@ function AdminDashboard({ handleLogout }) {
     <Layout>
       <Sidebar setItem={setItem} handleLogout={handleLogout} />
       <Layout>
-        <Navbar />
-        <HeaderComponent />
+        <Navbar setItem={setItem} />
+        <HeaderComponent/>
         <Content className='content-user'>
           {item == 1 && (
             <>
