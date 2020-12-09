@@ -22,38 +22,50 @@ const { Header, Footer, Sider, Content } = Layout;
 
 export default () => {
   const [currentUser, setCurrentUser] = useRecoilState(user);
-  const [projectI, setProjectI] = useRecoilState(projectInvited);
+  const [invitedProject, setInvitedProject] = useRecoilState(projectInvited);
 
   const { logout } = authUser();
   const history = useHistory();
   const { Content } = Layout;
   const [item, setItem] = React.useState(1);
 
+
+  // useEffect esta atento a los cambios en el usuario para renderizar el componente nuevamente
+  console.log("se renderiza usercontainer",invitedProject)
+
+  useEffect(() => {
+    let invitaciones=db.collectionGroup("invitedUser").where('email', '==' ,currentUser.email)
+    invitaciones.get()
+    .then((projects) => {
+      const newInvitations=[]
+      projects.forEach((doc)=>{
+        newInvitations.push(doc.data())
+      })
+      setInvitedProject(newInvitations)
+    })
+    .catch((err) => {
+      console.log("Error getting projectInvited", err);
+    });
+    let observer =invitaciones.onSnapshot((cambios)=>{
+      console.log('aqui recivio cambios las invitaciones')
+      const newInvitations=[]
+          cambios.forEach((doc)=>{
+            newInvitations.push(doc.data())
+          })
+          setInvitedProject({
+            invited:newInvitations,
+            observer
+          })
+    })
+  }, [currentUser]);
+
+
   const handleLogout = () => {
+    invitedProject.observer()
     logout();
     history.push("/login");
   };
 
-  // useEffect esta atento a los cambios en el usuario para renderizar el componente nuevamente
-
-  useEffect(() => {
-    console.log("ACA ESTA EL CURRENT USER", currentUser);
-    if (currentUser.projectInvited) {
-      return db
-        .collection("projects")
-        .doc(currentUser.projectInvited)
-        .get()
-        .then((project) => {
-          console.log("Document data:", project.data());
-          setProjectI(project.data());
-        })
-        .catch((err) => {
-          console.log("Error getting document", err);
-        });
-    } else {
-      setProjectI({});
-    }
-  }, [currentUser]);
 
   return !currentUser ? (
     <Error404 />
