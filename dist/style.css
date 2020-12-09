@@ -45,17 +45,18 @@
     border-bottom: 2px solid #9749f8 !important;
   }
 
-  .logo-navbar-container {
-    width: auto !important;
-    height:100% !important;
+  .logo-navbar {
     background-color: whitesmoke;
-    margin: 0 1rem 0 1rem
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 50% !important;
+    display: flex !important;
+    justify-content: space-around !important;
   }
 
-  .logo-navbar-container img {
+  .logo-navbar img {
     width: auto !important;
     height:30px !important;
-    margin: 0 auto;
   }
 
   .menu-bars {
@@ -79,6 +80,13 @@
     color: #9749f8;
     font-size: 1.3rem;
   }
+
+  .navbar-menu-item {
+    text-align: center;
+    padding: 0 !important;
+    margin: 0 !important
+  }
+  
 }
 
 .sider-admin {
@@ -179,9 +187,10 @@
 
 @media (min-width: 991px) {
   .header-user {
-    margin: 1.5rem !important;
+    width: 95% !important;
     padding: 0 !important;
     height: 15% !important;
+    margin: auto !important
   }
 }
 
