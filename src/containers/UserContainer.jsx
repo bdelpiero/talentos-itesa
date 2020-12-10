@@ -11,7 +11,7 @@ import { useRecoilState } from "recoil";
 import { user, projectInvited } from "../atoms/index";
 import { db } from "../../firebase/firebase";
 import Navbar from "../components/Navbar";
-import ContractProject from "../components/ContractProject";
+import AcceptProject from "../components/AcceptProject";
 import PendingPayments from "../components/PendingPayments";
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -30,13 +30,17 @@ export default () => {
 
   useEffect(() => {
     let invitaciones=db.collectionGroup("invitedUser").where('email', '==' ,currentUser.email)
+    // where('status', '==' ,"pending")
     invitaciones.get()
     .then((projects) => {
       const newInvitations=[]
       projects.forEach((doc)=>{
-        newInvitations.push(doc.data())
+        if(doc.data().status === 'pending'){
+          console.log("entro al if con este status",doc.data().status)
+          newInvitations.push(doc.data())
+        }
       })
-      setInvitedProject(newInvitations)
+      setInvitedProject({invited:newInvitations , selected:newInvitations[0]})
     })
     .catch((err) => {
       console.log("Error getting projectInvited", err);
@@ -45,10 +49,14 @@ export default () => {
       console.log('aqui recivio cambios las invitaciones')
       const newInvitations=[]
           cambios.forEach((doc)=>{
-            newInvitations.push(doc.data())
+            if(doc.data().status === 'pending'){
+              console.log("entro al if con este status",doc.data().status)
+              newInvitations.push(doc.data())
+            }
           })
           setInvitedProject({
             invited:newInvitations,
+            selected:newInvitations[0],
             observer
           })
     })
@@ -83,7 +91,7 @@ export default () => {
           )}
           {item == 5 && (
             <>
-              <ContractProject />
+              <AcceptProject setItem={setItem}/>
             </>
           )}
         </Content>

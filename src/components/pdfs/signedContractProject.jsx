@@ -160,6 +160,9 @@ const Contract = ({
           <Text style={styles.textSangria}>
           Esta Oferta se considerará aceptada si, dentro de los veinte (20) días corridos de recibida, Itesa envía una carta de aceptación de esta Oferta.
           </Text>
+          {imageData && (
+          <Image src={`${imageData}`} style={styles.signature}></Image>
+            )}
           <Text style={styles.signatureTexts}>____________________</Text>
           <Text style={styles.signatureTexts}>{project.name + " " + project.lastName}</Text>
           <Text style={styles.signatureTexts}>
@@ -455,50 +458,15 @@ const Contract = ({
 
 
 
-
-
-
-            
-
-
-
-
-
-
             </View>
         </Page>
         
-       
-        
-        
-
-
-        
-        
-        
-
-                   
-
-                    
-
-
-
-
-
-
 
 
     </Document>
   );
-
-  return (
-    <PDFViewer style={styles.viewer}>
-      <MyDocument />
-    </PDFViewer>
-  );
+ return <MyDocument/>
+  
 };
 
-export default React.memo(Contract, (prevState, nextState) => {
-  return prevState.show === nextState.show;
-});
-
+export default Contract

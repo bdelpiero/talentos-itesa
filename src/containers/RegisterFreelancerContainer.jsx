@@ -118,6 +118,7 @@ function RegisterFreelancerContainer() {
                 nonDisclosure: downloadUrl,
                 email: data.email,
                 projectInvited: "",
+                activeProjectsCounter: 0
               })
               .then(() => {
                 history.push("/freelancer");
@@ -127,19 +128,9 @@ function RegisterFreelancerContainer() {
               });
           });
         });
-        db.collection("users")
-          .doc(uid)
-          .set({
-            name: data.name,
-            lastName: data.lastName,
-            freelancerType: data.freelancerType,
-            bankDetails: bankData,
-            email:data.email
-          })
+       
       })
-      .then(() => {
-        db.collection("invites").doc(`${data.email}`).delete();
-      });
+     
   };
 
   return (
