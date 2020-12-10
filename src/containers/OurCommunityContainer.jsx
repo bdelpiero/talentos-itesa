@@ -47,7 +47,8 @@ export const OurCommunityContainer = () => {
   };
 
   useEffect(() => {
-    db.collection("users")
+    const unsuscribe = db
+      .collection("users")
       .where("isAdmin", "==", false)
       .onSnapshot((data) => {
         setCurrentUsers(
@@ -56,6 +57,7 @@ export const OurCommunityContainer = () => {
           })
         );
       });
+    return () => unsuscribe();
   }, []);
 
   const indexOfLastUser = currentPage * usersPerPage;

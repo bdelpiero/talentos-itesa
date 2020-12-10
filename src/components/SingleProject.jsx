@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { db } from "../../firebase/firebase";
 import {
   Row,
   Col,
@@ -9,6 +9,8 @@ import {
   List,
   Avatar,
   Button,
+  Input,
+  Form,
 } from "antd";
 import {
   HighlightOutlined,
@@ -21,26 +23,40 @@ import {
 import InviteProjectContainer from "../containers/InviteProjectContainer";
 
 const { Title, Paragraph } = Typography;
+const { TextArea } = Input;
 
 export const SingleProject = ({
   delUserFromProject,
   project,
   projectUsersData,
 }) => {
-  const [editableDesc, setEditableDesc] = useState(
-    "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum culpa, reprehenderit eius cumque labore in ducimus odio, corrupti sapiente perspiciatis vero recusandae aspernatur deleniti totam rerum porro est cum doloremque."
-  );
+  const [editableDesc, setEditableDesc] = useState();
   const [editableTime, setEditableTime] = useState("3 Meses");
   const [editableBudget, setEditableBudget] = useState("$50.000");
 
+  /* function projectDescription() {
+    db.collection("projects")
+      .doc(project.id)
+      .set({ description: e.target.value }, { merge: true });
+  } */
   return (
     <>
       <Row gutter={[30]}>
         <Col xs={24} sm={12} md={12} lg={12}>
           <Title level={5}>Descripción del Proyecto</Title>
-          <Paragraph editable={{ onChange: setEditableDesc }}>
-            {editableDesc}
-          </Paragraph>
+
+          <Paragraph>{project.description}</Paragraph>
+
+          {/* 
+          <TextArea
+            defaultValue={project.description}
+            onChange={handleChange}
+            onPressEnter={projectDescription}
+            bordered={false}
+            allowClear={true}
+            autoSize={false}
+          ></TextArea>
+ */}
           <Title level={5}>Duración</Title>
           <Paragraph editable={{ onChange: setEditableTime }}>
             {editableTime}

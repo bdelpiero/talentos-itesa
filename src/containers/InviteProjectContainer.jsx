@@ -4,74 +4,73 @@ import { db } from "../../firebase/firebase";
 
 import CheckCircle from "../../views/check.svg";
 import { Modal, Card } from "antd";
+import { unstable_batchedUpdates } from "react-dom";
 
 function InviteProjectContainer({ proyecto }) {
   const [modal, setModal] = useState(false);
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState("");
   const [asignData, setAsignData] = useState({
-    plazos:[],
-    status:"pending",
-    servicios:"",
-    cuota1:{
-      fecha:[],
-      monto: 0
+    plazos: [],
+    status: "pending",
+    servicios: "",
+    cuota1: {
+      fecha: [],
+      monto: 0,
     },
-    cuota2:{
-      fecha:[],
-      monto: 0
+    cuota2: {
+      fecha: [],
+      monto: 0,
     },
-    cuota3:{
-      fecha:[],
-      monto: 0
+    cuota3: {
+      fecha: [],
+      monto: 0,
     },
-    cuota4:{
-      fecha:[],
-      monto: 0
+    cuota4: {
+      fecha: [],
+      monto: 0,
     },
-  })
+  });
 
   const openModal = () => {
     setModal(true);
   };
-
 
   const closeModal = () => {
     setModal(false);
   };
 
   useEffect(() => {
-    db.collection("users")
-      .get()
-      .then((users) => {
-        setUsers(
-          users.docs.map((users) => {
-            return users.data();
-          })
-        );
-      });
+    const unsuscribe = db.collection("users").onSnapshot((users) => {
+      setUsers(
+        users.docs.map((users) => {
+          return users.data();
+        })
+      );
+    });
+
+    return () => unsuscribe();
   }, []);
 
-  const handleChange = (e)=>{
+  const handleChange = (e) => {
     setAsignData({
       ...asignData,
       [e.target.name]: e.target.value,
     });
-  }
+  };
 
-  const handleMonto = (e)=>{
+  const handleMonto = (e) => {
     setAsignData({
       ...asignData,
-      [e.target.name] : {...asignData[e.target.name], monto : e.target.value } ,
+      [e.target.name]: { ...asignData[e.target.name], monto: e.target.value },
     });
-    console.log("aca esta asign data ", asignData)
-  }
-
+    console.log("aca esta asign data ", asignData);
+  };
 
   function handleFinish() {
     closeModal();
-    const getUser = users.filter((user)=> user.id == selectedUser)[0]
-    console.log("esto es getUser -----",getUser)
+    const getUser = users.filter((user) => user.id == selectedUser)[0];
+    console.log("esto es getUser -----", getUser);
     const usersProject = proyecto.users
       ? [...proyecto.users, selectedUser]
       : [selectedUser];
@@ -79,8 +78,7 @@ function InviteProjectContainer({ proyecto }) {
       .doc(proyecto.id)
       .collection("invitedUser")
       .doc(selectedUser)
-      .set({...asignData, ...getUser
-      })
+      .set({ ...asignData, ...getUser })
       .then(() => {
         db.collection("users")
           .doc(selectedUser)
@@ -113,12 +111,11 @@ function InviteProjectContainer({ proyecto }) {
       });
   }
 
-  
   return (
     <InviteProject
       className="modal-outside"
       handleChange={handleChange}
-      handleMonto = {handleMonto}
+      handleMonto={handleMonto}
       closeModal={closeModal}
       openModal={openModal}
       modal={modal}
