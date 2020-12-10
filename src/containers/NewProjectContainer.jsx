@@ -52,6 +52,7 @@ function NewProjectContainer() {
         term,
       })
       .then(() => {
+        form.resetFields()
         console.log("Se creo correctamente");
       })
       .then(() => {
@@ -74,7 +75,7 @@ function NewProjectContainer() {
             },
           },
         });
-      });
+      })
   }
 
   return (

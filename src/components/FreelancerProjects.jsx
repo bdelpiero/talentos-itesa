@@ -2,6 +2,11 @@ import React from "react";
 import { Card, Col, Row, Button } from "antd";
 
 export default ({ acceptedProjects, currentUser }) => {
+
+  const calculoRemuneracion =(arr)=>{
+    return arr.reduce((pre,act)=> pre + parseInt(act.monto),0)
+  } 
+
   return (
     <div
       style={{
@@ -23,7 +28,7 @@ export default ({ acceptedProjects, currentUser }) => {
             <p id="subtittle">DURACION</p>
             <h1> {project.duracion}</h1>
             <p id="subtittle">MONTO</p>
-            <h1>$50.000</h1>
+            <h1>$ {calculoRemuneracion(project.cuotasDB)}</h1>
 
             <div
               style={{
@@ -34,7 +39,7 @@ export default ({ acceptedProjects, currentUser }) => {
                 bottom: 40,
               }}
             >
-              <a href={`${currentUser.nonDisclosure}`} target="_blank">
+              <a href={`${project.urlContractProject}`} target="_blank">
                 <Button
                   className="modal-button buttonCard buttonProjects "
                   style={{ backgroundColor: "#9E39FF", color: "white" }}

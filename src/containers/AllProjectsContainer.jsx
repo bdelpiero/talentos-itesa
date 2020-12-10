@@ -34,8 +34,11 @@ function AllProjectsContainer({ setItem, setProject }) {
 
   const changeStatus = (project) => {
     if (project.status == "pending") return;
+
     const newStatus =
       project.status == "On Development" ? "Finished" : "On Development";
+    const newTotal =
+      project.status == "On Development" ? -1 : 1  
     db.collection("projects")
       .doc(project.id)
       .update({
@@ -54,9 +57,21 @@ function AllProjectsContainer({ setItem, setProject }) {
                 .doc(user.id)
                 .update({
                   status: newStatus,
-                });
+                })
+                return user.id
+            }).then((user)=>{
+              db.collection("users").doc(user).
+              get()
+              .then((doc)=>{
+                const user = doc.data()
+                if(!user.activeProjectsCounter) return
+                db.collection("users").doc(user.id).update({
+                  activeProjectsCounter: user.activeProjectsCounter + newTotal
+                })
+              })
             })
-          );
+            
+          )
       });
   };
 
