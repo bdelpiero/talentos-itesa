@@ -156,6 +156,7 @@
   height: 10rem !important;
   text-align: center !important;
   background-color: whitesmoke !important;
+  width: auto !important;
 }
 
 .sider-cards:hover {
