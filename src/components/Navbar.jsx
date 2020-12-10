@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from "../../views/itesaBanana.png";
 import { authUser } from "../../firebase/auth";
 
@@ -8,39 +8,56 @@ import {
   BarChartOutlined,
   TeamOutlined,
   LogoutOutlined,
+  MenuOutlined,
+  HomeOutlined
 } from "@ant-design/icons";
 
 export default ({ setItem }) => {
 
   const {logout} = authUser()
+  const [menu,setMenu] = useState(false)
+
+  const openMenu = () => {
+    menu ? setMenu(false) : setMenu(true)
+  }
 
   const handleClick = e => {
-    if(e.key == 'home') setItem(1)
-    if(e.key == 'proyectos') setItem(2)
-    if(e.key == 'perfiles') setItem(5)
+    if(e.key == 'home') {setItem(1), setMenu(false)} 
+    if(e.key == 'proyectos') {setItem(2), setMenu(false)}
+    if(e.key == 'perfiles') {setItem(5), setMenu(false)}
     if(e.key == 'logout') logout()
   };
 
   return (
+    <>
+    <div style={{width: '100%'}} className='navbar-display'>
+      <MenuOutlined className='navbar-burger' onClick={openMenu}/>
+      <img src={logo} className='logo-navbar'/>
+    </div>
+    {menu && 
       <Menu 
-      onClick={handleClick} 
-      mode="inline"
-      className='navbar-display'
-      triggerSubMenuAction='click'
-      inlineIndent={10}
-      >
-        <Menu.Item key="home" className='logo-navbar' >
-          <img src={logo} className='logo-navbar'/>
-        </Menu.Item>
-        <Menu.Item key="proyectos" className='navbar-menu-item'>
-          Proyectos
-        </Menu.Item>
-        <Menu.Item key="perfiles" className='navbar-menu-item'>
-          Perfiles
-        </Menu.Item>
-        <Menu.Item key="logout" icon={<LogoutOutlined/>} className='navbar-menu-item'>
-          Logout
-        </Menu.Item>
+        onClick={handleClick} 
+        mode="vertical"
+        triggerSubMenuAction='click'
+        inlineIndent={10}
+        style={{marginBottom: '1rem'}}
+        className='navbar-menu'
+        >
+          <Menu.Item key="home" icon={<HomeOutlined/>} className='navbar-menu-item'>
+            Home
+          </Menu.Item>
+          <Menu.Item key="proyectos" icon={<BarChartOutlined/>} className='navbar-menu-item'>
+            Proyectos
+          </Menu.Item>
+          <Menu.Item key="perfiles" icon={<TeamOutlined/>} className='navbar-menu-item'>
+            Perfiles
+          </Menu.Item>
+          <Menu.Item key="logout" icon={<LogoutOutlined/>} className='navbar-menu-item'>
+            Logout
+          </Menu.Item>
       </Menu>
+    }
+    </>
   )
+      
 }
