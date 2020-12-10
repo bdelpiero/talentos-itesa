@@ -94,9 +94,9 @@ export default () => {
               <Row className="userCards-row">
                 <CardsFreelancer setItem={setItem} />
               </Row>
-              <Row>
-                <PendingPayments />
-              </Row>
+              <div >
+                <PagosFreelance user={currentUser} />
+              </div>
             </>
           )}
           {item == 2 && <FreelancerProjectContainer />}

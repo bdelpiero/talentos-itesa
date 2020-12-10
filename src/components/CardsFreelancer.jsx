@@ -75,16 +75,9 @@ export default ({setItem}) => {
           <p id="subtittle">NO TIENES PROYECTOS</p>
         </Card>
       )
-    }
-  
-    
+    }     
   }
   
-
-
-
-
-
   return (
     
     <>
