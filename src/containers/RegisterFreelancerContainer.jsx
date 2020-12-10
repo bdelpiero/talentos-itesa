@@ -118,14 +118,17 @@ function RegisterFreelancerContainer() {
                 nonDisclosure: downloadUrl,
                 email: data.email,
                 projectInvited: "",
+                activeProjectsCounter: 0
               })
               .then(() => {
                 db.collection("invites").doc(`${data.email}`).delete();
-                history.push("/freelancer");
+                history.push("/freelancer")
               });
           });
         });
-      });
+       
+      })
+     
   };
 
   return (

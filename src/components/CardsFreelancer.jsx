@@ -8,27 +8,48 @@ import MiBancoContainer from "../containers/MiBancoContainer";
 export default ({setItem}) => {
   const [currentUser,serCurrentUser]=useRecoilState(user)
   const [invitedProject, setInvitedProject] = useRecoilState(projectInvited);
-  const [carrusel, setCarrusel] = useState(0);
-
-  console.log("project en carfrelance", invitedProject)
-  console.log("user en carfrelance", currentUser)
 
   const CardsOferts =(props)=>{
-    if(props.inviteds.length > 0){
-      console.log("entro al primer if")
-      if(props.inviteds.length > 1){
-        console.log("mas de un proyecto",props.inviteds, carrusel)
-//el carrucel no funciono, hay que buscar otra manera
+
+    const getDatesBetweenDates = (startDate, endDate) => {
+      const sd=startDate.split('/')
+      const ed=endDate.split('/')
+      let dates = []
+      //to avoid modifying the original date
+      const theDate = new Date(sd[2],sd[1],sd[0])
+      const theEndDate = new Date(ed[2],ed[1],ed[0])
+  
+      while (theDate < theEndDate) {
+        dates = [...dates, new Date(theDate)]
+        theDate.setDate(theDate.getDate() + 1)
+      }
+      console.log("duracion",Math.floor(dates.length /7))
+      return Math.floor(dates.length /7)
+    }
+
+    const calculoRemuneracion =(arr)=>{
+      return arr.reduce((pre,act)=> pre + parseInt(act.monto),0)
+    } 
+
+    if(props.inviteds.invited.length > 0){
+
+      const duracion= getDatesBetweenDates(props.inviteds.selected.plazos[0],props.inviteds.selected.plazos[1])
+      const monto=calculoRemuneracion(props.inviteds.selected.cuotasDB)
+
+     
+      if(props.inviteds.invited.length > 1){
+        console.log("mas de un proyecto",props.inviteds, props.inviteds.selected)
+
         return (
           <Card className="bodyCard" >
           <h3 id="tittleCard">OFERTA DE PROYECTO</h3>
           <p id="subtittle">PROYECTO</p>
-          <p>"{props.inviteds[carrusel].proyecto}"</p>
+          <p>"{props.inviteds.selected.proyecto}"</p>
           <p id="subtittle">DURACION</p>
-          <p>{props.inviteds[carrusel].duracion}</p>
+          <p>{duracion} semanas</p>
           <p id="subtittle">MONTO</p>
           <p>
-          "${props.inviteds[carrusel].monto}"            
+          "$ {monto}"            
           </p>
           <div style={{display:"flex",flexDirection: "column",position:"absolute", right:20, bottom:40}}> 
 
@@ -39,27 +60,29 @@ export default ({setItem}) => {
             Firma Contrato
           </Button></div>   
           <div className='oferts-button'>
-            {props.inviteds.map((p,i)=>{
-              return <Button shape='round' key={i} onClick={()=>setCarrusel(i)}> </Button>
+            {props.inviteds.invited.map((p,i)=>{
+              return <Button shape='round' key={i} onClick={()=>{
+                console.log("AQUI",props.inviteds.invited[i])
+                setInvitedProject({...invitedProject, selected : props.inviteds.invited[i]})
+              }
+              }> </Button>
             })}
           </div>       
         </Card>
         )
       }else{
         return (
-          <Card className="bodyCard" key={props.inviteds[0].proyecto}>
+          <Card className="bodyCard" key={props.inviteds.selected.proyecto}>
             <h3 id="tittleCard">OFERTA DE PROYECTO</h3>
             <p id="subtittle">PROYECTO</p>
-            <p>"{props.inviteds[0].proyecto}"</p>
+            <p>"{props.inviteds.selected.proyecto}"</p>
             <p id="subtittle">DURACION</p>
-            <p>{props.inviteds[0].duracion}</p>
+            <p>{duracion} semanas</p>
             <p id="subtittle">MONTO</p>
-            <p>
-            "${props.inviteds[0].monto}"            
-            </p>
+            <p> "${monto}" </p>
+            
             <div>
             <Button 
-            autofocus
             onClick={()=>setItem(5)}
             className="modal-button buttonCard" 
             shape="round">
@@ -75,20 +98,13 @@ export default ({setItem}) => {
           <p id="subtittle">NO TIENES PROYECTOS</p>
         </Card>
       )
-    }
-  
-    
+    }     
   }
   
-
-
-
-
-
   return (
     
     <>
-      {invitedProject.invited && <CardsOferts inviteds={invitedProject.invited}/>}
+      {invitedProject && <CardsOferts inviteds={invitedProject}/>}
     
       <Card className='bodyCard'>
         <h3 id='tittleCard'>PROXIMO PAGO</h3>

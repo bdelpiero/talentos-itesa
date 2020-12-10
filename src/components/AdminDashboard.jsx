@@ -2,6 +2,8 @@ import React from "react";
 import { Layout, Row, Card } from "antd";
 import Briefing from "../../views/briefing.svg";
 import UserLogo from "../../views/man.svg";
+import { useRecoilState } from "recoil";
+import { user, projectInvited } from "../atoms/index";
 
 // COMPONENTS & CONTAINERS
 import InviteContainer from "../containers/InviteContainer";
@@ -18,7 +20,7 @@ import { OurCommunityContainer } from "../containers/OurCommunityContainer";
 
 function AdminDashboard({ handleLogout }) {
   const { Content } = Layout;
-
+  const [currentUser, setCurrentUser] = useRecoilState(user);
   const [item, setItem] = React.useState(1);
   const [project, setProject] = React.useState({});
 
@@ -56,10 +58,8 @@ function AdminDashboard({ handleLogout }) {
                   <AddPaymentContainer />
                 </Card>
                 <ResumeContainer />
-              </Row>
-              <Row>
-                <PendingPayments />
-              </Row>
+              </Row>              
+                <PendingPayments user={currentUser} />              
             </>
           )}
           {item == 2 && (
