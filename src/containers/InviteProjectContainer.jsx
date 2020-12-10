@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
 import InviteProject from "../components/InviteProject";
 import { db } from "../../firebase/firebase";
-
 import CheckCircle from "../../views/check.svg";
 import { Modal, Card } from "antd";
 
 function InviteProjectContainer({ proyecto }) {
   const [modal, setModal] = useState(false);
   const [users, setUsers] = useState([]);
+  const [selectedUser, setSelectedUser] = useState("");
+  const [asignData, setAsignData] = useState({
+    plazos: [],
+    status: "pending",
+    servicios: "",
+  });
   const [cuotas, setCuotas] = useState({
     cuota1: {
       fecha: [],
@@ -25,12 +30,6 @@ function InviteProjectContainer({ proyecto }) {
       fecha: [],
       monto: 0,
     },
-  });
-  const [selectedUser, setSelectedUser] = useState("");
-  const [asignData, setAsignData] = useState({
-    plazos: [],
-    status: "pending",
-    servicios: "",
   });
 
   // function onChange(e) {
@@ -51,15 +50,15 @@ function InviteProjectContainer({ proyecto }) {
   };
 
   useEffect(() => {
-    db.collection("users")
-      .get()
-      .then((users) => {
-        setUsers(
-          users.docs.map((users) => {
-            return users.data();
-          })
-        );
-      });
+    const unsuscribe = db.collection("users").onSnapshot((users) => {
+      setUsers(
+        users.docs.map((users) => {
+          return users.data();
+        })
+      );
+    });
+
+    return () => unsuscribe();
   }, []);
 
   const handleChange = (e) => {
@@ -80,9 +79,7 @@ function InviteProjectContainer({ proyecto }) {
   function handleFinish() {
     closeModal();
     const cuotasDB = Object.values(cuotas);
-    console.log("cuotasDB", cuotasDB);
     const getUser = users.filter((user) => user.id == selectedUser)[0];
-    console.log("esto es getUser -----", getUser);
     const usersProject = proyecto.users
       ? [...proyecto.users, selectedUser]
       : [selectedUser];

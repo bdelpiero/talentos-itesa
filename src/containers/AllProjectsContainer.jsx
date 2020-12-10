@@ -4,7 +4,6 @@ import AllProjects from "../components/AllProjects";
 
 function AllProjectsContainer({ setItem, setProject }) {
   const [projects, setProjects] = useState([]);
-  const [status, setStatus] = useState("");
   const [filterProjects, setFilterProjects] = useState([]);
 
   function onChange(e) {
@@ -16,7 +15,7 @@ function AllProjectsContainer({ setItem, setProject }) {
   }
 
   useEffect(() => {
-    db.collection("projects").onSnapshot((projects) => {
+    const unsuscribe = db.collection("projects").onSnapshot((projects) => {
       projects = projects.docs.map((project) => {
         let proyecto = project.data();
         proyecto.id = project.id;
@@ -26,6 +25,7 @@ function AllProjectsContainer({ setItem, setProject }) {
       setProjects(projects);
       setFilterProjects(projects);
     });
+    return () => unsuscribe();
   }, []);
 
   const deleteProject = (project) => {
