@@ -1,9 +1,13 @@
 import React, {useState} from "react";
-import { Button, Card, Carousel } from 'antd';
 import { useRecoilState } from "recoil";
 import { user,projectInvited } from "../atoms/index";
+
+// STYLES
+import { Button, Card, Carousel } from 'antd';
+import { Typography } from 'antd';
 import MiBancoContainer from "../containers/MiBancoContainer";
 
+const { Title } = Typography;
 
 export default ({setItem}) => {
   const [currentUser,serCurrentUser]=useRecoilState(user)
@@ -18,110 +22,83 @@ export default ({setItem}) => {
       console.log("entro al primer if")
       if(props.inviteds.length > 1){
         console.log("mas de un proyecto",props.inviteds, carrusel)
-//el carrucel no funciono, hay que buscar otra manera
         return (
-          <Card className="bodyCard" >
-          <h3 id="tittleCard">OFERTA DE PROYECTO</h3>
-          <p id="subtittle">PROYECTO</p>
-          <p>"{props.inviteds[carrusel].proyecto}"</p>
-          <p id="subtittle">DURACION</p>
-          <p>{props.inviteds[carrusel].duracion}</p>
-          <p id="subtittle">MONTO</p>
-          <p>
-          "${props.inviteds[carrusel].monto}"            
-          </p>
-          <div> 
-
-          <Button 
-          onClick={()=>setItem(5)}
-          className='modal-button buttonCard' 
-          shape="round">
-            Firma Contrato
-          </Button></div>   
-          <div className='oferts-button'>
-            {props.inviteds.map((p,i)=>{
-              return <Button shape='round' key={i} onClick={()=>setCarrusel(i)}> </Button>
-            })}
-          </div>       
-        </Card>
+          <Card className="freelancer-cards" >
+            <Title level={5} id="title-freelancer-card">OFERTA DE PROYECTO</Title>
+            <p id="subtittle-freelancer-card">PROYECTO</p>
+            <p id='text-freelancer-card'>"{props.inviteds[carrusel].proyecto}"</p>
+            <p id="subtittle-freelancer-card">DURACION</p>
+            <p id='text-freelancer-card'>{props.inviteds[carrusel].duracion}</p>
+            <p id="subtittle-freelancer-card">MONTO</p>
+            <div className='container-freelancer-button'>
+              <p id='text-freelancer-card'> "${props.inviteds[carrusel].monto}"</p>
+              <Button className="freelancer-card-buttons" onClick={()=>setItem(5)} shape="round"> Firma Contrato </Button>
+            </div>   
+            <div className='freelancer-card-stepers-container'>
+              {props.inviteds.map((p,i)=>{
+                return (
+                <Button shape='round' key={i} onClick={() => setCarrusel(i)} className='freelancer-card-stepers'> </Button>
+                )
+              })}
+            </div>
+          </Card>
         )
-      }else{
+      } else {
         return (
-          <Card className="bodyCard" key={props.inviteds[0].proyecto}>
-            <h3 id="tittleCard">OFERTA DE PROYECTO</h3>
-            <p id="subtittle">PROYECTO</p>
-            <p>"{props.inviteds[0].proyecto}"</p>
-            <p id="subtittle">DURACION</p>
-            <p>{props.inviteds[0].duracion}</p>
-            <p id="subtittle">MONTO</p>
-            <p>
-            "${props.inviteds[0].monto}"            
-            </p>
-            <div>
-            <Button 
-            autofocus
-            onClick={()=>setItem(5)}
-            className="modal-button buttonCard" 
-            shape="round">
-              Firma Contrato
-            </Button></div>          
+          <Card className="freelancer-cards" key={props.inviteds[0].proyecto}>
+            <Title level={5} id="title-freelancer-card">OFERTA DE PROYECTO</Title>
+            <p id="subtittle-freelancer-card">PROYECTO</p>
+            <p id='text-freelancer-card'>"{props.inviteds[0].proyecto}"</p>
+            <p id="subtittle-freelancer-card">DURACION</p>
+            <p id='text-freelancer-card'>{props.inviteds[0].duracion}</p>
+            <p id="subtittle-freelancer-card">MONTO</p>
+            <div className='container-freelancer-button'>
+              <p id='text-freelancer-card'> "${props.inviteds[0].monto}"</p>
+              <Button className="freelancer-card-buttons" onClick={()=>setItem(5)} shape="round"> Firma Contrato </Button>
+            </div>          
           </Card>
         )
       }
-    }else{
+    } else {
       return (
-        <Card className="bodyCard">
-          <h3 id="tittleCard">OFERTA DE PROYECTO</h3>
-          <p id="subtittle">NO TIENES PROYECTOS</p>
+        <Card className="freelancer-cards">
+          <Title level={5} id="title-freelancer-card">OFERTA DE PROYECTO</Title>
+          <p id="subtittle-freelancer-card">NO TIENES PROYECTOS</p>
         </Card>
       )
-    }
-  
-    
+    }    
   }
-  
-
-
-
-
 
   return (
-    
     <>
+      {/* CARD OFERTA DE PROYECTO */}
       {invitedProject.invited && <CardsOferts inviteds={invitedProject.invited}/>}
-    
-      <Card className='bodyCard'>
-        <h3 id='tittleCard'>PROXIMO PAGO</h3>
-        <p id='subtittle'>PROYECTO</p>
-        <p>{}</p>
-        <p id='subtittle'>FECHA DE PAGO</p>
-        <input
-          type='date'
-          id='start'
-          name='trip-start'
-          min='2021-01-01'
-          max='2029-12-31'></input>
-        <p id='subtittle'>MONTO</p>
-        <p>"$50.000"</p>
-        <div>
-          {/* <Button className="buttonCard" shape="round">
-            Cargar Factura
-          </Button> */}
-          <div style={{display:"flex",flexDirection: "column",position:"absolute", right:20, bottom:40}}>
-            <Button className='modal-button buttonCard'>Cargar Factura</Button>
-          </div>
+
+      {/* CARD PROXIMO PAGO */}
+      <Card className='freelancer-cards'>
+        <Title level={5} id="title-freelancer-card">PROXIMO PAGO</Title>
+        <p id='subtittle-freelancer-card'>PROYECTO</p>
+        <p id='text-freelancer-card'>Project Name</p>
+        <p id='subtittle-freelancer-card'>FECHA DE PAGO</p>
+        <p id='text-freelancer-card'>Fecha de Pago</p>
+        <p id='subtittle-freelancer-card'>MONTO</p>
+        <div className='container-freelancer-button'>
+          <p id='text-freelancer-card'>"$50.000"</p>
+          <Button shape='round' className="freelancer-card-buttons"> Cargar Factura </Button>
         </div>
       </Card>
-
-      <Card className='bodyCard'>
-        <h3 id='tittleCard'>MI BANCO</h3>
-        <p id='subtittle'>CBU/Alias</p>
-        <p>{currentUser.bankDetails.alias}</p>
-        <p id='subtittle'>TITULAR</p>
-        <p>{currentUser.bankDetails.accountName}</p>
-        <p id='subtittle'>BANCO</p>
-        <p>{currentUser.bankDetails.bankName}</p>
-        <div> <MiBancoContainer/></div>
+      {/* CARD MI BANCO */}
+      <Card className='freelancer-cards'>
+        <Title level={5} id="title-freelancer-card">MI BANCO</Title>
+        <p id='subtittle-freelancer-card'>CBU/Alias</p>
+        <p id='text-freelancer-card'>{currentUser.bankDetails.alias}</p>
+        <p id='subtittle-freelancer-card'>TITULAR</p>
+        <p id='text-freelancer-card'>{currentUser.bankDetails.accountName}</p>
+        <p id='subtittle-freelancer-card'>BANCO</p>
+        <div className='container-freelancer-button'>
+          <p id='text-freelancer-card'>{currentUser.bankDetails.bankName} </p>
+          <MiBancoContainer/>
+        </div>
       </Card>
     </>
   );

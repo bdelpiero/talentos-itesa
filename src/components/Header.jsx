@@ -18,14 +18,15 @@ export default () => {
       <Row align='center' justify='end' className='mini-logo'>
         <img src={logo} className='logo' />
       </Row>
-      <Row justify="space-between"  align="center" wrap={true}>
-        <span>
-          <Title className='header-title' level={2}>Dashboard</Title>
-          <Text>Bienvenido a Itesa, {currentUser.name + ' '} ":)" </Text>
+      <Row justify="space-between"  align="center" wrap={true} className='header-title-row'>
+        <span className='span-title'>
+          <Title level={2} className='header-title'>Dashboard</Title>
+          <Text>Bienvenido a Itesa, {currentUser.name + ' '} :) </Text>
         </span>
           <EditUserContainer
             user={currentUser}
             setCurrentUser={setCurrentUser}
+            style={{alignSelf: 'center'}}
           />
       </Row>
     </Header>

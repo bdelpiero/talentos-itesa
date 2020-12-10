@@ -39,7 +39,6 @@ function RegisterFreelancerContainer() {
     // cbu: "",
     cuit: "",
     type: "",
-    // dni: "",
     address: "",
   });
 
@@ -177,6 +176,7 @@ function RegisterFreelancerContainer() {
           errorSignature={errorSignature}
           setErrorSignature={setErrorSignature}
           isLogin={isLogin.loading}
+          setBankData={setBankData}
         />
       </div>
     </div>
