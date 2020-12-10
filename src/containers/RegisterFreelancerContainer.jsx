@@ -120,25 +120,11 @@ function RegisterFreelancerContainer() {
                 projectInvited: "",
               })
               .then(() => {
-                history.push("/freelancer");
-              })
-              .then(() => {
                 db.collection("invites").doc(`${data.email}`).delete();
+                history.push("/freelancer");
               });
           });
         });
-        db.collection("users")
-          .doc(uid)
-          .set({
-            name: data.name,
-            lastName: data.lastName,
-            freelancerType: data.freelancerType,
-            bankDetails: bankData,
-            email:data.email
-          })
-      })
-      .then(() => {
-        db.collection("invites").doc(`${data.email}`).delete();
       });
   };
 

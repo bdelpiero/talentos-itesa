@@ -8,33 +8,43 @@ import { Modal, Card } from "antd";
 function InviteProjectContainer({ proyecto }) {
   const [modal, setModal] = useState(false);
   const [users, setUsers] = useState([]);
+  const [cuotas, setCuotas] = useState({
+    cuota1: {
+      fecha: [],
+      monto: 0,
+    },
+    cuota2: {
+      fecha: [],
+      monto: 0,
+    },
+    cuota3: {
+      fecha: [],
+      monto: 0,
+    },
+    cuota4: {
+      fecha: [],
+      monto: 0,
+    },
+  });
   const [selectedUser, setSelectedUser] = useState("");
   const [asignData, setAsignData] = useState({
-    plazos:[],
-    status:"pending",
-    servicios:"",
-    cuota1:{
-      fecha:[],
-      monto: 0
-    },
-    cuota2:{
-      fecha:[],
-      monto: 0
-    },
-    cuota3:{
-      fecha:[],
-      monto: 0
-    },
-    cuota4:{
-      fecha:[],
-      monto: 0
-    },
-  })
+    plazos: [],
+    status: "pending",
+    servicios: "",
+  });
+
+  // function onChange(e) {
+  //   setCurrentUsers(
+  //     allUsers.filter((user) => {
+  //       if (user.name.toLowerCase().match(e.target.value.toLowerCase()))
+  //         return user.name.toLowerCase().match(e.target.value.toLowerCase());
+  //     })
+  //   );
+  // }
 
   const openModal = () => {
     setModal(true);
   };
-
 
   const closeModal = () => {
     setModal(false);
@@ -52,26 +62,27 @@ function InviteProjectContainer({ proyecto }) {
       });
   }, []);
 
-  const handleChange = (e)=>{
+  const handleChange = (e) => {
     setAsignData({
       ...asignData,
       [e.target.name]: e.target.value,
     });
-  }
+  };
 
-  const handleMonto = (e)=>{
-    setAsignData({
-      ...asignData,
-      [e.target.name] : {...asignData[e.target.name], monto : e.target.value } ,
+  const handleCuotas = (value, name, nCuota) => {
+    setCuotas({
+      ...cuotas,
+      [nCuota]: { ...cuotas[nCuota], [name]: value },
     });
-    console.log("aca esta asign data ", asignData)
-  }
-
+    console.log("aca esta cuotas---", cuotas);
+  };
 
   function handleFinish() {
     closeModal();
-    const getUser = users.filter((user)=> user.id == selectedUser)[0]
-    console.log("esto es getUser -----",getUser)
+    const cuotasDB = Object.values(cuotas);
+    console.log("cuotasDB", cuotasDB);
+    const getUser = users.filter((user) => user.id == selectedUser)[0];
+    console.log("esto es getUser -----", getUser);
     const usersProject = proyecto.users
       ? [...proyecto.users, selectedUser]
       : [selectedUser];
@@ -79,9 +90,12 @@ function InviteProjectContainer({ proyecto }) {
       .doc(proyecto.id)
       .collection("invitedUser")
       .doc(selectedUser)
-      .set({...asignData, ...getUser,
+      .set({
+        ...asignData,
+        ...getUser,
         proyecto: proyecto.name,
         duracion: proyecto.term,
+        cuotasDB,
       })
       .then(() => {
         db.collection("users")
@@ -115,12 +129,12 @@ function InviteProjectContainer({ proyecto }) {
       });
   }
 
-  
   return (
     <InviteProject
       className="modal-outside"
       handleChange={handleChange}
-      handleMonto = {handleMonto}
+      handleCuotas={handleCuotas}
+      cuotas={cuotas}
       closeModal={closeModal}
       openModal={openModal}
       modal={modal}

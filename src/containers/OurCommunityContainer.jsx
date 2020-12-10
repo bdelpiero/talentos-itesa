@@ -6,7 +6,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { allUsersState } from "../atoms/index";
 
 export const OurCommunityContainer = () => {
-  const [allUsers, setAllUsers] = useRecoilState(allUsersState);
+  const allUsers = useRecoilValue(allUsersState);
   const [currentUsers, setCurrentUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [usersPerPage, setUsersPerPage] = useState(5);
@@ -15,13 +15,11 @@ export const OurCommunityContainer = () => {
   function onChange(e) {
     setCurrentUsers(
       allUsers.filter((user) => {
-        setIsLoading(true);
         if (user.name.toLowerCase().match(e.target.value.toLowerCase()))
           return user.name.toLowerCase().match(e.target.value.toLowerCase());
         if (user.email.toLowerCase().match(e.target.value.toLowerCase()))
           return user.email.toLowerCase().match(e.target.value.toLowerCase());
-      }),
-      setIsLoading(false)
+      })
     );
   }
 
@@ -52,11 +50,6 @@ export const OurCommunityContainer = () => {
     db.collection("users")
       .where("isAdmin", "==", false)
       .onSnapshot((data) => {
-        setAllUsers(
-          data.docs.map((data) => {
-            return data.data();
-          })
-        );
         setCurrentUsers(
           data.docs.map((data) => {
             return data.data();
@@ -81,7 +74,8 @@ export const OurCommunityContainer = () => {
         usersPerPage={usersPerPage}
         handlePageChange={handlePageChange}
         isLoading={isLoading}
-        setCurrentUsers={setCurrentUsers}></OurCommunity>
+        setCurrentUsers={setCurrentUsers}
+      ></OurCommunity>
     </>
   );
 };

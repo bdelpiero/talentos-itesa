@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   Row,
   Col,
@@ -17,29 +18,15 @@ import {
   DeleteOutlined,
   UserAddOutlined,
 } from "@ant-design/icons";
+import InviteProjectContainer from "../containers/InviteProjectContainer";
 
 const { Title, Paragraph } = Typography;
-const data = [
-  {
-    title: "Juan Garrido",
-  },
-  {
-    title: "Chino San",
-  },
-  {
-    title: "Bruno DelP",
-  },
-  {
-    title: "Armando Rico",
-  },
-  {
-    title: "Williams Saya",
-  },
-  {
-    title: "Millas Marcos",
-  },
-];
-export const SingleProject = () => {
+
+export const SingleProject = ({
+  delUserFromProject,
+  project,
+  projectUsersData,
+}) => {
   const [editableDesc, setEditableDesc] = useState(
     "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum culpa, reprehenderit eius cumque labore in ducimus odio, corrupti sapiente perspiciatis vero recusandae aspernatur deleniti totam rerum porro est cum doloremque."
   );
@@ -63,26 +50,30 @@ export const SingleProject = () => {
             {editableBudget}
           </Paragraph>
         </Col>
+
         <Col xs={24} sm={12} md={12} lg={12}>
-          {/* "VER POR QUE CON EL TEXTO SE PUEDE OCUPAR EL 100% DE LA PANTALLA EN
-          CELULAR, ARREGLAR ESTE DETALLE" */}
-          <Title level={5}>
-            Freelancers en proyecto{" "}
-            <UserAddOutlined className="single-icon add-user" />
-          </Title>{" "}
+          <div style={{display:"flex",justifyContent:"space-between" }}>
+            <Title level={5}>
+              Freelancers en proyecto{" "}
+              {/* <UserAddOutlined className="single-icon add-user" /> */}
+            </Title>{" "}
+            <InviteProjectContainer proyecto={project} />
+          </div>
+
           <List
             itemLayout="horizontal"
-            dataSource={data}
+            dataSource={projectUsersData}
             renderItem={(item) => (
               <List.Item>
                 <List.Item.Meta
-                  avatar={
-                    <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-                  }
-                  title={<a href="https://ant.design">{item.title}</a>}
-                  description="Developer"
+                  avatar={<Avatar src={item.avatar} />}
+                  title={item.name}
+                  description={item.freelancerType}
                 />
-                <DeleteOutlined className="single-icon" />
+                <DeleteOutlined
+                  onClick={() => delUserFromProject(item.id)}
+                  className="single-icon"
+                />
               </List.Item>
             )}
           />

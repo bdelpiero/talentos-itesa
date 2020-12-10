@@ -86,6 +86,7 @@ function FreelancerProjectsContainer() {
       success={success}
       openModal={openModal}
       modal={modal}
+      currentUser={currentUser}
     />
   );
 }

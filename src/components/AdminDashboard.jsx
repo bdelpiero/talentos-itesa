@@ -13,21 +13,22 @@ import ResumeContainer from "../containers/ResumeContainer";
 import PendingPayments from "./PendingPayments";
 import AllProjectsContainer from "../containers/AllProjectsContainer";
 import Navbar from "../components/Navbar";
-import { SingleProject } from "../components/SingleProject";
+import { SingleProjectContainer } from "../containers/SingleProjectContainer";
 import { OurCommunityContainer } from "../containers/OurCommunityContainer";
 
 function AdminDashboard({ handleLogout }) {
   const { Content } = Layout;
 
   const [item, setItem] = React.useState(1);
+  const [project, setProject] = React.useState({});
 
   return (
     <Layout>
       <Sidebar setItem={setItem} handleLogout={handleLogout} />
       <Layout>
         <Navbar setItem={setItem} />
-        <HeaderComponent/>
-        <Content className='content-user'>
+        <HeaderComponent />
+        <Content className="content-user">
           {item == 1 && (
             <>
               <Row className="admin-row">
@@ -61,8 +62,10 @@ function AdminDashboard({ handleLogout }) {
               </Row>
             </>
           )}
-          {item == 2 && <AllProjectsContainer setItem={setItem} />}
-          {item == 3 && <SingleProject />}
+          {item == 2 && (
+            <AllProjectsContainer setItem={setItem} setProject={setProject} />
+          )}
+          {item == 3 && <SingleProjectContainer project={project} />}
           {item == 5 && <OurCommunityContainer />}
         </Content>
       </Layout>
