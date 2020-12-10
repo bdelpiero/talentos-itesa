@@ -66,12 +66,16 @@ export const SingleProject = ({
             {editableBudget}
           </Paragraph>
         </Col>
+
         <Col xs={24} sm={12} md={12} lg={12}>
-          <Title level={5}>
-            Freelancers en proyecto{" "}
+          <div style={{display:"flex",justifyContent:"space-between" }}>
+            <Title level={5}>
+              Freelancers en proyecto{" "}
+              {/* <UserAddOutlined className="single-icon add-user" /> */}
+            </Title>{" "}
             <InviteProjectContainer proyecto={project} />
-            {/* <UserAddOutlined className="single-icon add-user" /> */}
-          </Title>{" "}
+          </div>
+
           <List
             itemLayout="horizontal"
             dataSource={projectUsersData}

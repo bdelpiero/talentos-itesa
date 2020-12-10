@@ -31,9 +31,16 @@
   .add-user {
     margin-left: 2rem;
   }
+  .show-ellipsis {
+    display: none;
+  }
 }
 
 @media (max-width: 991px) {
+  .hide-button {
+    display: none;
+  }
+  
   .navbar-display {
     display: flex;
     width: 100%;
@@ -110,7 +117,6 @@
   .navbar-menu-item:hover {
     border-bottom: solid 1px #9e39ff !important;
   }
-  
 }
 
 .sider-admin {
@@ -419,7 +425,6 @@ trabajando con content user
   margin-bottom: 15px;
 }
 
-
 .ant-card-body {
   /* height: 100% !important; */
   margin: 0 !important;
@@ -580,6 +585,18 @@ trabajando con  user Cards
   height: 100%;
   color: white;
   background-color: #9e39ff;
+  float: right;
+  
+}
+
+
+.list-button-paymentsFree {
+  text-align: center;
+  width: 20%;
+  height: 100%;
+  color: white;
+  background-color: #9e39ff;
+  float: right;
 }
 
 .avatar-payments {
@@ -675,6 +692,7 @@ register freelancer
     #ff6e7f 0%,
     #a77ffa 40%
   ) !important;
+  margin-top: 10px;
 }
 
 .register-button {

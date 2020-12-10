@@ -9,14 +9,14 @@ import { user, projectInvited } from "../atoms/index";
 import Sidebar from "../components/Sidebar";
 import HeaderComponent from "../components/Header";
 import Error404 from "../components/404";
-import PagosFreelace from "../components/PagosFreelace";
+import PagosFreelance from "../components/PagosFreelance";
 import CardsFreelancer from "../components/CardsFreelancer";
 import Navbar from "../components/Navbar";
-import ContractProject from "../components/ContractProject";
+import AcceptProject from "../components/AcceptProject";
 import PendingPayments from "../components/PendingPayments";
 import FreelancerProjectContainer from "../containers/FreelancerProjectsContainer";
 
-import { Layout, Row} from "antd";
+import { Layout, Row } from "antd";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -29,32 +29,35 @@ export default () => {
   const { Content } = Layout;
   const [item, setItem] = React.useState(1);
 
-
   function hasDuplicates(inputArray) {
-    
-  for (let i=0; i<inputArray.length-1; i++){ // i==1//i==2 //==3
-    for (let j=1; j<inputArray.length; j++){ // j==2 // j==3 // 
-      if (inputArray[i] === inputArray[j]){
-        return true 
+    for (let i = 0; i < inputArray.length - 1; i++) {
+      // i==1//i==2 //==3
+      for (let j = 1; j < inputArray.length; j++) {
+        // j==2 // j==3 //
+        if (inputArray[i] === inputArray[j]) {
+          return true;
+        }
       }
     }
-  } 
-  return false
+    return false;
   }
 
-
   // useEffect esta atento a los cambios en el usuario para renderizar el componente nuevamente
-  console.log("se renderiza usercontainer",invitedProject)
+  console.log("se renderiza usercontainer", invitedProject);
 
   useEffect(() => {
     let invitaciones=db.collectionGroup("invitedUser").where('email', '==' ,currentUser.email)
+    // where('status', '==' ,"pending")
     invitaciones.get()
     .then((projects) => {
       const newInvitations=[]
       projects.forEach((doc)=>{
-        newInvitations.push(doc.data())
+        if(doc.data().status === 'pending'){
+          console.log("entro al if con este status",doc.data().status)
+          newInvitations.push(doc.data())
+        }
       })
-      setInvitedProject(newInvitations)
+      setInvitedProject({invited:newInvitations , selected:newInvitations[0]})
     })
     .catch((err) => {
       console.log("Error getting projectInvited", err);
@@ -63,22 +66,24 @@ export default () => {
       console.log('aqui recivio cambios las invitaciones')
       const newInvitations=[]
           cambios.forEach((doc)=>{
-            newInvitations.push(doc.data())
+            if(doc.data().status === 'pending'){
+              console.log("entro al if con este status",doc.data().status)
+              newInvitations.push(doc.data())
+            }
           })
           setInvitedProject({
             invited:newInvitations,
+            selected:newInvitations[0],
             observer
           })
     })
   }, [currentUser]);
 
-
   const handleLogout = () => {
-    invitedProject.observer()
+    invitedProject.observer();
     logout();
     history.push("/login");
   };
-
 
   return !currentUser ? (
     <Error404 />
@@ -86,29 +91,23 @@ export default () => {
     <Layout>
       <Sidebar setItem={setItem} handleLogout={handleLogout} />
       <Layout>
-        
         <Navbar />
         <HeaderComponent user={currentUser} setCurrentUser={setCurrentUser} />
-        <Content className='content-user'>
+        <Content className="content-user">
           {item == 1 && (
             <>
-              <Row className='userCards-row'>
+              <Row className="userCards-row">
                 <CardsFreelancer setItem={setItem} />
               </Row>
-              <Row>
-                <PendingPayments />
-              </Row>
+              <div >
+                <PagosFreelance user={currentUser} />
+              </div>
             </>
           )}
-          {
-            item == 2 && (
-              
-              <FreelancerProjectContainer />
-            )
-          }
+          {item == 2 && <FreelancerProjectContainer />}
           {item == 5 && (
             <>
-              <ContractProject />
+              <AcceptProject setItem={setItem}/>
             </>
           )}
         </Content>
