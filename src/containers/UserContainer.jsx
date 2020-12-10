@@ -30,6 +30,19 @@ export default () => {
   const [item, setItem] = React.useState(1);
 
 
+  function hasDuplicates(inputArray) {
+    
+  for (let i=0; i<inputArray.length-1; i++){ // i==1//i==2 //==3
+    for (let j=1; j<inputArray.length; j++){ // j==2 // j==3 // 
+      if (inputArray[i] === inputArray[j]){
+        return true 
+      }
+    }
+  } 
+  return false
+  }
+
+
   // useEffect esta atento a los cambios en el usuario para renderizar el componente nuevamente
   console.log("se renderiza usercontainer",invitedProject)
 
@@ -73,6 +86,7 @@ export default () => {
     <Layout>
       <Sidebar setItem={setItem} handleLogout={handleLogout} />
       <Layout>
+        
         <Navbar />
         <HeaderComponent user={currentUser} setCurrentUser={setCurrentUser} />
         <Content className='content-user'>
