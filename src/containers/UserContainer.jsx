@@ -9,7 +9,7 @@ import { user, projectInvited } from "../atoms/index";
 import Sidebar from "../components/Sidebar";
 import HeaderComponent from "../components/Header";
 import Error404 from "../components/404";
-import PagosFreelace from "../components/PagosFreelace";
+import PagosFreelance from "../components/PagosFreelance";
 import CardsFreelancer from "../components/CardsFreelancer";
 import Navbar from "../components/Navbar";
 import ContractProject from "../components/ContractProject";
@@ -95,9 +95,9 @@ export default () => {
               <Row className='userCards-row'>
                 <CardsFreelancer setItem={setItem} />
               </Row>
-              <Row>
-                <PendingPayments />
-              </Row>
+              <div >
+                <PagosFreelance user={currentUser} />
+              </div>
             </>
           )}
           {
