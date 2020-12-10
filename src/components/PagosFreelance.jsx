@@ -6,7 +6,7 @@ import { DownloadOutlined } from "@ant-design/icons";
 import { Typography } from "antd";
 
 const { Title } = Typography;
-
+const style = { background: "#0092ff", padding: "8px 0" };
 const data = [
   {
     valor: "$80.000",
@@ -20,10 +20,6 @@ class PagosFreelace extends Component {
   render() {
     return (
       <>
-        <Title level={3} style={{ width: "100%" }}>
-          Pagos
-        </Title>
-
         <List
           itemLayout="horizontal"
           dataSource={data}
