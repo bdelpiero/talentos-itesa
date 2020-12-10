@@ -12,15 +12,13 @@ function NewProject({
   success,
   openModal,
   modal,
+  form
 }) {
   const layout = {
     labelCol: { span: 8 },
     wrapperCol: { span: 8 },
   };
 
-  const onReset = () => {
-    form.resetFields();
-  };
 
   return (
     <div className="Modal">
@@ -49,6 +47,7 @@ function NewProject({
           {...layout}
           initialValues={{ remember: true }}
           onFinish={success}
+          form={form}
           // onFinishFailed={onFinishFailed}
         >
           <h5 style={{ color: "grey", marginLeft: "95px" }}>
