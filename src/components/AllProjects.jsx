@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Tag, Space, Button, Card, List, Avatar, Row, Col } from "antd";
+import { Table, Button, Input } from "antd";
 
 import { Typography, Spin, Dropdown, Menu } from "antd";
 import InviteProjectContainer from "../containers/InviteProjectContainer";
@@ -8,7 +8,7 @@ import { DeleteOutlined, EllipsisOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
 
-function AllProjects({ projects, deleteProject, handleClick, changeStatus }) {
+function AllProjects({ projects, deleteProject, handleClick, changeStatus, onChange }) {
   function menu(proyecto) {
     return (
       <Menu>
@@ -56,18 +56,37 @@ function AllProjects({ projects, deleteProject, handleClick, changeStatus }) {
       title: "FECHA DE INICIO",
       dataIndex: "startDate",
       key: "startDate",
+      sorter: (a, b) =>
+        new Date(Date.parse(a.startDate)) - new Date(Date.parse(b.startDate)),
+      defaultSortOrder: "descend",
       responsive: ["lg", "md"],
     },
     {
       title: "FECHA DE FINALIZACIÓN",
       key: "endDate",
       dataIndex: "endDate",
+      sorter: (a, b) =>
+        new Date(Date.parse(a.endDate)) - new Date(Date.parse(b.endDate)),
+      defaultSortOrder: "descend",
       responsive: ["lg", "md"],
     },
     {
-      title: "Estado",
+      title: "ESTADO",
       key: "status",
       dataIndex: "status",
+      filters: [
+        {
+          text: "On Development",
+          value: "On Development",
+        },
+        {
+          text: "Finished",
+          value: "Finished",
+        },
+      ],
+      onFilter: (value, record) => record.status.indexOf(value) === 0,
+      sorter: (a, b) => a.status.length - b.status.length,
+      sortDirections: ["ascend", "descend"],
     },
 
     {
@@ -117,7 +136,7 @@ function AllProjects({ projects, deleteProject, handleClick, changeStatus }) {
     },
     {
       title: "",
-      key: "action",
+      key: "dropdown",
       render: (proyecto) => {
         return (
           <div className="show-ellipsis">
@@ -149,16 +168,23 @@ function AllProjects({ projects, deleteProject, handleClick, changeStatus }) {
 
   return (
     <div>
-      <Row>
-        <Col span={20}>
-          <Title> Todos los Proyectos </Title>
-        </Col>
-        <Col span={4}>
-          <NewProjectContainer />
-        </Col>
-      </Row>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Title> Todos los Proyectos </Title>
+        <NewProjectContainer />
+      </div>
 
       <div>
+        <Input
+          style={{ marginBottom: "1rem" }}
+          onChange={onChange}
+          placeholder="Buscar Proyecto por Nombre"
+        />
         {/* <Spin delay={900} tip={"Cargando proyectos ..."}> */}
         <Table columns={columns} dataSource={projects} />
         {/* </Spin> */}
