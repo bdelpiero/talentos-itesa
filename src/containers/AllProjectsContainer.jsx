@@ -25,17 +25,19 @@ function AllProjectsContainer({ setItem }) {
   };
 
   const changeStatus = (project) => {
-    if(project.status == "on Development"){
+    if(project.status == "pending") return
+    const newStatus = project.status == "On Development" ? "Finished" : "On Development"
       db.collection("projects").doc(project.id).update({
-        status: "finished"
-      });
-    }
-    else{
-      db.collection("projects").doc(project.id).update({
-        status: "on Development"
-      });
-    }
-    
+        status: newStatus
+      })
+      .then(()=>{
+        db.collection("projects").doc(project.id).collection("invitedUser").get()
+        .then((proyectos)=> proyectos.forEach(user => {
+          db.collection("projects").doc(project.id).collection("invitedUser").doc(user.id).update({
+            status: newStatus
+          })
+        }))
+      })
   };
 
 

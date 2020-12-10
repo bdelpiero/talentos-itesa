@@ -27,7 +27,7 @@ export default ({setItem}) => {
           <p>
           "${props.inviteds[carrusel].monto}"            
           </p>
-          <div> 
+          <div style={{display:"flex",flexDirection: "column",position:"absolute", right:20, bottom:40}}> 
 
           <Button 
           onClick={()=>setItem(5)}

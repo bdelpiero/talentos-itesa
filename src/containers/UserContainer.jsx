@@ -39,7 +39,7 @@ export default () => {
     .then((projects) => {
       const newInvitations=[]
       projects.forEach((doc)=>{
-        newInvitations.push(doc.data())
+        newInvitations.push(doc.data()) // llena con los proyectos -> con status:"pending"
       })
       setInvitedProject(newInvitations)
     })

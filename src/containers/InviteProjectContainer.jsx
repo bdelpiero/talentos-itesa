@@ -79,7 +79,9 @@ function InviteProjectContainer({ proyecto }) {
       .doc(proyecto.id)
       .collection("invitedUser")
       .doc(selectedUser)
-      .set({...asignData, ...getUser
+      .set({...asignData, ...getUser,
+        proyecto: proyecto.name,
+        duracion: proyecto.term,
       })
       .then(() => {
         db.collection("users")
