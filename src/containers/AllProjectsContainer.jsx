@@ -7,8 +7,7 @@ function AllProjectsContainer({ setItem, setProject }) {
   const [status, setStatus] = useState("");
 
   useEffect(() => {
-    db.collection("projects").onSnapshot((projects) => {
-      // console.log(projects.docs.id, "aca estan todos los proyectos!")
+    const unsuscribe = db.collection("projects").onSnapshot((projects) => {
       setProjects(
         projects.docs.map((project) => {
           let proyecto = project.data();
@@ -18,6 +17,7 @@ function AllProjectsContainer({ setItem, setProject }) {
         })
       );
     });
+    return () => unsuscribe();
   }, []);
 
   const deleteProject = (project) => {

@@ -16,7 +16,8 @@ function AdminDashboardContainer() {
   const handleLogout = () => logout();
 
   useEffect(() => {
-    db.collection("users")
+    const unsuscribe = db
+      .collection("users")
       .where("isAdmin", "==", false)
       .onSnapshot((data) => {
         setAllUsers(
@@ -25,6 +26,7 @@ function AdminDashboardContainer() {
           })
         );
       });
+    return () => unsuscribe();
   }, []);
   return !currentUser ? (
     <Error404 />

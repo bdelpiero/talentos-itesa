@@ -7,7 +7,8 @@ export const SingleProjectContainer = ({ project }) => {
   const [projectUsersData, setProjectUsersData] = useState([]);
 
   useEffect(() => {
-    db.collection("projects")
+    const unsuscribe = db
+      .collection("projects")
       .doc(project.id)
       .collection("invitedUser")
       .onSnapshot((data) => {
@@ -17,6 +18,7 @@ export const SingleProjectContainer = ({ project }) => {
           })
         );
       });
+    return () => unsuscribe();
   }, []);
 
   function delUserFromProject(userId) {
