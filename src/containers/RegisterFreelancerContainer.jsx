@@ -121,9 +121,6 @@ function RegisterFreelancerContainer() {
                 activeProjectsCounter: 0
               })
               .then(() => {
-                history.push("/freelancer");
-              })
-              .then(() => {
                 db.collection("invites").doc(`${data.email}`).delete();
               });
           });

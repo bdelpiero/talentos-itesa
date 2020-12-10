@@ -17,9 +17,6 @@ function NewProject({
     labelCol: { span: 8 },
     wrapperCol: { span: 8 },
   };
-  const tailLayout = {
-    wrapperCol: { offset: 8, span: 8 },
-  };
 
   const onReset = () => {
     form.resetFields();
@@ -99,7 +96,7 @@ function NewProject({
               name="startDate"
               onChange={handleChangeStartDate}
               style={{ width: "100%" }}
-              format="DD/MM/YYYY"
+              format="YYYY-MM-DD"
               placeholder={"Fecha de Inicio"}
             />
           </Form.Item>
@@ -122,7 +119,7 @@ function NewProject({
               name="endDate"
               onChange={handleChangeEndDate}
               style={{ width: "100%" }}
-              format="DD/MM/YYYY"
+              format="YYYY-MM-DD"
               placeholder={"Fecha de Finalizacion"}
             />
           </Form.Item>

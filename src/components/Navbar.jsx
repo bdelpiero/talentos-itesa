@@ -4,13 +4,17 @@ import { authUser } from "../../firebase/auth";
 
 // STYLES 
 import { Menu } from 'antd';
+import {
+  BarChartOutlined,
+  TeamOutlined,
+  LogoutOutlined,
+} from "@ant-design/icons";
 
 export default ({ setItem }) => {
 
   const {logout} = authUser()
 
   const handleClick = e => {
-    console.log('click ', e.key);
     if(e.key == 'home') setItem(1)
     if(e.key == 'proyectos') setItem(2)
     if(e.key == 'perfiles') setItem(5)
@@ -20,23 +24,21 @@ export default ({ setItem }) => {
   return (
       <Menu 
       onClick={handleClick} 
-      mode="horizontal"
+      mode="inline"
       className='navbar-display'
       triggerSubMenuAction='click'
+      inlineIndent={10}
       >
-        <div className='logo-navbar-container'>
-          <img src={logo}  />
-        </div>
-        <Menu.Item key="home">
-          Home
+        <Menu.Item key="home" className='logo-navbar' >
+          <img src={logo} className='logo-navbar'/>
         </Menu.Item>
-        <Menu.Item key="proyectos" >
+        <Menu.Item key="proyectos" className='navbar-menu-item'>
           Proyectos
         </Menu.Item>
-        <Menu.Item key="perfiles">
+        <Menu.Item key="perfiles" className='navbar-menu-item'>
           Perfiles
         </Menu.Item>
-        <Menu.Item key="logout">
+        <Menu.Item key="logout" icon={<LogoutOutlined/>} className='navbar-menu-item'>
           Logout
         </Menu.Item>
       </Menu>

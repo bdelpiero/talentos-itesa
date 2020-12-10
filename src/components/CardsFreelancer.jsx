@@ -1,10 +1,12 @@
 import React, {useState} from "react";
 import { Button, Card, Carousel } from 'antd';
 import { useRecoilState } from "recoil";
-import { projectInvited } from "../atoms/index";
+import { user,projectInvited } from "../atoms/index";
+import MiBancoContainer from "../containers/MiBancoContainer";
 
 
 export default ({setItem}) => {
+  const [currentUser,serCurrentUser]=useRecoilState(user)
   const [invitedProject, setInvitedProject] = useRecoilState(projectInvited);
 
   const CardsOferts =(props)=>{
@@ -49,7 +51,7 @@ export default ({setItem}) => {
           <p>
           "$ {monto}"            
           </p>
-          <div> 
+          <div style={{display:"flex",flexDirection: "column",position:"absolute", right:20, bottom:40}}> 
 
           <Button 
           onClick={()=>setItem(5)}
@@ -96,16 +98,9 @@ export default ({setItem}) => {
           <p id="subtittle">NO TIENES PROYECTOS</p>
         </Card>
       )
-    }
-  
-    
+    }     
   }
   
-
-
-
-
-
   return (
     
     <>
@@ -114,7 +109,7 @@ export default ({setItem}) => {
       <Card className='bodyCard'>
         <h3 id='tittleCard'>PROXIMO PAGO</h3>
         <p id='subtittle'>PROYECTO</p>
-        <p>"ITS202|SATAPP"</p>
+        <p>{}</p>
         <p id='subtittle'>FECHA DE PAGO</p>
         <input
           type='date'
@@ -128,7 +123,7 @@ export default ({setItem}) => {
           {/* <Button className="buttonCard" shape="round">
             Cargar Factura
           </Button> */}
-          <div className='Modal card-button-container'>
+          <div style={{display:"flex",flexDirection: "column",position:"absolute", right:20, bottom:40}}>
             <Button className='modal-button buttonCard'>Cargar Factura</Button>
           </div>
         </div>
@@ -137,16 +132,12 @@ export default ({setItem}) => {
       <Card className='bodyCard'>
         <h3 id='tittleCard'>MI BANCO</h3>
         <p id='subtittle'>CBU/Alias</p>
-        <p>Banco EL P5</p>
+        <p>{currentUser.bankDetails.alias}</p>
         <p id='subtittle'>TITULAR</p>
-        <p>Agustin Fregossi</p>
+        <p>{currentUser.bankDetails.accountName}</p>
         <p id='subtittle'>BANCO</p>
-        <p>{"Santnader Rio"}</p>
-        <div>
-          <div className='Modal card-button-container'>
-            <Button className='modal-button buttonCard'>Modificar Datos</Button>
-          </div>
-        </div>
+        <p>{currentUser.bankDetails.bankName}</p>
+        <div> <MiBancoContainer/></div>
       </Card>
     </>
   );

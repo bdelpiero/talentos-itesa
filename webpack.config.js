@@ -4,6 +4,7 @@ const config = {
   entry: ["./src/index.js"],
   output: {
     path: path.resolve(__dirname, "dist"),
+    publicPath: '/',
     filename: "bundle.js",
   },
   node: {
@@ -43,7 +44,7 @@ const config = {
         include: /\.module\.css$/,
       },
       {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        test: /\.(png|svg|ico|jpg|jpeg|gif)$/i,
         use: [
           {
             loader: "file-loader",

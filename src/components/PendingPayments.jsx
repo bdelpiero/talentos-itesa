@@ -1,67 +1,51 @@
 import React, { Component } from "react";
 // Ant-Desing
-import { Button, Row, Col, List, Avatar } from "antd";
+import { Button, Row, Col, List, Avatar, Card } from "antd";
 import { DownloadOutlined } from "@ant-design/icons";
 import { Typography } from "antd";
 
 const { Title } = Typography;
 
-const data = [
-  {
-    valor: "$50.000",
-  },
-  {
-    valor: "$80.000",
-  },
-];
-
-class PendingPayments extends Component {
-  render() {
+export default ({user}) => {
     return (
-      <div className='resumen-card'>
+      <>
           <Title level={3} style={{width: '100%'}}>
             Pagos a realizar este mes
           </Title>
-          <List
-            itemLayout="horizontal"
-            dataSource={data}
-            renderItem={(item) => (
-              <List.Item key={item.valor}>
-                <List.Item.Meta
-                  avatar={ 
-                  <Avatar
-                    className='avatar-payments'
-                    id="avatar-payments"
-                    src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                  />
-                  }
-                  title={item.valor}
-                  description={
-                      <Row>
-                        <Col span={8} className='list-description'>
-                          <p>Proyecto:</p>
-                          <p>ITS202|Satapp</p>
-                        </Col>
-                        <Col span={8} className='list-description'>
-                          <p>Factura:</p>
-                          <p>1 de 4</p>
-                        </Col>
-                        <Col span={8} className='list-description'>
-                          <p>Fecha de pago:</p>
-                          <p>02/05/2020</p>
-                        </Col>
-                      </Row>
-                  }
-                />
-                <Button className="list-button-payments" shape="round">
-                  Ver comprobante de pago <DownloadOutlined />{" "}
-                </Button>
-              </List.Item>
-            )}
-          />
-      </div>
+          <Card >          
+            <Row gutter={{ xs: 6, sm: 8, md: 16, lg: 24 }}>  
+            <Col className="gutter-row" span={2} >
+            <Avatar size={55} src={user.avatar} className='avatar' />
+              </Col>          
+            <Col  span={4} >              
+            <h1>80.000</h1>        
+              <b style={{color:"#9e39ff"}}>Proyecto:</b>
+              <b>ITS202|Satapp</b>
+            </Col>
+            <Col className="gutter-row"  span={6}>
+              <b style={{color:"#9e39ff"}}>Factura:</b><b>1 de 4</b>              
+            </Col>
+            <Col 
+            className="gutter-row"  
+            span={6}
+            >
+              <b style={{color:"#9e39ff"}}>Fecha de pago:</b>
+              <b>02/05/2020</b>
+            </Col> 
+            <Col className="gutter-row" span={6}> 
+            <Button 
+            className="list-button-paymentsFree" 
+            shape="round"
+            style={{width:"80%", height:"auto"} }
+            >
+            Ver comprobante de pago <DownloadOutlined />
+          </Button> 
+          </Col> 
+            </Row>                              
+          </Card>  
+      </>
     )
   }
-}
 
-export default PendingPayments;
+
+

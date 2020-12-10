@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { db } from "../../firebase/firebase";
 import {
   Row,
   Col,
@@ -8,6 +9,8 @@ import {
   List,
   Avatar,
   Button,
+  Input,
+  Form,
 } from "antd";
 import {
   HighlightOutlined,
@@ -17,43 +20,43 @@ import {
   DeleteOutlined,
   UserAddOutlined,
 } from "@ant-design/icons";
+import InviteProjectContainer from "../containers/InviteProjectContainer";
 
 const { Title, Paragraph } = Typography;
-const data = [
-  {
-    title: "Juan Garrido",
-  },
-  {
-    title: "Chino San",
-  },
-  {
-    title: "Bruno DelP",
-  },
-  {
-    title: "Armando Rico",
-  },
-  {
-    title: "Williams Saya",
-  },
-  {
-    title: "Millas Marcos",
-  },
-];
-export const SingleProject = () => {
-  const [editableDesc, setEditableDesc] = useState(
-    "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsum culpa, reprehenderit eius cumque labore in ducimus odio, corrupti sapiente perspiciatis vero recusandae aspernatur deleniti totam rerum porro est cum doloremque."
-  );
+const { TextArea } = Input;
+
+export const SingleProject = ({
+  delUserFromProject,
+  project,
+  projectUsersData,
+}) => {
+  const [editableDesc, setEditableDesc] = useState();
   const [editableTime, setEditableTime] = useState("3 Meses");
   const [editableBudget, setEditableBudget] = useState("$50.000");
 
+  /* function projectDescription() {
+    db.collection("projects")
+      .doc(project.id)
+      .set({ description: e.target.value }, { merge: true });
+  } */
   return (
     <>
       <Row gutter={[30]}>
         <Col xs={24} sm={12} md={12} lg={12}>
           <Title level={5}>Descripción del Proyecto</Title>
-          <Paragraph editable={{ onChange: setEditableDesc }}>
-            {editableDesc}
-          </Paragraph>
+
+          <Paragraph>{project.description}</Paragraph>
+
+          {/* 
+          <TextArea
+            defaultValue={project.description}
+            onChange={handleChange}
+            onPressEnter={projectDescription}
+            bordered={false}
+            allowClear={true}
+            autoSize={false}
+          ></TextArea>
+ */}
           <Title level={5}>Duración</Title>
           <Paragraph editable={{ onChange: setEditableTime }}>
             {editableTime}
@@ -63,26 +66,30 @@ export const SingleProject = () => {
             {editableBudget}
           </Paragraph>
         </Col>
+
         <Col xs={24} sm={12} md={12} lg={12}>
-          {/* "VER POR QUE CON EL TEXTO SE PUEDE OCUPAR EL 100% DE LA PANTALLA EN
-          CELULAR, ARREGLAR ESTE DETALLE" */}
-          <Title level={5}>
-            Freelancers en proyecto{" "}
-            <UserAddOutlined className="single-icon add-user" />
-          </Title>{" "}
+          <div style={{display:"flex",justifyContent:"space-between" }}>
+            <Title level={5}>
+              Freelancers en proyecto{" "}
+              {/* <UserAddOutlined className="single-icon add-user" /> */}
+            </Title>{" "}
+            <InviteProjectContainer proyecto={project} />
+          </div>
+
           <List
             itemLayout="horizontal"
-            dataSource={data}
+            dataSource={projectUsersData}
             renderItem={(item) => (
               <List.Item>
                 <List.Item.Meta
-                  avatar={
-                    <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-                  }
-                  title={<a href="https://ant.design">{item.title}</a>}
-                  description="Developer"
+                  avatar={<Avatar src={item.avatar} />}
+                  title={item.name}
+                  description={item.freelancerType}
                 />
-                <DeleteOutlined className="single-icon" />
+                <DeleteOutlined
+                  onClick={() => delUserFromProject(item.id)}
+                  className="single-icon"
+                />
               </List.Item>
             )}
           />
