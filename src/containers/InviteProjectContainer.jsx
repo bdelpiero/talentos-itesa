@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import InviteProject from "../components/InviteProject";
 import { db } from "../../firebase/firebase";
-
 import CheckCircle from "../../views/check.svg";
 import { Modal, Card } from "antd";
-import { unstable_batchedUpdates } from "react-dom";
 
 function InviteProjectContainer({ proyecto }) {
   const [modal, setModal] = useState(false);
@@ -14,6 +12,8 @@ function InviteProjectContainer({ proyecto }) {
     plazos: [],
     status: "pending",
     servicios: "",
+  });
+  const [cuotas, setCuotas] = useState({
     cuota1: {
       fecha: [],
       monto: 0,
@@ -31,6 +31,15 @@ function InviteProjectContainer({ proyecto }) {
       monto: 0,
     },
   });
+
+  // function onChange(e) {
+  //   setCurrentUsers(
+  //     allUsers.filter((user) => {
+  //       if (user.name.toLowerCase().match(e.target.value.toLowerCase()))
+  //         return user.name.toLowerCase().match(e.target.value.toLowerCase());
+  //     })
+  //   );
+  // }
 
   const openModal = () => {
     setModal(true);
@@ -59,18 +68,18 @@ function InviteProjectContainer({ proyecto }) {
     });
   };
 
-  const handleMonto = (e) => {
-    setAsignData({
-      ...asignData,
-      [e.target.name]: { ...asignData[e.target.name], monto: e.target.value },
+  const handleCuotas = (value, name, nCuota) => {
+    setCuotas({
+      ...cuotas,
+      [nCuota]: { ...cuotas[nCuota], [name]: value },
     });
-    console.log("aca esta asign data ", asignData);
+    console.log("aca esta cuotas---", cuotas);
   };
 
   function handleFinish() {
     closeModal();
+    const cuotasDB = Object.values(cuotas);
     const getUser = users.filter((user) => user.id == selectedUser)[0];
-    console.log("esto es getUser -----", getUser);
     const usersProject = proyecto.users
       ? [...proyecto.users, selectedUser]
       : [selectedUser];
@@ -78,7 +87,13 @@ function InviteProjectContainer({ proyecto }) {
       .doc(proyecto.id)
       .collection("invitedUser")
       .doc(selectedUser)
-      .set({ ...asignData, ...getUser })
+      .set({
+        ...asignData,
+        ...getUser,
+        proyecto: proyecto.name,
+        duracion: proyecto.term,
+        cuotasDB,
+      })
       .then(() => {
         db.collection("users")
           .doc(selectedUser)
@@ -115,7 +130,8 @@ function InviteProjectContainer({ proyecto }) {
     <InviteProject
       className="modal-outside"
       handleChange={handleChange}
-      handleMonto={handleMonto}
+      handleCuotas={handleCuotas}
+      cuotas={cuotas}
       closeModal={closeModal}
       openModal={openModal}
       modal={modal}

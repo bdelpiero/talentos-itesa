@@ -25,17 +25,17 @@ export default ({user})=>  {
               </Col>          
             <Col  span={4} >              
             <h1>80.000</h1>        
-              <b>Proyecto:</b>
+              <b style={{color:"#9e39ff"}}>Proyecto:</b>
               <b>ITS202|Satapp</b>
             </Col>
             <Col className="gutter-row"  span={6}>
-              <b>Factura:</b><b>1 de 4</b>              
+              <b style={{color:"#9e39ff"}}>Factura:</b><b>1 de 4</b>              
             </Col>
             <Col 
             className="gutter-row"  
             span={6}
             >
-              <b>Fecha de pago:</b>
+              <b style={{color:"#9e39ff"}}>Fecha de pago:</b>
               <b>02/05/2020</b>
             </Col> 
             <Col className="gutter-row" span={6}> 

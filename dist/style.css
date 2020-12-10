@@ -34,9 +34,16 @@
   .add-user {
     margin-left: 2rem;
   }
+  .show-ellipsis {
+    display: none;
+  }
 }
 
 @media (max-width: 991px) {
+  .hide-button {
+    display: none;
+  }
+  
   .navbar-display {
     display: flex;
     width: 100%;
@@ -61,7 +68,7 @@
 
   .logo-navbar img {
     width: auto !important;
-    height:30px !important;
+    height: 30px !important;
     display: flex !important;
     align-self: center;
   }
@@ -91,9 +98,8 @@
   .navbar-menu-item {
     text-align: center;
     padding: 0 !important;
-    margin: 0 !important
+    margin: 0 !important;
   }
-  
 }
 
 .sider-admin {
@@ -197,7 +203,7 @@
     width: 95% !important;
     padding: 0 !important;
     height: 15% !important;
-    margin: auto !important
+    margin: auto !important;
   }
 }
 
@@ -375,7 +381,6 @@ trabajando con  user Cards
   margin-bottom: 15px;
 }
 
-
 .ant-card-body {
   /* height: 100% !important; */
   margin: 0 !important;
@@ -433,17 +438,20 @@ trabajando con  user Cards
 }
 
 .oferts-button {
-  justify-content: space-around;
+  justify-content: center;
   display: inline-flex;
   /* margin: 0 30%; */
   /* margin-top: 50px; */
   margin: 5px 0;
+
 }
 .oferts-button button {
-  width: 20%;
-  height: 3px !important;
+  width: 5px !important;
+  height: 5px !important;
   min-height: 3px !important;
   background-color: whitesmoke;
+  margin: 15px 2px;
+
 }
 
 .oferts-button button:focus:active {
