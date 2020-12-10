@@ -17,6 +17,7 @@ function InviteProject({
   setSelectedUser,
   asignData,
   setAsignData,
+  form
 }) {
   return (
     <div className="Modal">
@@ -39,7 +40,9 @@ function InviteProject({
         width={1000}
       >
         <>
-          <Form onFinish={handleFinish}>
+          <Form onFinish={handleFinish}
+          form={form}
+          >
             <div style={{ width: "70%", marginLeft: "30px" }}>
               <h1>Asignar Proyecto</h1>
             </div>

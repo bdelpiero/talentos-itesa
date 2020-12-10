@@ -34,7 +34,7 @@ export default ({ acceptedProjects, currentUser }) => {
                 bottom: 40,
               }}
             >
-              <a href={`${currentUser.nonDisclosure}`} target="_blank">
+              <a href={`${project.urlContractProject}`} target="_blank">
                 <Button
                   className="modal-button buttonCard buttonProjects "
                   style={{ backgroundColor: "#9E39FF", color: "white" }}
