@@ -27,9 +27,17 @@
   .add-user {
     margin-left: 2rem;
   }
+  .show-ellipsis {
+    display: none;
+  }
 }
 
 @media (max-width: 991px) {
+  .hide-button {
+    display: none;
+  }
+  .show-ellipsis {
+  }
   .navbar-display {
     display: flex;
     width: 100%;
@@ -54,7 +62,7 @@
 
   .logo-navbar img {
     width: auto !important;
-    height:30px !important;
+    height: 30px !important;
     display: flex !important;
     align-self: center;
   }
@@ -84,9 +92,8 @@
   .navbar-menu-item {
     text-align: center;
     padding: 0 !important;
-    margin: 0 !important
+    margin: 0 !important;
   }
-  
 }
 
 .sider-admin {
@@ -190,7 +197,7 @@
     width: 95% !important;
     padding: 0 !important;
     height: 15% !important;
-    margin: auto !important
+    margin: auto !important;
   }
 }
 
@@ -367,7 +374,6 @@ trabajando con  user Cards
 .buttonProjects {
   margin-bottom: 15px;
 }
-
 
 .ant-card-body {
   /* height: 100% !important; */
