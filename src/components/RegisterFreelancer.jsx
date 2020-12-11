@@ -4,6 +4,7 @@ import SignatureCanvas from "react-signature-canvas";
 import { Form, Input, Select, Button, Steps, Alert } from "antd";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
+const { Option } = Select;
 
 const { Step } = Steps;
 const antIcon = <LoadingOutlined style={{ fontSize: 40 }} spin />;
@@ -16,13 +17,13 @@ function RegisterFreelancer({
   bankData,
   step,
   signatureRef,
-  handleClick,
   saveSignature,
   invited,
   setData,
   errorSignature,
   setErrorSignature,
   isLogin,
+  setBankData
 }) {
   return (
     <div className='register-formContainer'>
@@ -270,20 +271,24 @@ function RegisterFreelancer({
           </Form.Item>
 
           <Form.Item
+            hasFeedback
             name='type'
+            rules={[{ required: true, message: "Invoice type is required" }]}
+            >
+            <Select 
+            onChange={(value) => {
+              setBankData({...bankData, 'type': value});
+            }}
             value={bankData.type}
-            onChange={handleChange}
-            rules={[
-              {
-                required: true,
-                message: "Invoice type is required",
-              },
-            ]}>
-            <Input
-              className='register-input'
-              placeholder='Tipo de factura a emitir'
-              name='type'
-            />
+            placeholder='Tipo de factura a emitir'
+            bordered={false}
+            className='register-input' 
+            >
+              <Option value="A">A</Option>
+              <Option value="B">B</Option>
+              <Option value="C">C</Option>
+              <Option value="E">E</Option>
+            </Select>
           </Form.Item>
           <Form.Item>
             <Button
@@ -350,7 +355,6 @@ function RegisterFreelancer({
               }}
             />
             <Button
-              onClick={handleClick}
               style={{ backgroundColor: "lightgray", border: 0, width: "30%" }}
               shape='round'
               block

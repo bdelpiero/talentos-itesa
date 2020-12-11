@@ -39,7 +39,6 @@ function RegisterFreelancerContainer() {
     // cbu: "",
     cuit: "",
     type: "",
-    // dni: "",
     address: "",
   });
 
@@ -122,6 +121,7 @@ function RegisterFreelancerContainer() {
               })
               .then(() => {
                 db.collection("invites").doc(`${data.email}`).delete();
+                history.push("/freelancer")
               });
           });
         });
@@ -165,6 +165,7 @@ function RegisterFreelancerContainer() {
           errorSignature={errorSignature}
           setErrorSignature={setErrorSignature}
           isLogin={isLogin.loading}
+          setBankData={setBankData}
         />
       </div>
     </div>
