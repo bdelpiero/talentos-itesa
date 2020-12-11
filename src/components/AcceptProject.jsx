@@ -141,13 +141,14 @@ export default ({setItem})=>{
           )}
             <Button
               onClick={handleSubmit}
-              style={{ backgroundColor: '#a77ffa', border: 0 }}
+              style={{ backgroundColor: '#a77ffa', border: 0,  }}
               shape='round'
               block
               type='primary'
               htmlType='submit'
               className='register-button'
               loading={show}
+              
               >
                 Firmar Contrato
               </Button>

@@ -390,7 +390,7 @@ trabajando con content user
   height: auto !important;
   background-color: whitesmoke;
   box-shadow: -1px 3px 15px -6px gray;
-  padding: 1.3rem !important;
+  padding: 1rem !important;
   margin: 1.5rem auto;
 }
 
@@ -429,7 +429,7 @@ trabajando con content user
 .ant-card-body {
   /* height: 100% !important; */
   margin: 0 !important;
-  padding: 0;
+  padding: 1rem;
 }
 
 .bodyCard > div {
