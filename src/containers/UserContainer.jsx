@@ -47,7 +47,6 @@ export default () => {
 
   useEffect(() => {
     let invitaciones=db.collectionGroup("invitedUser").where('email', '==' ,currentUser.email)
-    // where('status', '==' ,"pending")
     invitaciones.get()
     .then((projects) => {
       const newInvitations=[]

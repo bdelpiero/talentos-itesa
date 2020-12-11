@@ -21,7 +21,7 @@ export default () => {
       <Row justify="space-between"  align="center" wrap={true}>
         <span>
           <Title className='header-title' level={2}>Dashboard</Title>
-          <Text>Bienvenido a Itesa, {currentUser.name + ' '} ":)" </Text>
+          <Text>Bienvenido a Itesa, {currentUser.name + ' '} :) </Text>
         </span>
           <EditUserContainer
             user={currentUser}
