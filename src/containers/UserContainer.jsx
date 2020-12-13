@@ -12,7 +12,7 @@ import Error404 from "../components/404";
 import PagosFreelance from "../components/PagosFreelance";
 import CardsFreelancer from "../components/CardsFreelancer";
 import Navbar from "../components/Navbar";
-import ContractProject from "../components/ContractProject";
+import AcceptProject from "../components/AcceptProject";
 import PendingPayments from "../components/PendingPayments";
 import FreelancerProjectContainer from "../containers/FreelancerProjectsContainer";
 
@@ -46,32 +46,37 @@ export default () => {
   console.log("se renderiza usercontainer", invitedProject);
 
   useEffect(() => {
-    let invitaciones = db
-      .collectionGroup("invitedUser")
-      .where("email", "==", currentUser.email);
-    invitaciones
-      .get()
-      .then((projects) => {
-        const newInvitations = [];
-        projects.forEach((doc) => {
-          newInvitations.push(doc.data());
-        });
-        setInvitedProject(newInvitations);
+    let invitaciones=db.collectionGroup("invitedUser").where('email', '==' ,currentUser.email)
+    // where('status', '==' ,"pending")
+    invitaciones.get()
+    .then((projects) => {
+      const newInvitations=[]
+      projects.forEach((doc)=>{
+        if(doc.data().status === 'pending'){
+          console.log("entro al if con este status",doc.data().status)
+          newInvitations.push(doc.data())
+        }
       })
-      .catch((err) => {
-        console.log("Error getting projectInvited", err);
-      });
-    let observer = invitaciones.onSnapshot((cambios) => {
-      console.log("aqui recivio cambios las invitaciones");
-      const newInvitations = [];
-      cambios.forEach((doc) => {
-        newInvitations.push(doc.data());
-      });
-      setInvitedProject({
-        invited: newInvitations,
-        observer,
-      });
+      setInvitedProject({invited:newInvitations , selected:newInvitations[0]})
+    })
+    .catch((err) => {
+      console.log("Error getting projectInvited", err);
     });
+    let observer =invitaciones.onSnapshot((cambios)=>{
+      console.log('aqui recivio cambios las invitaciones')
+      const newInvitations=[]
+          cambios.forEach((doc)=>{
+            if(doc.data().status === 'pending'){
+              console.log("entro al if con este status",doc.data().status)
+              newInvitations.push(doc.data())
+            }
+          })
+          setInvitedProject({
+            invited:newInvitations,
+            selected:newInvitations[0],
+            observer
+          })
+    })
   }, [currentUser]);
 
   const handleLogout = () => {
@@ -94,15 +99,15 @@ export default () => {
               <Row className="userCards-row">
                 <CardsFreelancer setItem={setItem} />
               </Row>
-              <Row>
-                <PendingPayments />
-              </Row>
+              <div >
+                <PagosFreelance user={currentUser} />
+              </div>
             </>
           )}
           {item == 2 && <FreelancerProjectContainer />}
           {item == 5 && (
             <>
-              <ContractProject />
+              <AcceptProject setItem={setItem}/>
             </>
           )}
         </Content>

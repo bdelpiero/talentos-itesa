@@ -4,7 +4,11 @@
 
 @media (min-width: 991px) {
   .navbar-display {
-    display: none;
+    display: none !important;
+  }
+
+  .navbar-menu {
+    display: none !important;
   }
 
   .header-display {
@@ -36,13 +40,13 @@
   .hide-button {
     display: none;
   }
-  .show-ellipsis {
-  }
+  
   .navbar-display {
     display: flex;
     width: 100%;
     height: auto;
     background-color: whitesmoke !important;
+    border-bottom: solid 1px #9749f8;
   }
 
   .ant-menu-item-selected {
@@ -55,16 +59,31 @@
 
   .logo-navbar {
     background-color: whitesmoke;
-    margin: 0 !important;
+    margin: 0.5rem !important;
     padding: 0 !important;
-    width: 50% !important;
+    height: 2rem !important;
+    width: 2rem !important;
+    display: flex !important;
+    justify-self: center !important;
+    align-items: center !important;
+    align-self: center;
   }
 
-  .logo-navbar img {
-    width: auto !important;
-    height: 30px !important;
-    display: flex !important;
+  .navbar-burger {
+    display: flex;
+    justify-self: flex-start;
     align-self: center;
+    margin: 0.5rem !important;
+    font-size: 1.5rem;
+    color: #9e39ff;
+  }
+
+  .navbar-burger:hover {
+    color: #9e39ff;
+  }
+
+  .navbar-menu {
+    margin-bottom: 1rem;
   }
 
   .menu-bars {
@@ -93,6 +112,10 @@
     text-align: center;
     padding: 0 !important;
     margin: 0 !important;
+  }
+
+  .navbar-menu-item:hover {
+    border-bottom: solid 1px #9e39ff !important;
   }
 }
 
@@ -133,6 +156,7 @@
   height: 10rem !important;
   text-align: center !important;
   background-color: whitesmoke !important;
+  width: auto !important;
 }
 
 .sider-cards:hover {
@@ -198,7 +222,34 @@
     padding: 0 !important;
     height: 15% !important;
     margin: auto !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
   }
+
+  .header-title-row {
+    display: flex;
+    width: 90% !important;
+    align-self: center;
+  }
+
+  .header-title {
+    margin-bottom: 0 !important;
+  }
+
+  .span-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+
+  #avatar-header-user {
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    justify-items: center;
+  }
+
 }
 
 @media (max-width: 991px) {
@@ -216,12 +267,6 @@
 
 .ant-layout {
   background-color: whitesmoke !important;
-}
-
-.header-title {
-  display: flex;
-  align-items: center;
-  margin: 0 !important;
 }
 
 .ant-avatar {
@@ -335,24 +380,30 @@ trabajando con content user
 }
 
 /* ----------------------
-trabajando con  user Cards
+    FREELANCER CARDS
 ---------------------- */
 
-.bodyCard {
-  font-family: "arial";
-  color: #0b2257;
-  font-size: 100%;
-  border-radius: 42px;
-  margin: auto;
+.freelancer-cards {
+  border-radius: 42px !important;
   min-height: 100% !important;
-  width: 25em;
-  height: 22.5em !important;
+  width: 23rem !important;
+  height: auto !important;
   background-color: whitesmoke;
-  background: whitesmoke;
   box-shadow: -1px 3px 15px -6px gray;
-  padding: 30px;
+  padding: 1rem !important;
+  margin: 1.5rem auto;
+}
+
+.bodyCard {
+  border-radius: 42px;
+  min-height: 100% !important;
+  width: 20rem !important;
+  height: auto !important;
+  background-color: whitesmoke;
+  box-shadow: -1px 3px 15px -6px gray;
+  padding: 3px !important;
   position: relative;
-  margin: 0 auto 20px auto;
+  margin: 1.5rem auto;
 }
 
 .bodyCardProjects {
@@ -397,16 +448,46 @@ trabajando con  user Cards
   width: 100%;
 }
 
-#subtittle {
-  font-family: "Open Sans Semibold", arial;
-  color: #9e39ff;
-  font-size: 75%;
+#title-freelancer-card {
+  color: #8990ad;
+  letter-spacing: 3px;
+  margin-bottom: 1rem;
+  font-weight: lighter;
 }
 
-#tittleCard {
-  font-family: "Open Sans Semibold";
-  color: #8990ad;
-  font-stretch: expanded;
+#subtittle-freelancer-card {
+  color: #9e39ff;
+  font-size: 75%;
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+#text-freelancer-card {
+  font-size: 75%;
+  margin: 0;
+  font-size: 1rem;
+  margin-bottom: 3px;
+}
+
+.container-freelancer-button {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.freelancer-card-buttons {
+  text-align: center;
+  width: 9rem;
+  height: 100%;
+  color: white;
+  background-color: #9e39ff;
+}
+
+.freelancer-card-buttons:hover {
+  text-align: center;
+  color: white;
+  background-color: #9e39ff !important;
 }
 
 /* ----------------------
@@ -423,33 +504,24 @@ trabajando con  user Cards
 
 .buttonCard {
   width: 150px;
-  /* background-color: #9e39ff;
-  color: white;
-  float: right;
-  width: 200px;
-  height: 30px;
-  text-align: center; */
 }
 
-.oferts-button {
-  justify-content: center;
+.freelancer-card-stepers-container{
+  justify-content: space-around;
   display: inline-flex;
-  /* margin: 0 30%; */
-  /* margin-top: 50px; */
-  margin: 5px 0;
-
-}
-.oferts-button button {
-  width: 5px !important;
-  height: 5px !important;
-  min-height: 3px !important;
-  background-color: whitesmoke;
-  margin: 15px 2px;
-
+  margin-top: 0.7rem;
+  width: 100% !important
 }
 
-.oferts-button button:focus:active {
-  background-color: #9e39ff;
+.freelancer-card-stepers {
+  width: 20% !important;
+  height: 0.5rem !important;
+}
+
+.freelancer-card-stepers::focus {
+  color: #9e39ff !important;
+  background-color: #9e39ff !important;
+  background: #9e39ff !important;
 }
 
 /* --------------------------------------
@@ -514,6 +586,18 @@ trabajando con  user Cards
   height: 100%;
   color: white;
   background-color: #9e39ff;
+  float: right;
+  
+}
+
+
+.list-button-paymentsFree {
+  text-align: center;
+  width: 20%;
+  height: 100%;
+  color: white;
+  background-color: #9e39ff;
+  float: right;
 }
 
 .avatar-payments {
@@ -609,6 +693,7 @@ register freelancer
     #ff6e7f 0%,
     #a77ffa 40%
   ) !important;
+  margin-top: 10px;
 }
 
 .register-button {

@@ -39,7 +39,6 @@ function RegisterFreelancerContainer() {
     // cbu: "",
     cuit: "",
     type: "",
-    // dni: "",
     address: "",
   });
 
@@ -118,14 +117,17 @@ function RegisterFreelancerContainer() {
                 nonDisclosure: downloadUrl,
                 email: data.email,
                 projectInvited: "",
+                activeProjectsCounter: 0
               })
               .then(() => {
                 db.collection("invites").doc(`${data.email}`).delete();
-                history.push("/freelancer");
+                history.push("/freelancer")
               });
           });
         });
-      });
+       
+      })
+     
   };
 
   return (
@@ -163,6 +165,7 @@ function RegisterFreelancerContainer() {
           errorSignature={errorSignature}
           setErrorSignature={setErrorSignature}
           isLogin={isLogin.loading}
+          setBankData={setBankData}
         />
       </div>
     </div>

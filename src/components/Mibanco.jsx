@@ -24,8 +24,12 @@ function MiBanco({
   };
 
   return (
-    <div style={{display:"flex",flexDirection: "column",position:"absolute", right:20, bottom:40}}>
-      <Button onClick={openModal} className="modal-button buttonCard">
+    <div>
+      <Button 
+      onClick={openModal} 
+      shape='round'
+      className="freelancer-card-buttons"
+      >
         Modificar Datos
       </Button>
 

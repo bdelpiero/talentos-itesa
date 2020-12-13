@@ -17,12 +17,6 @@ export default ({ handleLogout, setItem }) => {
     <Sider
       breakpoint="lg"
       collapsedWidth="0"
-      onBreakpoint={(broken) => {
-        console.log(broken);
-      }}
-      onCollapse={(collapsed, type) => {
-        console.log(collapsed, type);
-      }}
       className="sider-admin"
       trigger={null}
     >

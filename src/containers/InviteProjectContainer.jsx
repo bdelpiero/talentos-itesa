@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import InviteProject from "../components/InviteProject";
 import { db } from "../../firebase/firebase";
 import CheckCircle from "../../views/check.svg";
-import { Modal, Card } from "antd";
+import { Modal, Card, Form } from "antd";
+import { ProjectOutlined } from "@ant-design/icons";
 
 function InviteProjectContainer({ proyecto }) {
   const [modal, setModal] = useState(false);
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState("");
+  const [form] = Form.useForm();
   const [asignData, setAsignData] = useState({
     plazos: [],
     status: "pending",
@@ -90,8 +92,9 @@ function InviteProjectContainer({ proyecto }) {
       .set({
         ...asignData,
         ...getUser,
-        proyecto: proyecto.name,
+        projectId: proyecto.id,
         duracion: proyecto.term,
+        proyecto: proyecto.name,
         cuotasDB,
       })
       .then(() => {
@@ -100,6 +103,7 @@ function InviteProjectContainer({ proyecto }) {
           .update({ projectInvited: proyecto.id });
       })
       .then(() => {
+        form.resetFields()
         Modal.success({
           bodyStyle: {
             display: "flex",
@@ -141,6 +145,7 @@ function InviteProjectContainer({ proyecto }) {
       setSelectedUser={setSelectedUser}
       asignData={asignData}
       setAsignData={setAsignData}
+      form={form}
     />
   );
 }

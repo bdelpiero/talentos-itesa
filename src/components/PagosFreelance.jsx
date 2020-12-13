@@ -6,72 +6,52 @@ import { DownloadOutlined } from "@ant-design/icons";
 import { Typography } from "antd";
 
 const { Title } = Typography;
-const style = { background: "#0092ff", padding: "8px 0" };
-const data = [
-  {
-    valor: "$80.000",
-  },
-  {
-    valor: "$20.000",
-  },
-];
 
-class PagosFreelace extends Component {
-  render() {
+
+
+export default ({user})=>  {
+  
     return (
       <>
-        <List
-          itemLayout="horizontal"
-          dataSource={data}
-          renderItem={(item) => (
-            <List.Item key={item.valor}>
-              <List.Item.Meta
-                avatar={
-                  <Avatar
-                    className="avatar-payments"
-                    id="avatar-payments"
-                    src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                  />
-                }
-                title={item.valor}
-                description={
-                  <Row>
-                    <Col
-                      xs={{ span: 5, offset: 1 }}
-                      lg={{ span: 6, offset: 2 }}
-                      className="list-description"
-                    >
-                      <p>Proyecto:</p>
-                      <p>ITS202|Satapp</p>
-                    </Col>
-                    <Col
-                      xs={{ span: 11, offset: 1 }}
-                      lg={{ span: 6, offset: 2 }}
-                      className="list-description"
-                    >
-                      <p>Factura:</p>
-                      <p>1 de 4</p>
-                    </Col>
-                    <Col
-                      xs={{ span: 5, offset: 1 }}
-                      lg={{ span: 6, offset: 2 }}
-                      className="list-description"
-                    >
-                      <p>Fecha de pago:</p>
-                      <p>02/05/2020</p>
-                    </Col>
-                  </Row>
-                }
-              />
-              <Button className="list-button-payments" shape="round">
-                Ver comprobante de pago <DownloadOutlined />{" "}
-              </Button>
-            </List.Item>
-          )}
-        />
+      {/* className="list-description" */}
+        <Title style={{ width: "100%" }}>
+          Pagos
+        </Title>
+        
+          <Card >          
+            <Row gutter={{ xs: 6, sm: 8, md: 16, lg: 24 }}>  
+            <Col className="gutter-row" span={2} >
+            <Avatar size={55} src={user.avatar} className='avatar' />
+              </Col>          
+            <Col  span={4} >              
+            <h1>80.000</h1>        
+              <b style={{color:"#9e39ff"}}>Proyecto:</b>
+              <b>ITS202|Satapp</b>
+            </Col>
+            <Col className="gutter-row"  span={6}>
+              <b style={{color:"#9e39ff"}}>Factura:</b><b>1 de 4</b>              
+            </Col>
+            <Col 
+            className="gutter-row"  
+            span={6}
+            >
+              <b style={{color:"#9e39ff"}}>Fecha de pago:</b>
+              <b>02/05/2020</b>
+            </Col> 
+            <Col className="gutter-row" span={6}> 
+            <Button 
+            className="list-button-paymentsFree" 
+            shape="round"
+            style={{width:"80%", height:"auto"} }
+            >
+            Ver comprobante de pago <DownloadOutlined />
+          </Button> 
+          </Col> 
+            </Row>                              
+          </Card>       
       </>
     );
-  }
+  
 }
 
-export default PagosFreelace;
+// export default PagosFreelace;

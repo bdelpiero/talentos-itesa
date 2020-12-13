@@ -18,6 +18,7 @@ export const projectInvited = atom({
   key: "projectInvited", // unique ID (with respect to other atoms/selectors)
   default: {
     invited:[],
+    selected:{},
     observer:''
   }, // default value (aka initial value)
 });
