@@ -40,7 +40,7 @@
   .hide-button {
     display: none;
   }
-  
+
   .navbar-display {
     display: flex;
     width: 100%;
@@ -151,9 +151,9 @@
 
 .sider-cards {
   color: #636363;
-  margin: 0rem auto !important;
-  padding: 0 !important;
-  height: 10rem !important;
+  margin: 0 !important;
+  padding: 10px !important;
+  height: 110px !important;
   text-align: center !important;
   background-color: whitesmoke !important;
   width: auto !important;
@@ -165,12 +165,12 @@
 
 .sider-buttons {
   background-color: whitesmoke;
-  width: 90% !important;
-  height: 9rem !important;
-  margin: 0.7rem !important;
-  padding: 0 auto !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
   border-radius: 5%;
-  font-size: 1.2rem;
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -189,7 +189,11 @@
 
 .icon-sider-buttons {
   margin: 0 auto !important;
-  font-size: 3.5rem !important;
+  font-size: 2.5rem !important;
+}
+
+.icon-sider-buttons svg {
+  margin-top: 10px !important;
 }
 
 .ant-menu-item-selected {
@@ -249,7 +253,6 @@
     align-self: center;
     justify-items: center;
   }
-
 }
 
 @media (max-width: 991px) {
@@ -506,11 +509,11 @@ trabajando con  user Cards
   width: 150px;
 }
 
-.freelancer-card-stepers-container{
+.freelancer-card-stepers-container {
   justify-content: space-around;
   display: inline-flex;
   margin-top: 0.7rem;
-  width: 100% !important
+  width: 100% !important;
 }
 
 .freelancer-card-stepers {
@@ -554,26 +557,7 @@ trabajando con  user Cards
   background: rgba(150, 150, 150, 0.2);
 }
 
-.text2 {
-  font-family: "Open Sans Semibold";
-  color: black;
-  font-size: 75%;
-  font-stretch: expanded;
-}
-.textPagos {
-  font-family: "Open Sans Semibold";
-  color: #8990ad;
-}
-.Pagos {
-  text-align: left;
-  width: 95% !important;
-}
 
-.subtittle2 {
-  font-family: "Open Sans Semibold", arial;
-  color: #9e39ff;
-  font-size: 90%;
-}
 .list-description {
   display: flex;
   flex-direction: row;
@@ -587,22 +571,20 @@ trabajando con  user Cards
   color: white;
   background-color: #9e39ff;
   float: right;
-  
 }
-
 
 .list-button-paymentsFree {
   text-align: center;
-  width: 20%;
-  height: 100%;
   color: white;
   background-color: #9e39ff;
-  float: right;
+  font-size: 1em !important;
+ float: left;
+
 }
 
 .avatar-payments {
-  height: 3rem;
-  width: 3rem;
+  height: 6rem;
+  width: 6rem;
 }
 
 /* ----------------------
@@ -731,10 +713,15 @@ register freelancer
   text-decoration: none;
   color: "gray";
 }
-@media (max-width: 850px) {
+@media (max-width: 800px) {
   .register-left {
     flex-basis: 0;
     width: 0;
+  }
+
+  .paymentsCards{
+    align-content:flex-start;
+    flex-flow:column wrap;
   }
 
   .register-formContainer {
@@ -798,6 +785,10 @@ Trabajando con Admin Cards/DashBoard
     padding: 0;
     margin: 0.5rem !important;
   }
+  .paymentsCards{
+    flex-flow:row wrap;
+    padding-left: 10px;
+  }
 }
 
 @media (max-width: 991px) {
@@ -807,6 +798,8 @@ Trabajando con Admin Cards/DashBoard
     justify-content: space-around;
     align-items: center;
   }
+
+  
 
   .admin-cards .ant-card-body {
     display: flex;
@@ -954,7 +947,8 @@ Trabajando con Admin Cards/DashBoard
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  /* height: 300px; */
+  /* height: 400px; */
+  /* height: auto; */
 }
 
 .modal-editProfile {
@@ -962,7 +956,7 @@ Trabajando con Admin Cards/DashBoard
   align-items: center;
   justify-content: space-around;
   /* font-family: Raleway; */
-  height: 200px;
+  height: 300px;
 }
 
 .modal-editProfile-header {
@@ -973,7 +967,7 @@ Trabajando con Admin Cards/DashBoard
 }
 
 .modal-editProfile-avatar {
-  height: 180px;
+  /* height: 180px; */
   display: flex;
   flex-direction: column;
   justify-content: center;

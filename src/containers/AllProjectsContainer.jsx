@@ -37,8 +37,7 @@ function AllProjectsContainer({ setItem, setProject }) {
 
     const newStatus =
       project.status == "On Development" ? "Finished" : "On Development";
-    const newTotal =
-      project.status == "On Development" ? -1 : 1  
+    const newTotal = project.status == "On Development" ? -1 : 1;
     db.collection("projects")
       .doc(project.id)
       .update({
@@ -50,28 +49,33 @@ function AllProjectsContainer({ setItem, setProject }) {
           .collection("invitedUser")
           .get()
           .then((proyectos) =>
-            proyectos.forEach((user) => {
-              db.collection("projects")
-                .doc(project.id)
-                .collection("invitedUser")
-                .doc(user.id)
-                .update({
-                  status: newStatus,
-                })
-                return user.id
-            }).then((user)=>{
-              db.collection("users").doc(user).
-              get()
-              .then((doc)=>{
-                const user = doc.data()
-                if(!user.activeProjectsCounter) return
-                db.collection("users").doc(user.id).update({
-                  activeProjectsCounter: user.activeProjectsCounter + newTotal
-                })
+            proyectos
+              .forEach((user) => {
+                db.collection("projects")
+                  .doc(project.id)
+                  .collection("invitedUser")
+                  .doc(user.id)
+                  .update({
+                    status: newStatus,
+                  });
+                return user.id;
               })
-            })
-            
-          )
+              .then((user) => {
+                db.collection("users")
+                  .doc(user)
+                  .get()
+                  .then((doc) => {
+                    const user = doc.data();
+                    if (!user.activeProjectsCounter) return;
+                    db.collection("users")
+                      .doc(user.id)
+                      .update({
+                        activeProjectsCounter:
+                          user.activeProjectsCounter + newTotal,
+                      });
+                  });
+              })
+          );
       });
   };
 
