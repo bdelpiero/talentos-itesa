@@ -17,14 +17,14 @@ import {
   Pagination,
 } from "antd";
 import { DownloadOutlined, DownOutlined } from "@ant-design/icons";
+import { useLayoutEffect } from "react";
 const { Title, Paragraph } = Typography;
 
 export const OurCommunity = ({ onChange, onFinishSearch, currentUsers }) => {
   const users = currentUsers.map((user) => {
-    user.activeProjectsCounter = user.activeProjectsCounter
-      ? "En Proyecto"
-      : "Libre";
-    return user;
+    const newUser = { ...user };
+    newUser.state = user.activeProjectsCounter ? "En Proyecto" : "Libre";
+    return newUser;
   });
   const columns = [
     {
@@ -64,8 +64,8 @@ export const OurCommunity = ({ onChange, onFinishSearch, currentUsers }) => {
     },
     {
       title: "STATE",
-      key: "activeProjectsCounter",
-      dataIndex: "activeProjectsCounter",
+      key: "state",
+      dataIndex: "state",
       render: (value) => {
         if (value != "Libre") return <Tag color='red'>En Proyecto</Tag>;
         return <Tag color='green'>Libre</Tag>;
@@ -93,7 +93,11 @@ export const OurCommunity = ({ onChange, onFinishSearch, currentUsers }) => {
       key: "cv",
       render: (cv) => {
         if (!cv) return;
-        return <DownloadOutlined id='download-icon' />;
+        return (
+          <a target='_blank' href={cv}>
+            <DownloadOutlined id='download-icon' />
+          </a>
+        );
       },
     },
   ];
