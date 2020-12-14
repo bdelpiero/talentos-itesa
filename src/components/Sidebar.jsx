@@ -15,6 +15,7 @@ export default ({ handleLogout, setItem }) => {
 
   return (
     <Sider
+      width='150px'
       breakpoint="lg"
       collapsedWidth="0"
       className="sider-admin"

@@ -27,8 +27,7 @@ export default ({setItem}) => {
         dates = [...dates, new Date(theDate)]
         theDate.setDate(theDate.getDate() + 1)
       }
-      /* console.log("duracion",Math.floor(dates.length /7))
-      return Math.floor(dates.length /7) */
+      return Math.floor(dates.length /7) 
     }
 
     const calculoRemuneracion =(arr)=>{

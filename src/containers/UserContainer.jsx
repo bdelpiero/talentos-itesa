@@ -44,10 +44,12 @@ export default () => {
 
   // useEffect esta atento a los cambios en el usuario para renderizar el componente nuevamente
   console.log("se renderiza usercontainer", invitedProject);
+  console.log("se renderiza usercontainer", currentUser);
+
 
   useEffect(() => {
-    let invitaciones=db.collectionGroup("invitedUser").where('email', '==' ,currentUser.email)
-    // where('status', '==' ,"pending")
+    if(currentUser){
+      let invitaciones=db.collectionGroup("invitedUser").where('email', '==' ,currentUser.email)
     invitaciones.get()
     .then((projects) => {
       const newInvitations=[]
@@ -77,6 +79,9 @@ export default () => {
             observer
           })
     })
+
+    }
+    
   }, [currentUser]);
 
   const handleLogout = () => {

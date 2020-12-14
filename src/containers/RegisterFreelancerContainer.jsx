@@ -122,7 +122,6 @@ function RegisterFreelancerContainer() {
               })
               .then(() => {
                 db.collection("invites").doc(`${data.email}`).delete();
-                history.push("/freelancer")
               });
           });
         });
