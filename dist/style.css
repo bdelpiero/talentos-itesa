@@ -40,7 +40,7 @@
   .hide-button {
     display: none;
   }
-  
+
   .navbar-display {
     display: flex;
     width: 100%;
@@ -249,7 +249,6 @@
     align-self: center;
     justify-items: center;
   }
-
 }
 
 @media (max-width: 991px) {
@@ -506,11 +505,11 @@ trabajando con  user Cards
   width: 150px;
 }
 
-.freelancer-card-stepers-container{
+.freelancer-card-stepers-container {
   justify-content: space-around;
   display: inline-flex;
   margin-top: 0.7rem;
-  width: 100% !important
+  width: 100% !important;
 }
 
 .freelancer-card-stepers {
@@ -587,9 +586,7 @@ trabajando con  user Cards
   color: white;
   background-color: #9e39ff;
   float: right;
-  
 }
-
 
 .list-button-paymentsFree {
   text-align: center;
@@ -935,7 +932,8 @@ Trabajando con Admin Cards/DashBoard
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  /* height: 300px; */
+  /* height: 400px; */
+  /* height: auto; */
 }
 
 .modal-editProfile {
@@ -943,7 +941,7 @@ Trabajando con Admin Cards/DashBoard
   align-items: center;
   justify-content: space-around;
   /* font-family: Raleway; */
-  height: 200px;
+  height: 300px;
 }
 
 .modal-editProfile-header {
@@ -954,7 +952,7 @@ Trabajando con Admin Cards/DashBoard
 }
 
 .modal-editProfile-avatar {
-  height: 180px;
+  /* height: 180px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
