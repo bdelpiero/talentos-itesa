@@ -80,10 +80,8 @@ export const OurCommunity = ({ onChange, onFinishSearch, currentUsers }) => {
           value: "En Proyecto",
         },
       ],
-      onFilter: (value, record) =>
-        record.activeProjectsCounter.indexOf(value) === 0,
-      sorter: (a, b) =>
-        a.activeProjectsCounter.length - b.activeProjectsCounter.length,
+      onFilter: (value, record) => record.state.indexOf(value) === 0,
+      sorter: (a, b) => a.state.length - b.state.length,
       sortDirections: ["ascend", "descend"],
     },
 
