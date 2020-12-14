@@ -7,9 +7,9 @@ import { ProjectOutlined } from "@ant-design/icons";
 
 function addCuotas(cuotas, user, project) {
   const batch = db.batch();
-  for (let cuota of cuotas) {
+  cuotas.forEach((cuota, i) => {
     console.log(cuota);
-    if (!cuota.monto) continue;
+    if (!cuota.monto) return;
     const cuotaRef = db.collection("payments").doc();
     const newDate = cuota.fecha.split("/").reverse().join("-");
     batch.set(cuotaRef, {
@@ -19,8 +19,12 @@ function addCuotas(cuotas, user, project) {
       projectId: project.id,
       factura: "",
       comprobantePago: "",
+      state: "pending",
+      projectName: project.name,
+      cuota: "CUOTA " + (i + 1),
     });
-  }
+  });
+
   return batch
     .commit()
     .then(() => console.log("cuotas cargadas exitosamente"))

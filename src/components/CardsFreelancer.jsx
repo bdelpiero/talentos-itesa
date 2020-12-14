@@ -11,7 +11,7 @@ import MiBancoContainer from "../containers/MiBancoContainer";
 
 const { Title } = Typography;
 
-export default ({ setItem }) => {
+export default ({ setItem, nextPayments }) => {
   const [currentUser, serCurrentUser] = useRecoilState(user);
   const [invitedProject, setInvitedProject] = useRecoilState(projectInvited);
 
@@ -27,7 +27,7 @@ export default ({ setItem }) => {
       )}
 
       {/* CARD PROXIMO PAGO */}
-      <CardsNextPayments />
+      <CardsNextPayments nextPayments={nextPayments} />
 
       {/* CARD MI BANCO */}
       <Card className='freelancer-cards'>

@@ -19,8 +19,8 @@ export default (props) => {
       dates = [...dates, new Date(theDate)];
       theDate.setDate(theDate.getDate() + 1);
     }
-    /* console.log("duracion",Math.floor(dates.length /7))
-    return Math.floor(dates.length /7) */
+    // /* console.log("duracion",Math.floor(dates.length /7))
+    return Math.floor(dates.length / 7);
   };
 
   const calculoRemuneracion = (arr) => {
@@ -35,11 +35,6 @@ export default (props) => {
     const monto = calculoRemuneracion(props.inviteds.selected.cuotasDB);
 
     if (props.inviteds.invited.length > 1) {
-      console.log(
-        "mas de un proyecto",
-        props.inviteds,
-        props.inviteds.selected
-      );
       return (
         <Card className='freelancer-cards'>
           <Title level={5} id='title-freelancer-card'>

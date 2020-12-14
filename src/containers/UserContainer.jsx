@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { authUser } from "../../firebase/auth";
 import { db } from "../../firebase/firebase";
@@ -23,11 +23,12 @@ const { Header, Footer, Sider, Content } = Layout;
 export default () => {
   const [currentUser, setCurrentUser] = useRecoilState(user);
   const [invitedProject, setInvitedProject] = useRecoilState(projectInvited);
-
+  const [nextPayments, setNextPayments] = useState([]);
   const { logout } = authUser();
   const history = useHistory();
   const { Content } = Layout;
   const [item, setItem] = React.useState(1);
+  let unsubscribePayments = () => {};
 
   function hasDuplicates(inputArray) {
     for (let i = 0; i < inputArray.length - 1; i++) {
@@ -43,43 +44,67 @@ export default () => {
   }
 
   // useEffect esta atento a los cambios en el usuario para renderizar el componente nuevamente
-  console.log("se renderiza usercontainer", invitedProject);
+  // console.log("se renderiza usercontainer", invitedProject);
 
   useEffect(() => {
-    let invitaciones=db.collectionGroup("invitedUser").where('email', '==' ,currentUser.email)
+    let invitaciones = db
+      .collectionGroup("invitedUser")
+      .where("email", "==", currentUser.email);
     // where('status', '==' ,"pending")
-    invitaciones.get()
-    .then((projects) => {
-      const newInvitations=[]
-      projects.forEach((doc)=>{
-        if(doc.data().status === 'pending'){
-          console.log("entro al if con este status",doc.data().status)
-          newInvitations.push(doc.data())
-        }
+    invitaciones
+      .get()
+      .then((projects) => {
+        const newInvitations = [];
+        projects.forEach((doc) => {
+          if (doc.data().status === "pending") {
+            // console.log("entro al if con este status",doc.data().status)
+            newInvitations.push(doc.data());
+          }
+        });
+        setInvitedProject({
+          invited: newInvitations,
+          selected: newInvitations[0],
+        });
       })
-      setInvitedProject({invited:newInvitations , selected:newInvitations[0]})
-    })
-    .catch((err) => {
-      console.log("Error getting projectInvited", err);
+      .catch((err) => {
+        console.log("Error getting projectInvited", err);
+      });
+    let observer = invitaciones.onSnapshot((cambios) => {
+      const newInvitations = [];
+      cambios.forEach((doc) => {
+        if (doc.data().status === "pending") {
+          newInvitations.push(doc.data());
+        }
+      });
+      setInvitedProject({
+        invited: newInvitations,
+        selected: newInvitations[0],
+        observer,
+      });
     });
-    let observer =invitaciones.onSnapshot((cambios)=>{
-      console.log('aqui recivio cambios las invitaciones')
-      const newInvitations=[]
-          cambios.forEach((doc)=>{
-            if(doc.data().status === 'pending'){
-              console.log("entro al if con este status",doc.data().status)
-              newInvitations.push(doc.data())
-            }
-          })
-          setInvitedProject({
-            invited:newInvitations,
-            selected:newInvitations[0],
-            observer
-          })
-    })
+  }, [currentUser]);
+
+  useEffect(() => {
+    unsubscribePayments = db
+      .collection("payments")
+      .where("userId", "==", currentUser.id)
+      .where("state", "==", "pending")
+      .onSnapshot((querySnapshot) => {
+        const arr = [];
+        querySnapshot.forEach((doc) => {
+          arr.push(doc.data());
+        });
+        const payments = arr
+          .sort((a, b) => new Date(a.fecha) - new Date(b.fecha))
+          .slice(0, 4);
+
+        setNextPayments(payments);
+      });
+    // return unsubscribe;
   }, [currentUser]);
 
   const handleLogout = () => {
+    unsubscribePayments();
     invitedProject.observer();
     logout();
     history.push("/login");
@@ -93,13 +118,16 @@ export default () => {
       <Layout>
         <Navbar />
         <HeaderComponent user={currentUser} setCurrentUser={setCurrentUser} />
-        <Content className="content-user">
+        <Content className='content-user'>
           {item == 1 && (
             <>
-              <Row className="userCards-row">
-                <CardsFreelancer setItem={setItem} />
+              <Row className='userCards-row'>
+                <CardsFreelancer
+                  setItem={setItem}
+                  nextPayments={nextPayments}
+                />
               </Row>
-              <div >
+              <div>
                 <PagosFreelance user={currentUser} />
               </div>
             </>
@@ -107,7 +135,7 @@ export default () => {
           {item == 2 && <FreelancerProjectContainer />}
           {item == 5 && (
             <>
-              <AcceptProject setItem={setItem}/>
+              <AcceptProject setItem={setItem} />
             </>
           )}
         </Content>
