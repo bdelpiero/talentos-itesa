@@ -39,6 +39,7 @@ export const SingleProject = ({
       .doc(project.id)
       .set({ description: e.target.value }, { merge: true });
   } */
+  
   return (
     <>
       <Row gutter={[30]}>
@@ -73,7 +74,7 @@ export const SingleProject = ({
               Freelancers en proyecto{" "}
               {/* <UserAddOutlined className="single-icon add-user" /> */}
             </Title>{" "}
-            <InviteProjectContainer proyecto={project} />
+            <InviteProjectContainer  proyecto={project} />
           </div>
 
           <List
@@ -86,6 +87,14 @@ export const SingleProject = ({
                   title={item.name}
                   description={item.freelancerType}
                 />
+                <a href={`${item.urlContractProject}`} target="_blank">
+                <Button
+                  className="modal-button2"
+                  style={{marginRight:"20px"}}                  
+                >
+                  Ver Contrato
+                </Button>
+              </a>
                 <DeleteOutlined
                   onClick={() => delUserFromProject(item.id)}
                   className="single-icon"

@@ -21,7 +21,7 @@ function InviteProject({
 }) {
   return (
     <div className="Modal">
-      <Button className="modal-button" onClick={openModal}>
+      <Button className="modal-button2" onClick={openModal}>
         {" "}
         INVITAR
       </Button>
