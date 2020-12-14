@@ -46,52 +46,34 @@ export default ({setItem})=>{
       imageData={imageData}
       />
     );
-          blob.toBlob().then((file) => {
-          const storageRef = storage.ref();
-          //nombre del pdf a guardar en el storage verificar
-          const dataName=invitedProject.selected.proyecto + "-"+currentUser.lastName
-          const pdfsRef = storageRef.child(`contractUserProject/${dataName}.pdf`);
-          pdfsRef.put(file).then(function (snapshot) {
-            console.log("Uploaded a blob or file!");
-          }).then(()=>{
-            return pdfsRef.getDownloadURL().then((downloadUrl) => {
-              db.collection("projects").doc(invitedProject.selected.projectId).collection('invitedUser').doc(invitedProject.selected.id).update({status:"On Development",urlContractProject:downloadUrl})
-            
-          });
-          })
-         
-        }).then(()=>{
-          let userRef = db.collection('users').doc(invitedProject.selected.id);
-          let getDoc = userRef.get()
-            .then(doc => {
-              if (!doc.exists) {
-                console.log('No such document!');
-              } else {
-                let user =doc.data()
-                userRef.update({activeProjectsCounter:user.activeProjectsCounter+1})
-              }
-            })
-            .catch(err => {
-              console.log('Error getting document', err);
-            });
-          })
-       
-      
+      blob.toBlob().then((file) => {
+        const storageRef = storage.ref();
+        const dataName = invitedProject.selected.proyecto + "-" + currentUser.lastName
+        const pdfsRef = storageRef.child(`contractUserProject/${dataName}.pdf`);
+        pdfsRef.put(file)
+        .then(() => console.log("Uploaded a blob or file!"))
+        .then(() => pdfsRef.getDownloadURL())
+        .then((downloadUrl) => db.collection("projects").doc(invitedProject.selected.projectId).collection('invitedUser').doc(invitedProject.selected.id).update({status:"On Development",urlContractProject:downloadUrl}))
+        .catch(err => console.log('ERROR CARGANDO PDF ->', err))
+      })
+      .then(()=>{
+        let userRef = db.collection('users').doc(invitedProject.selected.id);
+        let getDoc = userRef.get()
+        .then(doc => {
+          if (!doc.exists) {
+            console.log('No such document!');
+          } else {
+            let user = doc.data()
+            userRef.update({activeProjectsCounter:user.activeProjectsCounter + 1})
+          }
+        })
+        .catch(err => console.log('Error getting document', err))
+      })
   };
-
-
-
-
-
-
-
     return (<Row>
       <Col span={12} className='col-contract'>
       <ContractProjet project={invitedProject.selected}/>
       </Col>
-
-
-
       <Col span={12} className='col-contract'>
         <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height:'100%'}}>
         <h1 style={{ color: "gray", textAlign: "center" }}>
@@ -108,12 +90,9 @@ export default ({setItem})=>{
                 className: "sigCanvas",
                 style: { border: "1px solid #000000", borderRadius: '25px' },
               }}
-              onEnd={
-                () =>{
-                  saveSignature(
-                    signatureRef.current.getTrimmedCanvas().toDataURL("image/jpg")
-                  ) //base64
-                  setErrorSignature(false)
+              onEnd={() => { 
+                saveSignature(signatureRef.current.getTrimmedCanvas().toDataURL("image/jpg")) //base64
+                setErrorSignature(false)
               }}
             />
             <br></br>
@@ -148,7 +127,6 @@ export default ({setItem})=>{
               htmlType='submit'
               className='register-button'
               loading={show}
-              
               >
                 Firmar Contrato
               </Button>
@@ -158,7 +136,6 @@ export default ({setItem})=>{
                 onOk={handleOk}
               >
                 <p>Proyecto Firmado... </p>
-                
               </Modal>
               </div>
       </Col>

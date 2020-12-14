@@ -51,6 +51,7 @@ export default () => {
             })
       })
     }
+
   }, [currentUser]);
   
   const handleLogout = () => {
