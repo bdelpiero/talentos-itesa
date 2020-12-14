@@ -5,7 +5,7 @@ import CheckCircle from "../../views/check.svg";
 import { Modal, Card, Form } from "antd";
 import { ProjectOutlined } from "@ant-design/icons";
 
-function InviteProjectContainer({ proyecto }) {
+function InviteProjectContainer({ proyecto, boton}) {
   const [modal, setModal] = useState(false);
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState("");
@@ -69,6 +69,10 @@ function InviteProjectContainer({ proyecto }) {
       [e.target.name]: e.target.value,
     });
   };
+
+  const handleUsers = (e)=>{
+    setSelectedUser(e.target.value)
+  }
 
   const handleCuotas = (value, name, nCuota) => {
     setCuotas({
@@ -146,6 +150,8 @@ function InviteProjectContainer({ proyecto }) {
       asignData={asignData}
       setAsignData={setAsignData}
       form={form}
+      proyecto={proyecto}
+      handleUsers={handleUsers}
     />
   );
 }

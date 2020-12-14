@@ -6,6 +6,7 @@ function AllProjectsContainer({ setItem, setProject }) {
   const [projects, setProjects] = useState([]);
   const [filterProjects, setFilterProjects] = useState([]);
 
+
   function onChange(e) {
     setFilterProjects(
       projects.filter((project) => {
@@ -34,7 +35,6 @@ function AllProjectsContainer({ setItem, setProject }) {
 
   const changeStatus = (project) => {
     if (project.status == "pending") return;
-
     const newStatus =
       project.status == "On Development" ? "Finished" : "On Development";
     const newTotal =

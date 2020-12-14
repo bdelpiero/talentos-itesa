@@ -5,6 +5,8 @@ import { Modal, Button, Row, Col, Input, Form, DatePicker, Select } from "antd";
 const { Option } = Select;
 const { RangePicker } = DatePicker;
 
+import { AutoComplete } from "antd";
+
 function InviteProject({
   handleCuotas,
   cuotas,
@@ -17,11 +19,20 @@ function InviteProject({
   setSelectedUser,
   asignData,
   setAsignData,
-  form
+  form,
+  proyecto,
 }) {
+  const boton = proyecto.status == "On Development" ? false : true;
+
+  // const options = users.map((user) => {
+  //   return { value: `${user.name} ${user.lastName}` };
+  // });
+
+  // console.log(users);
+
   return (
     <div className="Modal">
-      <Button className="modal-button" onClick={openModal}>
+      <Button disabled={boton} className="modal-button" onClick={openModal}>
         {" "}
         INVITAR
       </Button>
@@ -40,9 +51,7 @@ function InviteProject({
         width={1000}
       >
         <>
-          <Form onFinish={handleFinish}
-          form={form}
-          >
+          <Form onFinish={handleFinish} form={form}>
             <div style={{ width: "70%", marginLeft: "30px" }}>
               <h1>Asignar Proyecto</h1>
             </div>
@@ -63,13 +72,45 @@ function InviteProject({
             <div>
               <Row>
                 <Col span={6}>
-                  <Form.Item>
+                  <Form.Item
+                    name="freelancer"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Por favor ingrese Freelancer",
+                      },
+                    ]}
+                  >
+                    {/* <AutoComplete
+                      style={{
+                        width: 200,
+                      }}
+                      value={selectedUser}
+                      onChange={(user) => {
+                        setSelectedUser(user.id);
+                      }}
+                      options={options}
+                      placeholder="Nombre de Freelancer"
+                      filterOption={(inputValue, option) =>
+                        option.value
+                          .toUpperCase()
+                          .indexOf(inputValue.toUpperCase()) !== -1
+                      }
+                    /> */}
                     {/* <Input
-                style={{ marginBottom: "1rem" }}
-                value = {}
-                onChange={onChange}
-                placeholder='Buscar freelancer por nombre o email'
-              /> */}
+                      style={{
+                        width: "95%",
+                        marginRight: "5%",
+                        marginLeft: "5%",
+                      }}
+                    
+                      onChange={(e) => {
+                        setSelectedUser(value);
+                      }}
+                      
+                      placeholder="Buscar Proyecto por Nombre"
+                    /> */}
+
                     <Select
                       style={{
                         width: "95%",
@@ -87,7 +128,7 @@ function InviteProject({
                         if (!user.isAdmin) {
                           return (
                             <Option key={user.id} value={user.id}>
-                              {user.name}
+                              {`${user.name} ${user.lastName}`}
                             </Option>
                           );
                         }
@@ -96,7 +137,15 @@ function InviteProject({
                   </Form.Item>
                 </Col>
                 <Col span={12}>
-                  <Form.Item>
+                  <Form.Item
+                    name="plazo"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Por favor ingrese Fechas",
+                      },
+                    ]}
+                  >
                     <RangePicker
                       style={{ width: "90%", margin: "0 5%" }}
                       format="DD/MM/YYYY"

@@ -72,7 +72,7 @@ export default ({setItem}) => {
         )
       }else{
         return (
-          <Card className="bodyCard" key={props.inviteds.selected.proyecto}>
+          <Card className="bodyCard" key={props.inviteds.selected.proyecto} >
             <h3 id="tittleCard">OFERTA DE PROYECTO</h3>
             <p id="subtittle">PROYECTO</p>
             <p>"{props.inviteds.selected.proyecto}"</p>
@@ -83,6 +83,7 @@ export default ({setItem}) => {
             
             <div>
             <Button 
+            style={{display:"flex",flexDirection: "column",position:"absolute", right:20, bottom:40}}
             onClick={()=>setItem(5)}
             className="modal-button buttonCard" 
             shape="round">
@@ -109,16 +110,17 @@ export default ({setItem}) => {
       <Card className='bodyCard'>
         <h3 id='tittleCard'>PROXIMO PAGO</h3>
         <p id='subtittle'>PROYECTO</p>
-        <p>{}</p>
+        <p> ITESA | 2020 </p>
         <p id='subtittle'>FECHA DE PAGO</p>
-        <input
+        <p> 08/10/2021 </p>
+        {/* <input
           type='date'
           id='start'
           name='trip-start'
           min='2021-01-01'
-          max='2029-12-31'></input>
+          max='2029-12-31'></input> */}
         <p id='subtittle'>MONTO</p>
-        <p>"$50.000"</p>
+        <p>$50.000</p>
         <div>
           {/* <Button className="buttonCard" shape="round">
             Cargar Factura
