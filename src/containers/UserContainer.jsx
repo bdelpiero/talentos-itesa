@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link, useHistory } from "react-router-dom";
 import { authUser } from "../../firebase/auth";
 import { db } from "../../firebase/firebase";
 import { useRecoilState } from "recoil";
@@ -13,19 +12,16 @@ import PagosFreelance from "../components/PagosFreelance";
 import CardsFreelancer from "../components/CardsFreelancer";
 import Navbar from "../components/Navbar";
 import AcceptProject from "../components/AcceptProject";
-import PendingPayments from "../components/PendingPayments";
 import FreelancerProjectContainer from "../containers/FreelancerProjectsContainer";
 
+// STYLES
 import { Layout, Row } from "antd";
-
-const { Header, Footer, Sider, Content } = Layout;
 
 export default () => {
   const [currentUser, setCurrentUser] = useRecoilState(user);
   const [invitedProject, setInvitedProject] = useRecoilState(projectInvited);
   const [nextPayments, setNextPayments] = useState([]);
   const { logout } = authUser();
-  const history = useHistory();
   const { Content } = Layout;
   const [item, setItem] = React.useState(1);
   let unsubscribePayments = () => {};
@@ -106,8 +102,7 @@ export default () => {
   const handleLogout = () => {
     unsubscribePayments();
     invitedProject.observer();
-    logout();
-    history.push("/login");
+    return logout();
   };
 
   return !currentUser ? (
@@ -116,7 +111,7 @@ export default () => {
     <Layout>
       <Sidebar setItem={setItem} handleLogout={handleLogout} />
       <Layout>
-        <Navbar />
+        <Navbar setItem={setItem} />
         <HeaderComponent user={currentUser} setCurrentUser={setCurrentUser} />
         <Content className='content-user'>
           {item == 1 && (
@@ -133,13 +128,8 @@ export default () => {
             </>
           )}
           {item == 2 && <FreelancerProjectContainer />}
-          {item == 5 && (
-            <>
-              <AcceptProject setItem={setItem} />
-            </>
-          )}
+          {item == 5 && <AcceptProject setItem={setItem} />}
         </Content>
-        {/* <Footer style={{ textAlign: 'center' }}>Talentos ITESA ©2020 Created by Plataforma 5</Footer> */}
       </Layout>
     </Layout>
   );

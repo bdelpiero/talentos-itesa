@@ -151,9 +151,9 @@
 
 .sider-cards {
   color: #636363;
-  margin: 0rem auto !important;
-  padding: 0 !important;
-  height: 10rem !important;
+  margin: 0 !important;
+  padding: 10px !important;
+  height: 110px !important;
   text-align: center !important;
   background-color: whitesmoke !important;
   width: auto !important;
@@ -165,12 +165,12 @@
 
 .sider-buttons {
   background-color: whitesmoke;
-  width: 90% !important;
-  height: 9rem !important;
-  margin: 0.7rem !important;
-  padding: 0 auto !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
   border-radius: 5%;
-  font-size: 1.2rem;
+  font-size: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -189,7 +189,11 @@
 
 .icon-sider-buttons {
   margin: 0 auto !important;
-  font-size: 3.5rem !important;
+  font-size: 2.5rem !important;
+}
+
+.icon-sider-buttons svg {
+  margin-top: 10px !important;
 }
 
 .ant-menu-item-selected {
