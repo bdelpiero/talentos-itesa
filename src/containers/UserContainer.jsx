@@ -25,37 +25,39 @@ export default () => {
   const { Content } = Layout;
 
   useEffect(() => {
-    let invitaciones = db.collectionGroup("invitedUser").where('email', '==' ,currentUser.email)
-      invitaciones.get()
-      .then((projects) => {
-      const newInvitations = []
-      projects.forEach((doc) => {
-        if(doc.data().status === 'pending') newInvitations.push(doc.data())
+    if(currentUser) {
+      let invitaciones = db.collectionGroup("invitedUser").where('email', '==' ,currentUser.email)
+        invitaciones.get()
+        .then((projects) => {
+        const newInvitations = []
+        projects.forEach((doc) => {
+          if(doc.data().status === 'pending') newInvitations.push(doc.data())
+        })
+        setInvitedProject({invited:newInvitations , selected:newInvitations[0]})
       })
-      setInvitedProject({invited:newInvitations , selected:newInvitations[0]})
-    })
-    .catch((err) => {
-      console.log("Error getting projectInvited", err);
-    })
-
-    let observer = invitaciones.onSnapshot((cambios) => {
-      const newInvitations = []
-          cambios.forEach((doc) => {
-            if(doc.data().status === 'pending') newInvitations.push(doc.data())
-          })
-          setInvitedProject({
-            invited:newInvitations,
-            selected:newInvitations[0],
-            observer
-          })
-    })
+      .catch((err) => {
+        console.log("Error getting projectInvited", err);
+      })
+  
+      let observer = invitaciones.onSnapshot((cambios) => {
+        const newInvitations = []
+            cambios.forEach((doc) => {
+              if(doc.data().status === 'pending') newInvitations.push(doc.data())
+            })
+            setInvitedProject({
+              invited:newInvitations,
+              selected:newInvitations[0],
+              observer
+            })
+      })
+    }
   }, [currentUser]);
-
+  
   const handleLogout = () => {
     invitedProject.observer();
     return logout();
   };
-
+  
   return !currentUser ? ( <Error404 /> ) : (
     <Layout>
       <Sidebar setItem={setItem} handleLogout={handleLogout} />
