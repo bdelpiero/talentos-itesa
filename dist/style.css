@@ -932,7 +932,8 @@ Trabajando con Admin Cards/DashBoard
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  /* height: 300px; */
+  /* height: 400px; */
+  /* height: auto; */
 }
 
 .modal-editProfile {
@@ -940,7 +941,7 @@ Trabajando con Admin Cards/DashBoard
   align-items: center;
   justify-content: space-around;
   /* font-family: Raleway; */
-  height: 200px;
+  height: 300px;
 }
 
 .modal-editProfile-header {
@@ -951,7 +952,7 @@ Trabajando con Admin Cards/DashBoard
 }
 
 .modal-editProfile-avatar {
-  height: 180px;
+  /* height: 180px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
