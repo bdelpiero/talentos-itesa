@@ -108,7 +108,6 @@ export default () => {
   return !currentUser ? (
     <Error404 />
   ) : (
-    
     <Layout>
       <Sidebar setItem={setItem} handleLogout={handleLogout} />
       <Layout>

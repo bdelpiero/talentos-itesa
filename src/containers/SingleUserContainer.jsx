@@ -7,7 +7,7 @@ import { db } from "../../firebase/firebase";
 export const SingleUserContainer = ({ selectedUser }) => {
   const [selectedUserData, setSelectedUserData] = useState({});
   const [allUsers, setAllUsers] = useRecoilState(allUsersState);
-  const [userProjects, setUserProjects] = useState({});
+  const [userProjects, setUserProjects] = useState(!{});
   useEffect(() => {
     allUsers.map((user) => {
       if (user.id === selectedUser) setSelectedUserData(user);
@@ -15,18 +15,24 @@ export const SingleUserContainer = ({ selectedUser }) => {
     return () => {};
   }, []);
 
-  /*   useEffect(() => {
-      db.collection("projects").doc()
-    return () => {
-      cleanup;
-    };
-  }, [input]); */
-
+  useEffect(() => {
+    db.collectionGroup("invitedUser")
+      .where("id", "==", selectedUser)
+      .onSnapshot((data) => {
+        setUserProjects(
+          data.docs.map((project) => {
+            return project.data();
+          })
+        );
+      });
+    return () => {};
+  }, []);
+  console.log("ACA ESTAN", userProjects);
   return (
     <>
       <SingleUser
         selectedUserData={selectedUserData}
-        /* userProjects={userProjects} */
+        userProjects={userProjects}
       />
     </>
   );

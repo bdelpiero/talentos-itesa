@@ -1,5 +1,14 @@
 import React from "react";
-import { Row, Col, Card, Avatar, Typography, Tag, Table } from "antd";
+import {
+  Row,
+  Col,
+  Card,
+  Avatar,
+  Typography,
+  Tag,
+  Table,
+  ConfigProvider,
+} from "antd";
 
 export const SingleUser = ({ selectedUserData, userProjects }) => {
   const user = selectedUserData;
@@ -16,9 +25,9 @@ export const SingleUser = ({ selectedUserData, userProjects }) => {
   const columns = [
     {
       title: "NOMBRE PROYECTO",
-      dataIndex: "name",
-      key: "name",
-      render: (name, record) => <h4>{name + " " + record.lastName}</h4>,
+      dataIndex: "proyecto",
+      key: "proyecto",
+      render: (proyecto) => <h4>{proyecto}</h4>,
     },
     {
       title: "ACTIVIDAD",
@@ -43,7 +52,14 @@ export const SingleUser = ({ selectedUserData, userProjects }) => {
       key: "contract",
       dataIndex: "contract",
     },
+    {
+      title: "ESTADO DEL PROYECTO",
+      key: "status",
+      dataIndex: "status",
+      render: (status) => <h4>{status}</h4>,
+    },
   ];
+
   return (
     <>
       {" "}
@@ -52,7 +68,7 @@ export const SingleUser = ({ selectedUserData, userProjects }) => {
           {bankData && (
             <Col xs={24} sm={12} md={12} lg={12}>
               <Title>{user.name + " " + user.lastName}</Title>
-              <Avatar size={96} src={user.avatar} />
+              <Avatar size={128} src={user.avatar} />
               <Row>
                 <Card size={"small"} title={"Datos Bancarios"}>
                   <p>Banco: {bankData.bankName}</p>
@@ -74,18 +90,22 @@ export const SingleUser = ({ selectedUserData, userProjects }) => {
             </Col>
           )}
           <Col xs={24} sm={12} md={12} lg={12}>
-            <Table
-              /* onRow={(user) => {
+            {userProjects &&
+              (console.log(userProjects),
+              (
+                <Table
+                  /* onRow={(user) => {
                 return {
                   onClick: (event) => {
                     handleClick(user);
                   },
                 };
               }} */
-              columns={columns}
-              dataSource={userProjects}
-              pagination={{ pageSize: 5 }}
-            />
+                  columns={columns}
+                  dataSource={userProjects}
+                  pagination={{ pageSize: 5 }}
+                />
+              ))}
           </Col>
         </Row>
       }
