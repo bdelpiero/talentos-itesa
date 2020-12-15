@@ -27,6 +27,7 @@
     "nodemailer": "^6.4.16",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-export-excel": "^0.5.3",
     "react-hot-loader": "^4.13.0",
     "react-router-dom": "^5.2.0",
     "react-signature-canvas": "^1.0.3",
