@@ -24,7 +24,7 @@ export default () => {
   const { logout } = authUser();
   const { Content } = Layout;
   const [item, setItem] = React.useState(1);
-  let unsubscribePayments = () => {};
+  let unsubscribePayments = () => { };
 
   function hasDuplicates(inputArray) {
     for (let i = 0; i < inputArray.length - 1; i++) {
@@ -93,7 +93,6 @@ export default () => {
         const payments = arr
           .sort((a, b) => new Date(a.fecha) - new Date(b.fecha))
           .slice(0, 4);
-
         setNextPayments(payments);
       });
     // return unsubscribe;
@@ -108,29 +107,29 @@ export default () => {
   return !currentUser ? (
     <Error404 />
   ) : (
-    <Layout>
-      <Sidebar setItem={setItem} handleLogout={handleLogout} />
       <Layout>
-        <Navbar setItem={setItem} />
-        <HeaderComponent user={currentUser} setCurrentUser={setCurrentUser} />
-        <Content className='content-user'>
-          {item == 1 && (
-            <>
-              <Row className='userCards-row'>
-                <CardsFreelancer
-                  setItem={setItem}
-                  nextPayments={nextPayments}
-                />
-              </Row>
-              <div>
-                <PagosFreelance user={currentUser} />
-              </div>
-            </>
-          )}
-          {item == 2 && <FreelancerProjectContainer />}
-          {item == 5 && <AcceptProject setItem={setItem} />}
-        </Content>
+        <Sidebar setItem={setItem} handleLogout={handleLogout} />
+        <Layout>
+          <Navbar setItem={setItem} />
+          <HeaderComponent user={currentUser} setCurrentUser={setCurrentUser } item={item}/>
+          <Content className='content-user'>
+            {item == 1 && (
+              <>
+                <Row className='userCards-row'>
+                  <CardsFreelancer
+                    setItem={setItem}
+                    nextPayments={nextPayments}
+                  />
+                </Row>
+                <div>
+                  <PagosFreelance user={currentUser} />
+                </div>
+              </>
+            )}
+            {item == 2 && <FreelancerProjectContainer />}
+            {item == 5 && <AcceptProject setItem={setItem} />}
+          </Content>
+        </Layout>
       </Layout>
-    </Layout>
-  );
+    );
 };
