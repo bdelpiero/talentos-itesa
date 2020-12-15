@@ -3,9 +3,10 @@ import { SingleProject } from "../components/SingleProject";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { allUsersState, allUsersInProject } from "../atoms/index";
 import { db } from "../../firebase/firebase";
+
 export const SingleProjectContainer = ({ project }) => {
   const [projectUsersData, setProjectUsersData] = useState([]);
-
+  
   useEffect(() => {
     const unsuscribe = db
       .collection("projects")

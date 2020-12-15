@@ -9,7 +9,7 @@ import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 const { Option } = Select;
 
-const { Step } = Steps;
+
 const antIcon = <LoadingOutlined style={{ fontSize: 40 }} spin />;
 
 function RegisterFreelancer({
