@@ -175,7 +175,7 @@ function AllProjects({ projects, deleteProject, handleClick, changeStatus, onCha
           alignItems: "center",
         }}
       >
-        <Title> Todos los Proyectos </Title>
+        <Title></Title>
         <NewProjectContainer />
       </div>
 
