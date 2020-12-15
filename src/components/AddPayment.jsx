@@ -8,7 +8,7 @@ function AddPayment() {
     <div className="Modal">
 
         <Button className="modal-button" >
-        Ingresar un Pago
+        Facturas de pago
       </Button>
 
     </div>

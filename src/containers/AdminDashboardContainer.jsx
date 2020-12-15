@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { authUser } from "../../firebase/auth";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { db } from "../../firebase/firebase";
-import { user, allUsersState } from "../atoms/index";
+import { user, allUsersState,pagos } from "../atoms/index";
 
 // COMPONENTS & CONTAINERS
 import Error404 from "../components/404";
@@ -12,6 +12,8 @@ function AdminDashboardContainer() {
   const [currentUser, setCurrentUser] = useRecoilState(user);
   const { logout } = authUser();
   const [allUsers, setAllUsers] = useRecoilState(allUsersState);
+  const [pagosPendientes, setPagosPendientes] = useState({pendin:[],observer:()=>{}});
+
 
   const handleLogout = () => logout();
 
@@ -26,8 +28,24 @@ function AdminDashboardContainer() {
           })
         );
       });
+
+    const pendingP= []
+    const PagosObserver = db
+    .collection("payments")
+    .where("state", "==", "pending")
+    .where("loadedF", "==", true)
+    .onSnapshot((data) => {
+      data.forEach((data) => {
+        pendingP.push(data.data())
+      })    
+    });
+    setPagosPendientes({pending:pendingP,observer:PagosObserver})
+    console.log(" pagos pendientes", pagosPendientes)
+
     return () => unsuscribe();
   }, []);
+console.log("AQUI ESTAN LOS PAGOS PENDIENTES",pagosPendientes)
+
   return !currentUser ? (
     <Error404 />
   ) : (
