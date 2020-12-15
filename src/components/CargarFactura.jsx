@@ -14,8 +14,8 @@ export default ({ handleModal, modalCargarFactura, selected }) => {
 
     const [currentUser, setCurrentUser] = useRecoilState(user);
     const [factura, setFactura] = useState({})
-    const [disable, setDisable] = useState(true)
     const [buttonLoading, setButtonLoading] = useState(false)
+    const [disable, setDisable] = useState(true)
 
     const props = {
         name: "file",
