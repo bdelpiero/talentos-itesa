@@ -20,7 +20,12 @@ import { DownloadOutlined, DownOutlined } from "@ant-design/icons";
 import { useLayoutEffect } from "react";
 const { Title, Paragraph } = Typography;
 
-export const OurCommunity = ({ onChange, onFinishSearch, currentUsers }) => {
+export const OurCommunity = ({
+  onChange,
+  onFinishSearch,
+  currentUsers,
+  handleClick,
+}) => {
   const users = currentUsers.map((user) => {
     const newUser = { ...user };
     newUser.state = user.activeProjectsCounter ? "En Proyecto" : "Libre";
@@ -67,8 +72,8 @@ export const OurCommunity = ({ onChange, onFinishSearch, currentUsers }) => {
       key: "state",
       dataIndex: "state",
       render: (value) => {
-        if (value != "Libre") return <Tag color='red'>En Proyecto</Tag>;
-        return <Tag color='green'>Libre</Tag>;
+        if (value != "Libre") return <Tag color="red">En Proyecto</Tag>;
+        return <Tag color="green">Libre</Tag>;
       },
       filters: [
         {
@@ -81,6 +86,7 @@ export const OurCommunity = ({ onChange, onFinishSearch, currentUsers }) => {
         },
       ],
       onFilter: (value, record) => record.state.indexOf(value) === 0,
+
       sorter: (a, b) => a.state.length - b.state.length,
       sortDirections: ["ascend", "descend"],
     },
@@ -92,8 +98,8 @@ export const OurCommunity = ({ onChange, onFinishSearch, currentUsers }) => {
       render: (cv) => {
         if (!cv) return;
         return (
-          <a target='_blank' href={cv}>
-            <DownloadOutlined id='download-icon' />
+          <a target="_blank" href={cv}>
+            <DownloadOutlined id="download-icon" />
           </a>
         );
       },
@@ -106,10 +112,17 @@ export const OurCommunity = ({ onChange, onFinishSearch, currentUsers }) => {
         <Input
           style={{ marginBottom: "1rem" }}
           onChange={onChange}
-          placeholder='Buscar freelancer por nombre o email'
+          placeholder="Buscar freelancer por nombre o email"
         />
       </Form>
       <Table
+        onRow={(user) => {
+          return {
+            onClick: (event) => {
+              handleClick(user);
+            },
+          };
+        }}
         columns={columns}
         dataSource={users}
         pagination={{ pageSize: 5 }}

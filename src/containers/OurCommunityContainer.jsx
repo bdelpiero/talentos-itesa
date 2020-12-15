@@ -5,7 +5,7 @@ import { FastBackwardFilled } from "@ant-design/icons";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { allUsersState } from "../atoms/index";
 
-export const OurCommunityContainer = () => {
+export const OurCommunityContainer = ({ setItem, setSelectedUser }) => {
   const allUsers = useRecoilValue(allUsersState);
   const [currentUsers, setCurrentUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -22,6 +22,11 @@ export const OurCommunityContainer = () => {
           return user.email.toLowerCase().match(e.target.value.toLowerCase());
       })
     );
+  }
+
+  function handleClick(user) {
+    setSelectedUser(user.id);
+    setItem(6);
   }
 
   useEffect(() => {
@@ -45,7 +50,9 @@ export const OurCommunityContainer = () => {
         // users={users}
         currentUsers={currentUsers}
         isLoading={isLoading}
-        setCurrentUsers={setCurrentUsers}></OurCommunity>
+        setCurrentUsers={setCurrentUsers}
+        handleClick={handleClick}
+      ></OurCommunity>
     </>
   );
 };

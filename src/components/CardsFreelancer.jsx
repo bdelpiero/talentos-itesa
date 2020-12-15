@@ -16,34 +16,37 @@ export default ({ setItem, nextPayments }) => {
   const [invitedProject, setInvitedProject] = useRecoilState(projectInvited);
 
   return (
-    <>
-      {/* CARD OFERTA DE PROYECTO */}
-      {invitedProject && (
-        <CardsOferts
-          inviteds={invitedProject}
-          setInvitedProject={setInvitedProject}
-          setItem={setItem}
-        />
-      )}
+    console.log("ACA ESTA EL USER", currentUser),
+    (
+      <>
+        {/* CARD OFERTA DE PROYECTO */}
+        {invitedProject && (
+          <CardsOferts
+            inviteds={invitedProject}
+            setInvitedProject={setInvitedProject}
+            setItem={setItem}
+          />
+        )}
 
-      {/* CARD PROXIMO PAGO */}
-      <CardsNextPayments nextPayments={nextPayments} />
+        {/* CARD PROXIMO PAGO */}
+        <CardsNextPayments nextPayments={nextPayments} />
 
-      {/* CARD MI BANCO */}
-      <Card className='freelancer-cards'>
-        <Title level={5} id='title-freelancer-card'>
-          MI BANCO
-        </Title>
-        <p id='subtittle-freelancer-card'>CBU/Alias</p>
-        <p id='text-freelancer-card'>{currentUser.bankDetails.alias}</p>
-        <p id='subtittle-freelancer-card'>TITULAR</p>
-        <p id='text-freelancer-card'>{currentUser.bankDetails.accountName}</p>
-        <p id='subtittle-freelancer-card'>BANCO</p>
-        <div className='container-freelancer-button'>
-          <p id='text-freelancer-card'>{currentUser.bankDetails.bankName} </p>
-          <MiBancoContainer />
-        </div>
-      </Card>
-    </>
+        {/* CARD MI BANCO */}
+        <Card className="freelancer-cards">
+          <Title level={5} id="title-freelancer-card">
+            MI BANCO
+          </Title>
+          <p id="subtittle-freelancer-card">CBU/Alias</p>
+          <p id="text-freelancer-card">{currentUser.bankDetails.alias}</p>
+          <p id="subtittle-freelancer-card">TITULAR</p>
+          <p id="text-freelancer-card">{currentUser.bankDetails.accountName}</p>
+          <p id="subtittle-freelancer-card">BANCO</p>
+          <div className="container-freelancer-button">
+            <p id="text-freelancer-card">{currentUser.bankDetails.bankName} </p>
+            <MiBancoContainer />
+          </div>
+        </Card>
+      </>
+    )
   );
 };
