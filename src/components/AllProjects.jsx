@@ -15,7 +15,7 @@ function AllProjects({ projects, deleteProject, handleClick, changeStatus, onCha
         <Menu.Item>
           <div>
             <Button
-              className="modal-button"
+              className="modal-button2"
               onClick={() => handleClick(proyecto)}
             >
               {" "}
@@ -30,7 +30,7 @@ function AllProjects({ projects, deleteProject, handleClick, changeStatus, onCha
         </Menu.Item>
         <Menu.Item>
           <Button
-            className="modal-button"
+            className="modal-button2"
             onClick={() => changeStatus(proyecto)}
           >
             ESTADO
@@ -96,7 +96,7 @@ function AllProjects({ projects, deleteProject, handleClick, changeStatus, onCha
       render: (proyecto) => (
         <div>
           <Button
-            className="modal-button hide-button"
+            className="modal-button2 hide-button"
             onClick={() => handleClick(proyecto)}
           >
             {" "}

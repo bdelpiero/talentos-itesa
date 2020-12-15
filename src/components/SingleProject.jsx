@@ -44,6 +44,8 @@ export const SingleProject = ({
       { merge: true }
     );
   }
+
+  
   return (
     <>
       <Row gutter={[30]}>
@@ -67,6 +69,7 @@ export const SingleProject = ({
             {editableBudget}
           </Paragraph>
           <Button
+          className="modal-button2"
             onClick={() =>
               projectDescription(editableDesc, editableTime, editableBudget)
             }
@@ -81,7 +84,7 @@ export const SingleProject = ({
               Freelancers en proyecto{" "}
               {/* <UserAddOutlined className="single-icon add-user" /> */}
             </Title>{" "}
-            <InviteProjectContainer proyecto={project} />
+            <InviteProjectContainer  proyecto={project} />
           </div>
 
           <List
@@ -92,8 +95,17 @@ export const SingleProject = ({
                 <List.Item.Meta
                   avatar={<Avatar src={item.avatar} />}
                   title={item.name}
-                  description={item.freelancerType}
+                  description={item.status}
                 />
+                { item.urlContractProject ?<a href={`${item.urlContractProject}`} target="_blank">
+                <Button
+                  className="modal-button2"
+                  style={{marginRight:"20px"}}                  
+                >
+                  Ver Contrato
+                </Button>
+              </a> : null }
+                
                 <DeleteOutlined
                   onClick={() => delUserFromProject(item.id)}
                   className="single-icon"
