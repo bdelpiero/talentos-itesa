@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { SingleUser } from "../components/SingleUser";
 import { useRecoilState } from "recoil";
 import { allUsersState, projectInvited } from "../atoms/index";
+import { db } from "../../firebase/firebase";
 
 export const SingleUserContainer = ({ selectedUser }) => {
   const [selectedUserData, setSelectedUserData] = useState({});
@@ -13,6 +14,13 @@ export const SingleUserContainer = ({ selectedUser }) => {
     });
     return () => {};
   }, []);
+
+  /*   useEffect(() => {
+      db.collection("projects").doc()
+    return () => {
+      cleanup;
+    };
+  }, [input]); */
 
   return (
     <>

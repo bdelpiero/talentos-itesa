@@ -19,8 +19,7 @@ export function AuthProvider({ children }) {
 
 
   function signup(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password)
-    .catch(err => console.log(err))
+    return auth.createUserWithEmailAndPassword(email, password).catch(err => console.log(err))
   }
 
   function login(email, password) {
@@ -62,11 +61,10 @@ export function AuthProvider({ children }) {
         // se guarda una referencia al usuario
         const userRef = db.collection("users").doc(authUser.uid);
         //se establece un observer que esta atento a los cambios en la base de datos
-
-      let obs =  userRef.onSnapshot(
+        let obs =  userRef.onSnapshot(
           (docSnapshot) => {
             //se setea el usuario nuevamente con los cambios
-            setCurrentUser(docSnapshot.data());
+            setCurrentUser(docSnapshot.data())
           },
           (err) => {
             console.log(`Encountered error: ${err}`);
@@ -78,16 +76,13 @@ export function AuthProvider({ children }) {
           .get()
           .then((UserInfo) => {
             const User = UserInfo.data();
-            console.log("aqui esta el usuario logueado",User)
             setLoading(false);
             setCurrentUser(User);
             setIsLogin({ loadin: false });
             if (User) {
               if (User.isAdmin) {
-                console.log("aqui entra a la ruta admin")
                 history.push("/admin");
               } else {
-                console.log("aqui entra a la ruta freelancer")
                 history.push("/freelancer");
               }
             }
@@ -96,9 +91,8 @@ export function AuthProvider({ children }) {
             console.log("Error getting document", err);
           });
       } else {
-        console.log("aqui eno hay usuario")
         setLoading(false);
-        setCurrentUser('');
+        setCurrentUser({});
       }
     });
     return unsubscribe;
