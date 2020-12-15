@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { db } from "../../firebase/firebase";
 import {
   Row,
@@ -30,50 +30,61 @@ export const SingleProject = ({
   project,
   projectUsersData,
 }) => {
-  const [editableDesc, setEditableDesc] = useState();
-  const [editableTime, setEditableTime] = useState("3 Meses");
-  const [editableBudget, setEditableBudget] = useState("$50.000");
+  const [editableDesc, setEditableDesc] = useState(project.description);
+  const [editableTime, setEditableTime] = useState(project.term);
+  const [editableBudget, setEditableBudget] = useState(project.budget);
 
-  /* function projectDescription() {
-    db.collection("projects")
-      .doc(project.id)
-      .set({ description: e.target.value }, { merge: true });
-  } */
+  function projectDescription(editableDesc) {
+    db.collection("projects").doc(project.id).set(
+      {
+        description: editableDesc,
+        term: editableTime,
+        budget: editableBudget,
+      },
+      { merge: true }
+    );
+  }
+
+  
   return (
     <>
       <Row gutter={[30]}>
         <Col xs={24} sm={12} md={12} lg={12}>
           <Title level={5}>Descripción del Proyecto</Title>
 
-          <Paragraph>{project.description}</Paragraph>
+          <Paragraph editable={{ onChange: setEditableDesc }}>
+            {editableDesc}
+          </Paragraph>
 
-          {/* 
-          <TextArea
-            defaultValue={project.description}
-            onChange={handleChange}
-            onPressEnter={projectDescription}
-            bordered={false}
-            allowClear={true}
-            autoSize={false}
-          ></TextArea>
- */}
           <Title level={5}>Duración</Title>
           <Paragraph editable={{ onChange: setEditableTime }}>
             {editableTime}
           </Paragraph>
           <Title level={5}>Presupuesto</Title>
-          <Paragraph editable={{ onChange: setEditableBudget }}>
+          <Paragraph
+            editable={{
+              onChange: setEditableBudget,
+            }}
+          >
             {editableBudget}
           </Paragraph>
+          <Button
+          className="modal-button2"
+            onClick={() =>
+              projectDescription(editableDesc, editableTime, editableBudget)
+            }
+          >
+            Aceptar
+          </Button>
         </Col>
 
         <Col xs={24} sm={12} md={12} lg={12}>
-          <div style={{display:"flex",justifyContent:"space-between" }}>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Title level={5}>
               Freelancers en proyecto{" "}
               {/* <UserAddOutlined className="single-icon add-user" /> */}
             </Title>{" "}
-            <InviteProjectContainer proyecto={project} />
+            <InviteProjectContainer  proyecto={project} />
           </div>
 
           <List
@@ -84,8 +95,17 @@ export const SingleProject = ({
                 <List.Item.Meta
                   avatar={<Avatar src={item.avatar} />}
                   title={item.name}
-                  description={item.freelancerType}
+                  description={item.status}
                 />
+                { item.urlContractProject ?<a href={`${item.urlContractProject}`} target="_blank">
+                <Button
+                  className="modal-button2"
+                  style={{marginRight:"20px"}}                  
+                >
+                  Ver Contrato
+                </Button>
+              </a> : null }
+                
                 <DeleteOutlined
                   onClick={() => delUserFromProject(item.id)}
                   className="single-icon"

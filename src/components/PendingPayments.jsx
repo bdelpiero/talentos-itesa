@@ -13,7 +13,7 @@ export default ({user}) => {
             Pagos a realizar este mes
           </Title>
           <Card >          
-            <Row gutter={{ xs: 6, sm: 8, md: 16, lg: 24 }}>  
+            <Row className="paymentsCards">  
             <Col className="gutter-row" span={2} >
             <Avatar size={55} src={user.avatar} className='avatar' />
               </Col>          
@@ -36,7 +36,6 @@ export default ({user}) => {
             <Button 
             className="list-button-paymentsFree" 
             shape="round"
-            style={{width:"80%", height:"auto"} }
             >
             Ver comprobante de pago <DownloadOutlined />
           </Button> 

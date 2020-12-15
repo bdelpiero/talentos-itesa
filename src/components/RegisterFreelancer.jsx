@@ -1,12 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { cbu } from 'arg.js'
+// CBU PARA PROBAR: 0170165040000005381456
+
 import SignatureCanvas from "react-signature-canvas";
 import { Form, Input, Select, Button, Steps, Alert } from "antd";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 const { Option } = Select;
 
-const { Step } = Steps;
+
 const antIcon = <LoadingOutlined style={{ fontSize: 40 }} spin />;
 
 function RegisterFreelancer({
@@ -23,7 +26,7 @@ function RegisterFreelancer({
   errorSignature,
   setErrorSignature,
   isLogin,
-  setBankData
+  setBankData,
 }) {
   return (
     <div className='register-formContainer'>
@@ -197,11 +200,25 @@ function RegisterFreelancer({
             name='cuit'
             value={bankData.cuit}
             onChange={handleChange}
+            hasFeedback
+            dependencies={["cuit"]}
             rules={[
-              {
-                required: true,
-                message: "CUIT is required",
-              },
+              () => ({
+                validator(rule, value) {
+                  const regExp = new RegExp( /\b(20|23|24|27|30|33|34)(\D)?[0-9]{8}(\D)?[0-9]/g )
+                  const test = regExp.test(value)
+                  if(value == undefined) {
+                    return Promise.reject("CUIT is required");
+                  } else if (value.length > 11) {
+                    return Promise.reject("CUIT cannot be longer than 11 characters");
+                  }else {
+                    if (test) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject("Enter a valid CUIT");
+                  }
+                }
+              }),
             ]}>
             <Input className='register-input' placeholder='CUIT' name='cuit' />
           </Form.Item>
@@ -236,6 +253,29 @@ function RegisterFreelancer({
               placeholder='Alias de cuenta'
               name='alias'
             />
+          </Form.Item>
+          <Form.Item
+            name='cbu'
+            value={bankData.cbu}
+            onChange={handleChange}
+            hasFeedback
+            dependencies={["cbu"]}
+            rules={[
+              () => ({
+                validator(rule, value) {
+                  let test = cbu.isValid(value)
+                  if(value == undefined) {
+                    return Promise.reject("CBU is required");
+                  } else {
+                    if (test) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject("Enter a valid CBU");
+                  }
+                }
+              }),
+            ]}>
+            <Input className='register-input' placeholder='CBU' name='cbu' />
           </Form.Item>
           <Form.Item
             name='bankName'

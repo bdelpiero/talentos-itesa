@@ -21,7 +21,7 @@ export default () => {
       <Row justify="space-between"  align="center" wrap={true} className='header-title-row'>
         <span className='span-title'>
           <Title level={2} className='header-title'>Dashboard</Title>
-          <Text>Bienvenido a Itesa, {currentUser.name + ' '} :) </Text>
+          <Text>Bienvenido a Itesa, {currentUser.name + ' ' + ':)' }</Text>
         </span>
           <EditUserContainer
             user={currentUser}
@@ -29,6 +29,8 @@ export default () => {
             style={{alignSelf: 'center'}}
           />
       </Row>
+       
+
     </Header>
   );
 };

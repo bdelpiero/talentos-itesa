@@ -1,13 +1,10 @@
 import React from "react";
 import { useRecoilState } from "recoil";
 import { user } from "../atoms/index";
+
+// STYLES
 import { Layout, Menu } from "antd";
-import {
-  BarChartOutlined,
-  HomeOutlined,
-  TeamOutlined,
-  LogoutOutlined,
-} from "@ant-design/icons";
+import { BarChartOutlined, HomeOutlined, TeamOutlined, LogoutOutlined } from "@ant-design/icons";
 
 export default ({ handleLogout, setItem }) => {
   const [currentUser, setCurrentUser] = useRecoilState(user);

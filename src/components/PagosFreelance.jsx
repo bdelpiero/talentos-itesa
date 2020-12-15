@@ -8,7 +8,6 @@ import { Typography } from "antd";
 const { Title } = Typography;
 
 
-
 export default ({user})=>  {
   
     return (
@@ -16,11 +15,10 @@ export default ({user})=>  {
       {/* className="list-description" */}
         <Title style={{ width: "100%" }}>
           Pagos
-        </Title>
-        
-          <Card >          
-            <Row gutter={{ xs: 6, sm: 8, md: 16, lg: 24 }}>  
-            <Col className="gutter-row" span={2} >
+        </Title>        
+          <Card  >          
+            <Row className="paymentsCards">  
+            <Col className="gutter-row " span={2} >
             <Avatar size={55} src={user.avatar} className='avatar' />
               </Col>          
             <Col  span={4} >              
@@ -28,11 +26,11 @@ export default ({user})=>  {
               <b style={{color:"#9e39ff"}}>Proyecto:</b>
               <b>ITS202|Satapp</b>
             </Col>
-            <Col className="gutter-row"  span={6}>
+            <Col className="gutter-row "  span={6}>
               <b style={{color:"#9e39ff"}}>Factura:</b><b>1 de 4</b>              
             </Col>
             <Col 
-            className="gutter-row"  
+            className="gutter-row "  
             span={6}
             >
               <b style={{color:"#9e39ff"}}>Fecha de pago:</b>
@@ -42,7 +40,6 @@ export default ({user})=>  {
             <Button 
             className="list-button-paymentsFree" 
             shape="round"
-            style={{width:"80%", height:"auto"} }
             >
             Ver comprobante de pago <DownloadOutlined />
           </Button> 

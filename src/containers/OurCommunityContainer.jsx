@@ -12,6 +12,7 @@ export const OurCommunityContainer = () => {
   const [usersPerPage, setUsersPerPage] = useState(5);
   const [isLoading, setIsLoading] = useState(false);
 
+  console.log(allUsers, "allUsers");
   function onChange(e) {
     setCurrentUsers(
       allUsers.filter((user) => {
@@ -22,29 +23,6 @@ export const OurCommunityContainer = () => {
       })
     );
   }
-
-  function handlePageChange(page, pageSize) {
-    setCurrentPage(page);
-  }
-
-  const filterByColumn = (e, column) => {
-    if (e.target.innerHTML == "all") return setCurrentUsers(allUsers);
-    if (column === "projectInvited") return filterByState(e);
-    setCurrentUsers(
-      allUsers.filter(
-        (user) =>
-          user[column] && user[column].toLowerCase() == e.target.innerHTML
-      )
-    );
-  };
-
-  const filterByState = (e) => {
-    if (e.target.innerHTML == "En Proyecto")
-      return setCurrentUsers(
-        allUsers.filter((user) => user.projectInvited !== "")
-      );
-    setCurrentUsers(allUsers.filter((user) => user.projectInvited === ""));
-  };
 
   useEffect(() => {
     const unsuscribe = db
@@ -60,24 +38,14 @@ export const OurCommunityContainer = () => {
     return () => unsuscribe();
   }, []);
 
-  const indexOfLastUser = currentPage * usersPerPage;
-  const indexOfFirstUser = indexOfLastUser - usersPerPage;
-  const users = currentUsers.slice(indexOfFirstUser, indexOfLastUser);
-
   return (
     <>
       <OurCommunity
-        currentPage={currentPage}
-        filterByState={filterByState}
-        filterByColumn={filterByColumn}
         onChange={onChange}
-        users={users}
+        // users={users}
         currentUsers={currentUsers}
-        usersPerPage={usersPerPage}
-        handlePageChange={handlePageChange}
         isLoading={isLoading}
-        setCurrentUsers={setCurrentUsers}
-      ></OurCommunity>
+        setCurrentUsers={setCurrentUsers}></OurCommunity>
     </>
   );
 };
