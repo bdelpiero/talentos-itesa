@@ -30,12 +30,12 @@ export const isLoading = atom({
 
 
 export const pagos = atom({
-  key: "pagosPendientes",
-  default: []
-  // {
-  //   pending:[],
-  //   observer:''
-  // }
+  key: "pagos",
+  default: {
+    pending:[],
+    observer:''
+  }
+  
 });
 
 

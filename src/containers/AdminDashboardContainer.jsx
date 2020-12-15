@@ -12,8 +12,7 @@ function AdminDashboardContainer() {
   const [currentUser, setCurrentUser] = useRecoilState(user);
   const { logout } = authUser();
   const [allUsers, setAllUsers] = useRecoilState(allUsersState);
-  const [pagosPendientes, setPagosPendientes] = useState({pendin:[],observer:()=>{}});
-
+  const [pagosPendientes, setPagosPendientes] = useRecoilState(pagos);
 
   const handleLogout = () => logout();
 
@@ -29,22 +28,22 @@ function AdminDashboardContainer() {
         );
       });
 
-    const pendingP= []
     const PagosObserver = db
     .collection("payments")
     .where("state", "==", "pending")
     .where("loadedF", "==", true)
     .onSnapshot((data) => {
-      data.forEach((data) => {
-        pendingP.push(data.data())
+      const pendingP= []
+      data.forEach((doc) => {
+        pendingP.push(doc.data())
       })    
+      setPagosPendientes({pending:pendingP,observer:PagosObserver})
     });
-    setPagosPendientes({pending:pendingP,observer:PagosObserver})
-    console.log(" pagos pendientes", pagosPendientes)
+   
 
     return () => unsuscribe();
   }, []);
-console.log("AQUI ESTAN LOS PAGOS PENDIENTES",pagosPendientes)
+
 
   return !currentUser ? (
     <Error404 />
