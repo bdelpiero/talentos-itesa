@@ -13,11 +13,11 @@ export default ({ user }) => {
         Pagos a realizar este mes
       </Title>
       <Card>
-        <Row className='paymentsCards'>
+        <Row className='paymentsCards' align='middle'>
           <Col className='gutter-row' span={2}>
             <Avatar size={55} src={user.avatar} className='avatar' />
           </Col>
-          <Col span={4}>
+          <Col span={6}>
             <h1>80.000</h1>
             <b style={{ color: "#9e39ff" }}>Proyecto:</b>
             <b>ITS202|Satapp</b>
@@ -30,7 +30,7 @@ export default ({ user }) => {
             <b style={{ color: "#9e39ff" }}>Fecha de pago:</b>
             <b>02/05/2020</b>
           </Col>
-          <Col className='gutter-row' span={6}>
+          <Col className='gutter-row' span={4}>
             <Button className='list-button-paymentsFree' shape='round'>
               Realizar Pago <DownloadOutlined />
             </Button>
