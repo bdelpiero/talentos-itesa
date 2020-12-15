@@ -168,7 +168,7 @@ function AllProjects({
           alignItems: "center",
         }}
       >
-        <Title> Todos los Proyectos </Title>
+        <Title></Title>
         <NewProjectContainer />
       </div>
 

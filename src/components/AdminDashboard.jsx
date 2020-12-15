@@ -31,7 +31,7 @@ function AdminDashboard({ handleLogout }) {
       <Sidebar setItem={setItem} handleLogout={handleLogout} />
       <Layout>
         <Navbar setItem={setItem} />
-        <HeaderComponent />
+        <HeaderComponent  item={item} project={project} />
         <Content className="content-user">
           {item == 1 && (
             <>
