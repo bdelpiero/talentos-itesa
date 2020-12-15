@@ -493,6 +493,12 @@ trabajando con content user
   background-color: #9e39ff !important;
 }
 
+.freelancer-card-buttons:focus {
+  text-align: center;
+  color: white;
+  background-color: #9e39ff !important;
+}
+
 /* ----------------------
 trabajando con  user Cards
 ---------------------- */
@@ -900,6 +906,39 @@ Trabajando con Admin Cards/DashBoard
   padding: 10px;
   width: auto;
   font-size: 16px;
+}
+
+#close-modal-invoice-button {
+  display: flex;
+  justify-content: center;
+}
+
+#dragger-modal-invoice {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-around !important;
+  align-content: center !important;
+  width: 100% !important;
+}
+
+#modal-invoice {
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-around !important;
+  align-items: stretch !important;
+}
+
+#cargar-factura-button {
+  margin: 1rem auto;
+  width: 35%;
+}
+
+#invoice-uploaded {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: center !important;
 }
 
 .ant-modal-footer {
