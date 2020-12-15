@@ -1,6 +1,7 @@
 import React from "react";
 import { CloseCircleOutlined } from "@ant-design/icons";
 import { Modal, Button, Row, Col, Input, Form, DatePicker, Select, AutoComplete} from "antd";
+import { user } from "../atoms";
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
@@ -90,9 +91,9 @@ function InviteProject({
                         const userSelect = options.filter((option) => {
                           if (userSelected == option.value) return true;
                         });
-
-                        setSelectedUser(userSelect[0].id);
-                        console.log("--- selected user ---- ", selectedUser);
+                        if(!userSelected[0].id)setSelectedUser(userSelect[0].id);
+                        console.log("PASO EL IF ")
+                        
                       }}
                       options={options}
                       placeholder="Nombre de Freelancer"

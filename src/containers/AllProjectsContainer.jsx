@@ -16,18 +16,23 @@ function AllProjectsContainer({ setItem, setProject }) {
   }
 
   useEffect(() => {
-    const unsuscribe = db.collection("projects").onSnapshot((projects) => {
+    const unsuscribe = db.collection("projects")
+    .onSnapshot((projects) => {
       projects = projects.docs.map((project) => {
         let proyecto = project.data();
         proyecto.id = project.id;
         proyecto.key = project.id;
         return proyecto;
-      });
+      })
       setProjects(projects);
       setFilterProjects(projects);
     });
     return () => unsuscribe();
   }, []);
+
+
+
+
 
   const deleteProject = (project) => {
     db.collection("projects").doc(project.id).delete();
@@ -37,8 +42,7 @@ function AllProjectsContainer({ setItem, setProject }) {
     if (project.status == "pending") return;
     const newStatus =
       project.status == "On Development" ? "Finished" : "On Development";
-    const newTotal =
-      project.status == "On Development" ? -1 : 1  
+    const newTotal = project.status == "On Development" ? -1 : 1;
     db.collection("projects")
       .doc(project.id)
       .update({
@@ -50,28 +54,33 @@ function AllProjectsContainer({ setItem, setProject }) {
           .collection("invitedUser")
           .get()
           .then((proyectos) =>
-            proyectos.forEach((user) => {
-              db.collection("projects")
-                .doc(project.id)
-                .collection("invitedUser")
-                .doc(user.id)
-                .update({
-                  status: newStatus,
-                })
-                return user.id
-            }).then((user)=>{
-              db.collection("users").doc(user).
-              get()
-              .then((doc)=>{
-                const user = doc.data()
-                if(!user.activeProjectsCounter) return
-                db.collection("users").doc(user.id).update({
-                  activeProjectsCounter: user.activeProjectsCounter + newTotal
-                })
+            proyectos
+              .forEach((user) => {
+                db.collection("projects")
+                  .doc(project.id)
+                  .collection("invitedUser")
+                  .doc(user.id)
+                  .update({
+                    status: newStatus,
+                  });
+                return user.id;
               })
-            })
-            
-          )
+              .then((user) => {
+                db.collection("users")
+                  .doc(user)
+                  .get()
+                  .then((doc) => {
+                    const user = doc.data();
+                    if (!user.activeProjectsCounter) return;
+                    db.collection("users")
+                      .doc(user.id)
+                      .update({
+                        activeProjectsCounter:
+                          user.activeProjectsCounter + newTotal,
+                      });
+                  });
+              })
+          );
       });
   };
 

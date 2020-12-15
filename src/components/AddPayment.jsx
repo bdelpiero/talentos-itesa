@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
   Modal,
@@ -11,10 +11,16 @@ import {
   Upload,
 } from "antd";
 
-import { CloseCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import {
+  CloseCircleOutlined,
+  PlusOutlined,
+  DeleteOutlined,
+  FilePdfOutlined,
+  DashOutlined,
+} from "@ant-design/icons";
 
 const { Dragger } = Upload;
-const {Option} = Select
+const { Option } = Select;
 
 function AddPayment({
   selectedUser,
@@ -44,13 +50,23 @@ function AddPayment({
     return { value: project.proyecto, id: project.projectId };
   });
 
+  const [dragger, setDragger] = useState(false);
+  const [boton, setBoton] = useState(true);
+
   const props = {
     name: "file",
-    multiple: true,
+    // action: (info) => {
+    //   console.log(info)
+    //   setFileUrl(info)
+    // },
     onChange(info){
-      setFileUrl(info) 
-     }
-}
+      setFileUrl(info)
+      setBoton(false)
+      setDragger(true)
+    }
+  };
+
+
 
   return (
     <div className="Modal">
@@ -148,7 +164,7 @@ function AddPayment({
                 ]}
               >
                 <Select
-                  onChange={(value)=>handleCuota(value)}
+                  onChange={(value) => handleCuota(value)}
                   placeholder="Cuota"
                 >
                   <Option value="CUOTA 1">Cuota 1</Option>
@@ -159,19 +175,57 @@ function AddPayment({
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Dragger {...props} >
-                <p className="ant-upload-drag-icon">
-                  <PlusOutlined />
-                </p>
-                <p className="ant-upload-text">
-                  Click or Drag file to upload
-                </p>
-              </Dragger>
+              {!dragger ? (
+                <Dragger {...props}
+                n
+                rules={[
+                  {
+                    required: true,
+                    message: "Por favor ingrese Cuota a cancelar",
+                  },
+                ]}
+                >
+                  <p className="ant-upload-drag-icon">
+                    <PlusOutlined style={{color:"#9e39ff"}} />
+                  </p>
+
+                  <p className="ant-upload-text">
+                    Click or Drag file to upload
+                  </p>
+                </Dragger>
+              ) : (
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    height:"80%",
+                    width:"80%",
+                    border: "dashed",
+                    borderColor:"green",
+                    padding:"25px"
+                  }}
+                >
+
+
+                  <p style={{color:"green"}}>{fileUrl.file.name} </p>
+
+                  <p>
+                    <DeleteOutlined
+                      style={{ fontSize: "20px",color:"red" }}
+                      onClick={() => {
+                        setFileUrl({});
+                        setDragger(false);
+                      }}
+                    />
+                  </p>
+                </div>
+              )}
             </Col>
           </Row>
 
           <div className="modal-input">
-            <button className="ok-button" type="submit">
+            <button className="ok-button" type="submit" disabled={boton}>
               CONFIRMAR PAGO
             </button>
           </div>

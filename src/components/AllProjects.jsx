@@ -20,7 +20,7 @@ function AllProjects({
         <Menu.Item>
           <div>
             <Button
-              className="modal-button"
+              className="modal-button2"
               onClick={() => handleClick(proyecto)}
             >
               {" "}
@@ -35,8 +35,8 @@ function AllProjects({
         </Menu.Item>
         <Menu.Item>
           <Button
-            className="modal-button"
-            onClick={() => {changeStatus(proyecto),changeBoton}}
+            className="modal-button2"
+            onClick={() => changeStatus(proyecto)}
           >
             ESTADO
           </Button>
@@ -101,7 +101,7 @@ function AllProjects({
       render: (proyecto) => (
         <div>
           <Button
-            className="modal-button hide-button"
+            className="modal-button2 hide-button"
             onClick={() => handleClick(proyecto)}
           >
             {" "}

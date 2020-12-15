@@ -22,6 +22,7 @@ function RegisterFreelancerContainer() {
   const [isLogin, setIsLogin] = useRecoilState(atomLogin);
   const [errorSignature, setErrorSignature] = useState(false);
   const [invited, setInvited] = useState(true);
+  const [invalidCuit, setInvalidCuit] = useState(false)
 
   const [data, setData] = useState({
     name: "",
@@ -36,7 +37,7 @@ function RegisterFreelancerContainer() {
     bankName: "",
     accountName: "",
     alias: "",
-    // cbu: "",
+    cbu: "",
     cuit: "",
     type: "",
     address: "",
@@ -53,10 +54,10 @@ function RegisterFreelancerContainer() {
         [e.target.name]: e.target.value,
       });
     if (step == 2)
-      setBankData({
+    setBankData({
         ...bankData,
         [e.target.name]: e.target.value,
-      });
+      })
   };
 
   const handleConfirm = () => {
@@ -121,7 +122,6 @@ function RegisterFreelancerContainer() {
               })
               .then(() => {
                 db.collection("invites").doc(`${data.email}`).delete();
-                history.push("/freelancer")
               });
           });
         });

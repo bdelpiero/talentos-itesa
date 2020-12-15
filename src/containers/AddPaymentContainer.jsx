@@ -27,8 +27,9 @@ function NewProjectContainer() {
 
   useEffect(() => {
     console.log(" -- ESTO ES EL SELECTEDUSER --", selectedUser);
+    let desuscribir = ()=>{}
     if (selectedUser.email)
-      return db
+    desuscribir = db
         .collectionGroup("invitedUser")
         .where("email", "==", selectedUser.email)
         .onSnapshot((projects) => {
@@ -38,6 +39,7 @@ function NewProjectContainer() {
             })
           );
         });
+        return () => desuscribir();
   }, [selectedUser]);
 
   const openModal = () => {
@@ -71,7 +73,7 @@ function NewProjectContainer() {
     })
       .then(() => {
         form.resetFields();
-        console.log("Se cargó correctamente");
+        console.log("Se cargo correctamente");
       })
       .then(() => {
         Modal.success({

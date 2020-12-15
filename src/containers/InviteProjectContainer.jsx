@@ -5,7 +5,35 @@ import CheckCircle from "../../views/check.svg";
 import { Modal, Card, Form } from "antd";
 import { ProjectOutlined } from "@ant-design/icons";
 
-function InviteProjectContainer({ proyecto, boton}) {
+function addCuotas(cuotas, user, project) {
+  console.log("--- ACA ESTAN LOS USER ----", user)
+  console.log("--- ACA ESTAN LOS PROJECT ----", project)
+  const batch = db.batch();
+  cuotas.forEach((cuota, i) => {
+    console.log(cuota);
+    if (!cuota.monto) return;
+    const cuotaRef = db.collection("payments").doc();
+    const newDate = cuota.fecha.split("/").reverse().join("-");
+    batch.set(cuotaRef, {
+      fecha: newDate,
+      monto: cuota.monto,
+      userId: user.id,
+      projectId: project.id,
+      factura: "",
+      comprobantePago: "",
+      state: "pending",
+      projectName: project.name,
+      cuota: "CUOTA " + (i + 1),
+    });
+  });
+
+  return batch
+    .commit()
+    .then(() => console.log("cuotas cargadas exitosamente"))
+    .catch((err) => console.log("error al cargar cuotas", err));
+}
+
+function InviteProjectContainer({ proyecto }) {
   const [modal, setModal] = useState(false);
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState("");
@@ -80,16 +108,17 @@ function InviteProjectContainer({ proyecto, boton}) {
       ...cuotas,
       [nCuota]: { ...cuotas[nCuota], [name]: value },
     });
-    console.log("aca esta cuotas---", cuotas);
   };
 
   function handleFinish() {
+    console.log("-- ACA ESTA SELECTEDUSER ---", selectedUser)
     closeModal();
     const cuotasDB = Object.values(cuotas);
     const getUser = users.filter((user) => user.id == selectedUser)[0];
     const usersProject = proyecto.users
       ? [...proyecto.users, selectedUser]
       : [selectedUser];
+    addCuotas(cuotasDB, getUser, proyecto);
     db.collection("projects")
       .doc(proyecto.id)
       .collection("invitedUser")
@@ -108,7 +137,7 @@ function InviteProjectContainer({ proyecto, boton}) {
           .update({ projectInvited: proyecto.id });
       })
       .then(() => {
-        form.resetFields()
+        form.resetFields();
         Modal.success({
           bodyStyle: {
             display: "flex",
@@ -117,13 +146,13 @@ function InviteProjectContainer({ proyecto, boton}) {
             justifyContent: "center",
           },
           content: (
-            <Card className="invite_msg" onClick={openModal}>
+            <Card className='invite_msg' onClick={openModal}>
               <h1>¡Perfil Invitado!</h1>
             </Card>
           ),
           centered: "true",
           okText: "VOLVER",
-          icon: <img src={CheckCircle} className="icono-sider" />,
+          icon: <img src={CheckCircle} className='icono-sider' />,
           okButtonProps: {
             style: {
               backgroundColor: "#9e39ff",
@@ -137,7 +166,7 @@ function InviteProjectContainer({ proyecto, boton}) {
 
   return (
     <InviteProject
-      className="modal-outside"
+      className='modal-outside'
       handleChange={handleChange}
       handleCuotas={handleCuotas}
       cuotas={cuotas}

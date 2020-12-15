@@ -1,16 +1,18 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useRecoilState } from "recoil";
-import { user,projectInvited } from "../atoms/index";
+import { user, projectInvited } from "../atoms/index";
+import CardsNextPayments from "./CardsNextPayments";
+import CardsOferts from "./CardsOferts";
 
 // STYLES
-import { Button, Card } from 'antd';
-import { Typography } from 'antd';
+import { Button, Card } from "antd";
+import { Typography } from "antd";
 import MiBancoContainer from "../containers/MiBancoContainer";
 
 const { Title } = Typography;
 
-export default ({setItem}) => {
-  const [currentUser,serCurrentUser]=useRecoilState(user)
+export default ({ setItem, nextPayments }) => {
+  const [currentUser, serCurrentUser] = useRecoilState(user);
   const [invitedProject, setInvitedProject] = useRecoilState(projectInvited);
 
   const CardsOferts = (props) => {
@@ -95,24 +97,22 @@ export default ({setItem}) => {
   return (
     <>
       {/* CARD OFERTA DE PROYECTO */}
-      {invitedProject && <CardsOferts inviteds={invitedProject}/>}
+      {invitedProject && (
+        <CardsOferts
+          inviteds={invitedProject}
+          setInvitedProject={setInvitedProject}
+          setItem={setItem}
+        />
+      )}
 
       {/* CARD PROXIMO PAGO */}
-      <Card className='freelancer-cards'>
-        <Title level={5} id="title-freelancer-card">PROXIMO PAGO</Title>
-        <p id='subtittle-freelancer-card'>PROYECTO</p>
-        <p id='text-freelancer-card'>Project Name</p>
-        <p id='subtittle-freelancer-card'>FECHA DE PAGO</p>
-        <p id='text-freelancer-card'>Fecha de Pago</p>
-        <p id='subtittle-freelancer-card'>MONTO</p>
-        <div className='container-freelancer-button'>
-          <p id='text-freelancer-card'>"$50.000"</p>
-          <Button shape='round' className="freelancer-card-buttons"> Cargar Factura </Button>
-        </div>
-      </Card>
+      <CardsNextPayments nextPayments={nextPayments} />
+
       {/* CARD MI BANCO */}
       <Card className='freelancer-cards'>
-        <Title level={5} id="title-freelancer-card">MI BANCO</Title>
+        <Title level={5} id='title-freelancer-card'>
+          MI BANCO
+        </Title>
         <p id='subtittle-freelancer-card'>CBU/Alias</p>
         <p id='text-freelancer-card'>{currentUser.bankDetails.alias}</p>
         <p id='subtittle-freelancer-card'>TITULAR</p>
@@ -120,9 +120,9 @@ export default ({setItem}) => {
         <p id='subtittle-freelancer-card'>BANCO</p>
         <div className='container-freelancer-button'>
           <p id='text-freelancer-card'>{currentUser.bankDetails.bankName} </p>
-          <MiBancoContainer/>
+          <MiBancoContainer />
         </div>
       </Card>
     </>
   );
-}
+};
