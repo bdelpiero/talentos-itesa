@@ -10,14 +10,14 @@ import { Typography, Avatar, Upload, Modal, Input, Form } from "antd";
 
 const { Title, Text } = Typography;
 
-function getBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
-  });
-}
+// function getBase64(file) {
+//   return new Promise((resolve, reject) => {
+//     const reader = new FileReader();
+//     reader.readAsDataURL(file);
+//     reader.onload = () => resolve(reader.result);
+//     reader.onerror = (error) => reject(error);
+//   });
+// }
 
 export default ({ user, setCurrentUser }) => {
   const [modal, setModal] = useState(false);
@@ -81,7 +81,7 @@ export default ({ user, setCurrentUser }) => {
     </div>
   );
 
-  const handleCV = async (info) => {
+  const handleCV = async( info) => {
     console.log(URL.createObjectURL(info.file.originFileObj));
     setFileUrl(URL.createObjectURL(info.file.originFileObj));
     setLoaded(true);
