@@ -109,17 +109,17 @@ export default ({ setItem, nextPayments }) => {
       <CardsNextPayments nextPayments={nextPayments} />
 
       {/* CARD MI BANCO */}
-      <Card className='freelancer-cards'>
-        <Title level={5} id='title-freelancer-card'>
+      <Card className="freelancer-cards">
+        <Title level={5} id="title-freelancer-card">
           MI BANCO
         </Title>
-        <p id='subtittle-freelancer-card'>CBU/Alias</p>
-        <p id='text-freelancer-card'>{currentUser.bankDetails.alias}</p>
-        <p id='subtittle-freelancer-card'>TITULAR</p>
-        <p id='text-freelancer-card'>{currentUser.bankDetails.accountName}</p>
-        <p id='subtittle-freelancer-card'>BANCO</p>
-        <div className='container-freelancer-button'>
-          <p id='text-freelancer-card'>{currentUser.bankDetails.bankName} </p>
+        <p id="subtittle-freelancer-card">CBU/Alias</p>
+        <p id="text-freelancer-card">{currentUser.bankDetails.alias}</p>
+        <p id="subtittle-freelancer-card">TITULAR</p>
+        <p id="text-freelancer-card">{currentUser.bankDetails.accountName}</p>
+        <p id="subtittle-freelancer-card">BANCO</p>
+        <div className="container-freelancer-button">
+          <p id="text-freelancer-card">{currentUser.bankDetails.bankName} </p>
           <MiBancoContainer />
         </div>
       </Card>
