@@ -138,6 +138,7 @@ function AddPayment({
                     const projectSelect = optionsProjects.filter((option) => {
                       if (projectSelected == option.value) return true;
                     });
+                    // if (!projectSelected[0] || !projectSelected[0].id) return;
                     setSelectedProject(projectSelect[0].id);
                   }}
                   options={optionsProjects}
