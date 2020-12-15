@@ -6,6 +6,7 @@ function AllProjectsContainer({ setItem, setProject }) {
   const [projects, setProjects] = useState([]);
   const [filterProjects, setFilterProjects] = useState([]);
 
+
   function onChange(e) {
     setFilterProjects(
       projects.filter((project) => {
@@ -15,18 +16,23 @@ function AllProjectsContainer({ setItem, setProject }) {
   }
 
   useEffect(() => {
-    const unsuscribe = db.collection("projects").onSnapshot((projects) => {
+    const unsuscribe = db.collection("projects")
+    .onSnapshot((projects) => {
       projects = projects.docs.map((project) => {
         let proyecto = project.data();
         proyecto.id = project.id;
         proyecto.key = project.id;
         return proyecto;
-      });
+      })
       setProjects(projects);
       setFilterProjects(projects);
     });
     return () => unsuscribe();
   }, []);
+
+
+
+
 
   const deleteProject = (project) => {
     db.collection("projects").doc(project.id).delete();
@@ -34,7 +40,6 @@ function AllProjectsContainer({ setItem, setProject }) {
 
   const changeStatus = (project) => {
     if (project.status == "pending") return;
-
     const newStatus =
       project.status == "On Development" ? "Finished" : "On Development";
     const newTotal = project.status == "On Development" ? -1 : 1;

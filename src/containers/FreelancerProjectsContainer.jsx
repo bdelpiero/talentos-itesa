@@ -20,7 +20,7 @@ function FreelancerProjectsContainer() {
       projects.forEach((doc)=>{
         newInvitations.push(doc.data()) // llena con los proyectos -> con status:"pending"
       })
-      setAcceptedProjects(newInvitations.filter((project)=> project.status !== "pending"))
+      setAcceptedProjects(newInvitations.filter((project)=> project.status !== "pending" && project.signed == true))
     })
     // let observer = invitaciones.onSnapshot((cambios)=>{
     //   console.log('aqui recivio cambios las invitaciones')

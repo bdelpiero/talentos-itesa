@@ -1042,3 +1042,20 @@ Trabajando con Admin Cards/DashBoard
 .ourCommunity-filterButtons button:hover {
   background-color: #dddcdc;
 }
+
+.ant-upload.ant-upload-drag {
+  position: relative;
+  width: 80%;
+  height: 80% !important;
+  text-align: center;
+  background: #fafafa;
+  border: 2px dashed #d9d9d9;
+  border-radius: 2px;
+  cursor: pointer;
+  -webkit-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+}
+
+/* ant-upload.ant-upload-drag .ant-upload {
+  padding: 50px 0;
+} */
