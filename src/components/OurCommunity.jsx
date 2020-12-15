@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   List,
   Typography,
+  Table,
   Divider,
   Row,
   Col,
@@ -16,132 +17,103 @@ import {
   Pagination,
 } from "antd";
 import { DownloadOutlined, DownOutlined } from "@ant-design/icons";
+import { useLayoutEffect } from "react";
 const { Title, Paragraph } = Typography;
 
-export const OurCommunity = ({
-  currentUsers,
-  onChange,
-  onFinishSearch,
-  usersPerPage,
-  users,
-  handlePageChange,
-  isLoading,
-  setCurrentUsers,
-  filterByColumn,
-  filterByState,
-  currentPage,
-}) => {
-  const pageNumbers = Math.ceil(currentUsers.length / usersPerPage);
+export const OurCommunity = ({ onChange, onFinishSearch, currentUsers }) => {
+  const users = currentUsers.map((user) => {
+    const newUser = { ...user };
+    newUser.state = user.activeProjectsCounter ? "En Proyecto" : "Libre";
+    return newUser;
+  });
+  const columns = [
+    {
+      title: "",
+      dataIndex: "avatar",
+      key: "avatar",
+      render: (avatar) => <Avatar src={avatar} />,
+    },
+    {
+      title: "NOMBRE",
+      dataIndex: "name",
+      key: "name",
+      render: (name, record) => <h4>{name + " " + record.lastName}</h4>,
+    },
+    {
+      title: "ACTIVIDAD",
+      dataIndex: "freelancerType",
+      key: "freelancerType",
+      filters: [
+        {
+          text: "developer",
+          value: "developer",
+        },
+        {
+          text: "designer",
+          value: "designer",
+        },
+      ],
+      onFilter: (value, record) => record.freelancerType.indexOf(value) === 0,
+      sorter: (a, b) => a.freelancerType.length - b.freelancerType.length,
+      sortDirections: ["ascend", "descend"],
+    },
+    {
+      title: "EMAIL",
+      key: "email",
+      dataIndex: "email",
+    },
+    {
+      title: "STATE",
+      key: "state",
+      dataIndex: "state",
+      render: (value) => {
+        if (value != "Libre") return <Tag color='red'>En Proyecto</Tag>;
+        return <Tag color='green'>Libre</Tag>;
+      },
+      filters: [
+        {
+          text: "Libre",
+          value: "Libre",
+        },
+        {
+          text: "En Proyecto",
+          value: "En Proyecto",
+        },
+      ],
+      onFilter: (value, record) => record.state.indexOf(value) === 0,
+      sorter: (a, b) => a.state.length - b.state.length,
+      sortDirections: ["ascend", "descend"],
+    },
 
-  const actividadOptions = (
-    <div className='ourCommunity-filterButtons'>
-      <button onClick={(e) => filterByColumn(e, "freelancerType")}>
-        developer
-      </button>
-      <button onClick={(e) => filterByColumn(e, "freelancerType")}>
-        designer
-      </button>
-      <button onClick={(e) => filterByColumn(e, "freelancerType")}>all</button>
-    </div>
-  );
-  const estadoOptions = (
-    <div className='ourCommunity-filterButtons'>
-      <button onClick={(e) => filterByColumn(e, "projectInvited")}>
-        En Proyecto
-      </button>
-      <button onClick={(e) => filterByColumn(e, "projectInvited")}>
-        Libre
-      </button>
-      <button onClick={(e) => filterByColumn(e, "projectInvited")}>all</button>
-    </div>
-  );
+    {
+      title: "CV",
+      dataIndex: "cv",
+      key: "cv",
+      render: (cv) => {
+        if (!cv) return;
+        return (
+          <a target='_blank' href={cv}>
+            <DownloadOutlined id='download-icon' />
+          </a>
+        );
+      },
+    },
+  ];
 
   return (
-    <>
-      <List
-        size='large'
-        header={
-          <>
-            <Form onFinish={onFinishSearch}>
-              <Input
-                style={{ marginBottom: "1rem" }}
-                onChange={onChange}
-                placeholder='Buscar freelancer por nombre o email'
-              />
-            </Form>
-            <Row>
-              <Col xs={2} sm={2} md={2} lg={2}>
-                {" "}
-              </Col>
-
-              <Col xs={5} sm={5} md={5} lg={5}>
-                <h3>NOMBRE</h3>
-              </Col>
-              <Col xs={5} sm={5} md={5} lg={5}>
-                <Dropdown overlay={actividadOptions}>
-                  <div className='ourCommunity-dropDown'>
-                    <h3>ACTIVIDAD</h3>
-                    <DownOutlined />
-                  </div>
-                </Dropdown>
-              </Col>
-              <Col xs={7} sm={7} md={7} lg={7}>
-                <h3>EMAIL</h3>
-              </Col>
-              <Col xs={4} sm={4} md={4} lg={4}>
-                <Dropdown overlay={estadoOptions}>
-                  <div className='ourCommunity-dropDown'>
-                    <h3>ESTADO</h3>
-                    <DownOutlined />
-                  </div>
-                </Dropdown>
-              </Col>
-              <Col xs={1} sm={1} md={1} lg={1}></Col>
-            </Row>
-          </>
-        }
-        bordered
+    <div>
+      <Form onFinish={onFinishSearch}>
+        <Input
+          style={{ marginBottom: "1rem" }}
+          onChange={onChange}
+          placeholder='Buscar freelancer por nombre o email'
+        />
+      </Form>
+      <Table
+        columns={columns}
         dataSource={users}
-        renderItem={(item) => (
-          <>
-            <Row style={{ padding: "16px 26px" }}>
-              <Col xs={2} sm={2} md={2} lg={2}>
-                <Avatar src={item.avatar} />
-              </Col>
-
-              <Col xs={5} sm={5} md={5} lg={5}>
-                <h4>{item.name + " " + item.lastName}</h4>
-              </Col>
-
-              <Col xs={5} sm={5} md={5} lg={5}>
-                <h4>{item.freelancerType}</h4>
-              </Col>
-              <Col xs={7} sm={7} md={7} lg={7}>
-                <h4>{item.email}</h4>
-              </Col>
-              {item.projectInvited !== "" ? (
-                <Col xs={4} sm={4} md={4} lg={4}>
-                  <Tag color='red'>En Proyecto</Tag>
-                </Col>
-              ) : (
-                <Col xs={4} sm={4} md={4} lg={4}>
-                  <Tag color='green'>Libre</Tag>
-                </Col>
-              )}
-              <Col xs={1} sm={1} md={1} lg={1}>
-                <DownloadOutlined id='download-icon' />
-              </Col>
-            </Row>
-          </>
-        )}
+        pagination={{ pageSize: 5 }}
       />
-      <Pagination
-        style={{ display: "flex", justifyContent: "flex-end", padding: 20 }}
-        current={currentPage}
-        onChange={(page, pageSize) => handlePageChange(page, pageSize)}
-        pageSize={usersPerPage}
-        total={currentUsers.length}
-      />
-    </>
+    </div>
   );
 };

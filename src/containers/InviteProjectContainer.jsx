@@ -34,6 +34,8 @@ function InviteProjectContainer({ proyecto, boton}) {
     },
   });
 
+  
+
   // function onChange(e) {
   //   setCurrentUsers(
   //     allUsers.filter((user) => {
@@ -58,8 +60,7 @@ function InviteProjectContainer({ proyecto, boton}) {
           return users.data();
         })
       );
-    });
-
+    })
     return () => unsuscribe();
   }, []);
 

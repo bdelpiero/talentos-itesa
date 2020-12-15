@@ -1,44 +1,56 @@
-// import React from "react";
-// import {} from "@ant-design/icons";
-// import Briefing from "../../views/briefing.svg";
-// import { Modal, Button, Card } from "antd";
-
-// function AddPayment() {
-//   return (
-//     <div className="Modal">
-
-//         <Button className="modal-button" >
-//         Ingresar un Pago
-//       </Button>
-
-//     </div>
-//   );
-// }
-
-// export default AddPayment;
-
-
 import React from "react";
 
-import { Modal, Button, Card, Form, Input, Select, DatePicker } from "antd";
-import { CloseCircleOutlined } from "@ant-design/icons";
+import {
+  Modal,
+  Button,
+  Form,
+  Select,
+  AutoComplete,
+  Row,
+  Col,
+  Upload,
+} from "antd";
 
-function NewProject({
-  handleChangeName,
-  handleChangeTerm,
-  handleChangeStartDate,
-  handleChangeEndDate,
+import { CloseCircleOutlined, PlusOutlined } from "@ant-design/icons";
+
+const { Dragger } = Upload;
+const {Option} = Select
+
+function AddPayment({
+  selectedUser,
+  setSelectedUser,
+  users,
   closeModal,
   success,
   openModal,
   modal,
-  form
+  form,
+  selectedProject,
+  setSelectedProject,
+  projects,
+  setFileUrl,
+  fileUrl,
+  handleCuota,
 }) {
-  const layout = {
-    labelCol: { span: 8 },
-    wrapperCol: { span: 8 },
-  };
+  const options = users.map((user) => {
+    return {
+      value: `${user.name} ${user.lastName}`,
+      id: user.id,
+      email: user.email,
+    };
+  });
 
+  const optionsProjects = projects.map((project) => {
+    return { value: project.proyecto, id: project.projectId };
+  });
+
+  const props = {
+    name: "file",
+    multiple: true,
+    onChange(info){
+      setFileUrl(info) 
+     }
+}
 
   return (
     <div className="Modal">
@@ -55,97 +67,112 @@ function NewProject({
         onOk={success}
         closeIcon={<CloseCircleOutlined className="close-button" />}
         bodyStyle={{ color: "#9e39ff" }}
+        width={800}
       >
-        <div className="modal-style">
-          <h1>Crear Proyecto</h1>
-          <p style={{ color: "grey" }}>
-            Ingrese los datos para crear el proyecto
-          </p>
+        <div style={{ width: "70%", marginLeft: "70px" }}>
+          <h1>Confirmar datos y adjuntar comprobante</h1>
+          <p style={{ color: "red" }}>Todos los campos son obligatorios.</p>
         </div>
-        <br/>
-        <Form
-          {...layout}
-          initialValues={{ remember: true }}
-          onFinish={success}
-          form={form}
-          // onFinishFailed={onFinishFailed}
-        >
-          <h5 style={{ color: "grey", marginLeft: "95px" }}>
-            NOMBRE DEL PROYECTO
-          </h5>
-          <Form.Item
-            className="modal-formularios"
-            name="name"
-            onChange={handleChangeName}
-            rules={[
-              {
-                required: true,
-                message: "Por favor ingrese Nombre del Proyecto",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
+        <br />
+        <Form initialValues={{ remember: true }} onFinish={success} form={form}>
+          <Row>
+            <Col span={12}>
+              <h5 style={{ color: "grey", marginLeft: "70px" }}>PERFIL</h5>
+              <Form.Item
+                style={{ width: "70%", marginLeft: "70px" }}
+                name="name"
+                rules={[
+                  {
+                    required: true,
+                    message: "Por favor ingrese Perfil",
+                  },
+                ]}
+              >
+                <AutoComplete
+                  onChange={(userSelected) => {
+                    const userSelect = options.filter((option) => {
+                      if (userSelected == option.value) return true;
+                    });
+                    if (!userSelect[0] || !userSelect[0].id) return;
+                    setSelectedUser(userSelect[0]);
+                  }}
+                  options={options}
+                  placeholder="Nombre de Perfil"
+                  filterOption={(inputValue, option) =>
+                    option.value
+                      .toUpperCase()
+                      .indexOf(inputValue.toUpperCase()) !== -1
+                  }
+                />
+              </Form.Item>
 
-          <h5 style={{ color: "grey", marginLeft: "95px" }}>DURACIÓN</h5>
-          <Form.Item
-            className="modal-formularios"
-            name="term"
-            onChange={handleChangeTerm}
-            rules={[
-              {
-                required: true,
-                message: "Por favor ingrese duración del Proyecto",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
+              <h5 style={{ color: "grey", marginLeft: "70px" }}>PROYECTO</h5>
+              <Form.Item
+                style={{ width: "70%", marginLeft: "70px" }}
+                name="project"
+                rules={[
+                  {
+                    required: true,
+                    message: "Por favor ingrese proyecto",
+                  },
+                ]}
+              >
+                <AutoComplete
+                  onChange={(projectSelected) => {
+                    const projectSelect = optionsProjects.filter((option) => {
+                      if (projectSelected == option.value) return true;
+                    });
+                    setSelectedProject(projectSelect[0].id);
+                  }}
+                  options={optionsProjects}
+                  placeholder="Nombre de Proyecto"
+                  filterOption={(inputValue, option) =>
+                    option.value
+                      .toUpperCase()
+                      .indexOf(inputValue.toUpperCase()) !== -1
+                  }
+                />
+              </Form.Item>
 
-          <h5 style={{ color: "grey", marginLeft: "95px" }}>FECHA DE INICIO</h5>
-          <Form.Item
-            name="startDate"
-            className="modal-formularios"
-            rules={[
-              { required: true, message: "Por favor ingrese fecha de inicio" },
-            ]}
-          >
-            <DatePicker
-              id="startDate"
-              name="startDate"
-              onChange={handleChangeStartDate}
-              style={{ width: "100%" }}
-              format="YYYY-MM-DD"
-              placeholder={"Fecha de Inicio"}
-            />
-          </Form.Item>
-
-          <h5 style={{ color: "grey", marginLeft: "95px" }}>
-            FECHA DE FINALIZACION
-          </h5>
-          <Form.Item
-            name="endDate"
-            className="modal-formularios"
-            rules={[
-              {
-                required: true,
-                message: "Por favor ingrese fecha de finalizacion",
-              },
-            ]}
-          >
-            <DatePicker
-              id="endDate"
-              name="endDate"
-              onChange={handleChangeEndDate}
-              style={{ width: "100%" }}
-              format="YYYY-MM-DD"
-              placeholder={"Fecha de Finalizacion"}
-            />
-          </Form.Item>
+              <h5 style={{ color: "grey", marginLeft: "70px" }}>
+                SELECCIONAR CUOTA A CANCELAR
+              </h5>
+              <Form.Item
+                style={{ width: "70%", marginLeft: "70px" }}
+                name="cuota"
+                rules={[
+                  {
+                    required: true,
+                    message: "Por favor ingrese Cuota a cancelar",
+                  },
+                ]}
+              >
+                <Select
+                  onChange={(value)=>handleCuota(value)}
+                  placeholder="Cuota"
+                >
+                  <Option value="CUOTA 1">Cuota 1</Option>
+                  <Option value="CUOTA 2">Cuota 2</Option>
+                  <Option value="CUOTA 3">Cuota 3</Option>
+                  <Option value="CUOTA 4">Cuota 4</Option>
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Dragger {...props} >
+                <p className="ant-upload-drag-icon">
+                  <PlusOutlined />
+                </p>
+                <p className="ant-upload-text">
+                  Click or Drag file to upload
+                </p>
+              </Dragger>
+            </Col>
+          </Row>
 
           <div className="modal-input">
             <button className="ok-button" type="submit">
-              CREAR PROYECTO
+              CONFIRMAR PAGO
             </button>
           </div>
         </Form>
@@ -154,4 +181,4 @@ function NewProject({
   );
 }
 
-export default NewProject;
+export default AddPayment;

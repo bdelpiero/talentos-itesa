@@ -1,46 +1,44 @@
-// import React from "react";
-// import AddPayment from "../components/AddPayment";
-
-// function AddPaymentContainer() {
-//   return <AddPayment />;
-// }
-
-// export default AddPaymentContainer;
-
 import React, { useEffect, useState } from "react";
-import { db } from "../../firebase/firebase";
+import { db, storage } from "../../firebase/firebase";
 import AddPayment from "../components/AddPayment";
 import { CheckCircleOutlined } from "@ant-design/icons";
 import { Modal, Form } from "antd";
 
 function NewProjectContainer() {
-  const [name, setName] = useState("");
-  const [status, setStatus] = useState("On Development");
-  const [startDate, setStartDate] = useState([]);
-  const [endDate, setEndDate] = useState([]);
-  const [term, setTerm] = useState("");
   const [modal, setModal] = useState(false);
+  const [users, setUsers] = useState([]);
+  const [projects, setProjects] = useState([]);
+  const [selectedUser, setSelectedUser] = useState({});
+  const [selectedProject, setSelectedProject] = useState("");
+  const [cuota, setCuota] = useState("");
+  const [fileUrl, setFileUrl] = useState("");
   const [form] = Form.useForm();
 
-  const handleChangeName = (e) => {
-    setName(e.target.value);
-  };
+  useEffect(() => {
+    const unsuscribe = db.collection("users").onSnapshot((users) => {
+      setUsers(
+        users.docs.map((users) => {
+          return users.data();
+        })
+      );
+    });
+    return () => unsuscribe();
+  }, []);
 
-  const handleChangeStartDate = (value, dateString) => {
-    console.log(value, "esto es start date");
-    console.log(dateString, "esto es datestring");
-    setStartDate(dateString);
-  };
-
-  const handleChangeEndDate = (value, dateString) => {
-    console.log(value, "esto es end date");
-    console.log(dateString, "esto es datestring");
-    setEndDate(dateString);
-  };
-
-  const handleChangeTerm = (e) => {
-    setTerm(e.target.value);
-  };
+  useEffect(() => {
+    console.log(" -- ESTO ES EL SELECTEDUSER --", selectedUser);
+    if (selectedUser.email)
+      return db
+        .collectionGroup("invitedUser")
+        .where("email", "==", selectedUser.email)
+        .onSnapshot((projects) => {
+          setProjects(
+            projects.docs.map((project) => {
+              return project.data();
+            })
+          );
+        });
+  }, [selectedUser]);
 
   const openModal = () => {
     setModal(true);
@@ -50,19 +48,30 @@ function NewProjectContainer() {
     setModal(false);
   };
 
-  function success() {
+  const handleCuota = (value) => {
+    setCuota(value);
+  };
+
+
+  async function success() {
     closeModal();
-    db.collection("projects")
-      .add({
-        name,
-        status,
-        startDate,
-        endDate,
-        term,
+    const file = fileUrl.file.originFileObj;
+    const storageRef = storage.ref();
+    const task = storageRef.child(`comprobantesDePago/${fileUrl.file.name}`);
+    await task.put(file);
+    await task.getDownloadURL().then((downloadUrl) => {
+      db.collection("payments").where("projectId", "==", selectedProject).where("cuota","==", cuota).where("userId","==", selectedUser.id)
+      .get()
+      .then((doc)=>{
+        const pago = doc.docs[0].id
+        db.collection("payments").doc(pago).update({
+          comprobantePago: downloadUrl
+        })
       })
+    })
       .then(() => {
-        form.resetFields()
-        console.log("Se creo correctamente");
+        form.resetFields();
+        console.log("Se cargó correctamente");
       })
       .then(() => {
         Modal.success({
@@ -72,7 +81,7 @@ function NewProjectContainer() {
             flexDirection: "column",
             justifyContent: "center",
           },
-          content: "¡Proyecto Creado!",
+          content: "¡Pago ingresado!",
           centered: "true",
           okText: "VOLVER",
           icon: <CheckCircleOutlined style={{ color: "#9e39ff" }} />,
@@ -84,21 +93,27 @@ function NewProjectContainer() {
             },
           },
         });
-      })
+      });
   }
 
   return (
     <AddPayment
-      handleChangeName={handleChangeName}
-      handleChangeStartDate={handleChangeStartDate}
-      handleChangeEndDate={handleChangeEndDate}
-      handleChangeTerm={handleChangeTerm}
       status={status}
       closeModal={closeModal}
       success={success}
       openModal={openModal}
       modal={modal}
       form={form}
+      users={users}
+      selectedUser={selectedUser}
+      setSelectedUser={setSelectedUser}
+      setSelectedProject={setSelectedProject}
+      selectedProject={selectedProject}
+      projects={projects}
+      fileUrl={fileUrl}
+      setFileUrl={setFileUrl}
+      // handlePayment={handlePayment}
+      handleCuota={handleCuota}
     />
   );
 }

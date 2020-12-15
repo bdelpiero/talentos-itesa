@@ -1,11 +1,9 @@
 import React from "react";
 import { CloseCircleOutlined } from "@ant-design/icons";
-import { Modal, Button, Row, Col, Input, Form, DatePicker, Select } from "antd";
+import { Modal, Button, Row, Col, Input, Form, DatePicker, Select, AutoComplete} from "antd";
 
 const { Option } = Select;
 const { RangePicker } = DatePicker;
-
-import { AutoComplete } from "antd";
 
 function InviteProject({
   handleCuotas,
@@ -24,11 +22,12 @@ function InviteProject({
 }) {
   const boton = proyecto.status == "On Development" ? false : true;
 
-  // const options = users.map((user) => {
-  //   return { value: `${user.name} ${user.lastName}` };
-  // });
 
-  // console.log(users);
+
+  const options = users.map((user) => {
+    return { value: `${user.name} ${user.lastName}`, id: user.id };
+  });
+
 
   return (
     <div className="Modal">
@@ -73,6 +72,10 @@ function InviteProject({
               <Row>
                 <Col span={6}>
                   <Form.Item
+                  style={{
+                    width: "90%",
+                    marginLeft: "12px"
+                  }}
                     name="freelancer"
                     rules={[
                       {
@@ -81,13 +84,15 @@ function InviteProject({
                       },
                     ]}
                   >
-                    {/* <AutoComplete
-                      style={{
-                        width: 200,
-                      }}
-                      value={selectedUser}
-                      onChange={(user) => {
-                        setSelectedUser(user.id);
+                    <AutoComplete
+                      
+                      onChange={(userSelected) => {
+                        const userSelect = options.filter((option) => {
+                          if (userSelected == option.value) return true;
+                        });
+
+                        setSelectedUser(userSelect[0].id);
+                        console.log("--- selected user ---- ", selectedUser);
                       }}
                       options={options}
                       placeholder="Nombre de Freelancer"
@@ -96,44 +101,7 @@ function InviteProject({
                           .toUpperCase()
                           .indexOf(inputValue.toUpperCase()) !== -1
                       }
-                    /> */}
-                    {/* <Input
-                      style={{
-                        width: "95%",
-                        marginRight: "5%",
-                        marginLeft: "5%",
-                      }}
-                    
-                      onChange={(e) => {
-                        setSelectedUser(value);
-                      }}
-                      
-                      placeholder="Buscar Proyecto por Nombre"
-                    /> */}
-
-                    <Select
-                      style={{
-                        width: "95%",
-                        marginRight: "5%",
-                        marginLeft: "5%",
-                      }}
-                      value={selectedUser}
-                      onChange={(value) => {
-                        setSelectedUser(value);
-                      }}
-                      placeholder="Perfil"
-                      allowClear
-                    >
-                      {users.map((user) => {
-                        if (!user.isAdmin) {
-                          return (
-                            <Option key={user.id} value={user.id}>
-                              {`${user.name} ${user.lastName}`}
-                            </Option>
-                          );
-                        }
-                      })}
-                    </Select>
+                    />
                   </Form.Item>
                 </Col>
                 <Col span={12}>
@@ -145,9 +113,10 @@ function InviteProject({
                         message: "Por favor ingrese Fechas",
                       },
                     ]}
+                    style={{margin: "0 5%" }}
                   >
                     <RangePicker
-                      style={{ width: "90%", margin: "0 5%" }}
+                      style={{ width: "90%"}}
                       format="DD/MM/YYYY"
                       placeholder={["Inicio", "Finalizacion"]}
                       onChange={(value, dataString) => {
@@ -198,14 +167,23 @@ function InviteProject({
 
               <Row>
                 <Col span={6}>
-                  <Form.Item>
+                  <Form.Item
+                  style={{marginLeft: "5%" }}
+                  rules={[
+                    {
+                      required: true,
+                      message: "Por favor ingrese Cuota 1",
+                    },
+                  ]}
+                  >
                     <Input
                       name="cuota1"
                       value={cuotas.cuota1.monto}
                       onChange={(e) =>
                         handleCuotas(e.target.value, "monto", e.target.name)
                       }
-                      style={{ width: "45%", marginLeft: "5%" }}
+                      style={{ width: "45%"}}
+                      
                     ></Input>
                     <DatePicker
                       name="cuota1"
@@ -225,10 +203,12 @@ function InviteProject({
                       onChange={(e) =>
                         handleCuotas(e.target.value, "monto", e.target.name)
                       }
+                      disabled={cuotas.cuota1.fecha.length == 0 || cuotas.cuota1.monto == 0}
                       style={{ width: "45%", marginLeft: "5%" }}
                     ></Input>
                     <DatePicker
                       name="cuota2"
+                      disabled={cuotas.cuota1.fecha.length == 0 || cuotas.cuota1.monto == 0}
                       format="DD/MM/YYYY"
                       style={{ width: "45%", marginRight: "5%" }}
                       onChange={(value, dataString) =>
@@ -245,6 +225,7 @@ function InviteProject({
                       onChange={(e) =>
                         handleCuotas(e.target.value, "monto", e.target.name)
                       }
+                      disabled={cuotas.cuota2.fecha.length == 0 || cuotas.cuota2.monto == 0}
                       style={{ width: "45%", marginLeft: "5%" }}
                     ></Input>
                     <DatePicker
@@ -252,6 +233,7 @@ function InviteProject({
                       onChange={(value, dataString) =>
                         handleCuotas(dataString, "fecha", "cuota3")
                       }
+                      disabled={cuotas.cuota2.fecha.length == 0 || cuotas.cuota2.monto == 0}
                       format="DD/MM/YYYY"
                       style={{ width: "45%", marginRight: "5%" }}
                     />
@@ -265,6 +247,7 @@ function InviteProject({
                       onChange={(e) =>
                         handleCuotas(e.target.value, "monto", e.target.name)
                       }
+                      disabled={cuotas.cuota3.fecha.length == 0 || cuotas.cuota3.monto == 0}
                       style={{ width: "45%", marginLeft: "5%" }}
                     ></Input>
                     <DatePicker
@@ -274,18 +257,13 @@ function InviteProject({
                       onChange={(value, dataString) =>
                         handleCuotas(dataString, "fecha", "cuota4")
                       }
+                      disabled={cuotas.cuota3.fecha.length == 0 || cuotas.cuota3.monto == 0}
                     />
                   </Form.Item>
                 </Col>
               </Row>
             </div>
-            <Row>
-              {/* <div className="modal-input">
-                <button className="ok-button" type="submit">
-                  Add a Row
-                </button>
-              </div> */}
-            </Row>
+            <Row></Row>
             <div className="modal-input">
               <button className="ok-button" type="submit">
                 CONFIRMAR
@@ -299,3 +277,5 @@ function InviteProject({
 }
 
 export default InviteProject;
+
+

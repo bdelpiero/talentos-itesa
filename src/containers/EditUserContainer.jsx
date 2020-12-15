@@ -2,37 +2,30 @@ import React, { useState } from "react";
 import { storage, db } from "../../firebase/firebase";
 import {
   UserOutlined,
-  UploadOutlined,
-  SettingOutlined,
+  CheckCircleOutlined,
+  LoadingOutlined,
+  PlusOutlined,
 } from "@ant-design/icons";
-import {
-  Row,
-  Col,
-  Typography,
-  Avatar,
-  Upload,
-  Modal,
-  Button,
-  Card,
-  Input,
-  Form,
-} from "antd";
+import { Typography, Avatar, Upload, Modal, Input, Form } from "antd";
 
 const { Title, Text } = Typography;
 
-function getBase64(file) {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
-    reader.onerror = (error) => reject(error);
-  });
-}
+// function getBase64(file) {
+//   return new Promise((resolve, reject) => {
+//     const reader = new FileReader();
+//     reader.readAsDataURL(file);
+//     reader.onload = () => resolve(reader.result);
+//     reader.onerror = (error) => reject(error);
+//   });
+// }
 
 export default ({ user, setCurrentUser }) => {
   const [modal, setModal] = useState(false);
   const [userName, setUserName] = useState(user.name || "");
   const [userLastName, setUserLastName] = useState(user.lastName || "");
+  const [loaded, setLoaded] = useState(false);
+  const [fileUrl, setFileUrl] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const openModal = () => {
     setModal(true);
@@ -59,6 +52,7 @@ export default ({ user, setCurrentUser }) => {
   };
 
   const handleSubmit = async (e) => {
+    setIsLoading(true);
     const file = image;
     const storageRef = storage.ref();
     const task = storageRef.child(`images/${file.name}`);
@@ -72,11 +66,41 @@ export default ({ user, setCurrentUser }) => {
           lastName: userLastName,
         })
         .then(() => {
+          setIsLoading(false);
           console.log("cambios realizados con éxito");
         })
         .catch((err) => console.log(err));
     });
     closeModal();
+  };
+
+  const uploadButton = (
+    <div>
+      {isLoading ? <LoadingOutlined /> : <PlusOutlined />}
+      <div style={{ marginTop: 8 }}>Upload</div>
+    </div>
+  );
+
+  const handleCV = async( info) => {
+    console.log(URL.createObjectURL(info.file.originFileObj));
+    setFileUrl(URL.createObjectURL(info.file.originFileObj));
+    setLoaded(true);
+
+    const file = info.file.originFileObj;
+    const storageRef = storage.ref();
+    const task = storageRef.child(`cvs/${info.file.name}`);
+    await task.put(file);
+    await task.getDownloadURL().then((downloadUrl) => {
+      db.collection("users")
+        .doc(user.id)
+        .update({
+          cv: downloadUrl,
+        })
+        .then(() => {
+          console.log("cambios realizados con éxito");
+        })
+        .catch((err) => console.log(err));
+    });
   };
 
   return (
@@ -109,6 +133,7 @@ export default ({ user, setCurrentUser }) => {
                 <label
                   style={{
                     cursor: "pointer",
+                    marginTop: "70px",
                   }}>
                   <input
                     style={{ display: "none" }}
@@ -126,6 +151,16 @@ export default ({ user, setCurrentUser }) => {
                     />
                   )}
                 </label>
+                <div style={{ margin: "30px 0 50px 0" }}>
+                  <Upload
+                    name='avatar'
+                    listType='picture-card'
+                    className='avatar-uploader'
+                    showUploadList={false}
+                    onChange={handleCV}>
+                    {loaded ? <CheckCircleOutlined /> : uploadButton}
+                  </Upload>
+                </div>
               </div>
 
               <Form>
@@ -146,34 +181,15 @@ export default ({ user, setCurrentUser }) => {
                     <Input placeholder={userLastName} name='userLastName' />
                   </Form.Item>
                 </div>
+                <div className='modal-input' style={{ marginTop: 30 }}>
+                  <button
+                    className='ok-button'
+                    type='submit'
+                    onClick={handleSubmit}>
+                    Confirmar cambios
+                  </button>
+                </div>
               </Form>
-            </div>
-            <div className='modal-editProfile-buttons'>
-              <div className='modal-input'>
-                {/* <button
-                  onClick={handleSubmit}
-                  className='modal-editProfile-button'
-                  style={{ margin: 0 }}>
-                  Confirmar cambios
-                </button> */}
-                <button
-                  className='ok-button'
-                  type='submit'
-                  onClick={handleSubmit}>
-                  Confirmar cambios
-                </button>
-                {/* <div className='Modal' onClick={handleSubmit}>
-                  <Button className='modal-button'>Confirmar cambios</Button>
-                </div> */}
-              </div>
-              {/* <div className='modal-input'>
-                <button
-                  className='modal-editProfile-button'
-                  // style={{ backgroundColor: "lightgrey" }}
-                  onClick={() => closeModal()}>
-                  Cancelar
-                </button>
-                </div> */}
             </div>
           </div>
         </>

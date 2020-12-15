@@ -10,7 +10,6 @@ const { Title } = Typography;
 
 function AllProjects({
   projects,
-  deleteProject,
   handleClick,
   changeStatus,
   onChange,
@@ -158,23 +157,6 @@ function AllProjects({
         );
       },
     },
-
-    /*  {
-      title: "",
-      key: "delete",
-      render: (proyecto) => {
-        return (
-          <div>
-            <Button
-              className="modal-button"
-              onClick={() => deleteProject(proyecto)}
-            >
-              <DeleteOutlined />
-            </Button>
-          </div>
-        );
-      },
-    }, */
   ];
 
   return (
