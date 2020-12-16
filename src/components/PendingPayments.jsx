@@ -1,50 +1,62 @@
-import React, { Component } from "react";
+import React from "react";
 // Ant-Desing
-import { Button, Row, Col, List, Avatar, Card } from "antd";
+import { Button, Row, Col, Avatar, Card,Typography } from "antd";
 import { DownloadOutlined } from "@ant-design/icons";
-import { Typography } from "antd";
+import AddPaymentContainer from "../containers/AddPaymentContainer"
+import ExcelDownload from './ExcelDownload'
 
 const { Title } = Typography;
 
-export default ({user}) => {
-    return (
-      <>
-          <Title level={3} style={{width: '100%'}}>
-            Pagos a realizar este mes
-          </Title>
-          <Card >          
-            <Row className="paymentsCards">  
-            <Col className="gutter-row" span={2} >
-            <Avatar size={55} src={user.avatar} className='avatar' />
-              </Col>          
-            <Col  span={4} >              
-            <h1>80.000</h1>        
-              <b style={{color:"#9e39ff"}}>Proyecto:</b>
-              <b>ITS202|Satapp</b>
-            </Col>
-            <Col className="gutter-row"  span={6}>
-              <b style={{color:"#9e39ff"}}>Factura:</b><b>1 de 4</b>              
-            </Col>
-            <Col 
-            className="gutter-row"  
-            span={6}
-            >
-              <b style={{color:"#9e39ff"}}>Fecha de pago:</b>
-              <b>02/05/2020</b>
-            </Col> 
-            <Col className="gutter-row" span={6}> 
-            <Button 
-            className="list-button-paymentsFree" 
-            shape="round"
-            >
-            Ver comprobante de pago <DownloadOutlined />
-          </Button> 
-          </Col> 
-            </Row>                              
-          </Card>  
-      </>
-    )
-  }
-
-
-
+export default ({pendingPayments }) => {
+  return (
+    <>
+    <div className='div-excel'>
+      <Title level={3} style={{ width: "100%" }}>
+        Pagos a realizar este mes
+      </Title>
+      <ExcelDownload pendingPayments={pendingPayments}/>
+    </div>
+      
+      {pendingPayments.length > 0 &&
+        pendingPayments.map((payment) => {
+          if(!payment.user){
+            return <div></div>
+          } 
+          return (
+            <Card>
+              <Row className="paymentsCards">
+                <Col className="gutter-row" span={2}>
+                  <Avatar size={55} src={payment.user && payment.user.avatar} className="avatar" />
+                </Col>
+                <Col span={3}>
+                  <h1>${payment.monto}</h1>
+                  <b style={{ color: "#9e39ff" }}>Proyecto:</b>
+                  <b> {payment.projectName}</b>
+                </Col>
+                <Col className="gutter-row" span={3}>
+                  <b style={{ color: "#9e39ff" }}>Factura:</b>
+                  <b> {payment.cuota}</b>
+                </Col>
+                <Col className="gutter-row" span={3}>
+                  <b style={{ color: "#9e39ff" }}>Fecha de pago:</b>
+                  <b> {payment.fecha}</b>
+                </Col>
+                <Col className="gutter-row" span={3}>
+                  <b style={{ color: "#9e39ff" }}>Perfil:</b>
+                  <b> {`${payment.user.name} ${payment.user.lastName}`}</b>
+                </Col>
+                <Col className="gutter-row" span={6}>
+                  <Button className="list-button-paymentsFree" shape="round">
+                    Ver comprobante de pago <DownloadOutlined />
+                  </Button>
+                </Col>
+                <Col className="gutter-row" span={4}>
+                  <AddPaymentContainer/>
+                </Col>
+              </Row>
+            </Card>
+          );
+        })}
+    </>
+  );
+};

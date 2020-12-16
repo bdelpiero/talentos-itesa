@@ -135,7 +135,7 @@ function AllProjects({
         return (
           <div>
             <Button
-              className="modal-button hide-button"
+              className="modal-button2 hide-button"
               onClick={() => changeStatus(proyecto)}
             >
               ESTADO
@@ -164,11 +164,11 @@ function AllProjects({
       <div
         style={{
           display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
+          justifyContent: "flex-end",
+          alignItems:"right",
+          marginBottom: "5px"
         }}
-      >
-        <Title></Title>
+      >        
         <NewProjectContainer />
       </div>
 

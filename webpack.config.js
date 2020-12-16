@@ -78,7 +78,7 @@ const config = {
   externals: [
       {'./cptable': 'var cptable'},
       {'./jszip': 'jszip'}
-  ]
+  ],
 };
 
 module.exports = config;

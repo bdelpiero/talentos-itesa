@@ -18,6 +18,7 @@ import {
 } from "antd";
 import { DownloadOutlined, DownOutlined } from "@ant-design/icons";
 import { useLayoutEffect } from "react";
+import { user } from "../atoms";
 const { Title, Paragraph } = Typography;
 
 export const OurCommunity = ({

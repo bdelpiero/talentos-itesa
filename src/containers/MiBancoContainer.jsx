@@ -20,8 +20,6 @@ function MiBancoContainer() {
   });
 
   const handleChangeBank = (e) => {
-    console.log("esto es e target name", e.target.name);
-
     setBankData({
       ...bankData,
       [e.target.name]: e.target.value,
@@ -43,9 +41,7 @@ function MiBancoContainer() {
       .update({
         bankDetails: bankData,
       })
-      .then(() => {
-        console.log("cambios realizados con éxito");
-      })
+      .then(() => {})
       .then(() => {
         Modal.success({
           bodyStyle: {
@@ -82,5 +78,3 @@ function MiBancoContainer() {
 }
 
 export default MiBancoContainer;
-
-
