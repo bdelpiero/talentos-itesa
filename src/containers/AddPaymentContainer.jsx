@@ -22,11 +22,6 @@ function NewProjectContainer({pendingPayments}) {
     setModal(false);
   };
 
-  const handleCuota = (value) => {
-    setCuota(value);
-  };
-
-
   async function success() {
     closeModal();
     const file = fileUrl.file.originFileObj;
@@ -78,6 +73,7 @@ function NewProjectContainer({pendingPayments}) {
       openModal={openModal}
       modal={modal}
       form={form}
+      
       // users={users}
       selectedUser={selectedUser}
       setSelectedUser={setSelectedUser}
@@ -86,7 +82,7 @@ function NewProjectContainer({pendingPayments}) {
       // projects={projects}
       fileUrl={fileUrl}
       setFileUrl={setFileUrl}
-      handleCuota={handleCuota}
+      setCuota={setCuota}
       pendingPayments={pendingPayments}
     />
   );

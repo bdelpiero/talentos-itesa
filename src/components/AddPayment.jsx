@@ -36,7 +36,7 @@ function AddPayment({
   projects,
   setFileUrl,
   fileUrl,
-  handleCuota,
+  setCuota,
   pendingPayments
 }) {
 
@@ -52,19 +52,20 @@ function AddPayment({
   const options = usuarios.filter((v,i,a)=>a.findIndex(t=>(t.id === v.id))===i)
 
 
-  // arr.filter((v,i,a)=>a.findIndex(t=>(t.id === v.id))===i)
-
+  // MAPEA TODOS LOS PROJECTS
   const projectsFilter = pendingPayments.filter((payment) => {
     return payment.user && selectedUser.id && payment.user.id == selectedUser.id 
   }).map((payment)=>{
     return { value: payment.projectName, id: payment.projectId }
   }) 
-
+  // ELIMINA PROJECTS DUPLICADOS
   const optionsProjects = projectsFilter.filter((v,i,a)=>a.findIndex(t=>(t.id === v.id))===i)
 
-  // if(payment.user.id == selectedUser.id){
-  //   return { value: payment.projectName, id: payment.projectId }
-
+  const optionCuotas = pendingPayments.filter((payment)=>{
+    return payment.user.id == selectedUser.id && payment.projectId == selectedProject
+  }).map((payment)=>{
+    return { value: payment.cuota, id: payment.paymentId }
+  }) 
 
   const [dragger, setDragger] = useState(false);
   const [boton, setBoton] = useState(true);
@@ -179,7 +180,7 @@ function AddPayment({
                   },
                 ]}
               >
-                <Select
+                {/* <Select
                   onChange={(value) => handleCuota(value)}
                   placeholder="Cuota"
                 >
@@ -187,7 +188,24 @@ function AddPayment({
                   <Option value="CUOTA 2">Cuota 2</Option>
                   <Option value="CUOTA 3">Cuota 3</Option>
                   <Option value="CUOTA 4">Cuota 4</Option>
-                </Select>
+                </Select> */}
+                <AutoComplete
+                  onChange={(cuotaSelected) => {
+                    const cuotaSelect = options.filter((option) => {
+                      if (cuotaSelected == option.value) return true;
+                    });
+
+                    if (!cuotaSelect[0] || !cuotaSelect[0].id) return;
+                    setCuota(cuotaSelect[0]);
+                  }}
+                  options={optionCuotas}
+                  placeholder="Cuotas"
+                  filterOption={(inputValue, option) =>
+                    option.value
+                      .toUpperCase()
+                      .indexOf(inputValue.toUpperCase()) !== -1
+                  }
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
