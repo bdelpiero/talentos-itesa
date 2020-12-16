@@ -108,7 +108,6 @@ export default ({ item, project }) => {
                 </Text>
               </span>
             )}
-
             <EditUserContainer
               user={currentUser}
               setCurrentUser={setCurrentUser}
