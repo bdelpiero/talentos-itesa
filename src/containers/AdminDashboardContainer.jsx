@@ -26,8 +26,8 @@ function AdminDashboardContainer() {
             return data.data();
           })
         );
-      });
-
+      })
+     
     const PagosObserver = db
     .collection("payments")
     .where("state", "==", "pending")
@@ -40,7 +40,10 @@ function AdminDashboardContainer() {
       setPagosPendientes({pending:pendingP,observer:PagosObserver})
     });
 
-    return () => unsuscribe();
+    return () =>{ 
+      unsuscribe()
+      PagosObserver()
+    };
   }, []);
 
   console.log(pagosPendientes," estos son los pago pendientes ---")
