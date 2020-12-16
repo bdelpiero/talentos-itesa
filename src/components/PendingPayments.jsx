@@ -7,18 +7,22 @@ import AddPaymentContainer from "../containers/AddPaymentContainer"
 const { Title } = Typography;
 
 export default ({pendingPayments }) => {
+  console.log(" PENDING PAYMENTS ", pendingPayments)
   return (
     <>
       <Title level={3} style={{ width: "100%" }}>
         Pagos a realizar este mes
       </Title>
-      {pendingPayments &&
+      {pendingPayments.length > 0 &&
         pendingPayments.map((payment) => {
+          if(!payment.user){
+            return <div></div>
+          } 
           return (
             <Card>
               <Row className="paymentsCards">
                 <Col className="gutter-row" span={2}>
-                  <Avatar size={55} src={payment.user.avatar} className="avatar" />
+                  <Avatar size={55} src={payment.user && payment.user.avatar} className="avatar" />
                 </Col>
                 <Col span={3}>
                   <h1>${payment.monto}</h1>
