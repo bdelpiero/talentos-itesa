@@ -6,8 +6,7 @@ import { Modal, Card, Form } from "antd";
 import { ProjectOutlined } from "@ant-design/icons";
 
 function addCuotas(cuotas, user, project) {
-  console.log("--- ACA ESTAN LOS USER ----", user)
-  console.log("--- ACA ESTAN LOS PROJECT ----", project)
+
   const batch = db.batch();
   cuotas.forEach((cuota, i) => {
     console.log(cuota);

@@ -66,8 +66,6 @@ function AddPayment({
     }
   };
 
-
-
   return (
     <div className="Modal">
       <Button onClick={openModal} className="modal-button">
