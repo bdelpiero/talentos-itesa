@@ -37,18 +37,34 @@ function AddPayment({
   setFileUrl,
   fileUrl,
   handleCuota,
+  pendingPayments
 }) {
-  const options = users.map((user) => {
-    return {
-      value: `${user.name} ${user.lastName}`,
-      id: user.id,
-      email: user.email,
-    };
-  });
 
-  const optionsProjects = projects.map((project) => {
-    return { value: project.proyecto, id: project.projectId };
-  });
+  // MAPEA TODOS LOS USUARIOS
+  const usuarios = pendingPayments.map((payment) => {
+    return {
+      value: `${payment.user.name} ${payment.user.lastName}`,
+      id: payment.user.id,
+      email: payment.user.email,
+    };
+  })
+  // ELIMINA USUARIOS DUPLICADOS
+  const options = usuarios.filter((v,i,a)=>a.findIndex(t=>(t.id === v.id))===i)
+
+
+  // arr.filter((v,i,a)=>a.findIndex(t=>(t.id === v.id))===i)
+
+  const projectsFilter = pendingPayments.filter((payment) => {
+    return payment.user && selectedUser.id && payment.user.id == selectedUser.id 
+  }).map((payment)=>{
+    return { value: payment.projectName, id: payment.projectId }
+  }) 
+
+  const optionsProjects = projectsFilter.filter((v,i,a)=>a.findIndex(t=>(t.id === v.id))===i)
+
+  // if(payment.user.id == selectedUser.id){
+  //   return { value: payment.projectName, id: payment.projectId }
+
 
   const [dragger, setDragger] = useState(false);
   const [boton, setBoton] = useState(true);
@@ -107,6 +123,7 @@ function AddPayment({
                     const userSelect = options.filter((option) => {
                       if (userSelected == option.value) return true;
                     });
+                    console.log(userSelect, "aca esta el userSelect")
                     if (!userSelect[0] || !userSelect[0].id) return;
                     setSelectedUser(userSelect[0]);
                   }}
@@ -175,15 +192,7 @@ function AddPayment({
             </Col>
             <Col span={12}>
               {!dragger ? (
-                <Dragger {...props}
-                n
-                rules={[
-                  {
-                    required: true,
-                    message: "Por favor ingrese Cuota a cancelar",
-                  },
-                ]}
-                >
+                <Dragger {...props} style={{width:"80%"}}>
                   <p className="ant-upload-drag-icon">
                     <PlusOutlined style={{color:"#9e39ff"}} />
                   </p>

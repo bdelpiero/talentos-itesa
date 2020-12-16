@@ -2,12 +2,11 @@ import React from "react";
 // Ant-Desing
 import { Button, Row, Col, Avatar, Card,Typography } from "antd";
 import { DownloadOutlined } from "@ant-design/icons";
-import AddPaymentContainer from "../containers/AddPaymentContainer"
+import AddSinglePaymentContainer from "../containers/AddSinglePaymentContainer"
 
 const { Title } = Typography;
 
 export default ({pendingPayments }) => {
-  console.log(" PENDING PAYMENTS ", pendingPayments)
   return (
     <>
       <Title level={3} style={{ width: "100%" }}>
@@ -47,7 +46,7 @@ export default ({pendingPayments }) => {
                   </Button>
                 </Col>
                 <Col className="gutter-row" span={4}>
-                  <AddPaymentContainer/>
+                  <AddSinglePaymentContainer payment={payment}/>
                 </Col>
               </Row>
             </Card>

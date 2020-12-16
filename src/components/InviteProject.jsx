@@ -1,6 +1,16 @@
 import React from "react";
 import { CloseCircleOutlined } from "@ant-design/icons";
-import { Modal, Button, Row, Col, Input, Form, DatePicker, Select, AutoComplete} from "antd";
+import {
+  Modal,
+  Button,
+  Row,
+  Col,
+  Input,
+  Form,
+  DatePicker,
+  Select,
+  AutoComplete,
+} from "antd";
 import { user } from "../atoms";
 
 const { Option } = Select;
@@ -23,12 +33,9 @@ function InviteProject({
 }) {
   const boton = proyecto.status == "On Development" ? false : true;
 
-
-
   const options = users.map((user) => {
     return { value: `${user.name} ${user.lastName}`, id: user.id };
   });
-
 
   return (
     <div className="Modal">
@@ -73,10 +80,10 @@ function InviteProject({
               <Row>
                 <Col span={6}>
                   <Form.Item
-                  style={{
-                    width: "90%",
-                    marginLeft: "12px"
-                  }}
+                    style={{
+                      width: "90%",
+                      marginLeft: "12px",
+                    }}
                     name="freelancer"
                     rules={[
                       {
@@ -86,14 +93,13 @@ function InviteProject({
                     ]}
                   >
                     <AutoComplete
-                      
                       onChange={(userSelected) => {
                         const userSelect = options.filter((option) => {
                           if (userSelected == option.value) return true;
                         });
-                        if(!userSelected[0].id)setSelectedUser(userSelect[0].id);
-                        console.log("PASO EL IF ")
-                        
+                        if (!userSelected[0].id)
+                          setSelectedUser(userSelect[0].id);
+                        console.log("PASO EL IF ");
                       }}
                       options={options}
                       placeholder="Nombre de Freelancer"
@@ -114,10 +120,10 @@ function InviteProject({
                         message: "Por favor ingrese Fechas",
                       },
                     ]}
-                    style={{margin: "0 5%" }}
+                    style={{ margin: "0 5%" }}
                   >
                     <RangePicker
-                      style={{ width: "90%"}}
+                      style={{ width: "90%" }}
                       format="DD/MM/YYYY"
                       placeholder={["Inicio", "Finalizacion"]}
                       onChange={(value, dataString) => {
@@ -168,99 +174,174 @@ function InviteProject({
 
               <Row>
                 <Col span={6}>
-                  <Form.Item
-                  style={{marginLeft: "5%" }}
-                  rules={[
-                    {
-                      required: true,
-                      message: "Por favor ingrese Cuota 1",
-                    },
-                  ]}
-                  >
-                    <Input
+                  {/*
+                ------------------
+                     CUOTA 1
+                ------------------
+                */}
+                  <Row style={{ display: "flex", alignItems: "center" }}>
+                    <Form.Item
                       name="cuota1"
-                      value={cuotas.cuota1.monto}
-                      onChange={(e) =>
-                        handleCuotas(e.target.value, "monto", e.target.name)
-                      }
+                      rules={[
+                        {
+                          required: true,
+                          message: "Requerido",
+                        },
+                      ]}
+                      style={{ width: "45%", marginLeft: "5%" }}
+                    >
+                      <Input
+                        name="cuota1"
+                        value={cuotas.cuota1.monto}
+                        onChange={(e) =>
+                          handleCuotas(e.target.value, "monto", e.target.name)
+                        }
+                      ></Input>
+                    </Form.Item>
+                    <Form.Item
+                      name="date1"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Requerido",
+                        },
+                      ]}
+                      style={{ width: "45%" }}
+                    >
+                      <DatePicker
+                        format="DD/MM/YYYY"
+                        onChange={(value, dataString) =>
+                          handleCuotas(dataString, "fecha", "cuota1")
+                        }
+                      />
+                    </Form.Item>
+                  </Row>
+                </Col>
+
+                {/*
+                ------------------
+                     CUOTA 2
+                ------------------
+                */}
+
+                <Col span={6}>
+                  <Row style={{ display: "flex", alignItems: "center" }}>
+                    <Form.Item
+                      name="cuota2"
+                      style={{ width: "45%", marginLeft: "5%"}}
+                    >
+                      <Input
+                        name="cuota2"
+                        value={cuotas.cuota2.monto}
+                        onChange={(e) =>
+                          handleCuotas(e.target.value, "monto", e.target.name)
+                        }
+                        disabled={
+                          cuotas.cuota1.fecha.length == 0 ||
+                          cuotas.cuota1.monto == 0
+                        }
+                      ></Input>
+                    </Form.Item>
+                    <Form.Item
+                      name="cuota2"
                       style={{ width: "45%"}}
-                      
-                    ></Input>
-                    <DatePicker
-                      name="cuota1"
-                      format="DD/MM/YYYY"
-                      style={{ width: "45%", marginRight: "5%" }}
-                      onChange={(value, dataString) =>
-                        handleCuotas(dataString, "fecha", "cuota1")
-                      }
-                    />
-                  </Form.Item>
+                    >
+                      <DatePicker
+                        name="cuota2"
+                        disabled={
+                          cuotas.cuota1.fecha.length == 0 ||
+                          cuotas.cuota1.monto == 0
+                        }
+                        format="DD/MM/YYYY"
+                        onChange={(value, dataString) =>
+                          handleCuotas(dataString, "fecha", "cuota2")
+                        }
+                      />
+                    </Form.Item>
+                  </Row>
                 </Col>
+                {/*
+                ------------------
+                     CUOTA 3
+                ------------------
+                */}
                 <Col span={6}>
-                  <Form.Item>
-                    <Input
-                      name="cuota2"
-                      value={cuotas.cuota2.monto}
-                      onChange={(e) =>
-                        handleCuotas(e.target.value, "monto", e.target.name)
-                      }
-                      disabled={cuotas.cuota1.fecha.length == 0 || cuotas.cuota1.monto == 0}
-                      style={{ width: "45%", marginLeft: "5%" }}
-                    ></Input>
-                    <DatePicker
-                      name="cuota2"
-                      disabled={cuotas.cuota1.fecha.length == 0 || cuotas.cuota1.monto == 0}
-                      format="DD/MM/YYYY"
-                      style={{ width: "45%", marginRight: "5%" }}
-                      onChange={(value, dataString) =>
-                        handleCuotas(dataString, "fecha", "cuota2")
-                      }
-                    />
-                  </Form.Item>
-                </Col>
-                <Col span={6}>
-                  <Form.Item>
-                    <Input
+                  <Row style={{ display: "flex", alignItems: "center" }}>
+                    <Form.Item
                       name="cuota3"
-                      value={cuotas.cuota3.monto}
-                      onChange={(e) =>
-                        handleCuotas(e.target.value, "monto", e.target.name)
-                      }
-                      disabled={cuotas.cuota2.fecha.length == 0 || cuotas.cuota2.monto == 0}
                       style={{ width: "45%", marginLeft: "5%" }}
-                    ></Input>
-                    <DatePicker
+                    >
+                      <Input
+                        name="cuota3"
+                        value={cuotas.cuota3.monto}
+                        onChange={(e) =>
+                          handleCuotas(e.target.value, "monto", e.target.name)
+                        }
+                        disabled={
+                          cuotas.cuota2.fecha.length == 0 ||
+                          cuotas.cuota2.monto == 0
+                        }
+                      ></Input>
+                    </Form.Item>
+                    <Form.Item
                       name="cuota3"
-                      onChange={(value, dataString) =>
-                        handleCuotas(dataString, "fecha", "cuota3")
-                      }
-                      disabled={cuotas.cuota2.fecha.length == 0 || cuotas.cuota2.monto == 0}
-                      format="DD/MM/YYYY"
-                      style={{ width: "45%", marginRight: "5%" }}
-                    />
-                  </Form.Item>
+                      style={{ width: "45%" }}
+                    >
+                      <DatePicker
+                        name="cuota3"
+                        onChange={(value, dataString) =>
+                          handleCuotas(dataString, "fecha", "cuota3")
+                        }
+                        disabled={
+                          cuotas.cuota2.fecha.length == 0 ||
+                          cuotas.cuota2.monto == 0
+                        }
+                        format="DD/MM/YYYY"
+                      />
+                    </Form.Item>
+                  </Row>
                 </Col>
+                {/*
+                ------------------
+                     CUOTA 4
+                ------------------
+                */}
                 <Col span={6}>
-                  <Form.Item>
-                    <Input
+                  <Row style={{ display: "flex", alignItems: "center" }}>
+                    <Form.Item
                       name="cuota4"
-                      value={cuotas.cuota4.monto}
-                      onChange={(e) =>
-                        handleCuotas(e.target.value, "monto", e.target.name)
-                      }
-                      disabled={cuotas.cuota3.fecha.length == 0 || cuotas.cuota3.monto == 0}
                       style={{ width: "45%", marginLeft: "5%" }}
-                    ></Input>
-                    <DatePicker
+                    >
+                      <Input
+                        name="cuota4"
+                        value={cuotas.cuota4.monto}
+                        onChange={(e) =>
+                          handleCuotas(e.target.value, "monto", e.target.name)
+                        }
+                        disabled={
+                          cuotas.cuota3.fecha.length == 0 ||
+                          cuotas.cuota3.monto == 0
+                        }
+                      ></Input>
+                    </Form.Item>
+
+                    <Form.Item
                       name="cuota4"
-                      format="DD/MM/YYYY"
                       style={{ width: "45%", marginRight: "5%" }}
-                      onChange={(value, dataString) =>
-                        handleCuotas(dataString, "fecha", "cuota4")
-                      }
-                      disabled={cuotas.cuota3.fecha.length == 0 || cuotas.cuota3.monto == 0}
-                    />
-                  </Form.Item>
+                    >
+                      <DatePicker
+                        name="cuota4"
+                        format="DD/MM/YYYY"
+                        onChange={(value, dataString) =>
+                          handleCuotas(dataString, "fecha", "cuota4")
+                        }
+                        disabled={
+                          cuotas.cuota3.fecha.length == 0 ||
+                          cuotas.cuota3.monto == 0
+                        }
+                      />
+                    </Form.Item>
+                  </Row>
                 </Col>
               </Row>
             </div>
@@ -278,5 +359,3 @@ function InviteProject({
 }
 
 export default InviteProject;
-
-
