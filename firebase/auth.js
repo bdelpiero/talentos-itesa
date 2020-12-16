@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { auth, db } from './firebase';
+import { auth, db } from "./firebase";
 import { useHistory } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { atomLogin, user } from "../src/atoms/index";
@@ -44,15 +44,17 @@ export function AuthProvider({ children }) {
   }
 
   function resetPassword(email) {
-    return auth.sendPasswordResetEmail(email).catch(err => err)
+    return auth.sendPasswordResetEmail(email).catch((err) => err);
   }
 
   function updateEmail(email) {
-    return currentUser.updateEmail(email).catch(err => console.log(err))
+    return currentUser.updateEmail(email).catch((err) => console.log(err));
   }
 
   function updatePassword(password) {
-    return currentUser.updatePassword(password).catch(err => console.log(err))
+    return currentUser
+      .updatePassword(password)
+      .catch((err) => console.log(err));
   }
 
   useEffect(() => {
@@ -62,7 +64,7 @@ export function AuthProvider({ children }) {
         const userRef = db.collection("users").doc(authUser.uid);
         //se establece un observer que esta atento a los cambios en la base de datos
 
-      let obs =  userRef.onSnapshot(
+        let obs = userRef.onSnapshot(
           (docSnapshot) => {
             setCurrentUser(docSnapshot.data());
           },
@@ -70,8 +72,8 @@ export function AuthProvider({ children }) {
             console.log(`Encountered error: ${err}`);
           }
         );
-        setObserver({observer:obs})
-      
+        setObserver({ observer: obs });
+
         return userRef
           .get()
           .then((UserInfo) => {
@@ -93,12 +95,12 @@ export function AuthProvider({ children }) {
           });
       } else {
         setLoading(false);
-        setCurrentUser('');
+        setCurrentUser("");
       }
     });
     return unsubscribe;
   }, []);
-  
+
   const value = {
     currentUser,
     login,

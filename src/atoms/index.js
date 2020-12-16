@@ -29,6 +29,16 @@ export const isLoading = atom({
 });
 
 
+export const pagos = atom({
+  key: "pagos",
+  default: {
+    pending:[],
+    observer:''
+  }
+  
+});
+
+
 export const atomLogin = atom({
   key: "login",
   default: {

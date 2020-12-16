@@ -9,10 +9,10 @@ const { Title } = Typography;
 const { Dragger } = Upload;
 
 export default ({ handleModal, modalCargarFactura, selected }) => {
-
-    const [factura, setFactura] = useState({})
-    const [disable, setDisable] = useState(true)
-    const [buttonLoading, setButtonLoading] = useState(false)
+  
+  const [factura, setFactura] = useState({});
+  const [disable, setDisable] = useState(true);
+  const [buttonLoading, setButtonLoading] = useState(false);
 
     const props = {
         name: "file",
@@ -67,45 +67,48 @@ export default ({ handleModal, modalCargarFactura, selected }) => {
         }
     }
 
-    return (
-        <Modal
-            visible={modalCargarFactura}
-            centered="true"
-            cancelButtonProps={{ hidden: true }}
-            okButtonProps={{ hidden: true }}
-            onCancel={handleModal}
-            closeIcon={<CloseCircleOutlined className="close-button" />}
-            width={600}
+
+  return (
+    <Modal
+      visible={modalCargarFactura}
+      centered="true"
+      cancelButtonProps={{ hidden: true }}
+      okButtonProps={{ hidden: true }}
+      onCancel={handleModal}
+      closeIcon={<CloseCircleOutlined className="close-button" />}
+      width={600}
+    >
+      <div id="modal-invoice">
+        <Title level={3}>Carga tu factura</Title>
+        {disable ? (
+          <Dragger {...props} className="modal-factura-dragger">
+            <p className="ant-upload-drag-icon">
+              <InboxOutlined style={{ fontSize: "4rem", color: "#9e39ff" }} />
+            </p>
+            <p className="ant-upload-text">
+              Click or drag file to this area to upload
+            </p>
+          </Dragger>
+        ) : (
+          <div id="invoice-uploaded">
+            <p style={{ margin: "0" }}> Uploaded File: {factura.name} </p>
+            <DeleteOutlined
+              style={{ fontSize: "1rem", color: "red" }}
+              onClick={() => (setFactura({}), setDisable(true))}
+            />
+          </div>
+        )}
+        <Button
+          shape="round"
+          className="freelancer-card-buttons"
+          id="cargar-factura-button"
+          onClick={handleClick}
+          loading={buttonLoading}
+          disabled={disable}
         >
-            <div id='modal-invoice'>
-                <Title level={3}>Carga tu factura</Title>
-                {disable ?
-                (
-                    <Dragger {...props} className='modal-factura-dragger'>
-                        <p className="ant-upload-drag-icon">
-                        <InboxOutlined style={{fontSize: '4rem', color: '#9e39ff'}}/>
-                        </p>
-                        <p className="ant-upload-text">Click or drag file to this area to upload</p>
-                    </Dragger>
-                ) : (
-                    <div id='invoice-uploaded'>
-                        <p style={{margin: '0'}}> Uploaded File: {factura.name} </p>
-                        <DeleteOutlined 
-                        style={{fontSize: '1rem', color: 'red'}}
-                        onClick={() => (setFactura({}), setDisable(true))}/>
-                    </div>
-                )}
-                <Button 
-                shape='round' 
-                className="freelancer-card-buttons" 
-                id='cargar-factura-button' 
-                onClick={handleClick} 
-                loading={buttonLoading}
-                disabled={disable}
-                >
-                    Cargar Factura
-                </Button>
-            </div>
-        </Modal>
-    )
-}
+          Cargar Factura
+        </Button>
+      </div>
+    </Modal>
+  );
+};

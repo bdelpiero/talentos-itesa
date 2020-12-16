@@ -3,14 +3,10 @@ import InviteProject from "../components/InviteProject";
 import { db } from "../../firebase/firebase";
 import CheckCircle from "../../views/check.svg";
 import { Modal, Card, Form } from "antd";
-import { ProjectOutlined } from "@ant-design/icons";
 
 function addCuotas(cuotas, user, project) {
-  console.log("--- ACA ESTAN LOS USER ----", user)
-  console.log("--- ACA ESTAN LOS PROJECT ----", project)
   const batch = db.batch();
   cuotas.forEach((cuota, i) => {
-    console.log(cuota);
     if (!cuota.monto) return;
     const cuotaRef = db.collection("payments").doc();
     const newDate = cuota.fecha.split("/").reverse().join("-");
@@ -65,8 +61,6 @@ function InviteProjectContainer({ proyecto }) {
     },
   });
 
-  
-
   // function onChange(e) {
   //   setCurrentUsers(
   //     allUsers.filter((user) => {
@@ -91,7 +85,7 @@ function InviteProjectContainer({ proyecto }) {
           return users.data();
         })
       );
-    })
+    });
     return () => unsuscribe();
   }, []);
 
@@ -102,9 +96,9 @@ function InviteProjectContainer({ proyecto }) {
     });
   };
 
-  const handleUsers = (e)=>{
-    setSelectedUser(e.target.value)
-  }
+  const handleUsers = (e) => {
+    setSelectedUser(e.target.value);
+  };
 
   const handleCuotas = (value, name, nCuota) => {
     setCuotas({
@@ -114,7 +108,6 @@ function InviteProjectContainer({ proyecto }) {
   };
 
   function handleFinish() {
-    console.log("-- ACA ESTA SELECTEDUSER ---", selectedUser)
     closeModal();
     const cuotasDB = Object.values(cuotas);
     const getUser = users.filter((user) => user.id == selectedUser)[0];
@@ -149,13 +142,13 @@ function InviteProjectContainer({ proyecto }) {
             justifyContent: "center",
           },
           content: (
-            <Card className='invite_msg' onClick={openModal}>
+            <Card className="invite_msg" onClick={openModal}>
               <h1>¡Perfil Invitado!</h1>
             </Card>
           ),
           centered: "true",
           okText: "VOLVER",
-          icon: <img src={CheckCircle} className='icono-sider' />,
+          icon: <img src={CheckCircle} className="icono-sider" />,
           okButtonProps: {
             style: {
               backgroundColor: "#9e39ff",
@@ -169,7 +162,7 @@ function InviteProjectContainer({ proyecto }) {
 
   return (
     <InviteProject
-      className='modal-outside'
+      className="modal-outside"
       handleChange={handleChange}
       handleCuotas={handleCuotas}
       cuotas={cuotas}
