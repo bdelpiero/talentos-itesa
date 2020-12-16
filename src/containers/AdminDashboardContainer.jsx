@@ -41,7 +41,10 @@ function AdminDashboardContainer() {
     });
    
 
-    return () => unsuscribe();
+    return () =>{ 
+      unsuscribe()
+      PagosObserver()
+    };
   }, []);
 
 

@@ -17,19 +17,21 @@ import AllProjectsContainer from "../containers/AllProjectsContainer";
 import Navbar from "../components/Navbar";
 import { SingleProjectContainer } from "../containers/SingleProjectContainer";
 import { OurCommunityContainer } from "../containers/OurCommunityContainer";
+import { SingleUserContainer } from "../containers/SingleUserContainer";
 
 function AdminDashboard({ handleLogout }) {
   const { Content } = Layout;
   const [currentUser, setCurrentUser] = useRecoilState(user);
   const [item, setItem] = React.useState(1);
   const [project, setProject] = React.useState({});
+  const [selectedUser, setSelectedUser] = React.useState({});
 
   return (
     <Layout>
       <Sidebar setItem={setItem} handleLogout={handleLogout} />
       <Layout>
         <Navbar setItem={setItem} />
-        <HeaderComponent />
+        <HeaderComponent  item={item} project={project} />
         <Content className="content-user">
           {item == 1 && (
             <>
@@ -58,15 +60,21 @@ function AdminDashboard({ handleLogout }) {
                   <AddPaymentContainer />
                 </Card>
                 <ResumeContainer />
-              </Row>              
-                <PendingPayments user={currentUser} />              
+              </Row>
+              <PendingPayments user={currentUser} />
             </>
           )}
           {item == 2 && (
             <AllProjectsContainer setItem={setItem} setProject={setProject} />
           )}
           {item == 3 && <SingleProjectContainer project={project} />}
-          {item == 5 && <OurCommunityContainer />}
+          {item == 5 && (
+            <OurCommunityContainer
+              setItem={setItem}
+              setSelectedUser={setSelectedUser}
+            />
+          )}
+          {item == 6 && <SingleUserContainer selectedUser={selectedUser} />}
         </Content>
       </Layout>
     </Layout>

@@ -6,6 +6,8 @@ import { Modal, Card, Form } from "antd";
 import { ProjectOutlined } from "@ant-design/icons";
 
 function addCuotas(cuotas, user, project) {
+  console.log("--- ACA ESTAN LOS USER ----", user)
+  console.log("--- ACA ESTAN LOS PROJECT ----", project)
   const batch = db.batch();
   cuotas.forEach((cuota, i) => {
     console.log(cuota);
@@ -22,6 +24,8 @@ function addCuotas(cuotas, user, project) {
       state: "pending",
       projectName: project.name,
       cuota: "CUOTA " + (i + 1),
+      loadedF: false,
+      paymentId: cuotaRef.id
     });
   });
 
@@ -60,6 +64,8 @@ function InviteProjectContainer({ proyecto }) {
     },
   });
 
+  
+
   // function onChange(e) {
   //   setCurrentUsers(
   //     allUsers.filter((user) => {
@@ -84,8 +90,7 @@ function InviteProjectContainer({ proyecto }) {
           return users.data();
         })
       );
-    });
-
+    })
     return () => unsuscribe();
   }, []);
 
@@ -96,15 +101,19 @@ function InviteProjectContainer({ proyecto }) {
     });
   };
 
+  const handleUsers = (e)=>{
+    setSelectedUser(e.target.value)
+  }
+
   const handleCuotas = (value, name, nCuota) => {
     setCuotas({
       ...cuotas,
       [nCuota]: { ...cuotas[nCuota], [name]: value },
     });
-    console.log("aca esta cuotas---", cuotas);
   };
 
   function handleFinish() {
+    console.log("-- ACA ESTA SELECTEDUSER ---", selectedUser)
     closeModal();
     const cuotasDB = Object.values(cuotas);
     const getUser = users.filter((user) => user.id == selectedUser)[0];
@@ -173,6 +182,8 @@ function InviteProjectContainer({ proyecto }) {
       asignData={asignData}
       setAsignData={setAsignData}
       form={form}
+      proyecto={proyecto}
+      handleUsers={handleUsers}
     />
   );
 }

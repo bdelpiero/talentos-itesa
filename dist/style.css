@@ -493,6 +493,13 @@ trabajando con content user
   background-color: #9e39ff !important;
 }
 
+.freelancer-card-buttons:focus {
+  text-align: center;
+  color: white;
+  background-color: #9e39ff !important;
+}
+
+
 /* ----------------------
 trabajando con  user Cards
 ---------------------- */
@@ -913,6 +920,45 @@ Trabajando con Admin Cards/DashBoard
   font-size: 16px;
 }
 
+#close-modal-invoice-button {
+  display: flex;
+  justify-content: center;
+}
+
+#dragger-modal-invoice {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-around !important;
+  align-content: center !important;
+  width: 100% !important;
+}
+
+#modal-invoice {
+  padding: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-around !important;
+  align-items: center !important;
+}
+
+.modal-factura-dragger {
+  padding: 1rem !important;
+}
+
+
+
+#cargar-factura-button {
+  margin: 1rem auto;
+  width: 35%;
+}
+
+#invoice-uploaded {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
 .ant-modal-footer {
   padding: 0;
   border-top: none;
@@ -1042,3 +1088,20 @@ Trabajando con Admin Cards/DashBoard
 .ourCommunity-filterButtons button:hover {
   background-color: #dddcdc;
 }
+
+/* .ant-upload.ant-upload-drag {
+  position: relative;
+  width: 80%;
+  height: 80% !important;
+  text-align: center;
+  background: #fafafa;
+  border: 2px dashed #d9d9d9;
+  border-radius: 2px;
+  cursor: pointer;
+  -webkit-transition: border-color 0.3s;
+  transition: border-color 0.3s;
+} */
+
+/* ant-upload.ant-upload-drag .ant-upload {
+  padding: 50px 0;
+} */
