@@ -85,6 +85,7 @@ export default () => {
       .collection("payments")
       .where("userId", "==", currentUser.id)
       .where("state", "==", "pending")
+      .where('loadedF', '==', false)
       .onSnapshot((querySnapshot) => {
         const arr = [];
         querySnapshot.forEach((doc) => {
