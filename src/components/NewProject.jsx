@@ -22,7 +22,7 @@ function NewProject({
 
   return (
     <div className="Modal">
-      <Button onClick={openModal} className="modal-button">
+      <Button onClick={openModal} className="modal-button2">
         Crear Proyecto
       </Button>
 

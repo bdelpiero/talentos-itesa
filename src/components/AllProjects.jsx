@@ -164,8 +164,9 @@ function AllProjects({
       <div
         style={{
           display: "flex",
-          justifyContent: "space-between",
-          alignItems: "end",
+          justifyContent: "flex-end",
+          alignItems:"right",
+          marginBottom: "5px"
         }}
       >        
         <NewProjectContainer />
