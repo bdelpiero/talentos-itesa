@@ -32,7 +32,7 @@ function InviteProject({
 
   return (
     <div className="Modal">
-      <Button disabled={boton} className="modal-button" onClick={openModal}>
+      <Button disabled={boton} className="modal-button2 hide-button" onClick={openModal}>
         {" "}
         INVITAR
       </Button>
@@ -144,7 +144,7 @@ function InviteProject({
                         Developer
                       </Option>
                       <Option key="designer" value="designer">
-                        Disigner
+                        Designer
                       </Option>
                     </Select>
                   </Form.Item>

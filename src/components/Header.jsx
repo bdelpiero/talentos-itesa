@@ -44,14 +44,14 @@ console.log(project,"proyecto nombre");
         
         { item == 5 && 
          <span className='span-title'>
-          <Title level={2} className='header-title'>Nuestra comunidad</Title>
+          <Title level={1} className='header-title'>Nuestra comunidad</Title>
           <Text>Estos son todos los perfiles que tenemos disponibles
           </Text>
         </span>}   
         { item == 6 && 
          <span className='span-title'>
-          <Title level={2} className='header-title'>Perfil Freelancer </Title>
-          <Text>😎
+          <Title level={1} className='header-title'>Perfil Freelancer </Title>
+          <Text>
           </Text>
         </span>}          
 
