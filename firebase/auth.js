@@ -14,21 +14,20 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useRecoilState(user);
   const [loading, setLoading] = useState(true);
   const [isLogin, setIsLogin] = useRecoilState(atomLogin);
+  const [observer, setObserver] = useState({observer: ""})
   const history = useHistory();
-  const [observer, setObserver] = useState({ observer: "" });
+
 
   function signup(email, password) {
-    return auth
-      .createUserWithEmailAndPassword(email, password)
-      .catch((err) => console.log(err));
+    return auth.createUserWithEmailAndPassword(email, password)
+      .catch(err => console.log(err))
   }
 
   function login(email, password) {
-    return auth
-      .signInWithEmailAndPassword(email, password)
-      .catch(function (error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
+    return auth.signInWithEmailAndPassword(email, password)
+      .catch((error) => {
+        let errorCode = error.code;
+        let errorMessage = error.message;
         setIsLogin({
           loadin: false,
           errorCode,
@@ -38,11 +37,10 @@ export function AuthProvider({ children }) {
   }
 
   function logout() {
-    observer.observer();
-    return auth
-      .signOut()
-      .then(() => history.push("/login"))
-      .catch((err) => console.log(err));
+    observer.observer()
+    return auth.signOut()
+    .then(() => history.push('/login'))
+    .catch(err => console.log('ERROR AL LOGIN', err))
   }
 
   function resetPassword(email) {
@@ -68,7 +66,6 @@ export function AuthProvider({ children }) {
 
         let obs = userRef.onSnapshot(
           (docSnapshot) => {
-            //se setea el usuario nuevamente con los cambios
             setCurrentUser(docSnapshot.data());
           },
           (err) => {
@@ -81,7 +78,7 @@ export function AuthProvider({ children }) {
           .get()
           .then((UserInfo) => {
             const User = UserInfo.data();
-
+            console.log("USUARIO LOGUEADO => ", User, "==============")
             setLoading(false);
             setCurrentUser(User);
             setIsLogin({ loadin: false });

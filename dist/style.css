@@ -1052,6 +1052,13 @@ Trabajando con Admin Cards/DashBoard
   border-color: #9e39ff;
 }
 
+#accept-project-button {
+  width: 40%;
+  background-color: #9e39ff;
+  color: white;
+  margin: 0.5rem auto;
+}
+
 /* ----------------
       OurCommunity component
 ------------------- */

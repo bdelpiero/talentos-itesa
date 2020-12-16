@@ -1,11 +1,12 @@
-import React, { useState, useEffect} from "react";
+import React, { useState } from "react";
 import LoadInvoice from './CargarFactura'
 
 // STYLES
 import { Button, Card, Typography } from "antd";
 const { Title } = Typography;
 
-export default ({ nextPayments }) => {
+export default ({ nextPayments, selected, setSelected }) => {
+
   if (nextPayments.length == 0) {
     return (
       <Card className='freelancer-cards'>
@@ -17,13 +18,8 @@ export default ({ nextPayments }) => {
     );
   }
 
-  const [selected, setSelected] = useState(nextPayments[0]);
   const [modalCargarFactura, setModalCargarFactura] = useState(false)
-  const handleModal = () => {
-    modalCargarFactura ? setModalCargarFactura(false) : setModalCargarFactura(true)
-    if(nextPayments.length !== 0) setSelected(nextPayments[0])
-  }
-
+  const handleModal = () => modalCargarFactura ? setModalCargarFactura(false) : setModalCargarFactura(true)
 
   {
     return nextPayments.length > 1 ? (
@@ -46,6 +42,7 @@ export default ({ nextPayments }) => {
             Cargar Factura{" "}
           </Button>
         </div>
+
          {/* MODAL PARA CARGAR FACTURA */}
          <LoadInvoice handleModal={handleModal} modalCargarFactura={modalCargarFactura} selected={selected}/>
         <div className='freelancer-card-stepers-container'>
@@ -80,10 +77,10 @@ export default ({ nextPayments }) => {
             className='freelancer-card-buttons'
             onClick={handleModal}
             shape='round'>
-            {" "}
-            Cargar Factura{" "}
+            Cargar Factura
           </Button>
         </div>
+
         {/* MODAL PARA CARGAR FACTURA */}
         <LoadInvoice modalCargarFactura={modalCargarFactura} handleModal={handleModal} selected={selected}/>
       </Card>
