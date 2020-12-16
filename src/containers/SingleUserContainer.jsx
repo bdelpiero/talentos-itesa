@@ -27,7 +27,7 @@ export const SingleUserContainer = ({ selectedUser }) => {
       });
     return () => {};
   }, []);
-  console.log("ACA ESTAN", userProjects);
+
   return (
     <>
       <SingleUser
