@@ -26,10 +26,9 @@ function NewProjectContainer() {
   }, []);
 
   useEffect(() => {
-    console.log(" -- ESTO ES EL SELECTEDUSER --", selectedUser);
-    let desuscribir = ()=>{}
+    let desuscribir = () => {};
     if (selectedUser.email)
-    desuscribir = db
+      desuscribir = db
         .collectionGroup("invitedUser")
         .where("email", "==", selectedUser.email)
         .onSnapshot((projects) => {
@@ -39,7 +38,7 @@ function NewProjectContainer() {
             })
           );
         });
-        return () => desuscribir();
+    return () => desuscribir();
   }, [selectedUser]);
 
   const openModal = () => {
@@ -54,26 +53,29 @@ function NewProjectContainer() {
     setCuota(value);
   };
 
-
   async function success() {
     closeModal();
     const file = fileUrl.file.originFileObj;
     const storageRef = storage.ref();
     const task = storageRef.child(`comprobantesDePago/${fileUrl.file.name}`);
     await task.put(file);
-    await task.getDownloadURL().then((downloadUrl) => {
-      db.collection("payments").where("projectId", "==", selectedProject).where("cuota","==", cuota).where("userId","==", selectedUser.id)
-      .get()
-      .then((doc)=>{
-        const pago = doc.docs[0].id
-        db.collection("payments").doc(pago).update({
-          comprobantePago: downloadUrl
-        })
+    await task
+      .getDownloadURL()
+      .then((downloadUrl) => {
+        db.collection("payments")
+          .where("projectId", "==", selectedProject)
+          .where("cuota", "==", cuota)
+          .where("userId", "==", selectedUser.id)
+          .get()
+          .then((doc) => {
+            const pago = doc.docs[0].id;
+            db.collection("payments").doc(pago).update({
+              comprobantePago: downloadUrl,
+            });
+          });
       })
-    })
       .then(() => {
         form.resetFields();
-        console.log("Se cargo correctamente");
       })
       .then(() => {
         Modal.success({
