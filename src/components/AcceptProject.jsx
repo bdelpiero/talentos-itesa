@@ -8,6 +8,7 @@ import { db } from "../../firebase/firebase";
 import { storage } from "../../firebase/firebase";
 import SignedContractProject from "../components/pdfs/signedContractProject";
 import { pdf } from "@react-pdf/renderer";
+import { ConsoleSqlOutlined } from "@ant-design/icons";
 
 export default ({ setItem }) => {
   const [invitedProject, setInvitedProject] = useRecoilState(projectInvited);
@@ -67,9 +68,23 @@ export default ({ setItem }) => {
           });
       })
       .then(() => {
-        let userRef = db.collection("users").doc(invitedProject.selected.id);
-        let getDoc = userRef
+        db.collection("payments")
+          .where("userId", "==", invitedProject.selected.id)
+          .where("projectId", '==', invitedProject.selected.projectId)
+          .where('proyectoAceptado', '==', false)
           .get()
+            .then((querySnapshot) => {
+              querySnapshot.forEach((doc) => {
+                let paymentRef = db.collection('payments').doc(doc.id)
+                paymentRef.update({proyectoAceptado: true})
+                .then(() => console.log('Payment Actualizado!'))
+              })
+            })
+            .catch((err) => console.log('ERROR ACTUALIZANDO PAGOS', err))
+      })
+      .then(() => {
+        let userRef = db.collection("users").doc(invitedProject.selected.id);
+        userRef.get()
           .then((doc) => {
             if (!doc.exists) {
               console.log("No such document!");
@@ -125,12 +140,10 @@ export default ({ setItem }) => {
           />
           <br></br>
           <Button
-            style={{ backgroundColor: "lightgray", border: 0, width: "30%" }}
             shape="round"
             block
-            type="primary"
             htmlType="submit"
-            className="register-button"
+            id='accept-project-button'
             onClick={() => {
               signatureRef.current.clear();
               saveSignature(null);
@@ -148,12 +161,10 @@ export default ({ setItem }) => {
           )}
           <Button
             onClick={handleSubmit}
-            style={{ backgroundColor: "#a77ffa", border: 0 }}
             shape="round"
             block
-            type="primary"
             htmlType="submit"
-            className="register-button"
+            id='accept-project-button'
             loading={show}
           >
             Firmar Contrato

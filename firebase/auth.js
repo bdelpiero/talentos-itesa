@@ -14,21 +14,20 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useRecoilState(user);
   const [loading, setLoading] = useState(true);
   const [isLogin, setIsLogin] = useRecoilState(atomLogin);
-  const history = useHistory();
   const [observer, setObserver] = useState({observer: ""})
+  const history = useHistory();
 
 
   function signup(email, password) {
     return auth.createUserWithEmailAndPassword(email, password)
-    .catch(err => console.log(err))
+      .catch(err => console.log(err))
   }
 
   function login(email, password) {
-    return auth
-      .signInWithEmailAndPassword(email, password)
-      .catch(function (error) {
-        var errorCode = error.code;
-        var errorMessage = error.message;
+    return auth.signInWithEmailAndPassword(email, password)
+      .catch((error) => {
+        let errorCode = error.code;
+        let errorMessage = error.message;
         setIsLogin({
           loadin: false,
           errorCode,
@@ -41,7 +40,7 @@ export function AuthProvider({ children }) {
     observer.observer()
     return auth.signOut()
     .then(() => history.push('/login'))
-    .catch(err => console.log(err))
+    .catch(err => console.log('ERROR AL LOGIN', err))
   }
 
   function resetPassword(email) {
@@ -65,7 +64,6 @@ export function AuthProvider({ children }) {
 
       let obs =  userRef.onSnapshot(
           (docSnapshot) => {
-            //se setea el usuario nuevamente con los cambios
             setCurrentUser(docSnapshot.data());
           },
           (err) => {
@@ -78,16 +76,14 @@ export function AuthProvider({ children }) {
           .get()
           .then((UserInfo) => {
             const User = UserInfo.data();
-            console.log("aqui esta el usuario logueado",User)
+            console.log("USUARIO LOGUEADO => ", User, "==============")
             setLoading(false);
             setCurrentUser(User);
             setIsLogin({ loadin: false });
             if (User) {
               if (User.isAdmin) {
-                console.log("aqui entra a la ruta admin")
                 history.push("/admin");
               } else {
-                console.log("aqui entra a la ruta freelancer")
                 history.push("/freelancer");
               }
             }
@@ -96,7 +92,6 @@ export function AuthProvider({ children }) {
             console.log("Error getting document", err);
           });
       } else {
-        console.log("aqui eno hay usuario")
         setLoading(false);
         setCurrentUser('');
       }

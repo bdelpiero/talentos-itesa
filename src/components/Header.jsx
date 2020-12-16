@@ -1,20 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import logo from "../../views/logo-itesa.svg";
-import { UserOutlined } from "@ant-design/icons";
-import { Row, Col, Typography, Avatar, Layout } from "antd";
+import { Row, Typography, Layout } from "antd";
 import EditUserContainer from "../containers/EditUserContainer";
 import { useRecoilState } from "recoil";
 import { user } from "../atoms/index";
 const { Title, Text } = Typography;
-import {  Menu } from "antd";
 
 const { Header } = Layout;
 
 export default ({item , project}) => {
-   
-console.log(project,"proyecto nombre");
+
   const [currentUser, setCurrentUser] = useRecoilState(user);
-  
 
   return (  
     <>  

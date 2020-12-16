@@ -25,7 +25,8 @@ function addCuotas(cuotas, user, project) {
       projectName: project.name,
       cuota: "CUOTA " + (i + 1),
       loadedF: false,
-      paymentId: cuotaRef.id
+      paymentId: cuotaRef.id,
+      proyectoAceptado: false
     });
   });
 

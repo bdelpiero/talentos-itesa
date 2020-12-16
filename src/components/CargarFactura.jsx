@@ -1,18 +1,15 @@
 import React, { useState } from "react";
-import { user } from "../atoms/index";
 import { db, storage } from '../../firebase/firebase'
-import { useRecoilState } from "recoil";
 
 // STYLES
-import { Upload, Modal, Button, Typography, message } from "antd";
+import { Upload, Modal, Button, Typography } from "antd";
 import { CloseCircleOutlined, DeleteOutlined, InboxOutlined, CheckCircleOutlined } from "@ant-design/icons";
 
-const { Text, Title } = Typography;
+const { Title } = Typography;
 const { Dragger } = Upload;
 
 export default ({ handleModal, modalCargarFactura, selected }) => {
 
-    const [currentUser, setCurrentUser] = useRecoilState(user);
     const [factura, setFactura] = useState({})
     const [disable, setDisable] = useState(true)
     const [buttonLoading, setButtonLoading] = useState(false)
@@ -27,7 +24,6 @@ export default ({ handleModal, modalCargarFactura, selected }) => {
     };
     
     const handleClick = async () => {
-        console.log('SELECTED', selected)
         if (factura.name) {
             setButtonLoading(true)
             const storageRef = storage.ref();
@@ -35,7 +31,8 @@ export default ({ handleModal, modalCargarFactura, selected }) => {
             await task.put(factura);
             await task.getDownloadURL()
             .then((downloadUrl) => {
-                db.collection("payments").doc(selected.paymentId).update({factura: downloadUrl, loadedF: true})
+                const paymentRef = db.collection("payments").doc(selected.paymentId)
+                paymentRef.update({factura: downloadUrl, loadedF: true})
                     .then(() => {
                         console.log('Factura cargada!')
                         handleModal()
