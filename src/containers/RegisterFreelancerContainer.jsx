@@ -22,7 +22,7 @@ function RegisterFreelancerContainer() {
   const [isLogin, setIsLogin] = useRecoilState(atomLogin);
   const [errorSignature, setErrorSignature] = useState(false);
   const [invited, setInvited] = useState(true);
-  const [invalidCuit, setInvalidCuit] = useState(false)
+  const [invalidCuit, setInvalidCuit] = useState(false);
 
   const [data, setData] = useState({
     name: "",
@@ -54,10 +54,10 @@ function RegisterFreelancerContainer() {
         [e.target.name]: e.target.value,
       });
     if (step == 2)
-    setBankData({
+      setBankData({
         ...bankData,
         [e.target.name]: e.target.value,
-      })
+      });
   };
 
   const handleConfirm = () => {
@@ -101,11 +101,8 @@ function RegisterFreelancerContainer() {
         await blob.toBlob().then(async (file) => {
           const storageRef = storage.ref();
           const pdfsRef = storageRef.child(`pdfs/${uid}.pdf`);
-          await pdfsRef.put(file).then(function (snapshot) {
-            console.log("Uploaded a blob or file!");
-          });
+          await pdfsRef.put(file).then(function (snapshot) {});
           await pdfsRef.getDownloadURL().then((downloadUrl) => {
-            console.log("archivo enviado por front", downloadUrl);
             db.collection("users")
               .doc(uid)
               .set({
@@ -118,16 +115,14 @@ function RegisterFreelancerContainer() {
                 nonDisclosure: downloadUrl,
                 email: data.email,
                 projectInvited: "",
-                activeProjectsCounter: 0
+                activeProjectsCounter: 0,
               })
               .then(() => {
                 db.collection("invites").doc(`${data.email}`).delete();
               });
           });
         });
-       
-      })
-     
+      });
   };
 
   return (
