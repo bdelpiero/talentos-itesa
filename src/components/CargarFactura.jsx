@@ -7,7 +7,7 @@ import { useRecoilState } from "recoil";
 import { Upload, Modal, Button, Typography, message } from "antd";
 import { CloseCircleOutlined, DeleteOutlined, InboxOutlined, CheckCircleOutlined } from "@ant-design/icons";
 
-const { Text } = Typography;
+const { Text, Title } = Typography;
 const { Dragger } = Upload;
 
 export default ({ handleModal, modalCargarFactura, selected }) => {
@@ -27,50 +27,46 @@ export default ({ handleModal, modalCargarFactura, selected }) => {
     };
     
     const handleClick = async () => {
+        console.log('SELECTED', selected)
         if (factura.name) {
             setButtonLoading(true)
             const storageRef = storage.ref();
             const task = storageRef.child(`facturas/${factura.name}`);
             await task.put(factura);
             await task.getDownloadURL()
-                .then((downloadUrl) => {
-                    db.collection("payments").where('cuota', '==', selected.cuota).where('projectName', '==', selected.projectName).where('userId', '==', currentUser.id).get()
-                        .then((payment) => {
-                            let paymentId = payment.docs[0].id
-                            db.collection('payments').doc(paymentId).update({ factura: downloadUrl })
-                                .then(() => {
-                                    setFactura({})
-                                    setButtonLoading(false)
-                                    setDisable(true)
-                                    handleModal()
-                                    console.log('URL and Document Uploaded')
-                                })
-                                .then(() => {
-                                    Modal.success({
-                                        bodyStyle: {
-                                            display: "flex",
-                                            alignItems: "center",
-                                            flexDirection: "column",
-                                            justifyContent: "center",
-                                        },
-                                        content: "¡Factura Cargada!",
-                                        centered: "true",
-                                        okText: "VOLVER",
-                                        icon: <CheckCircleOutlined style={{ color: "#9e39ff" }} />,
-                                        okButtonProps: {
-                                            style: {
-                                                display: 'flex',
-                                                alignSelf: "center",
-                                                backgroundColor: "#9e39ff",
-                                                border: "none",
-                                                borderRadius: "10px",
-                                            },
-                                        },
-                                    })
-                                })
+            .then((downloadUrl) => {
+                db.collection("payments").doc(selected.paymentId).update({factura: downloadUrl, loadedF: true})
+                    .then(() => {
+                        console.log('Factura cargada!')
+                        handleModal()
+                        setFactura({})
+                        setButtonLoading(false)
+                        setDisable(true)
+                    }).then(() => {
+                        Modal.success({
+                            bodyStyle: {
+                                display: "flex",
+                                alignItems: "center",
+                                flexDirection: "column",
+                                justifyContent: "center",
+                            },
+                            content: "¡Factura Cargada!",
+                            centered: "true",
+                            okText: "VOLVER",
+                            icon: <CheckCircleOutlined style={{ color: "#9e39ff" }} />,
+                            okButtonProps: {
+                                style: {
+                                    display: 'flex',
+                                    margin: '1rem auto',
+                                    backgroundColor: "#9e39ff",
+                                    border: "none",
+                                    borderRadius: "10px",
+                                },
+                            },
                         })
-                        .catch((err) => console.log('ERROR', err))
-                });
+                    })
+                    .catch((err) => console.log('ERROR', err))
+            })
         }
     }
 
@@ -83,12 +79,12 @@ export default ({ handleModal, modalCargarFactura, selected }) => {
             onCancel={handleModal}
             closeIcon={<CloseCircleOutlined className="close-button" />}
             width={600}
-            title='Carga tu factura'
         >
             <div id='modal-invoice'>
+                <Title level={3}>Carga tu factura</Title>
                 {disable ?
                 (
-                    <Dragger {...props} >
+                    <Dragger {...props} className='modal-factura-dragger'>
                         <p className="ant-upload-drag-icon">
                         <InboxOutlined style={{fontSize: '4rem', color: '#9e39ff'}}/>
                         </p>
@@ -112,7 +108,6 @@ export default ({ handleModal, modalCargarFactura, selected }) => {
                 >
                     Cargar Factura
                 </Button>
-
             </div>
         </Modal>
     )
