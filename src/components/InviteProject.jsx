@@ -149,7 +149,7 @@ function InviteProject({
                         Developer
                       </Option>
                       <Option key="designer" value="designer">
-                        Disigner
+                        Designer
                       </Option>
                     </Select>
                   </Form.Item>
