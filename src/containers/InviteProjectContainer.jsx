@@ -22,7 +22,7 @@ function addCuotas(cuotas, user, project) {
       comprobantePago: "",
       state: "pending",
       projectName: project.name,
-      cuota: cuotaRef.id,
+      cuota: "CUOTA " + (i + 1),
       loadedF: false,
       paymentId: cuotaRef.id
     });

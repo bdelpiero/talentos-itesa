@@ -1,24 +1,12 @@
-import React, { Component } from "react";
+import React from "react";
 // Ant-Desing
-import { Button, Row, Col, List, Avatar, Card } from "antd";
+import { Button, Row, Col, Avatar, Card,Typography } from "antd";
 import { DownloadOutlined } from "@ant-design/icons";
-import { Typography } from "antd";
-import { pagos, allUsersState } from "../atoms/index";
-import { useRecoilValue } from "recoil";
-
 import AddPaymentContainer from "../containers/AddPaymentContainer"
 
 const { Title } = Typography;
 
-export default ({ user }) => {
-  const users = useRecoilValue(allUsersState)
-  const paymentsInAtom = useRecoilValue(pagos);
-  const pendingPayments = paymentsInAtom.pending.map((payment)=>{
-    const usuario = users.filter((user)=> user.id == payment.userId)[0]
-    const newPayment = {...payment, user: usuario }
-    return newPayment
-  })
-
+export default ({pendingPayments }) => {
   return (
     <>
       <Title level={3} style={{ width: "100%" }}>
