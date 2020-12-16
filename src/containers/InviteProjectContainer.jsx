@@ -3,7 +3,6 @@ import InviteProject from "../components/InviteProject";
 import { db } from "../../firebase/firebase";
 import CheckCircle from "../../views/check.svg";
 import { Modal, Card, Form } from "antd";
-import { ProjectOutlined } from "@ant-design/icons";
 
 function addCuotas(cuotas, user, project) {
   const batch = db.batch();
@@ -23,6 +22,7 @@ function addCuotas(cuotas, user, project) {
       cuota: "CUOTA " + (i + 1),
       loadedF: false,
       paymentId: cuotaRef.id,
+      proyectoAceptado: false
     });
   });
 
