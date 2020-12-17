@@ -1,8 +1,9 @@
 import React from 'react'
-import {Card,Row,Col, Divider} from 'antd'
+import ExcelDownload from "./ExcelDownload";
+import {Card,Row,Col, Divider,Button} from 'antd'
 import {RightCircleOutlined } from '@ant-design/icons';
 
-export default ()=>{
+export default ({ pendingPayments, setItem })=>{
     return (
     <div>
         <Card className='resumen-card'>
@@ -26,9 +27,10 @@ export default ()=>{
             <Divider style={{margin: '1rem auto'}}/>
             </Row>
             <Row className='resumen-recordatorio'>
-                <p style={{ color: '#9e39ff', fontSize: '0.5rem'}}>RECORDATORIO</p>
-                <br/>
-                <RightCircleOutlined />
+            <ExcelDownload pendingPayments={pendingPayments} />
+        <Button className="modal-button"
+        onClick={() => setItem(7)}>Todos los pagos
+        </Button>
             </Row>
         </Card>
     </div>

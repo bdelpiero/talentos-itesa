@@ -599,6 +599,7 @@ trabajando con  user Cards
   color: white;
   background-color: #9e39ff;
   float: right;
+  position: relative;
 }
 
 .list-button-paymentsFree {
@@ -607,6 +608,9 @@ trabajando con  user Cards
   background-color: #9e39ff;
   font-size: 1em !important;
   float: left;
+  width: 40%;
+  margin: auto !important;
+  border-radius: 50px !important;
 }
 
 .avatar-payments {
@@ -1033,6 +1037,7 @@ Trabajando con Admin Cards/DashBoard
   justify-content: space-around;
   /* font-family: Raleway; */
   height: 300px;
+  
 }
 
 .modal-editProfile-header {
