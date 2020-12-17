@@ -41,6 +41,8 @@ export default ({ pendingPayments }) => {
 		return allRows
 	}
 
+	let date = new Date().toDateString()
+	console.log(date)
 
 	const multiDataSet = [
 		{
@@ -123,7 +125,7 @@ export default ({ pendingPayments }) => {
 
         return (
             <div>
-                <ExcelFile element={<Button className='modal-button'>Descargar Pagos</Button>} filename='testing-excel'>
+                <ExcelFile element={<Button className='modal-button'>Descargar Pagos</Button>} filename={`TransferenciasMasivas_${date}`}>
                     <ExcelSheet dataSet={multiDataSet} name="Transferencias"/>
                 </ExcelFile>
             </div>

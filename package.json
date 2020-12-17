@@ -28,7 +28,6 @@
     "react": "^17.0.1",
     "react-data-export": "^0.6.0",
     "react-dom": "^17.0.1",
-    "react-excel-workbook": "0.0.4",
     "react-hot-loader": "^4.13.0",
     "react-router-dom": "^5.2.0",
     "react-signature-canvas": "^1.0.3",
