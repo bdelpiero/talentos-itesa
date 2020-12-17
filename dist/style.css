@@ -728,6 +728,11 @@ register freelancer
   }
 
   .paymentsCards {
+    align-content: center;
+    flex-flow: column wrap;
+  }
+  .paymentsCards .gutter-row {
+    margin: 20px 0;
     align-content: flex-start;
     flex-flow: column wrap;
   }
@@ -896,6 +901,8 @@ Trabajando con Admin Cards/DashBoard
 .close-button {
   font-size: 180%;
   color: #9e39ff;
+  margin-top: 15px;
+  margin-right: 10px;
 }
 
 .modal-style {
@@ -1093,10 +1100,9 @@ Trabajando con Admin Cards/DashBoard
   background-color: #dddcdc;
 }
 
-/* .ant-upload.ant-upload-drag {
+.ant-upload.ant-upload-drag {
   position: relative;
-  width: 80%;
-  height: 80% !important;
+  height: 80%;
   text-align: center;
   background: #fafafa;
   border: 2px dashed #d9d9d9;
@@ -1104,8 +1110,19 @@ Trabajando con Admin Cards/DashBoard
   cursor: pointer;
   -webkit-transition: border-color 0.3s;
   transition: border-color 0.3s;
-} */
+}
 
 /* ant-upload.ant-upload-drag .ant-upload {
   padding: 50px 0;
 } */
+
+.ant-modal-confirm-body-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.paymentCards-card:hover {
+  transform: scale(1.02);
+}
