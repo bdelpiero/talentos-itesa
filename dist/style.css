@@ -3,6 +3,14 @@
 ---------------------- */
 
 @media (min-width: 991px) {
+  .list-button-paymentsFree {
+    text-align: center;
+    color: white;
+    background-color: #9e39ff;
+    font-size: 1em !important;
+    float: left;
+  }
+
   .navbar-display {
     display: none !important;
   }
@@ -39,6 +47,17 @@
   }
   .name-responsive h4 {
     margin-bottom: 0 !important;
+  }
+  .prueba {
+    height: 60px;
+
+    margin: 10px !important;
+  }
+  .prueba1 {
+    height: 60px;
+    padding: 10px;
+    margin: 5px !important;
+    box-shadow: 0px 2px 50px -10px rgba(156, 151, 151, 0.75) !important;
   }
 }
 
@@ -279,6 +298,14 @@
 }
 
 @media (max-width: 991px) {
+  .list-button-paymentsFree {
+    box-shadow: -1px 3px 15px -6px gray;
+    border: none;
+    background-color: #fbf7ff;
+    color: #9e39ff;
+    border-radius: 20px;
+  }
+
   .header-user {
     display: none;
   }
@@ -601,14 +628,6 @@ trabajando con  user Cards
   float: right;
 }
 
-.list-button-paymentsFree {
-  text-align: center;
-  color: white;
-  background-color: #9e39ff;
-  font-size: 1em !important;
-  float: left;
-}
-
 .avatar-payments {
   height: 6rem;
   width: 6rem;
@@ -751,8 +770,7 @@ register freelancer
   }
 
   .paymentsCards {
-    align-content: center;
-    flex-flow: column wrap;
+    display: flex;
   }
   .paymentsCards .gutter-row {
     margin: 20px 0;
