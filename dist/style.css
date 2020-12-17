@@ -3,6 +3,14 @@
 ---------------------- */
 
 @media (min-width: 991px) {
+  .list-button-paymentsFree {
+    text-align: center;
+    color: white;
+    background-color: #9e39ff;
+    font-size: 1em !important;
+    float: left;
+  }
+
   .navbar-display {
     display: none !important;
   }
@@ -40,11 +48,22 @@
   .name-responsive h4 {
     margin-bottom: 0 !important;
   }
+  .prueba {
+    height: 60px;
+
+    margin: 10px !important;
+  }
+  .prueba1 {
+    height: 60px;
+    padding: 10px;
+    margin: 5px !important;
+    box-shadow: 0px 2px 50px -10px rgba(156, 151, 151, 0.75) !important;
+  }
 }
 
 @media (max-width: 991px) {
   .hide-button {
-    display: none;
+    display: none !important;
   }
 
   .navbar-display {
@@ -279,6 +298,14 @@
 }
 
 @media (max-width: 991px) {
+  .list-button-paymentsFree {
+    box-shadow: -1px 3px 15px -6px gray;
+    border: none;
+    background-color: #fbf7ff;
+    color: #9e39ff;
+    border-radius: 20px;
+  }
+
   .header-user {
     display: none;
   }
@@ -613,6 +640,16 @@ trabajando con  user Cards
   margin: auto !important;
   border-radius: 50px !important;
 }
+.list-button-paymentsList {
+  text-align: center;
+  color: white;
+  background-color: #9e39ff;
+  font-size: 1em !important;
+  float: left;
+  width: 80%;
+  margin: auto !important;
+  border-radius: 50px !important;
+}
 
 .rechazar {
   color: #9e39ff;
@@ -770,7 +807,8 @@ register freelancer
   }
 
   .paymentsCards {
-    
+    display: flex;
+
     flex-flow: column wrap;
   }
   .paymentsCards .gutter-row {
@@ -1052,7 +1090,6 @@ Trabajando con Admin Cards/DashBoard
   justify-content: space-around;
   /* font-family: Raleway; */
   height: 300px;
-  
 }
 
 .modal-editProfile-header {
@@ -1173,7 +1210,7 @@ Trabajando con Admin Cards/DashBoard
   transform: scale(1.02);
 }
 
-.botonPagos:hover{
+.botonPagos:hover {
   transform: scale(1.05);
 }
 

@@ -8,12 +8,7 @@ import { DeleteOutlined, EllipsisOutlined } from "@ant-design/icons";
 
 const { Title } = Typography;
 
-function AllProjects({
-  projects,
-  handleClick,
-  changeStatus,
-  onChange,
-}) {
+function AllProjects({ projects, handleClick, changeStatus, onChange }) {
   function menu(proyecto) {
     return (
       <Menu>
@@ -38,7 +33,7 @@ function AllProjects({
             className="modal-button2"
             onClick={() => changeStatus(proyecto)}
           >
-            ESTADO
+            BORRAR?
           </Button>
         </Menu.Item>
       </Menu>
@@ -117,11 +112,11 @@ function AllProjects({
       className: "hide-button",
       render: (proyecto) => {
         // if (proyecto.status == "On Development") {
-          return (
-            <div className="hide-button">
-              <InviteProjectContainer proyecto={proyecto}/>
-            </div>
-          );
+        return (
+          <div className="hide-button">
+            <InviteProjectContainer proyecto={proyecto} />
+          </div>
+        );
         // }
         // else null
       },
@@ -165,10 +160,10 @@ function AllProjects({
         style={{
           display: "flex",
           justifyContent: "flex-end",
-          alignItems:"right",
-          marginBottom: "5px"
+          alignItems: "right",
+          marginBottom: "5px",
         }}
-      >        
+      >
         <NewProjectContainer />
       </div>
 
