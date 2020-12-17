@@ -6,7 +6,8 @@ import {
   LoadingOutlined,
   PlusOutlined,
   UploadOutlined,
-  InboxOutlined
+  InboxOutlined,
+  DeleteOutlined
 } from "@ant-design/icons";
 import { Typography, Avatar, Upload, Modal, Input, Button, message } from "antd";
 import { useEffect } from "react/cjs/react.development";
@@ -87,13 +88,18 @@ export default ({ user, setCurrentUser }) => {
     });
   };
 
+  const [dragger, setDragger] = useState(false);
+  const [boton, setBoton] = useState(true);
 
   const props = {
     name: 'file',
     multiple: true,
     action: 'cv',
-    onChange(cv) {setCv(cv)},
-    onRemove: () => { setCv('') }
+    onChange(cv) {
+      setCv(cv);
+      setBoton(false),
+      setDragger(true);
+    },      
   };
 
   return (
@@ -103,8 +109,7 @@ export default ({ user, setCurrentUser }) => {
           <Avatar size={55} src={user.avatar} className="avatar" />
         ) : (
             <Avatar size={55} icon={<UserOutlined />} className="avatar" />
-          )}
-        
+          )}        
       </div>
       <Modal
         visible={modal}
@@ -113,8 +118,7 @@ export default ({ user, setCurrentUser }) => {
         okButtonProps={{
           hidden: true,
         }}
-        onCancel={closeModal}
-        // closeIcon={<CloseCircleOutlined className='close-button' />}
+        onCancel={closeModal}        
         bodyStyle={{ color: "#9e39ff" }}
       >
         <>
@@ -144,22 +148,39 @@ export default ({ user, setCurrentUser }) => {
                       />
                     )}
                 </label>
-                <div style={{ margin: "30px 0 50px 0" }}>
-                  {/* <Upload
-                    name="avatar"
-                    listType="picture-card"
-                    className="avatar-uploader"
-                    showUploadList={false}
-                    onChange={setCv}                  
-                  >
-                  {loaded ? <UploadOutlined/> : uploadButton}
-                  </Upload> */}
-                  <Dragger {...props}>
-                    <p className="ant-upload-drag-icon">
-                    <InboxOutlined />
+                <div style={{ margin: "30px 0 50px 0" }}>    {!dragger ? (
+                <Dragger {...props} style={{ width: "80%" }}>
+                  <p className='ant-upload-drag-icon'>
+                    <PlusOutlined style={{ color: "#9e39ff" }} />
                   </p>
-                  <p className="ant-upload-text">puedes Subir tu CV aquí</p>                   
-                  </Dragger>
+                  <p className='ant-upload-text'>
+                    Click para cargar CV
+                  </p>
+                </Dragger>
+              ) : (
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "80%",
+                    width: "80%",
+                    border: "dashed",
+                    borderColor: "gray",
+                    padding: "25px",
+                  }}>
+                  <p style={{ color: "gray" }}> </p>
+                  <p>
+                    <DeleteOutlined
+                      style={{ fontSize: "20px", color: "#9e39ff" }}
+                      onClick={() => {
+                        setCv({});
+                        setDragger(false);
+                      }}
+                    />
+                  </p>
+                </div>
+              )}
               </div>
             </div>
             <Button
