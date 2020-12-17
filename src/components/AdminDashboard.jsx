@@ -51,7 +51,6 @@ function AdminDashboard({ handleLogout }) {
                   <img src={UserLogo} className='admin-card-icon ' />
                   <InviteContainer />
                 </Card>
-
                 <Card
                   className='admin-cards'
                   style={{ background: "whitesmoke", border: "none" }}>
@@ -65,7 +64,10 @@ function AdminDashboard({ handleLogout }) {
                   {/* <p className='invite-button-text'> Ingresar un pago </p> */}
                   <AddPaymentContainer pendingPayments={pendingPayments} />
                 </Card>
-                <ResumeContainer />
+                <ResumeContainer 
+                setItem={setItem}
+                pendingPayments={pendingPayments}
+                 setProject={setProject}/>
               </Row>
               <PendingPayments
                 setItem={setItem}

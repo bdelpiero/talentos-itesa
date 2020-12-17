@@ -51,7 +51,6 @@ function AllProjectsContainer({ setItem, setProject }) {
           .get()
           .then((proyectos) => {
             const usersInProjects = [];
-
             proyectos.forEach((user) => {
               if (!project.id || !user.id) return;
               db.collection("projects")
