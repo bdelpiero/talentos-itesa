@@ -20,7 +20,7 @@ import {
 } from "@ant-design/icons";
 
 const { Dragger } = Upload;
-const { Option } = Select;
+
 
 function AddPayment({
   selectedUser,

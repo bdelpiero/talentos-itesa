@@ -751,7 +751,7 @@ register freelancer
   }
 
   .paymentsCards {
-    align-content: center;
+    
     flex-flow: column wrap;
   }
   .paymentsCards .gutter-row {
@@ -947,6 +947,9 @@ Trabajando con Admin Cards/DashBoard
   padding: 10px;
   width: auto;
   font-size: 16px;
+  align-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 #close-modal-invoice-button {
