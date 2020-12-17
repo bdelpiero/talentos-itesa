@@ -1,8 +1,8 @@
 import React from "react";
 
 // STYLES
-import { Button, Card } from "antd";
-import { Typography } from "antd";
+import { Button, Card,Typography } from "antd";
+
 
 const { Title } = Typography;
 
