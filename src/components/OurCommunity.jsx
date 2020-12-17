@@ -37,12 +37,14 @@ export const OurCommunity = ({
       title: "",
       dataIndex: "avatar",
       key: "avatar",
+      className: "avatar-responsive",
       render: (avatar) => <Avatar src={avatar} />,
     },
     {
       title: "NOMBRE",
       dataIndex: "name",
       key: "name",
+      className: "name-responsive",
       render: (name, record) => <h4>{name + " " + record.lastName}</h4>,
     },
     {
@@ -59,6 +61,7 @@ export const OurCommunity = ({
           value: "designer",
         },
       ],
+      responsive: ["lg", "md"],
       onFilter: (value, record) => record.freelancerType.indexOf(value) === 0,
       sorter: (a, b) => a.freelancerType.length - b.freelancerType.length,
       sortDirections: ["ascend", "descend"],
@@ -67,11 +70,13 @@ export const OurCommunity = ({
       title: "EMAIL",
       key: "email",
       dataIndex: "email",
+      responsive: ["lg", "md"],
     },
     {
       title: "STATE",
       key: "state",
       dataIndex: "state",
+      className: "tag-responsive",
       render: (value) => {
         if (value != "Libre") return <Tag color="red">En Proyecto</Tag>;
         return <Tag color="green">Libre</Tag>;
@@ -93,15 +98,15 @@ export const OurCommunity = ({
     },
 
     {
-      title: "CV",
-      dataIndex: "cv",
-      key: "cv",
-      render: (cv) => {
-        if (!cv) return;
+      title: "",
+      dataIndex: "id",
+      key: "id",
+      className: "community-button",
+      render: (user) => {
         return (
-          <a target="_blank" href={cv}>
-            <DownloadOutlined id="download-icon" />
-          </a>
+          <Button className="modal-button2 " onClick={() => handleClick(user)}>
+            Ver perfil
+          </Button>
         );
       },
     },
@@ -117,13 +122,13 @@ export const OurCommunity = ({
         />
       </Form>
       <Table
-        onRow={(user) => {
+        /* onRow={(user) => {
           return {
             onClick: (event) => {
               handleClick(user);
             },
           };
-        }}
+        }} */
         columns={columns}
         dataSource={users}
         pagination={{ pageSize: 5 }}

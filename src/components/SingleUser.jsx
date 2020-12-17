@@ -37,12 +37,6 @@ export const SingleUser = ({ selectedUserData, userProjects }) => {
     return (
       <Menu>
         <Menu.Item>
-          <Button  className="modal-button2"> Factura </Button>
-        </Menu.Item>
-        <Menu.Item>
-          <Button  className="modal-button2"> Pago </Button>
-        </Menu.Item>
-        <Menu.Item>
           <Button
             disabled={contrato(proyecto.urlContractProject)}
             className="modal-button2"
@@ -88,40 +82,6 @@ export const SingleUser = ({ selectedUserData, userProjects }) => {
     },
 
     {
-      title: "FACTURA",
-      key: "action",
-      dataIndex: "ACA LA KEY DE LA ULTIMA FACTURA",
-      className: "hide-button",
-      render: (contract) => {
-        if (!contract) return;
-        return (
-          <a className="hide-button" target="_blank">
-            <DownloadOutlined
-              style={{ marginLeft: "20px" }}
-              id="download-icon"
-            />
-          </a>
-        );
-      },
-    },
-    {
-      title: "PAGO",
-      key: "action",
-      dataIndex: "ACA LA KEY DEL ULTIMO PAGO",
-      className: "hide-button",
-      render: (contract) => {
-        if (!contract) return;
-        return (
-          <a className="hide-button" target="_blank">
-            <DownloadOutlined
-              style={{ marginLeft: "10px" }}
-              id="download-icon"
-            />
-          </a>
-        );
-      },
-    },
-    {
       title: "",
       key: "dropdown",
       render: (proyecto) => {
@@ -142,7 +102,7 @@ export const SingleUser = ({ selectedUserData, userProjects }) => {
       {
         <Row style={{ marginTop: "80px" }} gutter={[30]}>
           {bankData && (
-            <Col xs={26} sm={14} md={14} lg={14}>
+            <Col xs={24} sm={16} md={16} lg={16}>
               <Title level={2}>
                 {<Avatar size={128} src={user.avatar} />}
                 {"  " + user.name + " " + user.lastName}
@@ -227,7 +187,7 @@ export const SingleUser = ({ selectedUserData, userProjects }) => {
               </Row>
             </Col>
           )}
-          <Col xs={22} sm={10} md={10} lg={10}>
+          <Col xs={24} sm={8} md={8} lg={8}>
             <Title>Proyectos</Title>
             {userProjects && (
               <Table

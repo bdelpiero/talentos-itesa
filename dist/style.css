@@ -34,6 +34,12 @@
   .show-ellipsis {
     display: none;
   }
+  .community-button {
+    margin-left: 60px;
+  }
+  .name-responsive h4 {
+    margin-bottom: 0 !important;
+  }
 }
 
 @media (max-width: 991px) {
@@ -116,6 +122,23 @@
 
   .navbar-menu-item:hover {
     border-bottom: solid 1px #9e39ff !important;
+  }
+  /*  .community-button {
+    padding-left: 0 !important  ;
+  } */
+  .tag-responsive {
+    /*     display: flex; */
+    margin-right: 0 !important;
+    padding-right: 0 !important ;
+  }
+  .name-responsive {
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  .avatar-responsive {
+    margin-right: 0 !important;
+    padding-right: 0 !important;
   }
 }
 
