@@ -7,9 +7,9 @@ export default ({pendingPayments})=>{
     console.log(" PENDING PAYMENTS ", pendingPayments)
 
     const ExcelData=[]
-    pendingPayments.map((cuota,i)=>{
+    pendingPayments.map((cuota)=>{
         ExcelData.push({
-            referencia:++i,
+            referencia:cuota.projectName,
             importe:cuota.monto,
             fecha:cuota.fecha,
             cbu:cuota.user.bankDetails.cbu,
