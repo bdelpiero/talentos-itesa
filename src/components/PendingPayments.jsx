@@ -3,16 +3,20 @@ import React from "react";
 import { Button, Row, Col, Avatar, Card,Typography } from "antd";
 import { DownloadOutlined } from "@ant-design/icons";
 import AddPaymentContainer from "../containers/AddPaymentContainer"
+import ExcelDownload from './ExcelDownload'
 
 const { Title } = Typography;
 
 export default ({pendingPayments }) => {
-  console.log(" PENDING PAYMENTS ", pendingPayments)
   return (
     <>
+    <div className='div-excel'>
       <Title level={3} style={{ width: "100%" }}>
         Pagos a realizar este mes
       </Title>
+      <ExcelDownload pendingPayments={pendingPayments}/>
+    </div>
+      
       {pendingPayments.length > 0 &&
         pendingPayments.map((payment) => {
           if(!payment.user){

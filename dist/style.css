@@ -499,7 +499,6 @@ trabajando con content user
   background-color: #9e39ff !important;
 }
 
-
 /* ----------------------
 trabajando con  user Cards
 ---------------------- */
@@ -564,7 +563,6 @@ trabajando con  user Cards
   background: rgba(150, 150, 150, 0.2);
 }
 
-
 .list-description {
   display: flex;
   flex-direction: row;
@@ -585,13 +583,16 @@ trabajando con  user Cards
   color: white;
   background-color: #9e39ff;
   font-size: 1em !important;
- float: left;
-
+  float: left;
 }
 
 .avatar-payments {
   height: 6rem;
   width: 6rem;
+}
+.div-excel {
+  display: flex;
+  padding: 5px;
 }
 
 /* ----------------------
@@ -726,9 +727,9 @@ register freelancer
     width: 0;
   }
 
-  .paymentsCards{
-    align-content:flex-start;
-    flex-flow:column wrap;
+  .paymentsCards {
+    align-content: flex-start;
+    flex-flow: column wrap;
   }
 
   .register-formContainer {
@@ -792,8 +793,8 @@ Trabajando con Admin Cards/DashBoard
     padding: 0;
     margin: 0.5rem !important;
   }
-  .paymentsCards{
-    flex-flow:row wrap;
+  .paymentsCards {
+    flex-flow: row wrap;
     padding-left: 10px;
   }
 }
@@ -805,8 +806,6 @@ Trabajando con Admin Cards/DashBoard
     justify-content: space-around;
     align-items: center;
   }
-
-  
 
   .admin-cards .ant-card-body {
     display: flex;
@@ -948,8 +947,6 @@ Trabajando con Admin Cards/DashBoard
   padding: 1rem !important;
 }
 
-
-
 #cargar-factura-button {
   margin: 1rem auto;
   width: 35%;
@@ -1056,6 +1053,13 @@ Trabajando con Admin Cards/DashBoard
 .ant-btn:focus {
   background: none;
   border-color: #9e39ff;
+}
+
+#accept-project-button {
+  width: 40%;
+  background-color: #9e39ff;
+  color: white;
+  margin: 0.5rem auto;
 }
 
 /* ----------------

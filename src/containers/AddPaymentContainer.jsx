@@ -100,7 +100,7 @@ function NewProjectContainer() {
       });
   }
 
-  return (
+  return (<>
     <AddPayment
       status={status}
       closeModal={closeModal}
@@ -119,6 +119,7 @@ function NewProjectContainer() {
       // handlePayment={handlePayment}
       handleCuota={handleCuota}
     />
+    </>
   );
 }
 
