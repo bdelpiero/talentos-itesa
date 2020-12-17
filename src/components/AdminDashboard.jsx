@@ -65,7 +65,7 @@ function AdminDashboard({ handleLogout }) {
                 >
                   <img src={Briefing} className="admin-card-icon" />
                   {/* <p className='invite-button-text'> Ingresar un pago </p> */}
-                  <AddPaymentContainer />
+                  <AddPaymentContainer pendingPayments={pendingPayments}/>
                 </Card>
                 <ResumeContainer />
               </Row>

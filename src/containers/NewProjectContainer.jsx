@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { db } from "../../firebase/firebase";
 import NewProject from "../components/NewProject";
-import { CheckCircleOutlined } from "@ant-design/icons";
 import { Modal, Form } from "antd";
+import CheckCircle from "../../views/check.svg";
 
 function NewProjectContainer() {
   const [name, setName] = useState("");
@@ -61,7 +61,7 @@ function NewProjectContainer() {
           content: "¡Proyecto Creado!",
           centered: "true",
           okText: "VOLVER",
-          icon: <CheckCircleOutlined style={{ color: "#9e39ff" }} />,
+          icon: <img src={CheckCircle} className='icono-sider' />,
           okButtonProps: {
             style: {
               backgroundColor: "#9e39ff",
