@@ -8,7 +8,7 @@ import ExcelDownload from "./ExcelDownload";
 
 const { Title } = Typography;
 
-export default ({ pendingPayments }) => {
+export default ({ pendingPayments, setItem }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(4);
@@ -27,15 +27,17 @@ export default ({ pendingPayments }) => {
           Pagos a realizar este mes
         </Title>
         <ExcelDownload pendingPayments={pendingPayments} />
+        <Button onClick={() => setItem(7)}>Todos los pagos</Button>
       </div>
       <div>
         {pendingPayments.length > 0 &&
-          pendingPayments.slice(minValue, maxValue).map((payment) => {
+          pendingPayments.slice(minValue, maxValue).map((payment, index) => {
             if (!payment.user) {
               return <div></div>;
             }
             return (
               <Card
+                key={index}
                 className='paymentCards-card'
                 style={{
                   borderRadius: 25,
