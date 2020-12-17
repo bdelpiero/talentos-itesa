@@ -166,12 +166,11 @@ function AllProjects({
           display: "flex",
           justifyContent: "flex-end",
           alignItems:"right",
-          marginBottom: "5px"
+          marginBottom: "1rem"
         }}
       >        
         <NewProjectContainer />
       </div>
-
       <div>
         <Input
           style={{ marginBottom: "1rem" }}

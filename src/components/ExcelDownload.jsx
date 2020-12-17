@@ -8,8 +8,6 @@ const ExcelSheet = ReactExport.ExcelFile.ExcelSheet;
 
 export default ({ pendingPayments }) => {
 
-	console.log(pendingPayments)
-
 	const dataCells = () => {
 		let paymentsData = []
 		pendingPayments.map((payment, i) => 
@@ -42,7 +40,6 @@ export default ({ pendingPayments }) => {
 	}
 
 	let date = new Date().toDateString()
-	console.log(date)
 
 	const multiDataSet = [
 		{
