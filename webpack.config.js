@@ -2,13 +2,6 @@ const path = require("path");
 
 const config = {
   entry: ["./src/index.js"],
-  // entry:{
-  //   main:"./src/index.js",
-  //   vendor: [
-  //       'xlsx',
-  //       'file-saver'
-  //     ],
-  // },
   output: {
     path: path.resolve(__dirname, "dist"),
     publicPath: '/',
@@ -58,8 +51,12 @@ const config = {
           },
         ],
       },
-     
-    ],
+      {
+        test: /\.json$/,
+        loader: 'json-loader',
+        exclude: /node_modules/,
+      }
+    ]
   },
   resolve: {
     extensions: [".js", ".jsx"],

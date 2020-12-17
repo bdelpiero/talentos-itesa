@@ -118,7 +118,8 @@ function RegisterFreelancerContainer() {
                 activeProjectsCounter: 0,
               })
               .then(() => {
-                db.collection("invites").doc(`${data.email}`).delete();
+                db.collection("invites").doc(`${data.email}`).delete()
+                history.push('/freelancer')
               });
           });
         });

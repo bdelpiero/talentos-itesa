@@ -1,14 +1,18 @@
 import React, { useRef, useState } from "react";
-import { Col, Row, Button, Alert, Modal, Form, Input } from "antd";
-import SignatureCanvas from "react-signature-canvas";
-import ContractProjet from "./pdfs/ContractProjet";
+import ContractUserProject from "./pdfs/ContractUserProject";
+import SignedContractUserProject from "../components/pdfs/SignedContractUserProject";
+
 import { useRecoilState } from "recoil";
 import { projectInvited, user } from "../atoms/index";
 import { db } from "../../firebase/firebase";
 import { storage } from "../../firebase/firebase";
-import SignedContractProject from "../components/pdfs/signedContractProject";
+
+// PAQUETES
+import SignatureCanvas from "react-signature-canvas";
 import { pdf } from "@react-pdf/renderer";
-import { ConsoleSqlOutlined } from "@ant-design/icons";
+
+// STYLES
+import { Col, Row, Button, Alert, Modal } from "antd";
 
 export default ({ setItem }) => {
   const [invitedProject, setInvitedProject] = useRecoilState(projectInvited);
@@ -17,6 +21,7 @@ export default ({ setItem }) => {
   const [imageData, setImageData] = useState("");
   const [errorSignature, setErrorSignature] = useState(false);
   const [show, setShow] = useState(false);
+  const [disableButton, setDisableButton] = useState(false)
 
   const showModal = () => {
     setShow(true);
@@ -35,7 +40,7 @@ export default ({ setItem }) => {
     showModal();
     if (!imageData) return setErrorSignature(true);
     const blob = pdf(
-      <SignedContractProject
+      <SignedContractUserProject
         project={invitedProject.selected}
         imageData={imageData}
       />
@@ -104,7 +109,7 @@ export default ({ setItem }) => {
   return (
     <Row>
       <Col span={12} className="col-contract">
-        <ContractProjet project={invitedProject.selected} />
+        <ContractUserProject project={invitedProject.selected} />
       </Col>
 
       <Col span={12} className="col-contract">
@@ -118,7 +123,7 @@ export default ({ setItem }) => {
           }}
         >
           <h1 style={{ color: "gray", textAlign: "center" }}>
-            Firma del acuerdo de confidencialidad
+            Revisá el contrato y firmá en el recuadro para aceptar el de Proyecto
           </h1>
           <br />
           <SignatureCanvas
@@ -136,6 +141,7 @@ export default ({ setItem }) => {
                 signatureRef.current.getTrimmedCanvas().toDataURL("image/jpg")
               ); //base64
               setErrorSignature(false);
+              setDisableButton(true)
             }}
           />
           <br></br>
@@ -147,6 +153,8 @@ export default ({ setItem }) => {
             onClick={() => {
               signatureRef.current.clear();
               saveSignature(null);
+              setDisableButton(false)
+
             }}
           >
             Reset
@@ -159,7 +167,8 @@ export default ({ setItem }) => {
               style={{ margin: 5 }}
             />
           )}
-          <Button
+          { disableButton && 
+          (<Button
             onClick={handleSubmit}
             shape="round"
             block
@@ -168,7 +177,9 @@ export default ({ setItem }) => {
             loading={show}
           >
             Firmar Contrato
-          </Button>
+          </Button>)
+          }
+          
           <Modal
             visible={show}
             centered="true"
@@ -176,8 +187,6 @@ export default ({ setItem }) => {
             okButtonProps={{
               hidden: true,
             }}
-            // onCancel={closeModal}
-            // closeIcon={<CloseCircleOutlined className="close-button" />}
             bodyStyle={{ color: "#9e39ff" }}
           >
             <>
