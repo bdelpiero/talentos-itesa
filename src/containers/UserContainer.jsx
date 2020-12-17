@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { authUser } from "../../firebase/auth";
 import { db } from "../../firebase/firebase";
 import { useRecoilState } from "recoil";
-import { user, projectInvited } from "../atoms/index";
+import { user, projectInvited,atomPayments,isLoading } from "../atoms/index";
 
 // COMPONENTES Y CONTAINERS
 import Sidebar from "../components/Sidebar";
@@ -20,14 +20,15 @@ import { Layout, Row } from "antd";
 export default () => {
   const [currentUser, setCurrentUser] = useRecoilState(user);
   const [invitedProject, setInvitedProject] = useRecoilState(projectInvited);
-  const [nextPayments, setNextPayments] = useState([]);
-  const [selected, setSelected] = useState({});
-  const [receivedPayments,setReceivedPayments] = useState([]);
+  const [cargarFacturas, setCargarFacturas] = useRecoilState(atomPayments);
+  const [loadingbtn, setLoadingbtn] =useRecoilState(isLoading)
+  const [receivedPayments, setReceivedPayments]=useState([])
+
 
   const { logout } = authUser();
   const { Content } = Layout;
-  const [item, setItem] = React.useState(1);
-  let unsubscribePayments = () => {};
+  const [item, setItem] = useState(1);
+  let unsubscribePayments = () => { };
 
   function hasDuplicates(inputArray) {
     for (let i = 0; i < inputArray.length - 1; i++) {
@@ -93,10 +94,13 @@ export default () => {
         const payments = arr
           .sort((a, b) => new Date(a.fecha) - new Date(b.fecha))
           .slice(0, 4);
-        setNextPayments(payments);
-        setSelected(payments[0]);
+          console.log("aqui recibo nuesvos pagos pendientes" ,payments)
+          setCargarFacturas({
+            nextPayments:payments,
+            selected:payments[0]
+          })
       });
-    // return unsubscribe;
+     return ()=> unsubscribePayments();
   }, [currentUser]);
 
   useEffect(() => {
@@ -126,33 +130,27 @@ export default () => {
   ) : (
     <Layout>
       <Sidebar setItem={setItem} handleLogout={handleLogout} />
-      <Layout>
-        <Navbar setItem={setItem} />
-        <HeaderComponent
-          user={currentUser}
-          setCurrentUser={setCurrentUser}
-          item={item}
-        />
-        <Content className="content-user">
-          {item == 1 && (
-            <>
-              <Row className="userCards-row">
-                <CardsFreelancer
-                  setItem={setItem}
-                  nextPayments={nextPayments}
-                  selected={selected}
-                  setSelected={setSelected}
-                />
-              </Row>
-              <div>
-                <PagosFreelance user={currentUser} receivedPayments={receivedPayments} />
-              </div>
-            </>
-          )}
-          {item == 2 && <FreelancerProjectContainer />}
-          {item == 5 && <AcceptProject setItem={setItem} />}
-        </Content>
-      </Layout>
+        <Layout>
+          <Navbar setItem={setItem} />
+          <HeaderComponent user={currentUser} setCurrentUser={setCurrentUser } item={item}/>
+          <Content className='content-user'>
+            {item == 1 && (
+              <>
+                <Row className='userCards-row'>
+                  <CardsFreelancer
+                    setItem={setItem}
+                  />
+                </Row>
+                <div>
+                  <PagosFreelance user={currentUser} receivedPayments={receivedPayments}/>
+                </div>
+              </>
+            )}
+            {item == 2 && <FreelancerProjectContainer />}
+            {item == 5 && <AcceptProject setItem={setItem} />}
+          </Content>
+        </Layout>
     </Layout>
+    
   );
 };

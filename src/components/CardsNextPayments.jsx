@@ -1,13 +1,21 @@
 import React, { useState } from "react";
 import LoadInvoice from './CargarFactura'
+import { useRecoilState } from "recoil";
+import { atomPayments } from "../atoms/index";
+
 
 // STYLES
 import { Button, Card, Typography } from "antd";
 const { Title } = Typography;
 
-export default ({ nextPayments, selected, setSelected }) => {
+export default () => {
 
-  if (nextPayments.length == 0) {
+
+  const [modalCargarFactura, setModalCargarFactura] = useState(false)
+  const handleModal = () => modalCargarFactura ? setModalCargarFactura(false) : setModalCargarFactura(true)
+  const [cargarFacturas, setCargarFacturas] = useRecoilState(atomPayments);
+
+  if (cargarFacturas.nextPayments.length == 0) {
     return (
       <Card className='freelancer-cards'>
         <Title level={5} id='title-freelancer-card'>
@@ -18,22 +26,20 @@ export default ({ nextPayments, selected, setSelected }) => {
     );
   }
 
-  const [modalCargarFactura, setModalCargarFactura] = useState(false)
-  const handleModal = () => modalCargarFactura ? setModalCargarFactura(false) : setModalCargarFactura(true)
 
   {
-    return nextPayments.length > 1 ? (
+    return cargarFacturas.nextPayments.length > 1 ? (
       <Card className='freelancer-cards'>
         <Title level={5} id='title-freelancer-card'>
           PRÓXIMOS PAGOS
         </Title>
         <p id='subtittle-freelancer-card'>PROYECTO</p>
-        <p id='text-freelancer-card'>"{selected.projectName}"</p>
+        <p id='text-freelancer-card'>"{cargarFacturas.selected.projectName}"</p>
         <p id='subtittle-freelancer-card'>FECHA DE PAGO</p>
-        <p id='text-freelancer-card'>{selected.fecha}</p>
+        <p id='text-freelancer-card'>{cargarFacturas.selected.fecha}</p>
         <p id='subtittle-freelancer-card'>MONTO</p>
         <div className='container-freelancer-button'>
-          <p id='text-freelancer-card'>"$ {selected.monto}"</p>
+          <p id='text-freelancer-card'>"$ {cargarFacturas.selected.monto}"</p>
           <Button
             className='freelancer-card-buttons'
             onClick={handleModal}
@@ -44,15 +50,15 @@ export default ({ nextPayments, selected, setSelected }) => {
         </div>
 
          {/* MODAL PARA CARGAR FACTURA */}
-         <LoadInvoice handleModal={handleModal} modalCargarFactura={modalCargarFactura} selected={selected}/>
+         <LoadInvoice handleModal={handleModal} modalCargarFactura={modalCargarFactura} />
         <div className='freelancer-card-stepers-container'>
-          {nextPayments.map((p, i) => {
+          {cargarFacturas.nextPayments.map((p, i) => {
             return (
               <Button
                 shape='round'
                 key={i}
                 onClick={() => {
-                  setSelected(nextPayments[i]);
+                  setCargarFacturas({...cargarFacturas,selected:cargarFacturas.nextPayments[i]})
                 }}
                 className='freelancer-card-stepers'>
                 {" "}
@@ -67,12 +73,12 @@ export default ({ nextPayments, selected, setSelected }) => {
           PRÓXIMOS PAGOS
         </Title>
         <p id='subtittle-freelancer-card'>PROYECTO</p>
-        <p id='text-freelancer-card'>"{selected.projectName}"</p>
+        <p id='text-freelancer-card'>"{cargarFacturas.selected.projectName}"</p>
         <p id='subtittle-freelancer-card'>FECHA DE PAGO</p>
-        <p id='text-freelancer-card'>{selected.fecha}</p>
+        <p id='text-freelancer-card'>{cargarFacturas.selected.fecha}</p>
         <p id='subtittle-freelancer-card'>MONTO</p>
         <div className='container-freelancer-button'>
-          <p id='text-freelancer-card'>"$ {selected.monto}"</p>
+          <p id='text-freelancer-card'>"$ {cargarFacturas.selected.monto}"</p>
           <Button
             className='freelancer-card-buttons'
             onClick={handleModal}
@@ -82,7 +88,7 @@ export default ({ nextPayments, selected, setSelected }) => {
         </div>
 
         {/* MODAL PARA CARGAR FACTURA */}
-        <LoadInvoice modalCargarFactura={modalCargarFactura} handleModal={handleModal} selected={selected}/>
+        <LoadInvoice modalCargarFactura={modalCargarFactura} handleModal={handleModal} />
       </Card>
     );
   }
