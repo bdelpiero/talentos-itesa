@@ -180,21 +180,5 @@ export default ({ pendingPayments, setItem }) => {
   );
 };
 
-{
-  /* <Col className='gutter-row' span={3}>
-                    <Button className='list-button-paymentsList' shape='round'>
-                      <a href={payment.factura} target="_blank" rel="noopener noreferrer">Ver factura</a>
-                    </Button>
-                  </Col>
-                  <Col span={1} className='gutter-row'>
-                  <DeleteOutlined className='rechazar' 
-                  onClick={()=>{
-                    console.log("delete",payment)
-                    db.collection("payments").doc(payment.paymentId)
-                    .update({
-                      factura: "",
-                      loadedF: false
-                    })
-                  }}/>
-                  </Col> */
-}
+
+ 
