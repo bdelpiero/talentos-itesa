@@ -38,10 +38,6 @@ function AddSinglePayment({
 
   const props = {
     name: "file",
-    // action: (info) => {
-    //   console.log(info)
-    //   setFileUrl(info)
-    // },
     onChange(info){
       setFileUrl(info)
       setBoton(false)
