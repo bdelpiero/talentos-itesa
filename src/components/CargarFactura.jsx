@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { db, storage } from '../../firebase/firebase'
+import { useRecoilState } from "recoil";
+import { atomPayments } from "../atoms/index";
+
 
 // STYLES
 import { Upload, Modal, Button, Typography } from "antd";
@@ -8,11 +11,13 @@ import { CloseCircleOutlined, DeleteOutlined, InboxOutlined, CheckCircleOutlined
 const { Title } = Typography;
 const { Dragger } = Upload;
 
-export default ({ handleModal, modalCargarFactura, selected }) => {
+export default ({ handleModal, modalCargarFactura}) => {
   
   const [factura, setFactura] = useState({});
   const [disable, setDisable] = useState(true);
   const [buttonLoading, setButtonLoading] = useState(false);
+  const [cargarFacturas, setCargarFacturas] = useRecoilState(atomPayments);
+
 
     const props = {
         name: "file",
@@ -31,7 +36,7 @@ export default ({ handleModal, modalCargarFactura, selected }) => {
             await task.put(factura);
             await task.getDownloadURL()
             .then((downloadUrl) => {
-                const paymentRef = db.collection("payments").doc(selected.paymentId)
+                const paymentRef = db.collection("payments").doc(cargarFacturas.selected.paymentId)
                 paymentRef.update({factura: downloadUrl, loadedF: true})
                     .then(() => {
                         console.log('Factura cargada!')

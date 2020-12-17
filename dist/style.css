@@ -586,6 +586,20 @@ trabajando con  user Cards
   float: left;
 }
 
+.rechazar {
+  color: #9e39ff;
+  text-align: center;
+  display: inline-flex;
+  cursor: pointer;
+  height: 30px;
+  width: 40px;
+  padding: 3px;
+}
+.rechazar svg {
+  height: 25px;
+  width: 25px;
+}
+
 .avatar-payments {
   height: 6rem;
   width: 6rem;

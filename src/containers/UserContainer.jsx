@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { authUser } from "../../firebase/auth";
 import { db } from "../../firebase/firebase";
 import { useRecoilState } from "recoil";
-import { user, projectInvited } from "../atoms/index";
+import { user, projectInvited,atomPayments,isLoading } from "../atoms/index";
 
 // COMPONENTES Y CONTAINERS
 import Sidebar from "../components/Sidebar";
@@ -20,12 +20,13 @@ import { Layout, Row } from "antd";
 export default () => {
   const [currentUser, setCurrentUser] = useRecoilState(user);
   const [invitedProject, setInvitedProject] = useRecoilState(projectInvited);
-  const [nextPayments, setNextPayments] = useState([]);
-  const [selected, setSelected] = useState({});
+  const [cargarFacturas, setCargarFacturas] = useRecoilState(atomPayments);
+  const [loadingbtn, setLoadingbtn] =useRecoilState(isLoading)
+
 
   const { logout } = authUser();
   const { Content } = Layout;
-  const [item, setItem] = React.useState(1);
+  const [item, setItem] = useState(1);
   let unsubscribePayments = () => { };
 
   function hasDuplicates(inputArray) {
@@ -92,10 +93,13 @@ export default () => {
         const payments = arr
           .sort((a, b) => new Date(a.fecha) - new Date(b.fecha))
           .slice(0, 4);
-        setNextPayments(payments);
-        setSelected(payments[0])
+          console.log("aqui recibo nuesvos pagos pendientes" ,payments)
+          setCargarFacturas({
+            nextPayments:payments,
+            selected:payments[0]
+          })
       });
-    // return unsubscribe;
+     return ()=> unsubscribePayments();
   }, [currentUser]);
 
   const handleLogout = () => {
@@ -118,9 +122,8 @@ export default () => {
                 <Row className='userCards-row'>
                   <CardsFreelancer
                     setItem={setItem}
-                    nextPayments={nextPayments}
-                    selected={selected}
-                    setSelected={setSelected}
+                    setLoadingbtn={setLoadingbtn}
+                    loadingbtn={loadingbtn}
                   />
                 </Row>
                 <div>
