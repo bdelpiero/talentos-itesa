@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../../firebase/firebase";
+import firebase from "firebase/app";
 import AllProjects from "../components/AllProjects";
 
 function AllProjectsContainer({ setItem, setProject }) {
   const [projects, setProjects] = useState([]);
   const [filterProjects, setFilterProjects] = useState([]);
-
 
   function onChange(e) {
     setFilterProjects(
@@ -16,23 +16,18 @@ function AllProjectsContainer({ setItem, setProject }) {
   }
 
   useEffect(() => {
-    const unsuscribe = db.collection("projects")
-    .onSnapshot((projects) => {
+    const unsuscribe = db.collection("projects").onSnapshot((projects) => {
       projects = projects.docs.map((project) => {
         let proyecto = project.data();
         proyecto.id = project.id;
         proyecto.key = project.id;
         return proyecto;
-      })
+      });
       setProjects(projects);
       setFilterProjects(projects);
     });
     return () => unsuscribe();
   }, []);
-
-
-
-
 
   const deleteProject = (project) => {
     db.collection("projects").doc(project.id).delete();
@@ -43,6 +38,7 @@ function AllProjectsContainer({ setItem, setProject }) {
     const newStatus =
       project.status == "On Development" ? "Finished" : "On Development";
     const newTotal = project.status == "On Development" ? -1 : 1;
+    const increment = firebase.firestore.FieldValue.increment(newTotal);
     db.collection("projects")
       .doc(project.id)
       .update({
@@ -53,34 +49,54 @@ function AllProjectsContainer({ setItem, setProject }) {
           .doc(project.id)
           .collection("invitedUser")
           .get()
-          .then((proyectos) =>
-            proyectos
-              .forEach((user) => {
-                db.collection("projects")
-                  .doc(project.id)
-                  .collection("invitedUser")
-                  .doc(user.id)
-                  .update({
+          .then((proyectos) => {
+            const usersInProjects = [];
+
+            proyectos.forEach((user) => {
+              if (!project.id || !user.id) return;
+              db.collection("projects")
+                .doc(project.id)
+                .collection("invitedUser")
+                .doc(user.id)
+                .set(
+                  {
                     status: newStatus,
-                  });
-                return user.id;
-              })
-              .then((user) => {
-                db.collection("users")
-                  .doc(user)
-                  .get()
-                  .then((doc) => {
-                    const user = doc.data();
-                    if (!user.activeProjectsCounter) return;
-                    db.collection("users")
-                      .doc(user.id)
-                      .update({
-                        activeProjectsCounter:
-                          user.activeProjectsCounter + newTotal,
-                      });
-                  });
-              })
-          );
+                  },
+                  { merge: true }
+                );
+              usersInProjects.push(user.id);
+              console.log(
+                user.activeProjectsCounter,
+                "projects counter del user"
+              );
+              // console.log(newTotal, newTotal);
+              if (!user.id) return;
+              db.collection("users").doc(user.id).set(
+                {
+                  activeProjectsCounter: increment,
+                },
+                { merge: true }
+              );
+            });
+            // .then((user) => {
+            //   console.log(user, "user to be updated");
+            //   db.collection("users")
+            //     .doc(user)
+            //     .get()
+            //     .then((doc) => {
+            //       const user = doc.data();
+            //       if (!user.activeProjectsCounter) return;
+            //       console.log("newTotal", newTotal);
+            //       console.log(user);
+            //       db.collection("users")
+            //         .doc(user.id)
+            //         .update({
+            //           activeProjectsCounter:
+            //             user.activeProjectsCounter + newTotal,
+            //         });
+            //     });
+            // });
+          });
       });
   };
 
