@@ -1,9 +1,8 @@
-import React, { useRef, useState } from "react";
-import ContractUserProject from "./pdfs/ContractUserProject";
-import SignedContractUserProject from "../components/pdfs/SignedContractUserProject";
-
+import React, { useRef, useState,useEffect } from "react";
+import SignedContractUserProject from "./pdfs/SignedContractUserProject";
+import ContractUserProject from './pdfs/ContractUserProject'
 import { useRecoilState } from "recoil";
-import { projectInvited, user } from "../atoms/index";
+import { projectInvited, user,isLoading } from "../atoms/index";
 import { db } from "../../firebase/firebase";
 import { storage } from "../../firebase/firebase";
 
@@ -16,14 +15,21 @@ import { Col, Row, Button, Alert, Modal } from "antd";
 import { CloseCircleOutlined } from "@ant-design/icons";
 import CheckCircle from "../../views/check.svg";
 
-export default ({ setItem }) => {
+export default ({ setItem}) => {
   const [invitedProject, setInvitedProject] = useRecoilState(projectInvited);
   const [currentUser, setCurrentUser] = useRecoilState(user);
   const signatureRef = useRef({});
   const [imageData, setImageData] = useState("");
   const [errorSignature, setErrorSignature] = useState(false);
   const [show, setShow] = useState(false);
-  const [disableButton, setDisableButton] = useState(false);
+  const [loadingbtn, setLoadingbtn] =useRecoilState(isLoading)
+  const [disableButton,setDisableButton]=useState(false)
+
+
+
+  useEffect(()=>{
+    setLoadingbtn(false)
+  },[])
 
   const showModal = () => {
     setShow(true);

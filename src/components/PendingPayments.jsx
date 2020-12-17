@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 // Ant-Desing
 import { Button, Row, Col, Avatar, Card, Typography, Pagination } from "antd";
-import { DownloadOutlined } from "@ant-design/icons";
+import { DeleteOutlined } from "@ant-design/icons";
 import AddPaymentContainer from "../containers/AddPaymentContainer";
 import AddSinglePaymentContainer from "../containers/AddSinglePaymentContainer";
 import ExcelDownload from "./ExcelDownload";
+import { db } from "../../firebase/firebase";
+
 
 const { Title } = Typography;
 
@@ -74,10 +76,21 @@ export default ({ pendingPayments, setItem }) => {
                       {`${payment.user.name} ${payment.user.lastName}`}
                     </p>
                   </Col>
-                  <Col className='gutter-row' span={4}>
+                  <Col className='gutter-row' span={3}>
                     <Button className='list-button-paymentsFree' shape='round'>
-                      Ver pago <DownloadOutlined />
+                      <a href={payment.factura} target="_blank" rel="noopener noreferrer">Ver factura</a>
                     </Button>
+                  </Col>
+                  <Col span={1} className='gutter-row'>
+                  <DeleteOutlined className='rechazar' 
+                  onClick={()=>{
+                    console.log("delete",payment)
+                    db.collection("payments").doc(payment.paymentId)
+                    .update({
+                      factura: "",
+                      loadedF: false
+                    })
+                  }}/>
                   </Col>
                   <Col className='gutter-row' span={3}>
                     <AddSinglePaymentContainer payment={payment} />
