@@ -42,7 +42,7 @@ export default ({ item, project }) => {
             {item == 3 && (
               <span className='span-title'>
                 <Title level={1} className='header-title'>
-                  Proyecto {project.name}
+                  Proyecto: {project.name}
                 </Title>
                 <Text>{"Proyectos Itesa :)"}</Text>
               </span>

@@ -24,7 +24,7 @@ export const OurCommunityContainer = ({ setItem, setSelectedUser }) => {
   }
 
   function handleClick(user) {
-    setSelectedUser(user.id);
+    setSelectedUser(user);
     setItem(6);
   }
 
