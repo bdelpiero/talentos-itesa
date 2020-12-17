@@ -20,7 +20,7 @@ import {
 } from "@ant-design/icons";
 
 const { Dragger } = Upload;
-const { Option } = Select;
+
 
 function AddPayment({
   selectedUser,
@@ -33,22 +33,50 @@ function AddPayment({
   form,
   selectedProject,
   setSelectedProject,
-  projects,
+  cuota,
   setFileUrl,
   fileUrl,
-  handleCuota,
+  setCuota,
+  pendingPayments,
 }) {
-  const options = users.map((user) => {
+  // MAPEA TODOS LOS USUARIOS
+  const usuarios = pendingPayments.map((payment) => {
     return {
-      value: `${user.name} ${user.lastName}`,
-      id: user.id,
-      email: user.email,
+      value: `${payment.user.name} ${payment.user.lastName}`,
+      id: payment.user.id,
+      email: payment.user.email,
     };
   });
+  // ELIMINA USUARIOS DUPLICADOS
+  const options = usuarios.filter(
+    (v, i, a) => a.findIndex((t) => t.id === v.id) === i
+  );
 
-  const optionsProjects = projects.map((project) => {
-    return { value: project.proyecto, id: project.projectId };
-  });
+  // MAPEA TODOS LOS PROJECTS
+  const projectsFilter = pendingPayments
+    .filter((payment) => {
+      return (
+        payment.user && selectedUser.id && payment.user.id == selectedUser.id
+      );
+    })
+    .map((payment) => {
+      return { value: payment.projectName, id: payment.projectId };
+    });
+  // ELIMINA PROJECTS DUPLICADOS
+  const optionsProjects = projectsFilter.filter(
+    (v, i, a) => a.findIndex((t) => t.id === v.id) === i
+  );
+
+  const optionCuotas = pendingPayments
+    .filter((payment) => {
+      return (
+        payment.user.id == selectedUser.id &&
+        payment.projectId == selectedProject
+      );
+    })
+    .map((payment) => {
+      return { value: payment.cuota, id: payment.paymentId };
+    });
 
   const [dragger, setDragger] = useState(false);
   const [boton, setBoton] = useState(true);
@@ -59,11 +87,11 @@ function AddPayment({
     //   console.log(info)
     //   setFileUrl(info)
     // },
-    onChange(info){
-      setFileUrl(info)
-      setBoton(false)
-      setDragger(true)
-    }
+    onChange(info) {
+      setFileUrl(info);
+      setBoton(false);
+      setDragger(true);
+    },
   };
 
   return (
@@ -146,6 +174,7 @@ function AddPayment({
                       .toUpperCase()
                       .indexOf(inputValue.toUpperCase()) !== -1
                   }
+                  disabled={!selectedUser.value}
                 />
               </Form.Item>
 
@@ -162,30 +191,34 @@ function AddPayment({
                   },
                 ]}
               >
-                <Select
-                  onChange={(value) => handleCuota(value)}
-                  placeholder="Cuota"
-                >
-                  <Option value="CUOTA 1">Cuota 1</Option>
-                  <Option value="CUOTA 2">Cuota 2</Option>
-                  <Option value="CUOTA 3">Cuota 3</Option>
-                  <Option value="CUOTA 4">Cuota 4</Option>
-                </Select>
+                <AutoComplete
+                  onChange={(cuotaSelected) => {
+                    const cuotaSelect = optionCuotas.filter((option) => {
+                      if (cuotaSelected == option.value) return true;
+                    });
+                    if (!cuotaSelect[0] || !cuotaSelect[0].id) return;
+                    setCuota(cuotaSelect[0]);
+                  }}
+                  options={optionCuotas}
+                  placeholder="Cuotas"
+                  filterOption={(inputValue, option) =>
+                    option.value
+                      .toUpperCase()
+                      .indexOf(inputValue.toUpperCase()) !== -1
+                  }
+                  disabled={selectedProject == ""}
+                />
               </Form.Item>
             </Col>
             <Col span={12}>
               {!dragger ? (
-                <Dragger {...props}
-                n
-                rules={[
-                  {
-                    required: true,
-                    message: "Por favor ingrese Cuota a cancelar",
-                  },
-                ]}
+                <Dragger
+                  {...props}
+                  style={{ width: "80%" }}
+                  disabled={!cuota.value}
                 >
                   <p className="ant-upload-drag-icon">
-                    <PlusOutlined style={{color:"#9e39ff"}} />
+                    <PlusOutlined style={{ color: "#9e39ff" }} />
                   </p>
 
                   <p className="ant-upload-text">
@@ -198,20 +231,18 @@ function AddPayment({
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center",
-                    height:"80%",
-                    width:"80%",
+                    height: "80%",
+                    width: "80%",
                     border: "dashed",
-                    borderColor:"green",
-                    padding:"25px"
+                    borderColor: "green",
+                    padding: "25px",
                   }}
                 >
-
-
-                  <p style={{color:"green"}}>{fileUrl.file.name} </p>
+                  <p style={{ color: "green" }}>{fileUrl.file.name} </p>
 
                   <p>
                     <DeleteOutlined
-                      style={{ fontSize: "20px",color:"red" }}
+                      style={{ fontSize: "20px", color: "red" }}
                       onClick={() => {
                         setFileUrl({});
                         setDragger(false);

@@ -1,6 +1,7 @@
 import React from "react";
+import { cbu } from 'arg.js'
 
-import { Modal, Button, Card, Form, Input, Select, DatePicker } from "antd";
+import { Modal, Button, Card, Form, Input, Select, DatePicker, Alert } from "antd";
 import { CloseCircleOutlined } from "@ant-design/icons";
 
 function MiBanco({
@@ -70,7 +71,7 @@ function MiBanco({
               },
             ]}
           >
-            <Input  name="bankName"/>
+            <Input  placeholder='Banco' name="bankName"/>
           </Form.Item>
           <h5 style={{ color: "grey", marginLeft: "95px" }}>
             Name
@@ -86,10 +87,10 @@ function MiBanco({
               },
             ]}
           >
-            <Input name="accountName"/>
+            <Input name="accountName" placeholder='Nombre'/>
           </Form.Item>
           <h5 style={{ color: "grey", marginLeft: "95px" }}>
-            alias
+            Alias
           </h5>
           <Form.Item
             className="modal-formularios"
@@ -98,11 +99,11 @@ function MiBanco({
             rules={[
               {
                 required: true,
-                message: "Por favor ingrese Nombre ",
+                message: "Por favor ingrese Alias ",
               },
             ]}
           >
-            <Input name="alias"/>
+            <Input placeholder='Alias' name="alias"/>
           </Form.Item>
           <h5 style={{ color: "grey", marginLeft: "95px" }}>
             Cuit
@@ -112,13 +113,50 @@ function MiBanco({
             name="cuit"
             onChange={handleChangeBank}
             rules={[
-              {
-                required: true,
-                message: "Por favor ingrese cuit valido ",
-              },
+              () => ({
+                validator(rule, value) {
+                  const regExp = new RegExp( /\b(20|23|24|27|30|33|34)(\D)?[0-9]{8}(\D)?[0-9]/g )
+                  const test = regExp.test(value)
+                  if(value == undefined) {
+                    return Promise.reject("CUIT is required");
+                  } else if (value.length > 11) {
+                    return Promise.reject("CUIT cannot be longer than 11 characters");
+                  }else {
+                    if (test) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject("Enter a valid CUIT");
+                  }
+                }
+              })
             ]}
           >
-            <Input name="cuit"/>
+            <Input placeholder='CUIT' name="cuit"/>
+          </Form.Item>
+          <h5 style={{ color: "grey", marginLeft: "95px" }}>
+           Cbu
+          </h5>
+          <Form.Item
+            className="modal-formularios"
+            name="cbu"
+            onChange={handleChangeBank}
+            rules={[
+              () => ({
+                validator(rule, value) {
+                  let test = cbu.isValid(value)
+                  if(value == undefined) {
+                    return Promise.reject("CBU is required");
+                  } else {
+                    if (test) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject("Enter a valid CBU");
+                  }
+                }
+              }),
+            ]}
+          >
+            <Input placeholder='CBU' name="cbu" />
           </Form.Item>
           <h5 style={{ color: "grey", marginLeft: "95px" }}>
           Tipo de Factura
@@ -126,7 +164,6 @@ function MiBanco({
           <Form.Item
             className="modal-formularios"
             name="type"
-            onChange={handleChangeBank}
             rules={[
               {
                 required: true,
@@ -134,24 +171,20 @@ function MiBanco({
               },
             ]}
           >
-            <Input name="type"/>
-          </Form.Item>
-          <h5 style={{ color: "grey", marginLeft: "95px" }}>
-            Direccion
-          </h5>
-          <Form.Item
-            className="modal-formularios"
-            name="address"
+           <Select 
             onChange={handleChangeBank}
-            rules={[
-              {
-                required: true,
-                message: "Ingrese direccion",
-              },
-            ]}
-          >
-            <Input name="address" />
+            name="type"
+            placeholder='Tipo de factura a emitir'
+            bordered={false}
+            //className='register-input' 
+            >
+              <Option value="A">A</Option>
+              <Option value="B">B</Option>
+              <Option value="C">C</Option>
+              <Option value="E">E</Option>
+            </Select>            
           </Form.Item>
+      
           
           <div className="modal-input">
             <button className="ok-button" type="submit">

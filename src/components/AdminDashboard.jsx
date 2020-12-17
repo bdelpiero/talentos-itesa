@@ -2,8 +2,8 @@ import React from "react";
 import { Layout, Row, Card } from "antd";
 import Briefing from "../../views/briefing.svg";
 import UserLogo from "../../views/man.svg";
-import { useRecoilState,useRecoilValue  } from "recoil";
-import { user, projectInvited, pagos, allUsersState  } from "../atoms/index";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { user, projectInvited, pagos, allUsersState } from "../atoms/index";
 
 // COMPONENTS & CONTAINERS
 import InviteContainer from "../containers/InviteContainer";
@@ -18,6 +18,7 @@ import Navbar from "../components/Navbar";
 import { SingleProjectContainer } from "../containers/SingleProjectContainer";
 import { OurCommunityContainer } from "../containers/OurCommunityContainer";
 import { SingleUserContainer } from "../containers/SingleUserContainer";
+import AllPaymentsContainer from "../containers/AllPaymentsContainer";
 
 function AdminDashboard({ handleLogout }) {
   const { Content } = Layout;
@@ -26,50 +27,51 @@ function AdminDashboard({ handleLogout }) {
   const [project, setProject] = React.useState({});
   const [selectedUser, setSelectedUser] = React.useState({});
 
-  const users = useRecoilValue(allUsersState)
+  const users = useRecoilValue(allUsersState);
   const paymentsInAtom = useRecoilValue(pagos);
-  const pendingPayments = paymentsInAtom.pending.map((payment)=>{
-    const usuario = users.filter((user)=> user.id == payment.userId)[0]
-    const newPayment = {...payment, user: usuario }
-    return newPayment
-  })
+  const pendingPayments = paymentsInAtom.pending.map((payment) => {
+    const usuario = users.filter((user) => user.id == payment.userId)[0];
+    const newPayment = { ...payment, user: usuario };
+    return newPayment;
+  });
 
   return (
     <Layout>
       <Sidebar setItem={setItem} handleLogout={handleLogout} />
       <Layout>
         <Navbar setItem={setItem} />
-        <HeaderComponent  item={item} project={project} />
-        <Content className="content-user">
+        <HeaderComponent item={item} project={project} />
+        <Content className='content-user'>
           {item == 1 && (
             <>
-              <Row className="admin-row">
+              <Row className='admin-row'>
                 <Card
-                  className="admin-cards"
-                  style={{ background: "whitesmoke", border: "none" }}
-                >
-                  <img src={UserLogo} className="admin-card-icon " />
+                  className='admin-cards'
+                  style={{ background: "whitesmoke", border: "none" }}>
+                  <img src={UserLogo} className='admin-card-icon ' />
                   <InviteContainer />
                 </Card>
 
                 <Card
-                  className="admin-cards"
-                  style={{ background: "whitesmoke", border: "none" }}
-                >
-                  <img src={Briefing} className="admin-card-icon" />
+                  className='admin-cards'
+                  style={{ background: "whitesmoke", border: "none" }}>
+                  <img src={Briefing} className='admin-card-icon' />
                   <NewProjectContainer />
                 </Card>
                 <Card
-                  className="admin-cards"
-                  style={{ background: "whitesmoke", border: "none" }}
-                >
-                  <img src={Briefing} className="admin-card-icon" />
+                  className='admin-cards'
+                  style={{ background: "whitesmoke", border: "none" }}>
+                  <img src={Briefing} className='admin-card-icon' />
                   {/* <p className='invite-button-text'> Ingresar un pago </p> */}
-                  <AddPaymentContainer />
+                  <AddPaymentContainer pendingPayments={pendingPayments} />
                 </Card>
                 <ResumeContainer />
               </Row>
-              <PendingPayments  pendingPayments={pendingPayments} user={currentUser} />
+              <PendingPayments
+                setItem={setItem}
+                pendingPayments={pendingPayments}
+                user={currentUser}
+              />
             </>
           )}
           {item == 2 && (
@@ -83,6 +85,7 @@ function AdminDashboard({ handleLogout }) {
             />
           )}
           {item == 6 && <SingleUserContainer selectedUser={selectedUser} />}
+          {item == 7 && <AllPaymentsContainer users={users} />}
         </Content>
       </Layout>
     </Layout>

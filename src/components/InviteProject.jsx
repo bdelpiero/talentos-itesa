@@ -33,13 +33,17 @@ function InviteProject({
 }) {
   const boton = proyecto.status == "On Development" ? false : true;
 
-  const options = users.map((user) => {
+  const options = users.filter(user=> user.name !== undefined).map((user) => {
     return { value: `${user.name} ${user.lastName}`, id: user.id };
   });
 
   return (
     <div className="Modal">
-      <Button disabled={boton} className="modal-button2 hide-button" onClick={openModal}>
+      <Button
+        disabled={boton}
+        className="modal-button2 hide-button"
+        onClick={openModal}
+      >
         {" "}
         INVITAR
       </Button>
@@ -173,36 +177,60 @@ function InviteProject({
 
               <Row>
                 <Col span={6}>
-                  <Form.Item
-                    style={{ marginLeft: "5%" }}
-                    rules={[
-                      {
-                        required: true,
-                        message: "Por favor ingrese Cuota 1",
-                      },
-                    ]}
-                  >
-                    <Input
+                  {/*
+                ------------------
+                     CUOTA 1
+                ------------------
+                */}
+                  <Row style={{ display: "flex", alignItems: "center" }}>
+                    <Form.Item
                       name="cuota1"
-                      value={cuotas.cuota1.monto}
-                      onChange={(e) =>
-                        handleCuotas(e.target.value, "monto", e.target.name)
-                      }
+                      rules={[
+                        {
+                          required: true,
+                          message: "Requerido",
+                        },
+                      ]}
+                      style={{ width: "45%", marginLeft: "5%" }}
+                    >
+                      <Input
+                        name="cuota1"
+                        value={cuotas.cuota1.monto}
+                        onChange={(e) =>
+                          handleCuotas(e.target.value, "monto", e.target.name)
+                        }
+                      ></Input>
+                    </Form.Item>
+                    <Form.Item
+                      name="date1"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Requerido",
+                        },
+                      ]}
                       style={{ width: "45%" }}
-                    ></Input>
-                    <DatePicker
-                      name="cuota1"
-                      format="DD/MM/YYYY"
-                      style={{ width: "45%", marginRight: "5%" }}
-                      onChange={(value, dataString) =>
-                        handleCuotas(dataString, "fecha", "cuota1")
-                      }
-                    />
-                  </Form.Item>
+                    >
+                      <DatePicker
+                        format="DD/MM/YYYY"
+                        onChange={(value, dataString) =>
+                          handleCuotas(dataString, "fecha", "cuota1")
+                        }
+                      />
+                    </Form.Item>
+                  </Row>
                 </Col>
+
+                {/*
+                ------------------
+                     CUOTA 2
+                ------------------
+                */}
+
                 <Col span={6}>
                   <Form.Item>
                     <Input
+                      style={{ width: "45%", marginLeft: "5%" }}
                       name="cuota2"
                       value={cuotas.cuota2.monto}
                       onChange={(e) =>
@@ -212,25 +240,30 @@ function InviteProject({
                         cuotas.cuota1.fecha.length == 0 ||
                         cuotas.cuota1.monto == 0
                       }
-                      style={{ width: "45%", marginLeft: "5%" }}
                     ></Input>
                     <DatePicker
+                      style={{ width: "45%", marginRight: "5%" }}
                       name="cuota2"
                       disabled={
                         cuotas.cuota1.fecha.length == 0 ||
                         cuotas.cuota1.monto == 0
                       }
                       format="DD/MM/YYYY"
-                      style={{ width: "45%", marginRight: "5%" }}
                       onChange={(value, dataString) =>
                         handleCuotas(dataString, "fecha", "cuota2")
                       }
                     />
                   </Form.Item>
                 </Col>
+                {/*
+                ------------------
+                     CUOTA 3
+                ------------------
+                */}
                 <Col span={6}>
                   <Form.Item>
                     <Input
+                      style={{ width: "45%", marginLeft: "5%" }}
                       name="cuota3"
                       value={cuotas.cuota3.monto}
                       onChange={(e) =>
@@ -240,9 +273,10 @@ function InviteProject({
                         cuotas.cuota2.fecha.length == 0 ||
                         cuotas.cuota2.monto == 0
                       }
-                      style={{ width: "45%", marginLeft: "5%" }}
                     ></Input>
+
                     <DatePicker
+                      style={{ width: "45%", marginRight: "5%" }}
                       name="cuota3"
                       onChange={(value, dataString) =>
                         handleCuotas(dataString, "fecha", "cuota3")
@@ -252,13 +286,18 @@ function InviteProject({
                         cuotas.cuota2.monto == 0
                       }
                       format="DD/MM/YYYY"
-                      style={{ width: "45%", marginRight: "5%" }}
                     />
                   </Form.Item>
                 </Col>
+                {/*
+                ------------------
+                     CUOTA 4
+                ------------------
+                */}
                 <Col span={6}>
                   <Form.Item>
                     <Input
+                      style={{ width: "45%", marginLeft: "5%" }}
                       name="cuota4"
                       value={cuotas.cuota4.monto}
                       onChange={(e) =>
@@ -268,12 +307,11 @@ function InviteProject({
                         cuotas.cuota3.fecha.length == 0 ||
                         cuotas.cuota3.monto == 0
                       }
-                      style={{ width: "45%", marginLeft: "5%" }}
                     ></Input>
                     <DatePicker
+                      style={{ width: "45%", marginRight: "5%" }}
                       name="cuota4"
                       format="DD/MM/YYYY"
-                      style={{ width: "45%", marginRight: "5%" }}
                       onChange={(value, dataString) =>
                         handleCuotas(dataString, "fecha", "cuota4")
                       }
