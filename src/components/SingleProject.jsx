@@ -30,9 +30,9 @@ export const SingleProject = ({
   project,
   projectUsersData,
 }) => {
-  const [editableDesc, setEditableDesc] = useState(project.description);
+  const [editableDesc, setEditableDesc] = useState("");
   const [editableTime, setEditableTime] = useState(project.term);
-  const [editableBudget, setEditableBudget] = useState(project.budget);
+  const [editableBudget, setEditableBudget] = useState("");
 
   function projectDescription(editableDesc) {
     db.collection("projects").doc(project.id).set(
@@ -45,7 +45,6 @@ export const SingleProject = ({
     );
   }
 
-  
   return (
     <>
       <Row gutter={[30]}>
@@ -69,7 +68,7 @@ export const SingleProject = ({
             {editableBudget}
           </Paragraph>
           <Button
-          className="modal-button2"
+            className="modal-button2"
             onClick={() =>
               projectDescription(editableDesc, editableTime, editableBudget)
             }
@@ -84,7 +83,7 @@ export const SingleProject = ({
               Freelancers en proyecto{" "}
               {/* <UserAddOutlined className="single-icon add-user" /> */}
             </Title>{" "}
-            <InviteProjectContainer  proyecto={project} />
+            <InviteProjectContainer proyecto={project} />
           </div>
 
           <List
@@ -97,15 +96,17 @@ export const SingleProject = ({
                   title={item.name}
                   description={item.status}
                 />
-                { item.urlContractProject ?<a href={`${item.urlContractProject}`} target="_blank">
-                <Button
-                  className="modal-button2"
-                  style={{marginRight:"20px"}}                  
-                >
-                  Ver Contrato
-                </Button>
-              </a> : null }
-                
+                {item.urlContractProject ? (
+                  <a href={`${item.urlContractProject}`} target="_blank">
+                    <Button
+                      className="modal-button2"
+                      style={{ marginRight: "20px" }}
+                    >
+                      Ver Contrato
+                    </Button>
+                  </a>
+                ) : null}
+
                 <DeleteOutlined
                   onClick={() => delUserFromProject(item.id)}
                   className="single-icon"

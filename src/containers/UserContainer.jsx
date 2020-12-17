@@ -21,6 +21,8 @@ export default () => {
   const [currentUser, setCurrentUser] = useRecoilState(user);
   const [invitedProject, setInvitedProject] = useRecoilState(projectInvited);
   const [nextPayments, setNextPayments] = useState([]);
+  const [selected, setSelected] = useState({});
+
   const { logout } = authUser();
   const { Content } = Layout;
   const [item, setItem] = React.useState(1);
@@ -39,21 +41,16 @@ export default () => {
     return false;
   }
 
-  // useEffect esta atento a los cambios en el usuario para renderizar el componente nuevamente
-  // console.log("se renderiza usercontainer", invitedProject);
-
   useEffect(() => {
     let invitaciones = db
       .collectionGroup("invitedUser")
       .where("email", "==", currentUser.email);
-    // where('status', '==' ,"pending")
-    invitaciones
+      invitaciones
       .get()
       .then((projects) => {
         const newInvitations = [];
         projects.forEach((doc) => {
           if (doc.data().status === "pending") {
-            // console.log("entro al if con este status",doc.data().status)
             newInvitations.push(doc.data());
           }
         });
@@ -85,15 +82,18 @@ export default () => {
       .collection("payments")
       .where("userId", "==", currentUser.id)
       .where("state", "==", "pending")
+      .where('loadedF', '==', false)
+      .where('proyectoAceptado', '==', true)
       .onSnapshot((querySnapshot) => {
-        const arr = [];
+        let arr = [];
         querySnapshot.forEach((doc) => {
-          arr.push(doc.data());
+          arr = [...arr, doc.data()]
         });
         const payments = arr
           .sort((a, b) => new Date(a.fecha) - new Date(b.fecha))
           .slice(0, 4);
         setNextPayments(payments);
+        setSelected(payments[0])
       });
     // return unsubscribe;
   }, [currentUser]);
@@ -119,6 +119,8 @@ export default () => {
                   <CardsFreelancer
                     setItem={setItem}
                     nextPayments={nextPayments}
+                    selected={selected}
+                    setSelected={setSelected}
                   />
                 </Row>
                 <div>

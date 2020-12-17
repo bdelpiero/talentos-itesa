@@ -26,7 +26,6 @@ function NewProjectContainer() {
   }, []);
 
   useEffect(() => {
-    console.log(" -- ESTO ES EL SELECTEDUSER --", selectedUser);
     let desuscribir = () => {};
     if (selectedUser.email)
       desuscribir = db
@@ -77,7 +76,6 @@ function NewProjectContainer() {
       })
       .then(() => {
         form.resetFields();
-        console.log("Se cargo correctamente");
       })
       .then(() => {
         Modal.success({
@@ -103,24 +101,26 @@ function NewProjectContainer() {
   }
 
   return (
-    <AddPayment
-      status={status}
-      closeModal={closeModal}
-      success={success}
-      openModal={openModal}
-      modal={modal}
-      form={form}
-      users={users}
-      selectedUser={selectedUser}
-      setSelectedUser={setSelectedUser}
-      setSelectedProject={setSelectedProject}
-      selectedProject={selectedProject}
-      projects={projects}
-      fileUrl={fileUrl}
-      setFileUrl={setFileUrl}
-      // handlePayment={handlePayment}
-      handleCuota={handleCuota}
-    />
+    <>
+      <AddPayment
+        status={status}
+        closeModal={closeModal}
+        success={success}
+        openModal={openModal}
+        modal={modal}
+        form={form}
+        users={users}
+        selectedUser={selectedUser}
+        setSelectedUser={setSelectedUser}
+        setSelectedProject={setSelectedProject}
+        selectedProject={selectedProject}
+        projects={projects}
+        fileUrl={fileUrl}
+        setFileUrl={setFileUrl}
+        // handlePayment={handlePayment}
+        handleCuota={handleCuota}
+      />
+    </>
   );
 }
 

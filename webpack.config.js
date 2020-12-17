@@ -2,6 +2,13 @@ const path = require("path");
 
 const config = {
   entry: ["./src/index.js"],
+  // entry:{
+  //   main:"./src/index.js",
+  //   vendor: [
+  //       'xlsx',
+  //       'file-saver'
+  //     ],
+  // },
   output: {
     path: path.resolve(__dirname, "dist"),
     publicPath: '/',
@@ -51,6 +58,7 @@ const config = {
           },
         ],
       },
+     
     ],
   },
   resolve: {
@@ -67,6 +75,10 @@ const config = {
       index: "index.html",
     },
   },
+  externals: [
+      {'./cptable': 'var cptable'},
+      {'./jszip': 'jszip'}
+  ],
 };
 
 module.exports = config;

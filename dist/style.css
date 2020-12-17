@@ -499,7 +499,6 @@ trabajando con content user
   background-color: #9e39ff !important;
 }
 
-
 /* ----------------------
 trabajando con  user Cards
 ---------------------- */
@@ -590,6 +589,10 @@ trabajando con  user Cards
 .avatar-payments {
   height: 6rem;
   width: 6rem;
+}
+.div-excel {
+  display: flex;
+  padding: 5px;
 }
 
 /* ----------------------
@@ -730,6 +733,8 @@ register freelancer
   }
   .paymentsCards .gutter-row {
     margin: 20px 0;
+    align-content: flex-start;
+    flex-flow: column wrap;
   }
 
   .register-formContainer {
@@ -937,7 +942,11 @@ Trabajando con Admin Cards/DashBoard
   display: flex !important;
   flex-direction: column !important;
   justify-content: space-around !important;
-  align-items: stretch !important;
+  align-items: center !important;
+}
+
+.modal-factura-dragger {
+  padding: 1rem !important;
 }
 
 #cargar-factura-button {
@@ -1048,6 +1057,13 @@ Trabajando con Admin Cards/DashBoard
   border-color: #9e39ff;
 }
 
+#accept-project-button {
+  width: 40%;
+  background-color: #9e39ff;
+  color: white;
+  margin: 0.5rem auto;
+}
+
 /* ----------------
       OurCommunity component
 ------------------- */
@@ -1082,7 +1098,7 @@ Trabajando con Admin Cards/DashBoard
   background-color: #dddcdc;
 }
 
-.ant-upload.ant-upload-drag {
+/* .ant-upload.ant-upload-drag {
   position: relative;
   width: 80%;
   height: 80% !important;
@@ -1093,7 +1109,7 @@ Trabajando con Admin Cards/DashBoard
   cursor: pointer;
   -webkit-transition: border-color 0.3s;
   transition: border-color 0.3s;
-}
+} */
 
 /* ant-upload.ant-upload-drag .ant-upload {
   padding: 50px 0;

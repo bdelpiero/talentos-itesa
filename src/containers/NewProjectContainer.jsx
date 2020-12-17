@@ -18,14 +18,10 @@ function NewProjectContainer() {
   };
 
   const handleChangeStartDate = (value, dateString) => {
-    console.log(value, "esto es start date");
-    console.log(dateString, "esto es datestring");
     setStartDate(dateString);
   };
 
   const handleChangeEndDate = (value, dateString) => {
-    console.log(value, "esto es end date");
-    console.log(dateString, "esto es datestring");
     setEndDate(dateString);
   };
 
@@ -52,8 +48,7 @@ function NewProjectContainer() {
         term,
       })
       .then(() => {
-        form.resetFields()
-        console.log("Se creo correctamente");
+        form.resetFields();
       })
       .then(() => {
         Modal.success({
@@ -75,7 +70,7 @@ function NewProjectContainer() {
             },
           },
         });
-      })
+      });
   }
 
   return (

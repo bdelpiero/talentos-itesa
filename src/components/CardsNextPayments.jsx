@@ -5,19 +5,19 @@ import LoadInvoice from './CargarFactura'
 import { Button, Card, Typography } from "antd";
 const { Title } = Typography;
 
-export default ({ nextPayments }) => {
+export default ({ nextPayments, selected, setSelected }) => {
+
   if (nextPayments.length == 0) {
     return (
       <Card className='freelancer-cards'>
         <Title level={5} id='title-freelancer-card'>
           PRÓXIMOS PAGOS
         </Title>
-        <p id='subtittle-freelancer-card'>NO HAY PAGOS PENDIENTES</p>
+        <p id='subtittle-freelancer-card'>ESTAS AL DIA CON TUS FACTURAS</p>
       </Card>
     );
   }
 
-  const [selected, setSelected] = useState(nextPayments[0]);
   const [modalCargarFactura, setModalCargarFactura] = useState(false)
   const handleModal = () => modalCargarFactura ? setModalCargarFactura(false) : setModalCargarFactura(true)
 
@@ -42,6 +42,7 @@ export default ({ nextPayments }) => {
             Cargar Factura{" "}
           </Button>
         </div>
+
          {/* MODAL PARA CARGAR FACTURA */}
          <LoadInvoice handleModal={handleModal} modalCargarFactura={modalCargarFactura} selected={selected}/>
         <div className='freelancer-card-stepers-container'>
@@ -76,10 +77,10 @@ export default ({ nextPayments }) => {
             className='freelancer-card-buttons'
             onClick={handleModal}
             shape='round'>
-            {" "}
-            Cargar Factura{" "}
+            Cargar Factura
           </Button>
         </div>
+
         {/* MODAL PARA CARGAR FACTURA */}
         <LoadInvoice modalCargarFactura={modalCargarFactura} handleModal={handleModal} selected={selected}/>
       </Card>

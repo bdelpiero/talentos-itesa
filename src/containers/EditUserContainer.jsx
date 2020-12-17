@@ -67,7 +67,6 @@ export default ({ user, setCurrentUser }) => {
         })
         .then(() => {
           setIsLoading(false);
-          console.log("cambios realizados con éxito");
         })
         .catch((err) => console.log(err));
     });
@@ -81,8 +80,7 @@ export default ({ user, setCurrentUser }) => {
     </div>
   );
 
-  const handleCV = async( info) => {
-    console.log(URL.createObjectURL(info.file.originFileObj));
+  const handleCV = async (info) => {
     setFileUrl(URL.createObjectURL(info.file.originFileObj));
     setLoaded(true);
 
@@ -96,9 +94,7 @@ export default ({ user, setCurrentUser }) => {
         .update({
           cv: downloadUrl,
         })
-        .then(() => {
-          console.log("cambios realizados con éxito");
-        })
+        .then(() => {})
         .catch((err) => console.log(err));
     });
   };
@@ -107,57 +103,60 @@ export default ({ user, setCurrentUser }) => {
     <>
       <div onClick={openModal} style={{ cursor: "pointer" }}>
         {user.avatar ? (
-          <Avatar size={55} src={user.avatar} className='avatar' />
+          <Avatar size={55} src={user.avatar} className="avatar" />
         ) : (
-          <Avatar size={55} icon={<UserOutlined />} className='avatar' />
+          <Avatar size={55} icon={<UserOutlined />} className="avatar" />
         )}
-        <Text type='secondary'>
+        <Text type="secondary">
           {user.name} {user.lastName}
         </Text>
       </div>
       <Modal
         visible={modal}
-        centered='true'
+        centered="true"
         cancelButtonProps={{ hidden: true }}
         okButtonProps={{
           hidden: true,
         }}
         onCancel={closeModal}
         // closeIcon={<CloseCircleOutlined className='close-button' />}
-        bodyStyle={{ color: "#9e39ff" }}>
+        bodyStyle={{ color: "#9e39ff" }}
+      >
         <>
-          <div className='modal-editProfile-container'>
-            <h1 className='modal-editProfile-header'>Editar datos de perfil</h1>
-            <div className='modal-editProfile'>
-              <div className='modal-editProfile-avatar'>
+          <div className="modal-editProfile-container">
+            <h1 className="modal-editProfile-header">Editar datos de perfil</h1>
+            <div className="modal-editProfile">
+              <div className="modal-editProfile-avatar">
                 <label
                   style={{
                     cursor: "pointer",
                     marginTop: "70px",
-                  }}>
+                  }}
+                >
                   <input
                     style={{ display: "none" }}
-                    type='file'
+                    type="file"
                     onChange={handleChange}
-                    accept='image/png, image/jpeg'
+                    accept="image/png, image/jpeg"
                   />
                   {previewUrl ? (
-                    <Avatar size={100} src={previewUrl} className='avatar' />
+                    <Avatar size={100} src={previewUrl} className="avatar" />
                   ) : (
                     <Avatar
                       size={100}
                       icon={<UserOutlined />}
-                      className='avatar'
+                      className="avatar"
                     />
                   )}
                 </label>
                 <div style={{ margin: "30px 0 50px 0" }}>
                   <Upload
-                    name='avatar'
-                    listType='picture-card'
-                    className='avatar-uploader'
+                    name="avatar"
+                    listType="picture-card"
+                    className="avatar-uploader"
                     showUploadList={false}
-                    onChange={handleCV}>
+                    onChange={handleCV}
+                  >
                     {loaded ? <CheckCircleOutlined /> : uploadButton}
                   </Upload>
                 </div>
@@ -167,25 +166,28 @@ export default ({ user, setCurrentUser }) => {
                 <div>
                   <Form.Item
                     // style={{ width: "60%", marginLeft: "95px" }}
-                    name='userName'
-                    onChange={handleInputChange}>
-                    <Input placeholder={userName} name='userName' />
+                    name="userName"
+                    onChange={handleInputChange}
+                  >
+                    <Input placeholder={userName} name="userName" />
                   </Form.Item>
                 </div>
 
                 <div>
                   <Form.Item
                     style={{ marginBottom: 0 }}
-                    name='userLastName'
-                    onChange={handleInputChange}>
-                    <Input placeholder={userLastName} name='userLastName' />
+                    name="userLastName"
+                    onChange={handleInputChange}
+                  >
+                    <Input placeholder={userLastName} name="userLastName" />
                   </Form.Item>
                 </div>
-                <div className='modal-input' style={{ marginTop: 30 }}>
+                <div className="modal-input" style={{ marginTop: 30 }}>
                   <button
-                    className='ok-button'
-                    type='submit'
-                    onClick={handleSubmit}>
+                    className="ok-button"
+                    type="submit"
+                    onClick={handleSubmit}
+                  >
                     Confirmar cambios
                   </button>
                 </div>

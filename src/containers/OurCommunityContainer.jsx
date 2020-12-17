@@ -12,7 +12,6 @@ export const OurCommunityContainer = ({ setItem, setSelectedUser }) => {
   const [usersPerPage, setUsersPerPage] = useState(5);
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log(allUsers, "allUsers");
   function onChange(e) {
     setCurrentUsers(
       allUsers.filter((user) => {

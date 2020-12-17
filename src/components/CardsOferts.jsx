@@ -36,39 +36,40 @@ export default (props) => {
 
     if (props.inviteds.invited.length > 1) {
       return (
-        <Card className='freelancer-cards'>
-          <Title level={5} id='title-freelancer-card'>
+        <Card className="freelancer-cards">
+          <Title level={5} id="title-freelancer-card">
             OFERTA DE PROYECTO
           </Title>
-          <p id='subtittle-freelancer-card'>PROYECTO</p>
-          <p id='text-freelancer-card'>"{props.inviteds.selected.proyecto}"</p>
-          <p id='subtittle-freelancer-card'>DURACION</p>
-          <p id='text-freelancer-card'>{duracion} semanas</p>
-          <p id='subtittle-freelancer-card'>MONTO</p>
-          <div className='container-freelancer-button'>
-            <p id='text-freelancer-card'>"$ {monto}"</p>
+          <p id="subtittle-freelancer-card">PROYECTO</p>
+          <p id="text-freelancer-card">"{props.inviteds.selected.proyecto}"</p>
+          <p id="subtittle-freelancer-card">DURACION</p>
+          <p id="text-freelancer-card">{duracion} semanas</p>
+          <p id="subtittle-freelancer-card">MONTO</p>
+          <div className="container-freelancer-button">
+            <p id="text-freelancer-card">"$ {monto}"</p>
             <Button
-              className='freelancer-card-buttons'
+              className="freelancer-card-buttons"
               onClick={() => props.setItem(5)}
-              shape='round'>
+              shape="round"
+            >
               {" "}
               Firma Contrato{" "}
             </Button>
           </div>
-          <div className='freelancer-card-stepers-container'>
+          <div className="freelancer-card-stepers-container">
             {props.inviteds.invited.map((p, i) => {
               return (
                 <Button
-                  shape='round'
+                  shape="round"
                   key={i}
                   onClick={() => {
-                    console.log("AQUI", props.inviteds.invited[i]);
                     props.setInvitedProject({
                       ...props.inviteds,
                       selected: props.inviteds.invited[i],
                     });
                   }}
-                  className='freelancer-card-stepers'>
+                  className="freelancer-card-stepers"
+                >
                   {" "}
                 </Button>
               );
@@ -79,22 +80,24 @@ export default (props) => {
     } else {
       return (
         <Card
-          className='freelancer-cards'
-          key={props.inviteds.selected.proyecto}>
-          <Title level={5} id='title-freelancer-card'>
+          className="freelancer-cards"
+          key={props.inviteds.selected.proyecto}
+        >
+          <Title level={5} id="title-freelancer-card">
             OFERTA DE PROYECTO
           </Title>
-          <p id='subtittle-freelancer-card'>PROYECTO</p>
-          <p id='text-freelancer-card'>"{props.inviteds.selected.proyecto}"</p>
-          <p id='subtittle-freelancer-card'>DURACION</p>
-          <p id='text-freelancer-card'>{duracion} semanas</p>
-          <p id='subtittle-freelancer-card'>MONTO</p>
-          <div className='container-freelancer-button'>
-            <p id='text-freelancer-card'> "${monto}"</p>
+          <p id="subtittle-freelancer-card">PROYECTO</p>
+          <p id="text-freelancer-card">"{props.inviteds.selected.proyecto}"</p>
+          <p id="subtittle-freelancer-card">DURACION</p>
+          <p id="text-freelancer-card">{duracion} semanas</p>
+          <p id="subtittle-freelancer-card">MONTO</p>
+          <div className="container-freelancer-button">
+            <p id="text-freelancer-card"> "${monto}"</p>
             <Button
-              className='freelancer-card-buttons'
+              className="freelancer-card-buttons"
               onClick={() => props.setItem(5)}
-              shape='round'>
+              shape="round"
+            >
               {" "}
               Firma Contrato{" "}
             </Button>
@@ -104,11 +107,11 @@ export default (props) => {
     }
   } else {
     return (
-      <Card className='freelancer-cards'>
-        <Title level={5} id='title-freelancer-card'>
+      <Card className="freelancer-cards">
+        <Title level={5} id="title-freelancer-card">
           OFERTA DE PROYECTO
         </Title>
-        <p id='subtittle-freelancer-card'>NO TIENES PROYECTOS</p>
+        <p id="subtittle-freelancer-card">NO TIENES PROYECTOS</p>
       </Card>
     );
   }
