@@ -25,9 +25,7 @@ export default ({ pendingPayments, setItem }) => {
       <div className='div-excel'>
         <Title level={3} style={{ width: "100%" }}>
           Pagos a realizar este mes
-        </Title>
-        <ExcelDownload pendingPayments={pendingPayments} />
-        <Button onClick={() => setItem(7)}>Todos los pagos</Button>
+        </Title>       
       </div>
       <div>
         {pendingPayments.length > 0 &&

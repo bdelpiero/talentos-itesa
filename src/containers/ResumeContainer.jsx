@@ -1,41 +1,24 @@
 import React, { useState } from "react";
 import Resume from "../components/Resume";
-import { Form } from "antd";
-import { Link, useHistory } from "react-router-dom";
 
-export default () => {
-  // const [email, setEmail]=useState('')
-  // const [password, setPassword]=useState('')
-  // const [form] =Form.useForm()
-  // const history = useHistory()
 
-  // const {login,currentUser}=authUser()
 
-  // const hanledChangeEmail=(e)=>{
-  //     setEmail(e.target.value)
-  // }
+export default ({ pendingPayments, setItem, setProject }) => {
+ 
+  const [projects, setProjects] = useState([]);
+  const [count, setCount] = useState(0);
 
-  // const hanledChangePassword=(e)=>{
-  //     setPassword(e.target.value)
-  // }
-
-  // const hanledSubmit =(valores)=>{
-  //     setEmail("")
-  //     setPassword('')
-  //     login(email,password)
-  //     console.log("AQUI USER",currentUser)
-  //     form.resetFields()
-  //     history.push("/frelance")
-  // }
+  
+ function handleCount(){
+    co
+ }
 
   return (
+
     <Resume
-    // hanledChangeEmail={hanledChangeEmail}
-    // hanledChangePassword={hanledChangePassword}
-    // hanledSubmit={hanledSubmit}
-    // email={email}
-    // password={password}
-    // form={form}
+    setItem={setItem}
+    pendingPayments={pendingPayments}
     />
+    
   );
 };
