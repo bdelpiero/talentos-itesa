@@ -1,10 +1,25 @@
 import React, {useState } from "react";
 import {Link} from "react-router-dom"
 // Ant-Desing
-import { Button, Radio, Card, Row, Col, List, Avatar, Pagination } from "antd";
-import { Content } from "antd/lib/layout/layout";
-import { DownloadOutlined } from "@ant-design/icons";
-import { Typography } from "antd";
+import {  
+  Button,
+  Row,
+  Col,
+  Avatar,
+  Card,
+  Typography,
+  Pagination,
+  Table,
+  Dropdown,
+  Menu, } from "antd";
+import { DownloadOutlined,
+  EllipsisOutlined,
+  DeleteOutlined, } from "@ant-design/icons"
+  import AddPaymentContainer from "../containers/AddPaymentContainer";
+  import AddSinglePaymentContainer from "../containers/AddSinglePaymentContainer";
+  import ExcelDownload from "./ExcelDownload";
+  import { db } from "../../firebase/firebase";
+
 
 const { Title } = Typography;
 
@@ -22,6 +37,41 @@ export default ({user, receivedPayments})=>  {
     setCurrentPage(value);
   };
   
+  
+  function menu(payment) {
+    return (
+      <Menu>
+        <Menu.Item>
+          <div>
+            <Button className="list-button-paymentsList">
+              <a
+                href={payment.factura}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ver factura
+              </a>
+            </Button>
+          </div>
+        </Menu.Item>
+        <Menu.Item>
+          <div>
+            <Button 
+            className='list-button-paymentsList'
+            >
+              <a 
+              href={payment.comprobantePago} 
+              target="_blank" 
+               rel="noopener noreferrer">
+              Ver pago 
+              </a>
+            </Button>
+          </div>
+        </Menu.Item>
+        
+      </Menu>
+    );
+  }
     return (
        <>
        <div className='div-excel'>
@@ -34,55 +84,54 @@ export default ({user, receivedPayments})=>  {
          {receivedPayments.length > 0 &&
            receivedPayments.slice(minValue, maxValue).map((payment) => {
              return (
-               <Card
-                 className='paymentCards-card'
-                 style={{
-                   borderRadius: 25,
-                   marginBottom: 15,
-                   boxShadow: "-5px 5px lightgray",
-                 }}>
-                 <Row className='paymentsCards' align='middle'>
-                   <Col className='gutter-row' span={3}>
-                     <Avatar
-                       size={55}
-                       src={user && user.avatar}
-                       className='avatar'
-                     />
+              <div className="prueba paymentCards-card">
+                <Row align={"middle"} className="prueba1" gutter={24}>                 
+                   <Col cxs={4} sm={4} md={4} lg={2}>
+                     <Avatar 
+                     size={48}
+                     src={user && user.avatar}/>
                    </Col>
-                   <Col span={3}>
-                     <h1>${payment.monto}</h1>
+                   <Col xs={4} sm={4} md={4} lg={2}>
+                     <h1>{"$" + payment.monto}</h1>
                    </Col>
-                   <Col span={4}>
+                   <Col xs={6} sm={6} md={4} lg={3}>
                      <p style={{ color: "#9e39ff", margin: 0 }}>Proyecto:</p>
                      <p style={{ margin: 0 }}> {payment.projectName}</p>
                    </Col>
-                   <Col className='gutter-row' span={4}>
+                   <Col cxs={4} sm={4} md={4} lg={3}>
                      <p style={{ color: "#9e39ff", margin: 0 }}>Factura:</p>
                      <p style={{ margin: 0 }}> {payment.cuota}</p>
                    </Col>
-                   <Col className='gutter-row' span={4}>
+                   <Col xs={4} sm={4} md={4} lg={3} className="hide-button">
                      <p style={{ color: "#9e39ff", margin: 0 }}>
                        Fecha de pago:
                      </p>
                      <p style={{ margin: 0 }}> {payment.fecha}</p>
                    </Col>
-                   <Col className='gutter-row' span={3}>
+                   <Col xs={1} sm={1} md={1} lg={5}>
                    <a href={payment.comprobantePago} target="_blank" download>
-                     <Button className='list-button-paymentsFree' shape='round'>
+                     <Button className='list-button-paymentsList hide-button' shape='round'>
                        Ver pago <DownloadOutlined />
                      </Button>
                      </a>
                    </Col>
-
-                   <Col className='gutter-row' span={3}>
+                   <Col xs={2} sm={2} md={2} lg={5}>
                    <a href={payment.factura} target="_blank" download>
-                     <Button className='list-button-paymentsFree' shape='round'>
+                     <Button className='list-button-paymentsList hide-button' shape='round'>
                        Ver factura <DownloadOutlined />
                      </Button>
                      </a>
                    </Col>
+                   <div className="show-ellipsis">
+                    <Col xs={2} sm={2} md={2} lg={4}>
+                      {" "}
+                      <Dropdown overlay={menu(payment)} placement="bottomLeft">
+                        <EllipsisOutlined className="single-icon" />
+                      </Dropdown>
+                    </Col>
+                  </div>
                  </Row>
-               </Card>
+               </div>
              );
            })}
          <div
@@ -101,4 +150,4 @@ export default ({user, receivedPayments})=>  {
   
 }
 
-// export default PagosFreelace;
+
