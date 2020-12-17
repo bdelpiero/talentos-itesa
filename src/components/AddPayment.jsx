@@ -222,7 +222,7 @@ function AddPayment({
                   </p>
 
                   <p className="ant-upload-text">
-                    Click or Drag file to upload
+                  Arrastra o carga tu factura acá
                   </p>
                 </Dragger>
               ) : (

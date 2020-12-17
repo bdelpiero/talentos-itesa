@@ -1171,3 +1171,11 @@ Trabajando con Admin Cards/DashBoard
 .paymentCards-card:hover {
   transform: scale(1.02);
 }
+
+.botonPagos:hover{
+  transform: scale(1.05);
+}
+
+.ant-alert-error {
+  width: 40%;
+}

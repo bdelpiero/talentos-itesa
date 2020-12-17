@@ -44,7 +44,7 @@ function AddSinglePaymentContainer({ payment }) {
             flexDirection: "column",
             justifyContent: "center",
           },
-          content: "¡Pago ingresado!",
+          content: <h1> ¡Pago ingresado! </h1> ,
           centered: "true",
           okText: "VOLVER",
           icon: <img src={CheckCircle} className="icono-sider" />,
@@ -52,7 +52,7 @@ function AddSinglePaymentContainer({ payment }) {
             style: {
               backgroundColor: "#9e39ff",
               border: "none",
-              borderRadius: "10px",
+              borderRadius: "20px",
             },
           },
         });

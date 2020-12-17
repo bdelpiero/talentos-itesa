@@ -14,7 +14,7 @@ function AllProjectsContainer({ setItem, setProject }) {
       })
     );
   }
-
+  
   useEffect(() => {
     const unsuscribe = db.collection("projects").onSnapshot((projects) => {
       projects = projects.docs.map((project) => {
@@ -77,7 +77,6 @@ function AllProjectsContainer({ setItem, setProject }) {
                 { merge: true }
               );
             });
-            
           });
       });
   };
