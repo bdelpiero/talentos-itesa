@@ -10,6 +10,7 @@ import {
   DatePicker,
   Select,
   AutoComplete,
+  Alert
 } from "antd";
 import { user } from "../atoms";
 
@@ -30,10 +31,11 @@ function InviteProject({
   setAsignData,
   form,
   proyecto,
+  error
 }) {
   const boton = proyecto.status == "On Development" ? false : true;
 
-  const options = users.filter(user=> user.name !== undefined).map((user) => {
+  const options = users.filter(user=> user.name !== undefined && !user.isAdmin).map((user) => {
     return { value: `${user.name} ${user.lastName}`, id: user.id };
   });
 
@@ -330,6 +332,14 @@ function InviteProject({
                 CONFIRMAR
               </button>
             </div>
+            
+            { error && 
+            <div style={{display:"flex", justifyContent:"center", marginTop:"10px"}}>
+            <Alert message="El usuario ya ha sido invitado" type="error" showIcon /> 
+            </div>
+            }
+            
+
           </Form>
         </>
       </Modal>

@@ -1,4 +1,6 @@
 import React from "react";
+import {isLoading,projectInvited} from '../atoms/index'
+import { useRecoilState } from "recoil";
 
 // STYLES
 import { Button, Card,Typography } from "antd";
@@ -6,7 +8,12 @@ import { Button, Card,Typography } from "antd";
 
 const { Title } = Typography;
 
-export default (props) => {
+export default ({setItem}) => {
+
+  const [loadingbtn, setLoadingbtn] =useRecoilState(isLoading)
+  const [invitedProject, setInvitedProject] = useRecoilState(projectInvited);
+
+
   const getDatesBetweenDates = (startDate, endDate) => {
     const sd = startDate.split("/");
     const ed = endDate.split("/");
@@ -27,21 +34,21 @@ export default (props) => {
     return arr.reduce((pre, act) => pre + parseInt(act.monto), 0);
   };
 
-  if (props.inviteds.invited.length > 0) {
+  if (invitedProject.invited.length > 0) {
     const duracion = getDatesBetweenDates(
-      props.inviteds.selected.plazos[0],
-      props.inviteds.selected.plazos[1]
+      invitedProject.selected.plazos[0],
+      invitedProject.selected.plazos[1]
     );
-    const monto = calculoRemuneracion(props.inviteds.selected.cuotasDB);
+    const monto = calculoRemuneracion(invitedProject.selected.cuotasDB);
 
-    if (props.inviteds.invited.length > 1) {
+    if (invitedProject.invited.length > 1) {
       return (
         <Card className="freelancer-cards">
           <Title level={5} id="title-freelancer-card">
             OFERTA DE PROYECTO
           </Title>
           <p id="subtittle-freelancer-card">PROYECTO</p>
-          <p id="text-freelancer-card">"{props.inviteds.selected.proyecto}"</p>
+          <p id="text-freelancer-card">"{invitedProject.selected.proyecto}"</p>
           <p id="subtittle-freelancer-card">DURACION</p>
           <p id="text-freelancer-card">{duracion} semanas</p>
           <p id="subtittle-freelancer-card">MONTO</p>
@@ -49,7 +56,10 @@ export default (props) => {
             <p id="text-freelancer-card">"$ {monto}"</p>
             <Button
               className="freelancer-card-buttons"
-              onClick={() => props.setItem(5)}
+              onClick={() =>{
+                setLoadingbtn(true)
+                setItem(5)}}
+                loading={loadingbtn}
               shape="round"
             >
               {" "}
@@ -57,15 +67,15 @@ export default (props) => {
             </Button>
           </div>
           <div className="freelancer-card-stepers-container">
-            {props.inviteds.invited.map((p, i) => {
+            {invitedProject.invited.map((p, i) => {
               return (
                 <Button
                   shape="round"
                   key={i}
                   onClick={() => {
-                    props.setInvitedProject({
-                      ...props.inviteds,
-                      selected: props.inviteds.invited[i],
+                    setInvitedProject({
+                      ...invitedProject,
+                      selected: invitedProject.invited[i],
                     });
                   }}
                   className="freelancer-card-stepers"
@@ -81,13 +91,13 @@ export default (props) => {
       return (
         <Card
           className="freelancer-cards"
-          key={props.inviteds.selected.proyecto}
+          key={invitedProject.selected.proyecto}
         >
           <Title level={5} id="title-freelancer-card">
             OFERTA DE PROYECTO
           </Title>
           <p id="subtittle-freelancer-card">PROYECTO</p>
-          <p id="text-freelancer-card">"{props.inviteds.selected.proyecto}"</p>
+          <p id="text-freelancer-card">"{invitedProject.selected.proyecto}"</p>
           <p id="subtittle-freelancer-card">DURACION</p>
           <p id="text-freelancer-card">{duracion} semanas</p>
           <p id="subtittle-freelancer-card">MONTO</p>
@@ -95,7 +105,10 @@ export default (props) => {
             <p id="text-freelancer-card"> "${monto}"</p>
             <Button
               className="freelancer-card-buttons"
-              onClick={() => props.setItem(5)}
+              onClick={() =>{
+                setLoadingbtn(true)
+                setItem(5)}}
+                loading={loadingbtn}
               shape="round"
             >
               {" "}

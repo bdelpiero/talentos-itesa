@@ -614,6 +614,20 @@ trabajando con  user Cards
   border-radius: 50px !important;
 }
 
+.rechazar {
+  color: #9e39ff;
+  text-align: center;
+  display: inline-flex;
+  cursor: pointer;
+  height: 30px;
+  width: 40px;
+  padding: 3px;
+}
+.rechazar svg {
+  height: 25px;
+  width: 25px;
+}
+
 .avatar-payments {
   height: 6rem;
   width: 6rem;
@@ -1157,4 +1171,12 @@ Trabajando con Admin Cards/DashBoard
 
 .paymentCards-card:hover {
   transform: scale(1.02);
+}
+
+.botonPagos:hover{
+  transform: scale(1.05);
+}
+
+.ant-alert-error {
+  width: 40%;
 }
