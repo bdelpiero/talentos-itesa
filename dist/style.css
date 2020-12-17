@@ -918,6 +918,9 @@ Trabajando con Admin Cards/DashBoard
   padding: 10px;
   width: auto;
   font-size: 16px;
+  align-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 #close-modal-invoice-button {

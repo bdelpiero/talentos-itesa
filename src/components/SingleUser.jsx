@@ -25,17 +25,26 @@ export const SingleUser = ({ selectedUserData, userProjects }) => {
     if (selectedUserData.activeProjectsCounter === 0)
       return <Tag color="green">Libre</Tag>;
   };
-  function menu(proyecto) {
+
+
+  function contrato(proyecto){proyecto  ? false:true;} 
+ 
+    // const factura =(data) =>{data.factura  ? false : true;} 
+    // const pago = proyecto.status == "On Development" ? false : true;
+
+  function menu(proyecto) {    
+    
     return (
       <Menu>
         <Menu.Item>
-          <Button className="modal-button2"> Factura </Button>
+          <Button  className="modal-button2"> Factura </Button>
         </Menu.Item>
         <Menu.Item>
-          <Button className="modal-button2"> Pago </Button>
+          <Button  className="modal-button2"> Pago </Button>
         </Menu.Item>
         <Menu.Item>
           <Button
+            disabled={contrato(proyecto.urlContractProject)}
             className="modal-button2"
             target="_blank"
             href={proyecto.urlContractProject}
@@ -62,7 +71,7 @@ export const SingleUser = ({ selectedUserData, userProjects }) => {
 
     {
       title: "CONTRATO",
-      key: "urlContractProject",
+      key: "action",
       dataIndex: "urlContractProject",
       className: "hide-button",
       render: (contract) => {
@@ -80,7 +89,7 @@ export const SingleUser = ({ selectedUserData, userProjects }) => {
 
     {
       title: "FACTURA",
-      key: "ACA LA KEY DE LA ULTIMA FACTURA",
+      key: "action",
       dataIndex: "ACA LA KEY DE LA ULTIMA FACTURA",
       className: "hide-button",
       render: (contract) => {
@@ -97,7 +106,7 @@ export const SingleUser = ({ selectedUserData, userProjects }) => {
     },
     {
       title: "PAGO",
-      key: "ACA LA KEY DEL ULTIMO PAGO",
+      key: "action",
       dataIndex: "ACA LA KEY DEL ULTIMO PAGO",
       className: "hide-button",
       render: (contract) => {
