@@ -46,7 +46,6 @@ function AdminDashboardContainer() {
     };
   }, []);
 
-  console.log(pagosPendientes," estos son los pago pendientes ---")
   return !currentUser ? (
     <Error404 />
   ) : (

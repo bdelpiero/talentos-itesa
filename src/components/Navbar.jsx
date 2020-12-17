@@ -31,9 +31,10 @@ export default ({ setItem }) => {
   };
 
     return (
-    <>
+    <div style={{width: '100%', marginBottom: '1rem'}}>
       <div style={{width: '100%'}} className='navbar-display'>
         <MenuOutlined className='navbar-burger' onClick={openMenu}/>
+
         <img src={logo} className='logo-navbar'/>
       </div>
       {menu && 
@@ -42,7 +43,6 @@ export default ({ setItem }) => {
           mode="vertical"
           triggerSubMenuAction='click'
           inlineIndent={10}
-          style={{marginBottom: '1rem'}}
           className='navbar-menu'
           >
             <Menu.Item key="home" icon={<HomeOutlined/>} className='navbar-menu-item'>
@@ -62,6 +62,6 @@ export default ({ setItem }) => {
             </Menu.Item>
         </Menu>
       }
-    </>
+    </div>
     )
 }
