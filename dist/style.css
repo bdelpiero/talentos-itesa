@@ -1156,3 +1156,7 @@ Trabajando con Admin Cards/DashBoard
 .botonPagos:hover{
   transform: scale(1.05);
 }
+
+.ant-alert-error {
+  width: 40%;
+}

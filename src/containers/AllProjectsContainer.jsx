@@ -14,7 +14,7 @@ function AllProjectsContainer({ setItem, setProject }) {
       })
     );
   }
-
+  
   useEffect(() => {
     const unsuscribe = db.collection("projects").onSnapshot((projects) => {
       projects = projects.docs.map((project) => {
@@ -78,24 +78,6 @@ function AllProjectsContainer({ setItem, setProject }) {
                 { merge: true }
               );
             });
-            // .then((user) => {
-            //   console.log(user, "user to be updated");
-            //   db.collection("users")
-            //     .doc(user)
-            //     .get()
-            //     .then((doc) => {
-            //       const user = doc.data();
-            //       if (!user.activeProjectsCounter) return;
-            //       console.log("newTotal", newTotal);
-            //       console.log(user);
-            //       db.collection("users")
-            //         .doc(user.id)
-            //         .update({
-            //           activeProjectsCounter:
-            //             user.activeProjectsCounter + newTotal,
-            //         });
-            //     });
-            // });
           });
       });
   };
