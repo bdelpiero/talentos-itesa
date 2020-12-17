@@ -20,7 +20,7 @@ import {
 } from "@ant-design/icons";
 
 const { Dragger } = Upload;
-const { Option } = Select;
+
 
 function AddPayment({
   selectedUser,
@@ -33,7 +33,7 @@ function AddPayment({
   form,
   selectedProject,
   setSelectedProject,
-  projects,
+  cuota,
   setFileUrl,
   fileUrl,
   setCuota,
@@ -95,21 +95,22 @@ function AddPayment({
   };
 
   return (
-    <div className='Modal'>
-      <Button onClick={openModal} className='modal-button'>
+    <div className="Modal">
+      <Button onClick={openModal} className="modal-button">
         Ingresar un Pago
       </Button>
 
       <Modal
         visible={modal}
-        centered='true'
+        centered="true"
         cancelButtonProps={{ hidden: true }}
         okButtonProps={{ hidden: true }}
         onCancel={closeModal}
         onOk={success}
-        closeIcon={<CloseCircleOutlined className='close-button' />}
+        closeIcon={<CloseCircleOutlined className="close-button" />}
         bodyStyle={{ color: "#9e39ff" }}
-        width={800}>
+        width={800}
+      >
         <div style={{ width: "70%", marginLeft: "70px" }}>
           <h1>Confirmar datos y adjuntar comprobante</h1>
           <p style={{ color: "red" }}>Todos los campos son obligatorios.</p>
@@ -121,24 +122,24 @@ function AddPayment({
               <h5 style={{ color: "grey", marginLeft: "70px" }}>PERFIL</h5>
               <Form.Item
                 style={{ width: "70%", marginLeft: "70px" }}
-                name='name'
+                name="name"
                 rules={[
                   {
                     required: true,
                     message: "Por favor ingrese Perfil",
                   },
-                ]}>
+                ]}
+              >
                 <AutoComplete
                   onChange={(userSelected) => {
                     const userSelect = options.filter((option) => {
                       if (userSelected == option.value) return true;
                     });
-                    console.log(userSelect, "aca esta el userSelect");
                     if (!userSelect[0] || !userSelect[0].id) return;
                     setSelectedUser(userSelect[0]);
                   }}
                   options={options}
-                  placeholder='Nombre de Perfil'
+                  placeholder="Nombre de Perfil"
                   filterOption={(inputValue, option) =>
                     option.value
                       .toUpperCase()
@@ -150,13 +151,14 @@ function AddPayment({
               <h5 style={{ color: "grey", marginLeft: "70px" }}>PROYECTO</h5>
               <Form.Item
                 style={{ width: "70%", marginLeft: "70px" }}
-                name='project'
+                name="project"
                 rules={[
                   {
                     required: true,
                     message: "Por favor ingrese proyecto",
                   },
-                ]}>
+                ]}
+              >
                 <AutoComplete
                   onChange={(projectSelected) => {
                     const projectSelect = optionsProjects.filter((option) => {
@@ -166,12 +168,13 @@ function AddPayment({
                     setSelectedProject(projectSelect[0].id);
                   }}
                   options={optionsProjects}
-                  placeholder='Nombre de Proyecto'
+                  placeholder="Nombre de Proyecto"
                   filterOption={(inputValue, option) =>
                     option.value
                       .toUpperCase()
                       .indexOf(inputValue.toUpperCase()) !== -1
                   }
+                  disabled={!selectedUser.value}
                 />
               </Form.Item>
 
@@ -180,50 +183,46 @@ function AddPayment({
               </h5>
               <Form.Item
                 style={{ width: "70%", marginLeft: "70px" }}
-                name='cuota'
+                name="cuota"
                 rules={[
                   {
                     required: true,
                     message: "Por favor ingrese Cuota a cancelar",
                   },
-                ]}>
-                {/* <Select
-                  onChange={(value) => handleCuota(value)}
-                  placeholder="Cuota"
-                >
-                  <Option value="CUOTA 1">Cuota 1</Option>
-                  <Option value="CUOTA 2">Cuota 2</Option>
-                  <Option value="CUOTA 3">Cuota 3</Option>
-                  <Option value="CUOTA 4">Cuota 4</Option>
-                </Select> */}
+                ]}
+              >
                 <AutoComplete
                   onChange={(cuotaSelected) => {
-                    const cuotaSelect = options.filter((option) => {
+                    const cuotaSelect = optionCuotas.filter((option) => {
                       if (cuotaSelected == option.value) return true;
                     });
-
                     if (!cuotaSelect[0] || !cuotaSelect[0].id) return;
                     setCuota(cuotaSelect[0]);
                   }}
                   options={optionCuotas}
-                  placeholder='Cuotas'
+                  placeholder="Cuotas"
                   filterOption={(inputValue, option) =>
                     option.value
                       .toUpperCase()
                       .indexOf(inputValue.toUpperCase()) !== -1
                   }
+                  disabled={selectedProject == ""}
                 />
               </Form.Item>
             </Col>
             <Col span={12}>
               {!dragger ? (
-                <Dragger {...props} style={{ width: "80%" }}>
-                  <p className='ant-upload-drag-icon'>
+                <Dragger
+                  {...props}
+                  style={{ width: "80%" }}
+                  disabled={!cuota.value}
+                >
+                  <p className="ant-upload-drag-icon">
                     <PlusOutlined style={{ color: "#9e39ff" }} />
                   </p>
 
-                  <p className='ant-upload-text'>
-                    Click or Drag file to upload
+                  <p className="ant-upload-text">
+                  Arrastra o carga tu factura acá
                   </p>
                 </Dragger>
               ) : (
@@ -237,7 +236,8 @@ function AddPayment({
                     border: "dashed",
                     borderColor: "green",
                     padding: "25px",
-                  }}>
+                  }}
+                >
                   <p style={{ color: "green" }}>{fileUrl.file.name} </p>
 
                   <p>
@@ -254,8 +254,8 @@ function AddPayment({
             </Col>
           </Row>
 
-          <div className='modal-input'>
-            <button className='ok-button' type='submit' disabled={boton}>
+          <div className="modal-input">
+            <button className="ok-button" type="submit" disabled={boton}>
               CONFIRMAR PAGO
             </button>
           </div>

@@ -63,7 +63,7 @@
 
 @media (max-width: 991px) {
   .hide-button {
-    display: none;
+    display: none !important;
   }
 
   .navbar-display {
@@ -626,6 +626,42 @@ trabajando con  user Cards
   color: white;
   background-color: #9e39ff;
   float: right;
+  position: relative;
+}
+
+.list-button-paymentsFree {
+  text-align: center;
+  color: white;
+  background-color: #9e39ff;
+  font-size: 1em !important;
+  float: left;
+  width: 40%;
+  margin: auto !important;
+  border-radius: 50px !important;
+}
+.list-button-paymentsList {
+  text-align: center;
+  color: white;
+  background-color: #9e39ff;
+  font-size: 1em !important;
+  float: left;
+  width: 80%;
+  margin: auto !important;
+  border-radius: 50px !important;
+}
+
+.rechazar {
+  color: #9e39ff;
+  text-align: center;
+  display: inline-flex;
+  cursor: pointer;
+  height: 30px;
+  width: 40px;
+  padding: 3px;
+}
+.rechazar svg {
+  height: 25px;
+  width: 25px;
 }
 
 .avatar-payments {
@@ -771,6 +807,8 @@ register freelancer
 
   .paymentsCards {
     display: flex;
+
+    flex-flow: column wrap;
   }
   .paymentsCards .gutter-row {
     margin: 20px 0;
@@ -965,6 +1003,9 @@ Trabajando con Admin Cards/DashBoard
   padding: 10px;
   width: auto;
   font-size: 16px;
+  align-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 #close-modal-invoice-button {
@@ -1166,4 +1207,12 @@ Trabajando con Admin Cards/DashBoard
 
 .paymentCards-card:hover {
   transform: scale(1.02);
+}
+
+.botonPagos:hover {
+  transform: scale(1.05);
+}
+
+.ant-alert-error {
+  width: 40%;
 }

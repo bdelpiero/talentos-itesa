@@ -12,14 +12,19 @@ import {
   Dropdown,
   Menu,
 } from "antd";
-import { DownloadOutlined, EllipsisOutlined } from "@ant-design/icons";
+import {
+  DownloadOutlined,
+  EllipsisOutlined,
+  DeleteOutlined,
+} from "@ant-design/icons";
 import AddPaymentContainer from "../containers/AddPaymentContainer";
 import AddSinglePaymentContainer from "../containers/AddSinglePaymentContainer";
 import ExcelDownload from "./ExcelDownload";
+import { db } from "../../firebase/firebase";
 
 const { Title } = Typography;
 
-export default ({ pendingPayments }) => {
+export default ({ pendingPayments, setItem }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(4);
@@ -30,17 +35,20 @@ export default ({ pendingPayments }) => {
     setMaxValue(value * numEachPage);
     setCurrentPage(value);
   };
+
   function menu(payment) {
     return (
       <Menu>
         <Menu.Item>
           <div>
-            <Button
-              className="modal-button2"
-              /*    onClick={() => handleClick(proyecto)} */
-            >
-              {" "}
-              VER MÁS{" "}
+            <Button className="list-button-paymentsList">
+              <a
+                href={payment.factura}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ver factura
+              </a>
             </Button>
           </div>
         </Menu.Item>
@@ -50,7 +58,16 @@ export default ({ pendingPayments }) => {
           </div>
         </Menu.Item>
         <Menu.Item>
-          <Button className="modal-button2">ESTADO</Button>
+          <DeleteOutlined
+            className="rechazar"
+            onClick={() => {
+              console.log("delete", payment);
+              db.collection("payments").doc(payment.paymentId).update({
+                factura: "",
+                loadedF: false,
+              });
+            }}
+          />
         </Menu.Item>
       </Menu>
     );
@@ -62,25 +79,24 @@ export default ({ pendingPayments }) => {
         <Title level={3} style={{ width: "100%" }}>
           Pagos a realizar este mes
         </Title>
-        <ExcelDownload pendingPayments={pendingPayments} />
       </div>
 
       <div>
         {pendingPayments.length > 0 &&
-          pendingPayments.slice(minValue, maxValue).map((payment) => {
+          pendingPayments.slice(minValue, maxValue).map((payment, index) => {
             if (!payment.user) {
               return <div></div>;
             }
             return (
               <div className="prueba paymentCards-card">
                 <Row align={"middle"} className="prueba1" gutter={24}>
-                  <Col xs={4} sm={4} md={4} lg={1} span={1}>
+                  <Col xs={4} sm={4} md={4} lg={2}>
                     <Avatar src={payment.user && payment.user.avatar}></Avatar>
                   </Col>
-                  <Col xs={4} sm={4} md={4} lg={2} span={2}>
+                  <Col xs={4} sm={4} md={4} lg={2}>
                     {"$" + payment.monto}
                   </Col>
-                  <Col xs={6} sm={6} md={4} lg={2} span={2}>
+                  <Col xs={6} sm={6} md={4} lg={2}>
                     <p style={{ color: "#9e39ff", margin: 0 }}>Freelancer:</p>
                     <p style={{ margin: 0 }}>
                       {" "}
@@ -88,64 +104,56 @@ export default ({ pendingPayments }) => {
                     </p>
                   </Col>
 
-                  <Col xs={4} sm={4} md={4} lg={2} span={2}>
+                  <Col xs={4} sm={4} md={4} lg={2}>
                     <p style={{ color: "#9e39ff", margin: 0 }}>Proyecto:</p>
                     <p style={{ margin: 0 }}> {payment.projectName}</p>
                   </Col>
-                  <Col
-                    className="hide-button"
-                    xs={4}
-                    sm={4}
-                    md={4}
-                    lg={2}
-                    span={2}
-                  >
+                  <Col className="hide-button" xs={4} sm={4} md={4} lg={3}>
                     <p style={{ color: "#9e39ff", margin: 0 }}>Factura:</p>
                     <p style={{ margin: 0 }}>{payment.cuota}</p>
                   </Col>
-                  <Col
-                    xs={4}
-                    sm={4}
-                    md={4}
-                    lg={3}
-                    className="hide-button"
-                    span={3}
-                  >
+                  <Col xs={4} sm={4} md={4} lg={3} className="hide-button">
                     <p style={{ color: "#9e39ff", margin: 0 }}>
                       Fecha de pago:
                     </p>
                     <p style={{ margin: 0 }}> {payment.fecha}</p>
                   </Col>
-                  <Col
-                    xs={1}
-                    sm={1}
-                    md={1}
-                    lg={4}
-                    className="hide-button"
-                    span={4}
-                  >
+                  <Col xs={1} sm={1} md={1} lg={4} className="hide-button">
                     <AddSinglePaymentContainer payment={payment} />
                   </Col>
-                  <Col xs={1} sm={1} md={1} lg={4} span={4}>
+
+                  <Col xs={1} sm={1} md={1} lg={4}>
                     {" "}
                     <Button
-                      className="list-button-paymentsFree hide-button"
+                      className="list-button-paymentsList hide-button"
                       shape="round"
                     >
-                      Ver pago <DownloadOutlined />
+                      <a
+                        href={payment.factura}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Ver factura
+                      </a>
                     </Button>
                   </Col>
-                  <Col xs={1} sm={1} md={1} lg={4} span={4}>
+                  <Col xs={1} sm={1} md={1} lg={1}>
                     {" "}
-                    <Button
-                      className="list-button-paymentsFree hide-button"
-                      shape="round"
-                    >
-                      Ver pago <DownloadOutlined />
-                    </Button>
+                    <DeleteOutlined
+                      className="rechazar hide-button"
+                      onClick={() => {
+                        console.log("delete", payment);
+                        db.collection("payments")
+                          .doc(payment.paymentId)
+                          .update({
+                            factura: "",
+                            loadedF: false,
+                          });
+                      }}
+                    />
                   </Col>
                   <div className="show-ellipsis">
-                    <Col xs={2} sm={2} md={2} lg={4} span={4}>
+                    <Col xs={2} sm={2} md={2} lg={2}>
                       {" "}
                       <Dropdown overlay={menu(payment)} placement="bottomLeft">
                         <EllipsisOutlined className="single-icon" />
@@ -171,3 +179,22 @@ export default ({ pendingPayments }) => {
     </>
   );
 };
+
+{
+  /* <Col className='gutter-row' span={3}>
+                    <Button className='list-button-paymentsList' shape='round'>
+                      <a href={payment.factura} target="_blank" rel="noopener noreferrer">Ver factura</a>
+                    </Button>
+                  </Col>
+                  <Col span={1} className='gutter-row'>
+                  <DeleteOutlined className='rechazar' 
+                  onClick={()=>{
+                    console.log("delete",payment)
+                    db.collection("payments").doc(payment.paymentId)
+                    .update({
+                      factura: "",
+                      loadedF: false
+                    })
+                  }}/>
+                  </Col> */
+}

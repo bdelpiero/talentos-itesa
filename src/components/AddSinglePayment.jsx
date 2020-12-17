@@ -1,26 +1,16 @@
 import React, { useState } from "react";
 
-import {
-  Modal,
-  Button,
-  Form,
-  Select,
-  AutoComplete,
-  Row,
-  Col,
-  Upload,
-} from "antd";
+import { Modal, Button, Typography, Select, Upload } from "antd";
 
 import {
   CloseCircleOutlined,
   PlusOutlined,
   DeleteOutlined,
-  FilePdfOutlined,
-  DashOutlined,
 } from "@ant-design/icons";
 
 const { Dragger } = Upload;
 const { Option } = Select;
+const { Title } = Typography;
 
 function AddSinglePayment({
   closeModal,
@@ -36,10 +26,6 @@ function AddSinglePayment({
 
   const props = {
     name: "file",
-    // action: (info) => {
-    //   console.log(info)
-    //   setFileUrl(info)
-    // },
     onChange(info) {
       setFileUrl(info);
       setBoton(false);
@@ -52,7 +38,7 @@ function AddSinglePayment({
       <Button
         onClick={openModal}
         style={{ borderRadius: "32px" }}
-        className="list-button-paymentsFree"
+        className="list-button-paymentsList"
       >
         Ingresar Pago
       </Button>
@@ -66,15 +52,13 @@ function AddSinglePayment({
         width={600}
       >
         <div id="modal-invoice">
-          <h1>Adjuntar Comprobante</h1>
+          <Title level={3}> Adjuntar Comprobante </Title>
           {!dragger ? (
             <Dragger {...props} className="modal-factura-dragger">
               <p className="ant-upload-drag-icon">
                 <PlusOutlined style={{ fontSize: "4rem", color: "#9e39ff" }} />
               </p>
-              <p className="ant-upload-text">
-                Click or drag file to this area to upload
-              </p>
+              <p className="ant-upload-text">Arrastra o carga tu factura acá</p>
             </Dragger>
           ) : (
             <div

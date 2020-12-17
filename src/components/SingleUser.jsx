@@ -25,11 +25,20 @@ export const SingleUser = ({ selectedUserData, userProjects }) => {
     if (selectedUserData.activeProjectsCounter === 0)
       return <Tag color="green">Libre</Tag>;
   };
-  function menu(proyecto) {
+
+
+  function contrato(proyecto){proyecto  ? false:true;} 
+ 
+    // const factura =(data) =>{data.factura  ? false : true;} 
+    // const pago = proyecto.status == "On Development" ? false : true;
+
+  function menu(proyecto) {    
+    
     return (
       <Menu>
         <Menu.Item>
           <Button
+            disabled={contrato(proyecto.urlContractProject)}
             className="modal-button2"
             target="_blank"
             href={proyecto.urlContractProject}
@@ -56,7 +65,7 @@ export const SingleUser = ({ selectedUserData, userProjects }) => {
 
     {
       title: "CONTRATO",
-      key: "urlContractProject",
+      key: "action",
       dataIndex: "urlContractProject",
       className: "hide-button",
       render: (contract) => {

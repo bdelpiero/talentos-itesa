@@ -1,5 +1,8 @@
 import React from "react";
-import { Card, Col, Row, Button } from "antd";
+import { Card, Col, Row, Button, Typography  } from "antd";
+import SeePaymentsContainer from "../containers/SeePaymentsContainer";
+
+const { Title } = Typography;
 
 export default ({ acceptedProjects, currentUser }) => {
 
@@ -22,12 +25,14 @@ export default ({ acceptedProjects, currentUser }) => {
             key={project.id}
             style={{ marginBottom: "50px" }}
           >
-            <h1 id="tittleCard">OFERTA DE PROYECTO</h1>
-            <p id="subtittle">PROYECTO</p>
+             <Title level={5} id="title-freelancer-card">
+            OFERTA DE PROYECTO
+          </Title>
+            <p id="subtittle-freelancer-card">PROYECTO</p>
             <h1>{project.proyecto}</h1>
-            <p id="subtittle">DURACION</p>
+            <p id="subtittle-freelancer-card">DURACION</p>
             <h1> {project.duracion}</h1>
-            <p id="subtittle">MONTO</p>
+            <p id="subtittle-freelancer-card">MONTO</p>
             <h1>$ {calculoRemuneracion(project.cuotasDB)}</h1>
 
             <div
@@ -48,12 +53,12 @@ export default ({ acceptedProjects, currentUser }) => {
                 </Button>
               </a>
 
-              <Button
+              {/* <Button
                 className="modal-button buttonCard"
                 style={{ backgroundColor: "#7513D3", color: "white" }}
-              >
-                Ver Pagos
-              </Button>
+              > */}
+                <SeePaymentsContainer currentUser={currentUser} project={project}/>
+    
             </div>
             {project.status && project.status == "Finished" && (
               <span

@@ -1,18 +1,24 @@
 import React, { useState } from "react";
 import { db, storage } from '../../firebase/firebase'
+import { useRecoilState } from "recoil";
+import { atomPayments } from "../atoms/index";
+
 
 // STYLES
 import { Upload, Modal, Button, Typography } from "antd";
-import { CloseCircleOutlined, DeleteOutlined, InboxOutlined, CheckCircleOutlined } from "@ant-design/icons";
+import { CloseCircleOutlined, DeleteOutlined, PlusOutlined} from "@ant-design/icons";
+import CheckCircle from "../../views/check.svg";
 
 const { Title } = Typography;
 const { Dragger } = Upload;
 
-export default ({ handleModal, modalCargarFactura, selected }) => {
+export default ({ handleModal, modalCargarFactura}) => {
   
   const [factura, setFactura] = useState({});
   const [disable, setDisable] = useState(true);
   const [buttonLoading, setButtonLoading] = useState(false);
+  const [cargarFacturas, setCargarFacturas] = useRecoilState(atomPayments);
+
 
     const props = {
         name: "file",
@@ -31,7 +37,7 @@ export default ({ handleModal, modalCargarFactura, selected }) => {
             await task.put(factura);
             await task.getDownloadURL()
             .then((downloadUrl) => {
-                const paymentRef = db.collection("payments").doc(selected.paymentId)
+                const paymentRef = db.collection("payments").doc(cargarFacturas.selected.paymentId)
                 paymentRef.update({factura: downloadUrl, loadedF: true})
                     .then(() => {
                         console.log('Factura cargada!')
@@ -47,17 +53,15 @@ export default ({ handleModal, modalCargarFactura, selected }) => {
                                 flexDirection: "column",
                                 justifyContent: "center",
                             },
-                            content: "¡Factura Cargada!",
+                            content: <h1>¡Factura Cargada!</h1>,
                             centered: "true",
                             okText: "VOLVER",
-                            icon: <CheckCircleOutlined style={{ color: "#9e39ff" }} />,
+                            icon: <img src={CheckCircle} className="icono-sider" />,
                             okButtonProps: {
                                 style: {
-                                    display: 'flex',
-                                    margin: '1rem auto',
-                                    backgroundColor: "#9e39ff",
-                                    border: "none",
-                                    borderRadius: "10px",
+                                  backgroundColor: "#9e39ff",
+                                  border: "none",
+                                  borderRadius: "20px",
                                 },
                             },
                         })
@@ -79,18 +83,27 @@ export default ({ handleModal, modalCargarFactura, selected }) => {
       width={600}
     >
       <div id="modal-invoice">
-        <Title level={3}>Carga tu factura</Title>
+        <Title level={3}>Cargá tu factura</Title>
         {disable ? (
           <Dragger {...props} className="modal-factura-dragger">
             <p className="ant-upload-drag-icon">
-              <InboxOutlined style={{ fontSize: "4rem", color: "#9e39ff" }} />
+              <PlusOutlined style={{ fontSize: "4rem", color: "#9e39ff" }} />
             </p>
             <p className="ant-upload-text">
-              Click or drag file to this area to upload
+              Arrastra o carga tu factura acá
             </p>
           </Dragger>
         ) : (
-          <div id="invoice-uploaded">
+          <div style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            height:"80%",
+            width:"80%",
+            border: "dashed",
+            borderColor:"green",
+            padding:"25px"
+          }}>
             <p style={{ margin: "0" }}> Uploaded File: {factura.name} </p>
             <DeleteOutlined
               style={{ fontSize: "1rem", color: "red" }}

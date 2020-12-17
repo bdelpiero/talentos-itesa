@@ -39,6 +39,15 @@ export const pagos = atom({
 });
 
 
+export const atomPayments = atom({
+  key: "NextPayments",
+  default: {
+    nextPayments:[],
+    selected:''
+  } 
+});
+
+
 export const atomLogin = atom({
   key: "login",
   default: {
