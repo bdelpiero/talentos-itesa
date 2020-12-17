@@ -132,11 +132,7 @@ function InviteProjectContainer({ proyecto }) {
             flexDirection: "column",
             justifyContent: "center",
           },
-          content: (
-            <Card className="invite_msg" onClick={openModal}>
-              <h1>¡Perfil Invitado!</h1>
-            </Card>
-          ),
+          content: (<h1>¡Perfil Invitado!</h1>),
           centered: "true",
           okText: "VOLVER",
           icon: <img src={CheckCircle} className="icono-sider" />,
@@ -144,7 +140,7 @@ function InviteProjectContainer({ proyecto }) {
             style: {
               backgroundColor: "#9e39ff",
               border: "none",
-              borderRadius: "10px",
+              borderRadius: "20px",
             },
           },
         });
