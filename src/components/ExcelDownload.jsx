@@ -124,10 +124,10 @@ export default ({ pendingPayments }) => {
 	];
 
         return (
-            <div>
-                <ExcelFile element={<Button className='modal-button'>Descargar Pagos</Button>} filename={`TransferenciasMasivas_${date}`}>
+            
+                <ExcelFile  element={<Button  style={{width:"150px !important", margin:"5px"}}className='modal-button2'>Descargar Pagos</Button>} filename={`TransferenciasMasivas_${date}`}>
                     <ExcelSheet dataSet={multiDataSet} name="Transferencias"/>
                 </ExcelFile>
-            </div>
+            
         );
 }
