@@ -4,7 +4,7 @@ import AddPayment from "../components/AddPayment";
 import { Modal, Form } from "antd";
 import CheckCircle from "../../views/check.svg";
 
-function NewProjectContainer({ pendingPayments }) {
+function AddPaymentContainer({ pendingPayments }) {
   const [modal, setModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState({});
   const [selectedProject, setSelectedProject] = useState("");
@@ -82,4 +82,4 @@ function NewProjectContainer({ pendingPayments }) {
   );
 }
 
-export default NewProjectContainer;
+export default AddPaymentContainer;

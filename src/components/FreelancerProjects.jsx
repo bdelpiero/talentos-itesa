@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Col, Row, Button } from "antd";
+import SeePaymentsContainer from "../containers/SeePaymentsContainer";
 
 export default ({ acceptedProjects, currentUser }) => {
 
@@ -48,12 +49,12 @@ export default ({ acceptedProjects, currentUser }) => {
                 </Button>
               </a>
 
-              <Button
+              {/* <Button
                 className="modal-button buttonCard"
                 style={{ backgroundColor: "#7513D3", color: "white" }}
-              >
-                Ver Pagos
-              </Button>
+              > */}
+                <SeePaymentsContainer currentUser={currentUser} project={project}/>
+    
             </div>
             {project.status && project.status == "Finished" && (
               <span
