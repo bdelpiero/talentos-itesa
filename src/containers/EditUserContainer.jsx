@@ -104,9 +104,7 @@ export default ({ user, setCurrentUser }) => {
         ) : (
             <Avatar size={55} icon={<UserOutlined />} className="avatar" />
           )}
-        <Text type="secondary">
-          {user.name} {user.lastName}
-        </Text>
+        
       </div>
       <Modal
         visible={modal}
