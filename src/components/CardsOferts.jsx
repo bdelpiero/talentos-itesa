@@ -3,8 +3,8 @@ import {isLoading,projectInvited} from '../atoms/index'
 import { useRecoilState } from "recoil";
 
 // STYLES
-import { Button, Card } from "antd";
-import { Typography } from "antd";
+import { Button, Card,Typography } from "antd";
+
 
 const { Title } = Typography;
 

@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { db, storage } from "../../firebase/firebase";
 import AddPayment from "../components/AddPayment";
-import { CheckCircleOutlined } from "@ant-design/icons";
 import { Modal, Form } from "antd";
 import CheckCircle from "../../views/check.svg";
 
-function NewProjectContainer({ pendingPayments }) {
+function AddPaymentContainer({ pendingPayments }) {
   const [modal, setModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState({});
   const [selectedProject, setSelectedProject] = useState("");
-  const [cuota, setCuota] = useState("");
+  const [cuota, setCuota] = useState({});
   const [fileUrl, setFileUrl] = useState("");
   const [form] = Form.useForm();
 
@@ -28,14 +27,12 @@ function NewProjectContainer({ pendingPayments }) {
     const task = storageRef.child(`comprobantesDePago/${fileUrl.file.name}`);
     await task.put(file);
     await task.getDownloadURL().then((downloadUrl) => {
+      console.log("ESTO ES CUOTA ", cuota);
       db.collection("payments")
-        .doc(payment.paymentId)
-        .get()
-        .then((doc) => {
-          const pago = doc.docs[0].id;
-          db.collection("payments").doc(pago).update({
-            comprobantePago: downloadUrl,
-          });
+        .doc(cuota.id)
+        .update({
+          comprobantePago: downloadUrl,
+          state: "completed",
         })
         .then(() => {
           form.resetFields();
@@ -52,7 +49,7 @@ function NewProjectContainer({ pendingPayments }) {
             content: "¡Pago ingresado!",
             centered: "true",
             okText: "VOLVER",
-            icon: <img src={CheckCircle} className='icono-sider' />,
+            icon: <img src={CheckCircle} className="icono-sider" />,
             okButtonProps: {
               style: {
                 backgroundColor: "#9e39ff",
@@ -67,24 +64,22 @@ function NewProjectContainer({ pendingPayments }) {
 
   return (
     <AddPayment
-      status={status}
-      closeModal={closeModal}
       success={success}
-      openModal={openModal}
       modal={modal}
+      openModal={openModal}
+      closeModal={closeModal}
       form={form}
-      // users={users}
       selectedUser={selectedUser}
       setSelectedUser={setSelectedUser}
-      setSelectedProject={setSelectedProject}
       selectedProject={selectedProject}
-      // projects={projects}
+      setSelectedProject={setSelectedProject}
       fileUrl={fileUrl}
       setFileUrl={setFileUrl}
+      cuota={cuota}
       setCuota={setCuota}
       pendingPayments={pendingPayments}
     />
   );
 }
 
-export default NewProjectContainer;
+export default AddPaymentContainer;

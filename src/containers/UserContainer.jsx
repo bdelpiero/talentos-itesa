@@ -22,6 +22,7 @@ export default () => {
   const [invitedProject, setInvitedProject] = useRecoilState(projectInvited);
   const [cargarFacturas, setCargarFacturas] = useRecoilState(atomPayments);
   const [loadingbtn, setLoadingbtn] =useRecoilState(isLoading)
+  const [receivedPayments, setReceivedPayments]=useState([])
 
 
   const { logout } = authUser();
@@ -46,7 +47,7 @@ export default () => {
     let invitaciones = db
       .collectionGroup("invitedUser")
       .where("email", "==", currentUser.email);
-      invitaciones
+    invitaciones
       .get()
       .then((projects) => {
         const newInvitations = [];
@@ -83,12 +84,12 @@ export default () => {
       .collection("payments")
       .where("userId", "==", currentUser.id)
       .where("state", "==", "pending")
-      .where('loadedF', '==', false)
-      .where('proyectoAceptado', '==', true)
+      .where("loadedF", "==", false)
+      .where("proyectoAceptado", "==", true)
       .onSnapshot((querySnapshot) => {
         let arr = [];
         querySnapshot.forEach((doc) => {
-          arr = [...arr, doc.data()]
+          arr = [...arr, doc.data()];
         });
         const payments = arr
           .sort((a, b) => new Date(a.fecha) - new Date(b.fecha))
@@ -102,6 +103,22 @@ export default () => {
      return ()=> unsubscribePayments();
   }, [currentUser]);
 
+  useEffect(() => {
+    const unsuscribe = db
+      .collection("payments")
+      .where("userId","==",currentUser.id)
+      .where("state", "==", "completed")
+      .onSnapshot((querySnap) => {
+        let arr = [];
+        querySnap.forEach((doc) => {
+          arr = [...arr, doc.data()];
+        });
+        setReceivedPayments(arr)
+      });
+      console.log("RECEIVED PAYMENTS",receivedPayments)
+      return ()=>unsuscribe()
+  },[currentUser]);
+
   const handleLogout = () => {
     unsubscribePayments();
     invitedProject.observer();
@@ -111,8 +128,8 @@ export default () => {
   return !currentUser ? (
     <Error404 />
   ) : (
-      <Layout>
-        <Sidebar setItem={setItem} handleLogout={handleLogout} />
+    <Layout>
+      <Sidebar setItem={setItem} handleLogout={handleLogout} />
         <Layout>
           <Navbar setItem={setItem} />
           <HeaderComponent user={currentUser} setCurrentUser={setCurrentUser } item={item}/>
@@ -122,12 +139,10 @@ export default () => {
                 <Row className='userCards-row'>
                   <CardsFreelancer
                     setItem={setItem}
-                    setLoadingbtn={setLoadingbtn}
-                    loadingbtn={loadingbtn}
                   />
                 </Row>
                 <div>
-                  <PagosFreelance user={currentUser} />
+                  <PagosFreelance user={currentUser} receivedPayments={receivedPayments}/>
                 </div>
               </>
             )}
@@ -135,6 +150,7 @@ export default () => {
             {item == 5 && <AcceptProject setItem={setItem} />}
           </Content>
         </Layout>
-      </Layout>
-    );
+    </Layout>
+    
+  );
 };

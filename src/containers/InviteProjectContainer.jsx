@@ -61,15 +61,6 @@ function InviteProjectContainer({ proyecto }) {
     },
   });
 
-  // function onChange(e) {
-  //   setCurrentUsers(
-  //     allUsers.filter((user) => {
-  //       if (user.name.toLowerCase().match(e.target.value.toLowerCase()))
-  //         return user.name.toLowerCase().match(e.target.value.toLowerCase());
-  //     })
-  //   );
-  // }
-
   const openModal = () => {
     setModal(true);
   };

@@ -10,7 +10,7 @@ import { db } from "../../firebase/firebase";
 
 const { Title } = Typography;
 
-export default ({ pendingPayments }) => {
+export default ({ pendingPayments, setItem }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [minValue, setMinValue] = useState(0);
   const [maxValue, setMaxValue] = useState(4);
@@ -27,17 +27,17 @@ export default ({ pendingPayments }) => {
       <div className='div-excel'>
         <Title level={3} style={{ width: "100%" }}>
           Pagos a realizar este mes
-        </Title>
-        <ExcelDownload pendingPayments={pendingPayments} />
+        </Title>       
       </div>
       <div>
         {pendingPayments.length > 0 &&
-          pendingPayments.slice(minValue, maxValue).map((payment) => {
+          pendingPayments.slice(minValue, maxValue).map((payment, index) => {
             if (!payment.user) {
               return <div></div>;
             }
             return (
               <Card
+                key={index}
                 className='paymentCards-card'
                 style={{
                   borderRadius: 25,

@@ -91,7 +91,7 @@ export default ({ handleModal, modalCargarFactura}) => {
               <InboxOutlined style={{ fontSize: "4rem", color: "#9e39ff" }} />
             </p>
             <p className="ant-upload-text">
-              Click or drag file to this area to upload
+              Arrastra o carga tu factura aca
             </p>
           </Dragger>
         ) : (
