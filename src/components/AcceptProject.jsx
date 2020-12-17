@@ -199,7 +199,7 @@ export default ({ setItem }) => {
               <div className="modal-style">
                 <img src={CheckCircle} className="icono-sider" />
                 <br/>
-                <h1> ¡Pago ingresado! </h1>
+                <h1> ¡Proyecto Firmado! </h1>
                 <p style={{ color: "grey" }}> Tu firma ha sido registrada! </p>
                 <br />
               </div>
