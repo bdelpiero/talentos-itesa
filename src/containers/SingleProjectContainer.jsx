@@ -28,7 +28,17 @@ export const SingleProjectContainer = ({ project }) => {
       .collection("invitedUser")
       .doc(userId)
       .delete();
+    db.collection("payments")
+    .where("userId","==", userId)
+    .where("projectId","==",project.id)
+    .get()
+    .then((querySnapshot)=>{
+      querySnapshot.forEach((payment)=>{
+        db.collection("payments").doc(payment.id).delete()
+      })
+    })
   }
+
 
   return (
     <>

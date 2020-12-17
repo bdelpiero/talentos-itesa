@@ -58,7 +58,7 @@ function NewProjectContainer() {
             flexDirection: "column",
             justifyContent: "center",
           },
-          content: "¡Proyecto Creado!",
+          content: (<h1>¡Proyecto Creado! </h1>),
           centered: "true",
           okText: "VOLVER",
           icon: <img src={CheckCircle} className='icono-sider' />,
@@ -66,7 +66,7 @@ function NewProjectContainer() {
             style: {
               backgroundColor: "#9e39ff",
               border: "none",
-              borderRadius: "10px",
+              borderRadius: "20px",
             },
           },
         });
