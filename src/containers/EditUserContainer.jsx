@@ -53,7 +53,7 @@ export default ({ user, setCurrentUser }) => {
       db.collection("users")
         .doc(user.id)
         .update({
-          avatar: downloadUrl || user.avatar ,
+          avatar: downloadUrl || user.avatar,
         })
         .then(() => {
           setIsLoading(false);
@@ -98,8 +98,8 @@ export default ({ user, setCurrentUser }) => {
     onChange(cv) {
       setCv(cv);
       setBoton(false),
-      setDragger(true);
-    },      
+        setDragger(true);
+    },
   };
 
   return (
@@ -107,9 +107,13 @@ export default ({ user, setCurrentUser }) => {
       <div onClick={openModal} style={{ cursor: "pointer" }}>
         {user.avatar ? (
           <Avatar size={55} src={user.avatar} className="avatar" />
+          
         ) : (
             <Avatar size={55} icon={<UserOutlined />} className="avatar" />
-          )}        
+          )}
+          <Text type='primary'>
+          {user.name} {user.lastName}
+        </Text>
       </div>
       <Modal
         visible={modal}
@@ -118,20 +122,19 @@ export default ({ user, setCurrentUser }) => {
         okButtonProps={{
           hidden: true,
         }}
-        onCancel={closeModal}        
+        onCancel={closeModal}
         bodyStyle={{ color: "#9e39ff" }}
       >
         <>
           <div className="modal-editProfile-container">
             <h1 className="modal-editProfile-header">Editar datos de perfil</h1>
             <div className="modal-editProfile">
-              <div className="modal-editProfile-avatar">
+              
                 <label
                   style={{
-                    cursor: "pointer",
-                    marginTop: "70px",
+                    cursor: "pointer",                    
                   }}
-                >
+                  >
                   <input
                     style={{ display: "none" }}
                     type="file"
@@ -148,52 +151,53 @@ export default ({ user, setCurrentUser }) => {
                       />
                     )}
                 </label>
-                <div style={{ margin: "30px 0 50px 0" }}>    {!dragger ? (
-                <Dragger {...props} style={{ width: "80%" }}>
-                  <p className='ant-upload-drag-icon'>
-                    <PlusOutlined style={{ color: "#9e39ff" }} />
+                <div style={{ margin: "30px 0 50px 0" }}>
+                  {!dragger ? (
+                    <Dragger {...props} style={{ width: "80%" }}>
+                      <p className='ant-upload-drag-icon'>
+                        <PlusOutlined style={{ color: "#9e39ff" }} />
+                      </p>
+                      <p className='ant-upload-text'>
+                        Click para cargar CV
                   </p>
-                  <p className='ant-upload-text'>
-                    Click para cargar CV
-                  </p>
-                </Dragger>
-              ) : (
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "80%",
-                    width: "80%",
-                    border: "dashed",
-                    borderColor: "gray",
-                    padding: "25px",
-                  }}>
-                  <p style={{ color: "gray" }}> </p>
-                  <p>
-                    <DeleteOutlined
-                      style={{ fontSize: "20px", color: "#9e39ff" }}
-                      onClick={() => {
-                        setCv({});
-                        setDragger(false);
-                      }}
-                    />
-                  </p>
-                </div>
-              )}
-              </div>
+                    </Dragger>
+                  ) : (
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          height: "80%",
+                          width: "80%",
+                          border: "dashed",
+                          borderColor: "gray",
+                          padding: "25px",
+                        }}>
+                        <p style={{ color: "gray" }}> </p>
+                        <p>
+                          <DeleteOutlined
+                            style={{ fontSize: "20px", color: "#9e39ff" }}
+                            onClick={() => {
+                              setCv({});
+                              setDragger(false);
+                            }}
+                          />
+                        </p>
+                      </div>
+                    )}
+                </div>              
             </div>
             <Button
-              className="list-button-paymentsFree"
-              type="submit"
-              onClick={handleSubmit}
-            >
-              Confirmar cambios
-            </Button>
+                className="list-button-paymentsFree"
+                type="submit"
+                onClick={handleSubmit}
+              >
+                Confirmar cambios
+            </Button>            
           </div>
-        </div>
+          
         </>
-    </Modal>
+      </Modal>
     </>
   );
 };

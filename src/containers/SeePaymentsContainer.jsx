@@ -17,10 +17,12 @@ function SeePaymentsContainer({ currentUser, project }) {
     setModal(false);
   };
 
+  console.log(project,"esto llega como project")
   useEffect(() => {
     const unsuscribe = db
       .collection("payments")
       .where("userId","==",currentUser.id)
+      .where("projectId","==",project.projectId)
       .onSnapshot((querySnap) => {
         let arr = [];
         querySnap.forEach((doc) => {
@@ -28,52 +30,8 @@ function SeePaymentsContainer({ currentUser, project }) {
         });
         setMyPayments(arr)
       });
-      console.log("RECEIVED PAYMENTS",myPayments)
       return ()=>unsuscribe()
   },[currentUser]);
-
-
-  // async function success() {
-  //   closeModal();
-  //   const file = fileUrl.file.originFileObj;
-  //   const storageRef = storage.ref();
-  //   const task = storageRef.child(`comprobantesDePago/${fileUrl.file.name}`);
-  //   await task.put(file);
-  //   await task.getDownloadURL().then((downloadUrl) => {
-  //     console.log("ESTO ES CUOTA ", cuota);
-  //     db.collection("payments")
-  //       .doc(cuota.id)
-  //       .update({
-  //         comprobantePago: downloadUrl,
-  //         state: "completed",
-  //       })
-  //       .then(() => {
-  //         form.resetFields();
-  //         console.log("Pago cargado correctamente!");
-  //       })
-  //       .then(() => {
-  //         Modal.success({
-  //           bodyStyle: {
-  //             display: "flex",
-  //             alignItems: "center",
-  //             flexDirection: "column",
-  //             justifyContent: "center",
-  //           },
-  //           content: "¡Pago ingresado!",
-  //           centered: "true",
-  //           okText: "VOLVER",
-  //           icon: <img src={CheckCircle} className="icono-sider" />,
-  //           okButtonProps: {
-  //             style: {
-  //               backgroundColor: "#9e39ff",
-  //               border: "none",
-  //               borderRadius: "20px",
-  //             },
-  //           },
-  //         });
-  //       });
-  //   });
-  // }
 
   return (
     <SeePayments
@@ -83,7 +41,6 @@ function SeePaymentsContainer({ currentUser, project }) {
       closeModal={closeModal}
       form={form}
       myPayments={myPayments}
-      // pendingPayments={pendingPayments}
     />
   );
 }

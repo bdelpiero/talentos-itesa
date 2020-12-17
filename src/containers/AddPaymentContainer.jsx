@@ -46,7 +46,7 @@ function AddPaymentContainer({ pendingPayments }) {
               flexDirection: "column",
               justifyContent: "center",
             },
-            content: "¡Pago ingresado!",
+            content:(<h1> ¡Pago ingresado! </h1>),
             centered: "true",
             okText: "VOLVER",
             icon: <img src={CheckCircle} className="icono-sider" />,

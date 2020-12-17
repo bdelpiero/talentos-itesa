@@ -1,41 +1,53 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
+import { db } from "../../firebase/firebase";
+import firebase from "firebase/app";
 import Resume from "../components/Resume";
-import { Form } from "antd";
-import { Link, useHistory } from "react-router-dom";
 
-export default () => {
-  // const [email, setEmail]=useState('')
-  // const [password, setPassword]=useState('')
-  // const [form] =Form.useForm()
-  // const history = useHistory()
 
-  // const {login,currentUser}=authUser()
 
-  // const hanledChangeEmail=(e)=>{
-  //     setEmail(e.target.value)
-  // }
+export default ({ pendingPayments, setItem, setProject }) => {
+ 
+  const [projects, setProjects] = useState([]);
+ 
 
-  // const hanledChangePassword=(e)=>{
-  //     setPassword(e.target.value)
-  // }
+ useEffect(() => {
+  const unsuscribe = db.collection("projects").onSnapshot((projects) => {
+    projects = projects.docs.map((project) => {
+      let proyecto = project.data();
+      proyecto.id = project.id;
+      proyecto.key = project.id;
+      return proyecto;
+    });
+    setProjects(projects);
+    
+  });
+  return () => unsuscribe();
+}, []);
 
-  // const hanledSubmit =(valores)=>{
-  //     setEmail("")
-  //     setPassword('')
-  //     login(email,password)
-  //     console.log("AQUI USER",currentUser)
-  //     form.resetFields()
-  //     history.push("/frelance")
-  // }
 
+const pendingProjects= projects.filter((project)=>{
+  return project.status == "On Development"
+}).length
+
+const totalPagos=pendingPayments.filter((payment)=>{
+  return payment.state == "pending"
+}).reduce((a,b)=>{
+  return a + +b.monto
+},0)
+
+const totalProject= projects.length
+console.log("busncado los proyectos ", pendingProjects)
+console.log("busncando los pagos pendientes", pendingPayments)
   return (
+
     <Resume
-    // hanledChangeEmail={hanledChangeEmail}
-    // hanledChangePassword={hanledChangePassword}
-    // hanledSubmit={hanledSubmit}
-    // email={email}
-    // password={password}
-    // form={form}
+    setItem={setItem}
+    pendingPayments={pendingPayments}
+    totalProject={totalProject}
+    pendingProjects={pendingProjects}
+    totalPagos={totalPagos}
+
     />
+    
   );
 };

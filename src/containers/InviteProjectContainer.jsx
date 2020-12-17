@@ -33,6 +33,7 @@ function addCuotas(cuotas, user, project) {
 }
 
 function InviteProjectContainer({ proyecto }) {
+  const [error, setError] = useState(false)
   const [modal, setModal] = useState(false);
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState("");
@@ -98,14 +99,22 @@ function InviteProjectContainer({ proyecto }) {
     });
   };
 
-  function handleFinish() {
-    closeModal();
+  async function handleFinish() {
+    
     const cuotasDB = Object.values(cuotas);
     const getUser = users.filter((user) => user.id == selectedUser)[0];
     const usersProject = proyecto.users
       ? [...proyecto.users, selectedUser]
       : [selectedUser];
     addCuotas(cuotasDB, getUser, proyecto);
+
+    const existe = await db.collection("projects").doc(proyecto.id).collection("invitedUser").doc(selectedUser).get().then((doc)=>{
+      if(doc.exists) return true
+      else return false
+    })
+    if(existe) return setError(true)
+    setError(false)
+    closeModal();
     db.collection("projects")
       .doc(proyecto.id)
       .collection("invitedUser")
@@ -132,11 +141,7 @@ function InviteProjectContainer({ proyecto }) {
             flexDirection: "column",
             justifyContent: "center",
           },
-          content: (
-            <Card className="invite_msg" onClick={openModal}>
-              <h1>¡Perfil Invitado!</h1>
-            </Card>
-          ),
+          content: (<h1>¡Perfil Invitado!</h1>),
           centered: "true",
           okText: "VOLVER",
           icon: <img src={CheckCircle} className="icono-sider" />,
@@ -144,7 +149,7 @@ function InviteProjectContainer({ proyecto }) {
             style: {
               backgroundColor: "#9e39ff",
               border: "none",
-              borderRadius: "10px",
+              borderRadius: "20px",
             },
           },
         });
@@ -169,6 +174,7 @@ function InviteProjectContainer({ proyecto }) {
       form={form}
       proyecto={proyecto}
       handleUsers={handleUsers}
+      error={error}
     />
   );
 }

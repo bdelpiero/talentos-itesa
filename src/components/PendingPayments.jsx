@@ -1,10 +1,26 @@
 import React, { useState } from "react";
 // Ant-Desing
-import { Button, Row, Col, Avatar, Card, Typography, Pagination } from "antd";
-import { DownloadOutlined } from "@ant-design/icons";
+import {
+  Button,
+  Row,
+  Col,
+  Avatar,
+  Card,
+  Typography,
+  Pagination,
+  Table,
+  Dropdown,
+  Menu,
+} from "antd";
+import {
+  DownloadOutlined,
+  EllipsisOutlined,
+  DeleteOutlined,
+} from "@ant-design/icons";
 import AddPaymentContainer from "../containers/AddPaymentContainer";
 import AddSinglePaymentContainer from "../containers/AddSinglePaymentContainer";
 import ExcelDownload from "./ExcelDownload";
+import { db } from "../../firebase/firebase";
 
 const { Title } = Typography;
 
@@ -20,17 +36,51 @@ export default ({ pendingPayments, setItem }) => {
     setCurrentPage(value);
   };
 
+  function menu(payment) {
+    return (
+      <Menu>
+        <Menu.Item>
+          <div>
+            <Button className="list-button-paymentsList">
+              <a
+                href={payment.factura}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Ver factura
+              </a>
+            </Button>
+          </div>
+        </Menu.Item>
+        <Menu.Item>
+          <div>
+            <AddSinglePaymentContainer payment={payment} />
+          </div>
+        </Menu.Item>
+        <Menu.Item>
+          <DeleteOutlined
+            className="rechazar"
+            onClick={() => {
+              console.log("delete", payment);
+              db.collection("payments").doc(payment.paymentId).update({
+                factura: "",
+                loadedF: false,
+              });
+            }}
+          />
+        </Menu.Item>
+      </Menu>
+    );
+  }
+
   return (
     <>
-      <div className='div-excel'>
+      <div className="div-excel">
         <Title level={3} style={{ width: "100%" }}>
           Pagos a realizar este mes
         </Title>
-        <div className='div-title-pending-payments'>
-          <ExcelDownload pendingPayments={pendingPayments} />
-          <Button className='modal-button' onClick={() => setItem(7)}>Todos los pagos</Button>
-        </div>
       </div>
+
       <div>
         {pendingPayments.length > 0 &&
           pendingPayments.slice(minValue, maxValue).map((payment, index) => {
@@ -38,60 +88,85 @@ export default ({ pendingPayments, setItem }) => {
               return <div></div>;
             }
             return (
-              <Card
-                key={index}
-                className='paymentCards-card'
-                style={{
-                  borderRadius: 25,
-                  marginBottom: 15,
-                  boxShadow: "-5px 5px lightgray",
-                }}>
-                <Row className='paymentsCards' align='middle'>
-                  <Col className='gutter-row' span={2}>
-                    <Avatar
-                      size={55}
-                      src={payment.user && payment.user.avatar}
-                      className='avatar'
-                    />
+              <div className="prueba paymentCards-card">
+                <Row align={"middle"} className="prueba1" gutter={24}>
+                  <Col xs={4} sm={4} md={4} lg={2}>
+                    <Avatar src={payment.user && payment.user.avatar}></Avatar>
                   </Col>
-                  <Col span={3}>
-                    <h1>${payment.monto}</h1>
+                  <Col xs={4} sm={4} md={4} lg={2}>
+                    {"$" + payment.monto}
                   </Col>
-                  <Col span={3}>
+                  <Col xs={6} sm={6} md={4} lg={2}>
+                    <p style={{ color: "#9e39ff", margin: 0 }}>Freelancer:</p>
+                    <p style={{ margin: 0 }}>
+                      {" "}
+                      {payment.user.name + "" + payment.user.lastName}
+                    </p>
+                  </Col>
+
+                  <Col xs={4} sm={4} md={4} lg={2}>
                     <p style={{ color: "#9e39ff", margin: 0 }}>Proyecto:</p>
                     <p style={{ margin: 0 }}> {payment.projectName}</p>
                   </Col>
-                  <Col className='gutter-row' span={3}>
+                  <Col className="hide-button" xs={4} sm={4} md={4} lg={3}>
                     <p style={{ color: "#9e39ff", margin: 0 }}>Factura:</p>
-                    <p style={{ margin: 0 }}> {payment.cuota}</p>
+                    <p style={{ margin: 0 }}>{payment.cuota}</p>
                   </Col>
-                  <Col className='gutter-row' span={3}>
+                  <Col xs={4} sm={4} md={4} lg={3} className="hide-button">
                     <p style={{ color: "#9e39ff", margin: 0 }}>
                       Fecha de pago:
                     </p>
                     <p style={{ margin: 0 }}> {payment.fecha}</p>
                   </Col>
-                  <Col className='gutter-row' span={3}>
-                    <p style={{ color: "#9e39ff", margin: 0 }}>Perfil:</p>
-                    <p style={{ margin: 0 }}>
-                      {" "}
-                      {`${payment.user.name} ${payment.user.lastName}`}
-                    </p>
-                  </Col>
-                  <Col className='gutter-row' span={4}>
-                    <Button className='list-button-paymentsFree' shape='round'>
-                      Ver pago <DownloadOutlined />
-                    </Button>
-                  </Col>
-                  <Col className='gutter-row' span={3}>
+                  <Col xs={1} sm={1} md={1} lg={4} className="hide-button">
                     <AddSinglePaymentContainer payment={payment} />
                   </Col>
+
+                  <Col xs={1} sm={1} md={1} lg={4}>
+                    {" "}
+                    <Button
+                      className="list-button-paymentsList hide-button"
+                      shape="round"
+                    >
+                      <a
+                        href={payment.factura}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Ver factura
+                      </a>
+                    </Button>
+                  </Col>
+                  <Col xs={1} sm={1} md={1} lg={1}>
+                    {" "}
+                    <DeleteOutlined
+                      className="rechazar hide-button"
+                      onClick={() => {
+                        console.log("delete", payment);
+                        db.collection("payments")
+                          .doc(payment.paymentId)
+                          .update({
+                            factura: "",
+                            loadedF: false,
+                          });
+                      }}
+                    />
+                  </Col>
+                  <div className="show-ellipsis">
+                    <Col xs={2} sm={2} md={2} lg={2}>
+                      {" "}
+                      <Dropdown overlay={menu(payment)} placement="bottomLeft">
+                        <EllipsisOutlined className="single-icon" />
+                      </Dropdown>
+                    </Col>
+                  </div>
                 </Row>
-              </Card>
+              </div>
             );
           })}
         <div
-          style={{ display: "flex", justifyContent: "flex-end", margin: 20 }}>
+          style={{ display: "flex", justifyContent: "flex-end", margin: 20 }}
+        >
           <Pagination
             //defaultCurrent={1}
             current={currentPage}
@@ -104,3 +179,22 @@ export default ({ pendingPayments, setItem }) => {
     </>
   );
 };
+
+{
+  /* <Col className='gutter-row' span={3}>
+                    <Button className='list-button-paymentsList' shape='round'>
+                      <a href={payment.factura} target="_blank" rel="noopener noreferrer">Ver factura</a>
+                    </Button>
+                  </Col>
+                  <Col span={1} className='gutter-row'>
+                  <DeleteOutlined className='rechazar' 
+                  onClick={()=>{
+                    console.log("delete",payment)
+                    db.collection("payments").doc(payment.paymentId)
+                    .update({
+                      factura: "",
+                      loadedF: false
+                    })
+                  }}/>
+                  </Col> */
+}

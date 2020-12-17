@@ -1,9 +1,8 @@
-import React, { useRef, useState } from "react";
-import ContractUserProject from "./pdfs/ContractUserProject";
-import SignedContractUserProject from "../components/pdfs/SignedContractUserProject";
-
+import React, { useRef, useState,useEffect } from "react";
+import SignedContractUserProject from "./pdfs/SignedContractUserProject";
+import ContractUserProject from './pdfs/ContractUserProject'
 import { useRecoilState } from "recoil";
-import { projectInvited, user } from "../atoms/index";
+import { projectInvited, user,isLoading } from "../atoms/index";
 import { db } from "../../firebase/firebase";
 import { storage } from "../../firebase/firebase";
 
@@ -13,15 +12,24 @@ import { pdf } from "@react-pdf/renderer";
 
 // STYLES
 import { Col, Row, Button, Alert, Modal } from "antd";
+import { CloseCircleOutlined } from "@ant-design/icons";
+import CheckCircle from "../../views/check.svg";
 
-export default ({ setItem }) => {
+export default ({ setItem}) => {
   const [invitedProject, setInvitedProject] = useRecoilState(projectInvited);
   const [currentUser, setCurrentUser] = useRecoilState(user);
   const signatureRef = useRef({});
   const [imageData, setImageData] = useState("");
   const [errorSignature, setErrorSignature] = useState(false);
   const [show, setShow] = useState(false);
-  const [disableButton, setDisableButton] = useState(false)
+  const [loadingbtn, setLoadingbtn] =useRecoilState(isLoading)
+  const [disableButton,setDisableButton]=useState(false)
+
+
+
+  useEffect(()=>{
+    setLoadingbtn(false)
+  },[])
 
   const showModal = () => {
     setShow(true);
@@ -67,7 +75,7 @@ export default ({ setItem }) => {
                 .update({
                   status: "On Development",
                   urlContractProject: downloadUrl,
-                  signed:true
+                  signed: true,
                 });
             });
           });
@@ -75,21 +83,23 @@ export default ({ setItem }) => {
       .then(() => {
         db.collection("payments")
           .where("userId", "==", invitedProject.selected.id)
-          .where("projectId", '==', invitedProject.selected.projectId)
-          .where('proyectoAceptado', '==', false)
+          .where("projectId", "==", invitedProject.selected.projectId)
+          .where("proyectoAceptado", "==", false)
           .get()
-            .then((querySnapshot) => {
-              querySnapshot.forEach((doc) => {
-                let paymentRef = db.collection('payments').doc(doc.id)
-                paymentRef.update({proyectoAceptado: true})
-                .then(() => console.log('Payment Actualizado!'))
-              })
-            })
-            .catch((err) => console.log('ERROR ACTUALIZANDO PAGOS', err))
+          .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              let paymentRef = db.collection("payments").doc(doc.id);
+              paymentRef
+                .update({ proyectoAceptado: true })
+                .then(() => console.log("Payment Actualizado!"));
+            });
+          })
+          .catch((err) => console.log("ERROR ACTUALIZANDO PAGOS", err));
       })
       .then(() => {
         let userRef = db.collection("users").doc(invitedProject.selected.id);
-        userRef.get()
+        userRef
+          .get()
           .then((doc) => {
             if (!doc.exists) {
               console.log("No such document!");
@@ -123,7 +133,8 @@ export default ({ setItem }) => {
           }}
         >
           <h1 style={{ color: "gray", textAlign: "center" }}>
-            Revisá el contrato y firmá en el recuadro para aceptar el de Proyecto
+            Revisá el contrato y firmá en el recuadro para aceptar el de
+            Proyecto
           </h1>
           <br />
           <SignatureCanvas
@@ -141,7 +152,7 @@ export default ({ setItem }) => {
                 signatureRef.current.getTrimmedCanvas().toDataURL("image/jpg")
               ); //base64
               setErrorSignature(false);
-              setDisableButton(true)
+              setDisableButton(true);
             }}
           />
           <br></br>
@@ -149,12 +160,11 @@ export default ({ setItem }) => {
             shape="round"
             block
             htmlType="submit"
-            id='accept-project-button'
+            id="accept-project-button"
             onClick={() => {
               signatureRef.current.clear();
               saveSignature(null);
-              setDisableButton(false)
-
+              setDisableButton(false);
             }}
           >
             Reset
@@ -167,19 +177,19 @@ export default ({ setItem }) => {
               style={{ margin: 5 }}
             />
           )}
-          { disableButton && 
-          (<Button
-            onClick={handleSubmit}
-            shape="round"
-            block
-            htmlType="submit"
-            id='accept-project-button'
-            loading={show}
-          >
-            Firmar Contrato
-          </Button>)
-          }
-          
+          {disableButton && (
+            <Button
+              onClick={handleSubmit}
+              shape="round"
+              block
+              htmlType="submit"
+              id="accept-project-button"
+              loading={show}
+            >
+              Firmar Contrato
+            </Button>
+          )}
+
           <Modal
             visible={show}
             centered="true"
@@ -188,20 +198,30 @@ export default ({ setItem }) => {
               hidden: true,
             }}
             bodyStyle={{ color: "#9e39ff" }}
+            closeIcon={<CloseCircleOutlined className="close-button" />}
+            onCancel={handleOk}
           >
             <>
               <div className="modal-style">
-                <br />
-                <h3 style={{ color: "grey", textAlign: "center" }}>
-                  OFERTA ACEPTADA
-                </h3>
+                <img src={CheckCircle} className="icono-sider" />
+                <br/>
+                <h1> ¡Pago ingresado! </h1>
                 <p style={{ color: "grey" }}> Tu firma ha sido registrada! </p>
                 <br />
               </div>
               <div className="modal-input">
-                <button className="ok-button" type="submit" onClick={handleOk}>
-                  OK
-                </button>
+                <Button
+                  style={{
+                    backgroundColor: "#9e39ff",
+                    border: "none",
+                    borderRadius: "20px",
+                    color:"white"
+                  }}
+                  type="submit"
+                  onClick={handleOk}
+                >
+                  VOLVER
+                </Button>
               </div>
             </>
           </Modal>
