@@ -36,18 +36,14 @@ const totalPagos=pendingPayments.filter((payment)=>{
 },0)
 
 const totalProject= projects.length
-console.log("busncado los proyectos ", pendingProjects)
-console.log("busncando los pagos pendientes", pendingPayments)
-  return (
 
+  return (
     <Resume
     setItem={setItem}
     pendingPayments={pendingPayments}
     totalProject={totalProject}
     pendingProjects={pendingProjects}
     totalPagos={totalPagos}
-
     />
-    
   );
 };

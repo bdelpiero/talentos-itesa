@@ -38,37 +38,39 @@ export default ({ pendingPayments, setItem }) => {
 
   function menu(payment) {
     return (
-      <Menu>
-        <Menu.Item>
-          <div>
-            <Button className="list-button-paymentsList">
-              <a
-                href={payment.factura}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Ver factura
-              </a>
-            </Button>
-          </div>
-        </Menu.Item>
-        <Menu.Item>
-          <div>
-            <AddSinglePaymentContainer payment={payment} />
-          </div>
-        </Menu.Item>
-        <Menu.Item>
-          <DeleteOutlined
-            className="rechazar"
-            onClick={() => {
-              console.log("delete", payment);
-              db.collection("payments").doc(payment.paymentId).update({
-                factura: "",
-                loadedF: false,
-              });
-            }}
-          />
-        </Menu.Item>
+      <Menu style={{width: '100%'}}>
+        <div className='div-container-dropdown'>
+          <Menu.Item>
+            <div>
+              <Button id="list-button-paymentsList">
+                <a
+                  href={payment.factura}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Ver factura
+                </a>
+              </Button>
+            </div>
+          </Menu.Item>
+          <Menu.Item>
+            <div style={{width: '100%'}}>
+              <AddSinglePaymentContainer payment={payment} />
+            </div>
+          </Menu.Item>
+          <Menu.Item>
+            <DeleteOutlined
+              className="rechazar"
+              onClick={() => {
+                console.log("delete", payment);
+                db.collection("payments").doc(payment.paymentId).update({
+                  factura: "",
+                  loadedF: false,
+                });
+              }}
+            />
+          </Menu.Item>
+        </div>
       </Menu>
     );
   }
@@ -88,8 +90,8 @@ export default ({ pendingPayments, setItem }) => {
               return <div></div>;
             }
             return (
-              <div className="prueba paymentCards-card">
-                <Row align={"middle"} className="prueba1" gutter={24}>
+              <div className="payments-pending paymentCards-card">
+                <Row align={"middle"} className="row-payments-pending" gutter={24}>
                   <Col xs={4} sm={4} md={4} lg={2}>
                     <Avatar src={payment.user && payment.user.avatar}></Avatar>
                   </Col>
@@ -100,7 +102,7 @@ export default ({ pendingPayments, setItem }) => {
                     <p style={{ color: "#9e39ff", margin: 0 }}>Freelancer:</p>
                     <p style={{ margin: 0 }}>
                       {" "}
-                      {payment.user.name + "" + payment.user.lastName}
+                      {payment.user.lastName}
                     </p>
                   </Col>
 

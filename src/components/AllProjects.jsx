@@ -166,7 +166,6 @@ function AllProjects({ projects, handleClick, changeStatus, onChange }) {
       >
         <NewProjectContainer />
       </div>
-
       <div>
         <Input
           style={{ marginBottom: "1rem" }}

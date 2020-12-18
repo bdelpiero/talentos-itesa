@@ -38,9 +38,9 @@ function AddSinglePayment({
       <Button
         onClick={openModal}
         style={{ borderRadius: "32px" }}
-        className="list-button-paymentsList"
+        id="list-button-paymentsList"
       >
-        Ingresar Pago
+        Pago
       </Button>
       <Modal
         visible={modal}
@@ -93,7 +93,7 @@ function AddSinglePayment({
             onClick={success}
             // disabled={disable}
           >
-            Ingresar Pago
+            Pago
           </Button>
         </div>
       </Modal>

@@ -1,24 +1,17 @@
 import React, {useState } from "react";
-import {Link} from "react-router-dom"
 // Ant-Desing
 import {  
   Button,
   Row,
   Col,
   Avatar,
-  Card,
   Typography,
   Pagination,
-  Table,
   Dropdown,
   Menu, } from "antd";
 import { DownloadOutlined,
-  EllipsisOutlined,
-  DeleteOutlined, } from "@ant-design/icons"
-  import AddPaymentContainer from "../containers/AddPaymentContainer";
-  import AddSinglePaymentContainer from "../containers/AddSinglePaymentContainer";
-  import ExcelDownload from "./ExcelDownload";
-  import { db } from "../../firebase/firebase";
+  EllipsisOutlined} from "@ant-design/icons"
+
 
 
 const { Title } = Typography;
@@ -84,8 +77,8 @@ export default ({user, receivedPayments})=>  {
          {receivedPayments.length > 0 &&
            receivedPayments.slice(minValue, maxValue).map((payment) => {
              return (
-              <div className="prueba paymentCards-card">
-                <Row align={"middle"} className="prueba1" gutter={24}>                 
+              <div className="payments-pending paymentCards-card">
+                <Row align={"middle"} className="row-payments-pending"  gutter={24}>                 
                    <Col cxs={4} sm={4} md={4} lg={2}>
                      <Avatar 
                      size={48}
