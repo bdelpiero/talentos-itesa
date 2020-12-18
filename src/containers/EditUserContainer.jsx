@@ -106,8 +106,8 @@ export default ({ user, setCurrentUser }) => {
     <>
       <div onClick={openModal} style={{ cursor: "pointer" }}>
         {user.avatar ? (
+
           <Avatar size={55} src={user.avatar} className="avatar" />
-          
         ) : (
             <Avatar size={55} icon={<UserOutlined />} className="avatar" />
           )}

@@ -22,7 +22,7 @@ function addCuotas(cuotas, user, project) {
       cuota: "CUOTA " + (i + 1),
       loadedF: false,
       paymentId: cuotaRef.id,
-      proyectoAceptado: false
+      proyectoAceptado: false,
     });
   });
 
@@ -33,7 +33,7 @@ function addCuotas(cuotas, user, project) {
 }
 
 function InviteProjectContainer({ proyecto }) {
-  const [error, setError] = useState(false)
+  const [error, setError] = useState(false);
   const [modal, setModal] = useState(false);
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState("");
@@ -100,59 +100,68 @@ function InviteProjectContainer({ proyecto }) {
   };
 
   async function handleFinish() {
-    
     const cuotasDB = Object.values(cuotas);
     const getUser = users.filter((user) => user.id == selectedUser)[0];
     const usersProject = proyecto.users
       ? [...proyecto.users, selectedUser]
       : [selectedUser];
-    addCuotas(cuotasDB, getUser, proyecto);
-
-    const existe = await db.collection("projects").doc(proyecto.id).collection("invitedUser").doc(selectedUser).get().then((doc)=>{
-      if(doc.exists) return true
-      else return false
-    })
-    if(existe) return setError(true)
-    setError(false)
-    closeModal();
-    db.collection("projects")
+  
+    await db
+      .collection("projects")
       .doc(proyecto.id)
       .collection("invitedUser")
       .doc(selectedUser)
-      .set({
-        ...asignData,
-        ...getUser,
-        projectId: proyecto.id,
-        duracion: proyecto.term,
-        proyecto: proyecto.name,
-        cuotasDB,
+      .get()
+      .then((doc) => {
+        if (doc.exists) return true;
+        else return false;
       })
-      .then(() => {
-        db.collection("users")
-          .doc(selectedUser)
-          .update({ projectInvited: proyecto.id });
-      })
-      .then(() => {
-        form.resetFields();
-        Modal.success({
-          bodyStyle: {
-            display: "flex",
-            alignItems: "center",
-            flexDirection: "column",
-            justifyContent: "center",
-          },
-          content: (<h1>¡Perfil Invitado!</h1>),
-          centered: "true",
-          okText: "VOLVER",
-          icon: <img src={CheckCircle} className="icono-sider" />,
-          okButtonProps: {
-            style: {
-              backgroundColor: "#9e39ff",
-              border: "none",
-              borderRadius: "20px",
-            },
-          },
-        });
+      .then((existe) => {
+        if (existe) return setError(true);
+        else {
+          addCuotas(cuotasDB, getUser, proyecto);
+          setError(false);
+          closeModal();
+          db.collection("projects")
+            .doc(proyecto.id)
+            .collection("invitedUser")
+            .doc(selectedUser)
+            .set({
+              ...asignData,
+              ...getUser,
+              projectId: proyecto.id,
+              duracion: proyecto.term,
+              proyecto: proyecto.name,
+              cuotasDB,
+            })
+            .then(() => {
+              db.collection("users")
+                .doc(selectedUser)
+                .update({ projectInvited: proyecto.id });
+            })
+            .then(() => {
+              form.resetFields();
+              Modal.success({
+                bodyStyle: {
+                  display: "flex",
+                  alignItems: "center",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                },
+                content: <h1>¡Perfil Invitado!</h1>,
+                centered: "true",
+                okText: "VOLVER",
+                icon: <img src={CheckCircle} className="icono-sider" />,
+                okButtonProps: {
+                  style: {
+                    backgroundColor: "#9e39ff",
+                    border: "none",
+                    borderRadius: "20px",
+                  },
+                },
+              });
+            });
+        }
       });
   }
 

@@ -21,9 +21,9 @@ export const SingleUser = ({ selectedUserData, userProjects }) => {
 
   let userState = function () {
     if (selectedUserData.activeProjectsCounter > 0)
-      return <Tag color="red">En Proyecto</Tag>;
+      return <Tag color="red" style={{height:"40px",width:"80px", fontSize:20, display:"flex", justifyContent:"center", alignItems:"center"}}>En Proyecto</Tag>;
     if (selectedUserData.activeProjectsCounter === 0)
-      return <Tag color="green">Libre</Tag>;
+      return <Tag color="green" style={{height:"40px",width:"80px", fontSize:20, display:"flex", justifyContent:"center", alignItems:"center", marginTop:"10px"}}>Libre</Tag>;
   };
 
 
@@ -103,10 +103,15 @@ export const SingleUser = ({ selectedUserData, userProjects }) => {
         <Row style={{ marginTop: "80px" }} gutter={[30]}>
           {bankData && (
             <Col xs={24} sm={16} md={16} lg={16}>
-              <Title level={2}>
-                {<Avatar size={128} src={user.avatar} />}
+              
+              <Title level={2} style={{display:"flex", alignItems:"center"}}>
+              {<Avatar size={128} src={user.avatar} />}
+                <div>
                 {"  " + user.name + " " + user.lastName}
                 <div>{userState()}</div>
+                </div>
+                
+                
               </Title>
 
               <Row>

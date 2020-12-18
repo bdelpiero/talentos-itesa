@@ -65,11 +65,17 @@ export default ({ filteredPayments, onChange }) => {
       key: "comprobantePago",
       render: (payment) => {
         return payment.comprobantePago ? (
-          <Button className='list-button-paymentsFree' shape='round'>
+          <a href={payment.comprobantePago} target="_blank">
+          <Button className='modal-button2' shape='round'>
             Ver pago <DownloadOutlined />
           </Button>
+
+          </a>
+
         ) : (
-          <div></div>
+          <Button className='modal-button2' shape='round' disabled>
+            Ver pago <DownloadOutlined />
+          </Button>
         );
       },
     },
@@ -77,7 +83,11 @@ export default ({ filteredPayments, onChange }) => {
       title: "FACTURA",
       key: "factura",
       render: (payment) => {
-        return <Button>Ver Factura</Button>;
+        return payment.factura ? (
+          <a href={payment.factura} target="_blank">
+        <Button className="modal-button2" >Ver Factura</Button>
+        </a>
+        ):(<Button className="modal-button2" disabled >Ver Factura</Button>)
       },
     },
   ];
