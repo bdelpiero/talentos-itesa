@@ -29,7 +29,7 @@ export const OurCommunity = ({
 }) => {
   const users = currentUsers.map((user) => {
     const newUser = { ...user };
-    newUser.state = user.activeProjectsCounter ? "En Proyecto" : "Libre";
+    newUser.state = user.activeProjectsCounter > 0 ? "En Proyecto" : "Libre";
     return newUser;
   });
   const columns = [
