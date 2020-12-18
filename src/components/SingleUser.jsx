@@ -21,7 +21,7 @@ export const SingleUser = ({ selectedUserData, userProjects }) => {
 
   let userState = function () {
     if (selectedUserData.activeProjectsCounter > 0)
-      return <Tag color="red" style={{height:"40px",width:"80px", fontSize:20, display:"flex", justifyContent:"center", alignItems:"center"}}>En Proyecto</Tag>;
+      return <Tag color="red" style={{height:"40px",width:"140px", fontSize:20, display:"flex", justifyContent:"center", alignItems:"center"}}>En Proyecto</Tag>;
     if (selectedUserData.activeProjectsCounter === 0)
       return <Tag color="green" style={{height:"40px",width:"80px", fontSize:20, display:"flex", justifyContent:"center", alignItems:"center", marginTop:"10px"}}>Libre</Tag>;
   };
