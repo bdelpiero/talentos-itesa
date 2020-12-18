@@ -38,7 +38,7 @@ function AddSinglePayment({
       <Button
         onClick={openModal}
         style={{ borderRadius: "32px" }}
-        id="list-button-paymentsList"
+        className="list-button-paymentsList"
       >
         Pago
       </Button>

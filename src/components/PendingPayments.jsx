@@ -38,11 +38,10 @@ export default ({ pendingPayments, setItem }) => {
 
   function menu(payment) {
     return (
-      <Menu style={{width: '100%'}}>
-        <div className='div-container-dropdown'>
+      <Menu>
           <Menu.Item>
             <div>
-              <Button id="list-button-paymentsList">
+              <Button className="list-button-paymentsList">
                 <a
                   href={payment.factura}
                   target="_blank"
@@ -70,7 +69,6 @@ export default ({ pendingPayments, setItem }) => {
               }}
             />
           </Menu.Item>
-        </div>
       </Menu>
     );
   }

@@ -48,25 +48,17 @@
   .name-responsive h4 {
     margin-bottom: 0 !important;
   }
+
   .payments-pending {
     height: 60px;
     margin: 10px !important;
   }
+
   .row-payments-pending {
     height: 60px;
     padding: 10px;
     margin: 5px !important;
     box-shadow: 0px 2px 50px -10px rgba(156, 151, 151, 0.75) !important;
-  }
-
-  .rechazar {
-	color: #9e39ff;
-	text-align: center;
-	display: inline-flex;
-	cursor: pointer;
-	height: 30px;
-	width: 40px;
-	padding: 3px;
   }
 }
 
@@ -76,15 +68,7 @@
   }
 
   .ant-dropdown {
-	width: 35%;
-  }
-
-  .div-container-dropdown {
-	display: flex !important;
-	flex-direction: column !important;
-	justify-content: center !important;
-	align-items: center !important;
-	flex-wrap: wrap !important;
+	width: 35% !important
   }
 
   .navbar-display {
@@ -180,16 +164,6 @@
 		margin-right: 0 !important;
 		padding-right: 0 !important;
 	}
-
-	.rechazar {
-		color: #9e39ff;
-		text-align: center;
-		cursor: pointer;
-		/* height: 30px;
-		width: 40px;*/
-		padding: 3px;
-		font-size: 1.2rem;
-	  }
 }
 
 .sider-admin {
@@ -675,7 +649,9 @@ trabajando con  user Cards
 	border-radius: 50px !important;
 }
 
-.list-button-paymentsFree:hover, .list-button-paymentsFree:focus  {
+.list-button-paymentsFree:hover, .list-button-paymentsFree:focus,
+.list-button-paymentsList:hover,
+.list-button-paymentsList:focus {
 	color: white !important;
 	background-color: #9e39ff !important;
 	transform: scale(1.05);
@@ -690,22 +666,17 @@ trabajando con  user Cards
   width: 80%;
   margin: auto !important;
   border-radius: 50px !important;
-  align-self: center !important;
 }
 
-#list-button-paymentsList {
-	text-align: center;
-	color: white;
-	background-color: #9e39ff;
-	font-size: 1em !important;
-	float: left;
-	width: 100% !important;
-	margin: auto !important;
-	border-radius: 50px !important;
-	align-self: stretch !important;
-	margin-bottom: 5px !important;
+.rechazar {
+  color: #9e39ff;
+  text-align: center;
+  display: inline-flex;
+  cursor: pointer;
+  height: 30px;
+  width: 40px;
+  padding: 3px;
 }
-
 .rechazar svg {
   height: 25px;
   width: 25px;
